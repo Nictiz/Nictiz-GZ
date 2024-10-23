@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../sch/distribute-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<distributions xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../../xsd/distribute-data.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        The distributions for ketenzorg
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <distribution name="ketenzorg-3.0.2" target-directory="ketenzorg-3.0.2/distribution" href-zip="../$DISTRIBUTIONNAME-hl7v3_2_fhir-$DISTRIBUTIONVERSION-$DATECOMPACT.zip" distribution-version-required="true" base-dir-in-zip="false" allow-overwrite="true">
+        
+        <message>=============================== Distribution for $DISTRIBUTIONNAME/$DISTRIBUTIONVERSION</message>
+        
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- Process hl7_2_ada, using the data in the HL7-mappings repository (since this component is not yet in YATC). -->
+        
+        <group source-directory="{$HL7-mappingsDirectory}">
+            <group source-directory="hl7_2_ada" target-directory="$SOURCE">
+                
+                <!-- First copy the full ketenzorg/3.0.2 stuff, without stylesheets: -->
+                <directory source-directory="ketenzorg/3.0.2" target-directory="$SOURCE">
+                    <include glob="*.xml"/>
+                    <include glob="*.xsd"/>
+                    <include glob="*.md"/>
+                    <include glob="*.txt"/>
+                </directory>
+                
+                <!-- Add the relevant stylesheets, flattened: -->
+                <flatten-stylesheets href-include="common/include" clear-target="false" add-addional-info="#all">
+                    <!-- Remark: If there will ever come more usecases, add these as a <master-document-directory> as well! -->
+                    <group source-directory="ketenzorg/3.0.2" target-directory="$SOURCE">
+                        <master-document-directory source-directory="beschikbaarstellen/payload" target-directory="$SOURCE"/>
+                    </group>
+                </flatten-stylesheets>
+                
+                <!-- Don't forget to add the necessary util data files to the include directory: -->
+                <directory source-directory="../util" target-directory="common/include" clear-target="false">
+                    <include glob="*.xml"/>
+                </directory>
+                
+            </group>
+        </group>
+        
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- Process ada-2-fhir, using the data in the HL7-mappings repository and the stylesheets from YATC-internal. -->
+        
+        <!-- Data: -->
+        <group source-directory="{$HL7-mappingsDirectory}">
+            <group source-directory="ada_2_fhir" target-directory="$SOURCE">
+                
+                <!-- Copy the full ketenzorg/3.0.2 stuff, without stylesheets: -->
+                <directory source-directory="ketenzorg/3.0.2" target-directory="$SOURCE">
+                    <include glob="*.xml"/>
+                    <include glob="*.xsd"/>
+                    <include glob="*.md"/>
+                    <include glob="*.txt"/>
+                </directory>
+                
+            </group>
+        </group>
+        
+        <!-- Stylesheets: -->
+        <group source-directory="{$yatcInternalDirectory}">
+            <group source-directory="ada-2-fhir" target-directory="ada_2_fhir">
+                
+                <!-- Add the relevant stylesheets, flattened: -->
+                <flatten-stylesheets href-include="common/include" clear-target="false" add-addional-info="#all">
+                    <!-- Remark: If there will ever come more usecases, add these as a <master-document-directory> as well! -->
+                    <group source-directory="env/ketenzorg/3.0.2" target-directory="ketenzorg/3.0.2">
+                        <master-document-directory source-directory="beschikbaarstellen/payload" target-directory="$SOURCE"/>
+                    </group>
+                </flatten-stylesheets>
+                
+                <!-- Don't forget to add the necessary util data files to the include directory: -->
+                <directory source-directory="{$yatcSharedDirectory}/xsl/util" target-directory="common/include" clear-target="false">
+                    <include glob="*.xml"/>
+                </directory>
+                
+            </group>
+        </group>
+        
+        <!-- Create a combined README: -->
+        <combine-additional-text-documents href-target="README.txt" separator="$NL$NL$NL======================================================================$NL$NL$NL">
+            <text-document href-source="{$HL7-mappingsDirectory}/hl7_2_ada/ketenzorg/3.0.2/beschikbaarstellen/README.txt"/>
+            <text-document href-source="{$yatcInternalDirectory}/ada-2-fhir/env/ketenzorg/3.0.2/beschikbaarstellen/README.txt"/>
+        </combine-additional-text-documents>
+        
+        <!-- Add an (experimental) XML information document: -->
+        <additional-xml-document href-target="distribution-info.xml">
+            <distribution xmlns="" name="$DISTRIBUTIONNAME" timestamp="$DATETIMEISO" version="$DISTRIBUTIONVERSION"/>
+        </additional-xml-document>
+        
+    </distribution>
+    
+</distributions>

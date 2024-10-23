@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../sch/ada-2-fhir-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<application name="mp" version="9.0.7" source-adarefs2ada="true" source-project-name="mp-mp907" xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../../xsd/ada-2-fhir-data.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        ada-2-fhir application data for mp 9.0.7
+        
+        This is an include file for ../ada-2-fhir-data.xml
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+    <!-- Setup beschikbaarstellen_medicatiegegevens -->
+
+    <setup usecase="beschikbaarstellen_medicatiegegevens" directory-id="mg">
+        <copy-project-schemas>
+            <include glob="*$USECASE*.xsd"/>
+        </copy-project-schemas>
+
+        <!-- MA -->
+        <copy-data target-subdir="ada_instance_MA" directory-id="mg-ada-instance-MA">
+            <include glob="*MA*.xml"/>
+            <!-- exclude the initating scenario's -->
+            <exclude glob="*8i*.xml"/>
+        </copy-data>
+
+        <!-- VV -->
+        <copy-data target-subdir="ada_instance_VV" directory-id="mg-ada-instance-VV">
+            <include glob="*VV*.xml"/>
+            <!-- exclude the initating scenario's -->
+            <exclude glob="*8i*.xml"/>
+        </copy-data>
+
+        <!-- medmij -->
+        <copy-data directory-id="mg-ada-instance">
+            <include glob="XXX_*.xml"/>
+        </copy-data>
+
+        <!-- TestSet MA -->
+        <copy-data source-subdir="ada_instance_TestSet" target-subdir="ada_instance_TestSet_MA" directory-id="mg-ada-instance-testset-MA">
+            <include glob="*MA*.xml"/>
+            <!-- exclude the initating scenario's -->
+            <exclude glob="*8i*.xml"/>
+        </copy-data>
+
+        <!-- TestSet VV -->
+        <copy-data source-subdir="ada_instance_TestSet" target-subdir="ada_instance_TestSet_VV" directory-id="mg-ada-instance-testset-VV">
+            <include glob="*VV*.xml"/>
+        </copy-data>
+
+        <!-- Result directories: -->
+        <empty-directory target-subdir="fhir_instance_MA" directory-id="mg-fhir-instance-MA"/>
+        <empty-directory target-subdir="fhir_instance_VV" directory-id="mg-fhir-instance-VV"/>
+        <empty-directory target-subdir="fhir_instance_TestSet_MA" directory-id="mg-fhir-instance-testset-MA"/>
+        <empty-directory target-subdir="fhir_instance_TestSet_VV" directory-id="mg-fhir-instance-testset-VV"/>
+        <empty-directory target-subdir="fhir_instance" directory-id="mg-fhir-instance"/>
+
+        <!-- The following is for beschikbaarstellen_medicatiegegevens nictiz (regression) test stuff: -->
+        <!-- The input data comes from a fixed set of files in  ../../env/$BASEPATH/beschikbaarstellen_medicatiegegevens/ada_instance_test_nictiz/ -->
+        <copy-directory directory="#../../env/$BASEPATH/ada_instance_test_nictiz/" target-subdir="ada_instance_test_nictiz" directory-id="mg-ada-instance-test-nictiz"/>
+        <empty-directory target-subdir="fhir_instance_test_nictiz" directory-id="mg-fhir-instance-test-nictiz"/>
+        
+        <!-- FHIR instance directory (unclear purpose) -->
+        <!-- The input data comes from a fixed set of files in ../../env/$BASEPATH/beschikbaarstellen_medicatiegegevens/fhir_instance_POCPraktijktest/ -->
+        <copy-directory directory="#../../env/$BASEPATH/fhir_instance_POCPraktijktest/" target-subdir="fhir_instance_POCPraktijktest"></copy-directory>
+
+    </setup>
+
+    <!-- ======================================================================= -->
+    <!-- Setup beschikbaarstellen_medicatieoverzicht -->
+
+    <setup usecase="beschikbaarstellen_medicatieoverzicht" directory-id="mo">
+        <copy-project-schemas>
+            <include glob="*$USECASE*.xsd"/>
+        </copy-project-schemas>
+
+        <copy-data target-subdir="ada_instance_mp" directory-id="mo-ada-instance-mp">
+            <include glob="*output.xml"/>
+        </copy-data>
+
+        <!-- medmij -->
+        <copy-data directory-id="mo-ada-instance">
+            <include glob="*MO*.xml"/>
+            <include glob="XXX_Jangi*.xml"/>
+        </copy-data>
+
+        <!-- TestSet -->
+        <copy-data source-subdir="ada_instance_TestSet" target-subdir="ada_instance_TestSet" directory-id="mo-ada-instance-testset">
+            <include glob="*.xml"/>
+        </copy-data>
+        <copy-data source-subdir="ada_instance_TestSet" target-subdir="ada_instance_mp_TestSet" directory-id="mo-ada-instance-testset-mp">
+            <include glob="*output.xml"/>
+        </copy-data>
+
+        <!-- Result directories: -->
+        <empty-directory target-subdir="fhir_instance_mp" directory-id="mo-fhir-instance-mp" compare-flags="no-hex-filenames"/>
+        <empty-directory target-subdir="fhir_instance_TestSet" directory-id="mo-fhir-instance-testset" compare-flags="no-hex-filenames"/>
+        <empty-directory target-subdir="fhir_instance" directory-id="mo-fhir-instance" compare-flags="no-hex-filenames"/>
+
+    </setup>
+
+    <!-- ======================================================================= -->
+    <!-- Setup beschikbaarstellen_verstrekkingenvertaling medmij stuff -->
+
+    <setup usecase="beschikbaarstellen_verstrekkingenvertaling">
+        <copy-project-schemas>
+            <include glob="*$USECASE*.xsd"/>
+        </copy-project-schemas>
+
+        <copy-data directory-id="vv-ada-instance">
+            <include glob="*.xml"/>
+        </copy-data>
+
+        <!-- Result directories: -->
+        <empty-directory target-subdir="fhir_instance" directory-id="vv-fhir-instance"/>
+
+    </setup>
+
+    <!-- ======================================================================= -->
+    <!-- Setup xml voorbeelden -->
+
+    <setup usecase="xml-voorbeelden" directory-id="xmlv">
+        <copy-project-schemas>
+            <include glob="*beschikbaarstellen_medicatiegegevens.xsd"/>
+            <include glob="*beschikbaarstellen_medicatieoverzicht.xsd"/>
+            <include glob="*beschikbaarstellen_verstrekkingenvertaling.xsd"/>
+        </copy-project-schemas>
+
+        <copy-data directory-id="xmlv-ada-instance">
+            <include glob="mg*example*.xml"/>
+            <include glob="mo*example*.xml"/>
+            <include glob="vv*example*.xml"/>
+        </copy-data>
+
+        <!-- Result directories: -->
+        <empty-directory target-subdir="fhir_instance" directory-id="xmlv-fhir-instance" compare-flags="no-hex-filenames no-uuid-containing-filenames"/>
+
+    </setup>
+
+    <!-- ======================================================================= -->
+    <!-- Setup nictiz_test -->
+
+    <setup usecase="nictiz_test">
+        <!-- The ADA documents for nictiz_test come from a fixed set (in YATC-internal/ada-2-fhir/env/$BASEPATH/nictiz_test/ada_instance/) -->
+        <copy-directory directory="#../../env/$BASEPATH/ada_instance/" target-subdir="ada_instance" directory-id="nt-ada-instance"/>
+        <empty-directory target-subdir="fhir_instance" directory-id="nt-fhir-instance"/>
+    </setup>
+
+    <!-- ======================================================================= -->
+
+    <!-- Copy FHIR schemas: -->
+    <empty-root-directory target-subdir="fhir-xsd" directory-id="fhir-xsd" compare="false"/>
+    <copy recurse="true">
+        <source directory="#../../env/$BASEPATH/fhir-xsd" ></source>
+        <target directory="@fhir-xsd"/>
+    </copy>
+    
+    <!-- ======================================================================= -->
+    
+    <!-- preprocess for Touchstone (update use period to use end date for querying purposes) -->
+    <build name="preprocess-for-Touchstone-MA">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen_medicatiegegevens/payload/preprocess_ada_4_Touchstone.xsl"/>
+        <input-documents directory="@mg-ada-instance-MA">
+            <include glob="mg-mgr-mg-MA-Scenarioset0*.xml"/>
+        </input-documents>
+        <output-documents directory="@mg-ada-instance-MA"/>
+    </build>
+    <build name="preprocess-for-Touchstone-testset-MA">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen_medicatiegegevens/payload/preprocess_ada_4_Touchstone.xsl"/>
+        <input-documents directory="@mg-ada-instance-testset-MA">
+            <include glob="mg-mgr-ma-TestSet-scen0*.xml"/>
+        </input-documents>
+        <output-documents directory="@mg-ada-instance-testset-MA"/>
+    </build>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <!-- Convert beschikbaarstellen_medicatiegegevens MA to fhir instances -->
+    <build name="build-fhir-resources-beschikbaarstellen_medicatiegegevens-MA">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_medicatiegegevens_2_fhir_resources.xsl"/>
+        <input-documents directory="@mg-ada-instance-MA"/>
+        <discard-output/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@mg-fhir-instance-MA"/>
+    </build>
+    <build name="build-fhir-instances-beschikbaarstellen_medicatiegegevens-MA">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_medicatiegegevens_2_fhir.xsl"/>
+        <input-documents directory="@mg-ada-instance-MA"/>
+        <output-documents directory="@mg-fhir-instance-MA"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@mg-fhir-instance-MA"/>
+    </build>
+
+    <!-- Convert beschikbaarstellen_medicatiegegevens VV to fhir instances -->
+    <build name="build-fhir-resources-beschikbaarstellen_medicatiegegevens-VV">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_medicatiegegevens_2_fhir_resources.xsl"/>
+        <input-documents directory="@mg-ada-instance-VV"/>
+        <discard-output/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@mg-fhir-instance-VV"/>
+    </build>
+    <build name="build-fhir-instances-beschikbaarstellen_medicatiegegevens-VV">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_medicatiegegevens_2_fhir.xsl"/>
+        <input-documents directory="@mg-ada-instance-VV"/>
+        <output-documents directory="@mg-fhir-instance-VV"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@mg-fhir-instance-VV"/>
+    </build>
+
+    <!-- Convert beschikbaarstellen_medicatieoverzicht mp to fhir instances -->
+    <build name="build-fhir-resources-beschikbaarstellen_medicatieoverzicht-mp">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_medicatieoverzicht_2_fhir_resources.xsl"/>
+        <input-documents directory="@mo-ada-instance-mp"/>
+        <discard-output/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@mo-fhir-instance-mp"/>
+    </build>
+    <build name="build-fhir-instances-beschikbaarstellen_medicatieoverzicht-mp">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_medicatieoverzicht_2_fhir.xsl"/>
+        <input-documents directory="@mo-ada-instance-mp"/>
+        <output-documents directory="@mo-fhir-instance-mp"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@mo-fhir-instance-mp"/>
+    </build>
+
+    <!-- Convert beschikbaarstellen_verstrekkingenvertaling to fhir instances -->
+    <build name="build-fhir-resources-beschikbaarstellen_verstrekkingenvertaling">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_verstrekkingenvertaling_2_fhir_resources.xsl"/>
+        <input-documents directory="@vv-ada-instance"/>
+        <discard-output/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@vv-fhir-instance"/>
+    </build>
+    <build name="build-fhir-instances-beschikbaarstellen_verstrekkingenvertaling">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_verstrekkingenvertaling_2_fhir.xsl"/>
+        <input-documents directory="@vv-ada-instance"/>
+        <output-documents directory="@vv-fhir-instance"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@vv-fhir-instance"/>
+    </build>
+
+    <!-- ======================================================================= -->
+    <!-- Examples: -->
+
+    <!-- beschikbaarstellen_medicatiegegevens -->
+    <build name="build-xml-voorbeelden-fhir-resources-mg">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_2_fhir_resources.xsl"/>
+        <input-documents directory="@xmlv-ada-instance">
+            <include glob="mg-*.xml"/>
+        </input-documents>
+        <discard-output/>
+        <parameter name="outputDirectory" directory="@xmlv-fhir-instance"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="dateT" value="2020-06-08"/>
+    </build>
+
+    <build name="build-xml-voorbeelden-fhir-instances-mg">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_2_fhir.xsl"/>
+        <input-documents directory="@xmlv-ada-instance">
+            <include glob="mg-*.xml"/>
+        </input-documents>
+        <output-documents directory="@xmlv-fhir-instance"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="dateT" value="2020-06-08"/>
+    </build>
+
+    <!-- beschikbaarstellen_medicatieoverzicht -->
+    <build name="build-xml-voorbeelden-fhir-resources-mo">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen_medicatieoverzicht/payload/beschikbaarstellen_medicatieoverzicht_2_fhir_resources.xsl"/>
+        <input-documents directory="@xmlv-ada-instance">
+            <include glob="mo*.xml"/>
+        </input-documents>
+        <discard-output/>
+        <parameter name="outputDirectory" directory="@xmlv-fhir-instance"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="dateT" value="2020-06-08"/>
+    </build>
+
+    <build name="build-xml-voorbeelden-fhir-instances-mo">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen_medicatieoverzicht/payload/beschikbaarstellen_medicatieoverzicht_2_fhir.xsl"/>
+        <input-documents directory="@xmlv-ada-instance">
+            <include glob="mo*.xml"/>
+        </input-documents>
+        <output-documents directory="@xmlv-fhir-instance"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="dateT" value="2020-06-08"/>
+    </build>
+
+    <!-- ======================================================================= -->
+    <!-- MP 907 specific stuff for test purposes -->
+
+    <!-- beschikbaarstellen_medicatiegegevens -->
+    <build name="build-fhir-testset-resources-beschikbaarstellen_medicatiegegevens-MA">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_medicatiegegevens_2_fhir_resources.xsl"/>
+        <input-documents directory="@mg-ada-instance-testset-MA"/>
+        <discard-output/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@mg-fhir-instance-testset-MA"/>
+    </build>
+    <build name="build-fhir-testset-instances-beschikbaarstellen_medicatiegegevens-MA">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_medicatiegegevens_2_fhir.xsl"/>
+        <input-documents directory="@mg-ada-instance-testset-MA"/>
+        <output-documents directory="@mg-fhir-instance-testset-MA"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@mg-fhir-instance-testset-MA"/>
+    </build>
+
+    <build name="build-fhir-testset-resources-beschikbaarstellen_medicatiegegevens-VV">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_medicatiegegevens_2_fhir_resources.xsl"/>
+        <input-documents directory="@mg-ada-instance-testset-VV"/>
+        <discard-output/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@mg-fhir-instance-testset-VV"/>
+    </build>
+    <build name="build-fhir-testset-instances-beschikbaarstellen_medicatiegegevens-VV">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_medicatiegegevens_2_fhir.xsl"/>
+        <input-documents directory="@mg-ada-instance-testset-VV"/>
+        <output-documents directory="@mg-fhir-instance-testset-VV"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@mg-fhir-instance-testset-VV"/>
+    </build>
+
+    <!-- medicatieoverzicht -->
+    <build name="build-fhir-testset-resources-beschikbaarstellen_medicatieoverzicht">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_medicatieoverzicht_2_fhir_resources.xsl"/>
+        <input-documents directory="@mo-ada-instance-testset"/>
+        <discard-output/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@mo-fhir-instance-testset"/>
+    </build>
+    <build name="build-fhir-testset-instances-beschikbaarstellen_medicatieoverzicht">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_medicatieoverzicht_2_fhir.xsl"/>
+        <input-documents directory="@mo-ada-instance-testset"/>
+        <output-documents directory="@mo-fhir-instance-testset"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@mo-fhir-instance-testset"/>
+    </build>
+
+    <!-- specific instances for internal testing -->
+    <build name="build-fhir-testset-resources-beschikbaarstellen_verstrekkingenvertaling">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_verstrekkingenvertaling_2_fhir_resources.xsl"/>
+        <input-documents directory="@nt-ada-instance">
+            <include glob="vv*.xml"/>
+        </input-documents>
+        <discard-output/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@nt-fhir-instance"/>
+    </build>
+    <build name="build-fhir-testset-instances-beschikbaarstellen_verstrekkingenvertaling">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_verstrekkingenvertaling_2_fhir.xsl"/>
+        <input-documents directory="@nt-ada-instance">
+            <include glob="vv*.xml"/>
+        </input-documents>
+        <output-documents directory="@nt-fhir-instance"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@nt-fhir-instance"/>
+    </build>
+
+    <!-- ======================================================================= -->
+    <!-- copy the appropriate testset fhir instances for Touchstone to a separate folder, to ease upload to Touchstone -->
+    <empty-root-directory target-subdir="4TouchstoneMPTestSet" directory-id="touchstone-mp-testset"/>
+    <!-- MO is excluded from MedMij in https://bits.nictiz.nl/browse/MM-3705, so we still build, but don't copy for Touchstone -->
+    <!--
+    <copy>
+        <source directory="@mo-fhir-instance-testset">
+            <include glob="mo-mor*.xml"/>
+            <include glob="*XXX-*.xml"/>
+        </source>
+        <target directory="@touchstone-mp-testset"/>
+    </copy>
+    -->
+    <copy>
+        <source directory="@mg-fhir-instance-testset-MA">
+            <exclude glob="mg-mgr-*.xml"/>
+        </source>
+        <target directory="@touchstone-mp-testset"/>
+    </copy>
+    <copy>
+        <source directory="@mg-fhir-instance-testset-VV">
+            <exclude glob="mg-mgr-*.xml"/>
+        </source>
+        <target directory="@touchstone-mp-testset"/>
+    </copy>
+
+    <!-- ======================================================================= -->
+    <!-- the MP specific stuff for version 9.0.7 -->
+
+    <!-- MedMij stuff beschikbaarstellen_medicatiegegevens -->
+    <build name="build-medmij-specific-stuff-resources-beschikbaarstellen_medicatiegegevens">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_medicatiegegevens_2_fhir_resources.xsl"/>
+        <input-documents directory="@mg-ada-instance"/>
+        <discard-output/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@mg-fhir-instance"/>
+    </build>
+    <build name="build-medmij-specific-stuff-instances-beschikbaarstellen_medicatiegegevens">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_medicatiegegevens_2_fhir.xsl"/>
+        <input-documents directory="@mg-ada-instance"/>
+        <output-documents directory="@mg-fhir-instance"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@mg-fhir-instance"/>
+    </build>
+
+    <!-- MedMij stuff beschikbaarstellen_medicatieoverzicht -->
+    <build name="build-medmij-specific-stuff-resources-beschikbaarstellen_medicatieoverzicht">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_medicatieoverzicht_2_fhir_resources.xsl"/>
+        <input-documents directory="@mo-ada-instance"/>
+        <discard-output/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@mo-fhir-instance"/>
+    </build>
+    <build name="build-medmij-specific-stuff-instances-beschikbaarstellen_medicatieoverzicht">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_medicatieoverzicht_2_fhir.xsl"/>
+        <input-documents directory="@mo-ada-instance"/>
+        <output-documents directory="@mo-fhir-instance"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@mo-fhir-instance"/>
+    </build>
+
+    <!-- beschikbaarstellen_medicatiegegevens nictiz (regression) test stuff -->
+    <build name="build-medmij-specific-stuff-resources-beschikbaarstellen_medicatiegegevens">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_medicatiegegevens_2_fhir_resources.xsl"/>
+        <input-documents directory="@mg-ada-instance-test-nictiz"/>
+        <discard-output/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@mg-fhir-instance-test-nictiz"/>
+    </build>
+    <build name="build-medmij-specific-stuff-instances-beschikbaarstellen_medicatiegegevens">
+        <stylesheet href="../../env/$BASEPATH/fhir_fixtures4Touchstone/payload/beschikbaarstellen_medicatiegegevens_2_fhir.xsl"/>
+        <input-documents directory="@mg-ada-instance-test-nictiz"/>
+        <output-documents directory="@mg-fhir-instance-test-nictiz"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@mg-fhir-instance-test-nictiz"/>
+    </build>
+
+    <!-- ======================================================================= -->
+    <!-- copy the appropriate fhir instances for Touchstone to a separate folder, to ease upload to Touchstone -->
+
+    <empty-root-directory target-subdir="4TouchstoneMP" directory-id="touchstone-mp"/>
+    <!-- MO is excluded from MedMij in https://bits.nictiz.nl/browse/MM-3705, so we still build, but don't copy for Touchstone -->
+    <!--
+    <copy>
+        <source directory="@mo-fhir-instance-mp">
+            <include glob="mo-mor*.xml"/>
+            <include glob="*XXX-*.xml"/>
+        </source>
+        <target directory="@touchstone-mp"/>
+    </copy>
+    -->
+    <copy>
+        <source directory="@mg-fhir-instance-VV">
+            <exclude glob="mg-mgr-*.xml"/>
+        </source>
+        <target directory="@touchstone-mp"/>
+    </copy>
+    <copy>
+        <source directory="@mg-fhir-instance-MA">
+            <exclude glob="mg-mgr-*.xml"/>
+        </source>
+        <target directory="@touchstone-mp"/>
+    </copy>
+    <!-- MO is excluded from MedMij in https://bits.nictiz.nl/browse/MM-3705, so we still build, but don't copy for Touchstone -->
+    <!--
+    <copy>
+        <source directory="@mo-fhir-instance">
+            <include glob="XXX*.xml"/>
+        </source>
+        <target directory="@touchstone-mp"/>
+    </copy>
+    -->
+    <copy>
+        <source directory="@mg-fhir-instance">
+            <exclude glob="*-907.xml"/>
+        </source>
+        <target directory="@touchstone-mp"/>
+    </copy>
+    <copy>
+        <source directory="@vv-fhir-instance">
+            <exclude glob="QURX*.xml"/>
+        </source>
+        <target directory="@touchstone-mp"/>
+    </copy>
+
+</application>

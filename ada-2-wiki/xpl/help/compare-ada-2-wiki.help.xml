@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<command-help-text xmlns="https://nictiz.nl/ns/YATC-shared/command-help-text" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/command-help-text ../../../../YATC-shared/xsd/command-help-text.xsd" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!-- ======================================================================= -->
+    <!-- 
+        Help text for the standard YATC compare-* commands
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+    
+    <description>Compares the documents produced by this YATC component with the ones produced by the original scripts.</description>
+    
+    <command-line-options>
+        <xi:include href="../../../../YATC-shared/chtmod/help-command-line-option.xml"/>
+        <command-line-option>
+            <flag name="nodirs" optional="true">Disables directory compares, only compares generated WIKI documents.</flag>
+            <argument name="application"/>
+            <argument name="version"/>
+            <description>Perform the compare for this application/version. To compare all applications/versions/distributions available, use either #all or %all for the argument(s).</description>
+        </command-line-option>
+    </command-line-options>
+    
+</command-help-text>

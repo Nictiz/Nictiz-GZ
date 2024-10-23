@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             id="2.16.840.1.113883.2.4.3.11.60.40.2.0.1.1"
+             name="GeslachtCodelijst"
+             displayName="GeslachtCodelijst"
+             effectiveDate="2017-12-31T00:00:00"
+             statusCode="final"
+             ident="zib2017bbr-"
+             url="http://decor.nictiz.nl/decor/services/"
+             referencedFrom="zib2020bbr-">
+      <sourceCodeSystem id="2.16.840.1.113883.5.1"
+                        identifierName="Administrative Gender"
+                        canonicalUri="http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender"
+                        canonicalUriDSTU2="http://hl7.org/fhir/v3/AdministrativeGender"
+                        canonicalUriSTU3="http://hl7.org/fhir/v3/AdministrativeGender"
+                        canonicalUriR4="http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender"/>
+      <sourceCodeSystem id="2.16.840.1.113883.5.1008"
+                        identifierName="Null Flavor"
+                        canonicalUri="http://terminology.hl7.org/CodeSystem/v3-NullFlavor"
+                        canonicalUriDSTU2="http://hl7.org/fhir/v3/NullFlavor"
+                        canonicalUriSTU3="http://hl7.org/fhir/v3/NullFlavor"
+                        canonicalUriR4="http://terminology.hl7.org/CodeSystem/v3-NullFlavor"/>
+      <publishingAuthority name="Registratie aan de bron">
+         <addrLine type="uri">https://www.registratieaandebron.nl</addrLine>
+         <addrLine type="uri">https://www.zibs.nl</addrLine>
+      </publishingAuthority>
+      <conceptList>
+         <concept code="UN"
+                  codeSystem="2.16.840.1.113883.5.1"
+                  displayName="Undifferentiated"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Ongedifferentieerd"/>
+         </concept>
+         <concept code="M"
+                  codeSystem="2.16.840.1.113883.5.1"
+                  displayName="Male"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Man"/>
+         </concept>
+         <concept code="F"
+                  codeSystem="2.16.840.1.113883.5.1"
+                  displayName="Female"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Vrouw"/>
+         </concept>
+         <exception code="UNK"
+                    codeSystem="2.16.840.1.113883.5.1008"
+                    displayName="Unknown"
+                    level="0"
+                    type="L">
+            <designation language="nl-NL" type="preferred" displayName="Onbekend"/>
+         </exception>
+      </conceptList>
+   </valueSet>
+</valueSets>

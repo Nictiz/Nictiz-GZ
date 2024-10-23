@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             id="2.16.840.1.113883.2.4.3.11.60.40.2.9.5.11"
+             name="VoorschriftProductGTINCodelijst"
+             displayName="VoorschriftProductGTINCodelijst"
+             effectiveDate="2015-04-01T00:00:00"
+             statusCode="final"
+             ident="zib2015bbr-"
+             url="http://decor.nictiz.nl/decor/services/"
+             referencedFrom="mp-">
+      <desc language="nl-NL">Global Trade Item Number (GTIN) (1.3.160): Alle waarden</desc>
+      <sourceCodeSystem id="1.3.160"
+                        identifierName="EAN artikelcode (ook bekend als GTIN en UPC)"
+                        canonicalUri="https://www.gs1.org/gtin"
+                        canonicalUriDSTU2="https://www.gs1.org/gtin"
+                        canonicalUriSTU3="https://www.gs1.org/gtin"
+                        canonicalUriR4="https://www.gs1.org/gtin"/>
+      <publishingAuthority name="Nictiz" inherited="project">
+         <addrLine>Oude Middenweg 55</addrLine>
+         <addrLine>2491 AC Den Haag</addrLine>
+         <addrLine>T 070 317 3450</addrLine>
+      </publishingAuthority>
+      <completeCodeSystem codeSystem="1.3.160"
+                          codeSystemName="EAN artikelcode (ook bekend als GTIN en UPC)"/>
+   </valueSet>
+</valueSets>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../sch/ada-2-fhir-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<application name="vragenlijsten" version="1.0.0" xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../../xsd/ada-2-fhir-data.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        ada-2-fhir application data for vragenlijsten 1.0.0
+        
+        This is an include file for ../ada-2-fhir-data.xml
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <message>WARNING: This conversion uses *static* ADA data (source: YATC-internal/ada-2-fhir/env/vragenlijsten/*/ada_instance/)</message>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- beschikbaarstellen_vragenlijst -->
+
+    <setup usecase="beschikbaarstellen_vragenlijst" directory-id="bsvl">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-directory directory="#../../env/$BASEPATH/ada_instance/" target-subdir="ada_instance" directory-id="bsvl-ada-instance"/>
+        <empty-directory target-subdir="fhir_instance" directory-id="bsvl-fhir-instance"/>
+    </setup>
+
+    <build name="build-beschikbaarstellen_vragenlijst-fhir">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen_vragenlijst/payload/beschikbaarstellen_vragenlijst_2_fhir_resources.xsl"/>
+        <input-documents directory="@bsvl-ada-instance"/>
+        <discard-output/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@bsvl-fhir-instance"/>
+    </build>
+    <build name="build-beschikbaarstellen_vragenlijst-fhir-resources">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen_vragenlijst/payload/beschikbaarstellen_vragenlijst_2_fhir.xsl"/>
+        <input-documents directory="@bsvl-ada-instance"/>
+        <output-documents directory="@bsvl-fhir-instance"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+    </build>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- beschikbaarstellen_vragenlijstverwijzing -->
+
+    <setup usecase="beschikbaarstellen_vragenlijstverwijzing" directory-id="bsvv">
+        <copy-project-schemas>
+            <include glob="*$USECASE*.xsd"/>
+        </copy-project-schemas>
+        <copy-directory directory="#../../env/$BASEPATH/ada_instance/" target-subdir="ada_instance" directory-id="bsvv-ada-instance"/>
+        <empty-directory target-subdir="fhir_instance" directory-id="bsvv-fhir-instance" compare-flags="no-uuid-containing-filenames"/>
+    </setup>
+
+    <build name="build-beschikbaarstellen_vragenlijstverwijzing-fhir">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen_vragenlijstverwijzing/payload/beschikbaarstellen_vragenlijstverwijzing_2_fhir_resources.xsl"/>
+        <input-documents directory="@bsvv-ada-instance"/>
+        <discard-output/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@bsvv-fhir-instance"/>
+    </build>
+    <build name="build-beschikbaarstellen_vragenlijstverwijzing-fhir-resources">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen_vragenlijstverwijzing/payload/beschikbaarstellen_vragenlijstverwijzing_2_fhir.xsl"/>
+        <input-documents directory="@bsvv-ada-instance"/>
+        <output-documents directory="@bsvv-fhir-instance"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+    </build>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- sturen_antwoorden_op_vragenlijst -->
+
+    <setup usecase="sturen_antwoorden_op_vragenlijst" directory-id="stav">
+        <copy-project-schemas>
+            <include glob="*$USECASE*.xsd"/>
+        </copy-project-schemas>
+        <copy-directory directory="#../../env/$BASEPATH/ada_instance/" target-subdir="ada_instance" directory-id="stav-ada-instance"/>
+        <empty-directory target-subdir="fhir_instance" directory-id="stav-fhir-instance" compare-flags="no-uuid-containing-filenames"/>
+    </setup>
+
+    <build name="build-sturen_antwoorden_op_vragenlijst-fhir">
+        <stylesheet href="../../env/$BASEPATH/sturen_antwoorden_op_vragenlijst/payload/sturen_antwoorden_op_vragenlijst_2_fhir_resources.xsl"/>
+        <input-documents directory="@stav-ada-instance"/>
+        <discard-output/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+        <parameter name="outputDirectory" directory="@stav-fhir-instance"/>
+    </build>
+    <build name="build-sturen_antwoorden_op_vragenlijst-fhir-resources">
+        <stylesheet href="../../env/$BASEPATH/sturen_antwoorden_op_vragenlijst/payload/sturen_antwoorden_op_vragenlijst_2_fhir.xsl"/>
+        <input-documents directory="@stav-ada-instance"/>
+        <output-documents directory="@stav-fhir-instance"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+    </build>
+
+</application>

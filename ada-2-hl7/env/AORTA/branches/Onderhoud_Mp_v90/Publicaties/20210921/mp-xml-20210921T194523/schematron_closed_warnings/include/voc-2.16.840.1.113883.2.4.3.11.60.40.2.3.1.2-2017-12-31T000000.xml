@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             id="2.16.840.1.113883.2.4.3.11.60.40.2.3.1.2"
+             name="RolCodelijst"
+             displayName="RolCodelijst"
+             effectiveDate="2017-12-31T00:00:00"
+             statusCode="final">
+      <sourceCodeSystem id="2.16.840.1.113883.2.4.3.11.22.472"
+                        identifierName="COD472-VEKT"
+                        canonicalUri="urn:oid:2.16.840.1.113883.2.4.3.11.22.472"
+                        canonicalUriDSTU2="urn:oid:2.16.840.1.113883.2.4.3.11.22.472"
+                        canonicalUriSTU3="urn:oid:2.16.840.1.113883.2.4.3.11.22.472"
+                        canonicalUriR4="urn:oid:2.16.840.1.113883.2.4.3.11.22.472"/>
+      <publishingAuthority name="Registratie aan de bron">
+         <addrLine type="uri">https://www.registratieaandebron.nl</addrLine>
+         <addrLine type="uri">https://zibs.nl</addrLine>
+      </publishingAuthority>
+      <conceptList>
+         <concept code="1"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.22.472"
+                  displayName="Eerste relatie/contactpersoon"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Eerste relatie/contactpersoon"/>
+         </concept>
+         <concept code="2"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.22.472"
+                  displayName="Tweede relatie/contactpersoon"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Tweede relatie/contactpersoon"/>
+         </concept>
+         <concept code="3"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.22.472"
+                  displayName="Curator (juridisch)"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Curator (juridisch)"/>
+         </concept>
+         <concept code="4"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.22.472"
+                  displayName="Financieel (gemachtigd)"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Financieel (gemachtigd)"/>
+         </concept>
+         <concept code="5"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.22.472"
+                  displayName="Financieel (toetsing)"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Financieel (toetsing)"/>
+         </concept>
+         <concept code="6"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.22.472"
+                  displayName="Leefeenheid"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Leefeenheid"/>
+         </concept>
+         <concept code="7"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.22.472"
+                  displayName="Hulpverlener"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Hulpverlener"/>
+         </concept>
+         <concept code="9"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.22.472"
+                  displayName="Anders"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Anders"/>
+         </concept>
+         <concept code="11"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.22.472"
+                  displayName="Voogd"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Voogd"/>
+         </concept>
+         <concept code="14"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.22.472"
+                  displayName="Bewindvoerder"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Bewindvoerder"/>
+         </concept>
+         <concept code="15"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.22.472"
+                  displayName="Mentor"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Mentor"/>
+         </concept>
+         <concept code="19"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.22.472"
+                  displayName="Buur"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Buur"/>
+         </concept>
+         <concept code="20"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.22.472"
+                  displayName="Vriend(in)/kennis"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Vriend(in)/kennis"/>
+         </concept>
+         <concept code="21"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.22.472"
+                  displayName="Cliëntondersteuner"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Cliëntondersteuner"/>
+         </concept>
+         <concept code="23"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.22.472"
+                  displayName="Contactpersoon"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Contactpersoon"/>
+         </concept>
+         <concept code="24"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.22.472"
+                  displayName="Wettelijke vertegenwoordiger"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Wettelijke vertegenwoordiger"/>
+         </concept>
+      </conceptList>
+   </valueSet>
+</valueSets>

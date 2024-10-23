@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application name="TESTAPP" version="TESTVERSION" ada-application-name="perinatologie-234" xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../../xsd/application-ada-retrieval-data.xsd">
+    <!-- ================================================================== -->
+    <!--
+        File for testing the XInclude functionality for the ADA retrieval data 
+        (from ../test-application-ada-retrieval-data.xml).
+        
+        It uses the relatively small set of files for peri/2.3 
+        (ADA application perinatologie-234)
+    -->
+    <!-- ================================================================== -->
+    
+    <retrieval-set idref="peri-generic"/>
+    
+    <!-- This postprocessing stylesheet is referenced from an *included* file, and so the relative href here must be
+         resolved correctly! 
+    -->
+    <postprocessing-stylesheet href="../postprocessing/test-postprocessing.xsl"/>
+    
+</application>

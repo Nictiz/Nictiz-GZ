@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             id="2.16.840.1.113883.1.11.18943"
+             name="x_ActMoodDocumentObservation"
+             displayName="x_ActMoodDocumentObservation"
+             effectiveDate="2016-11-26T00:00:00"
+             statusCode="final"
+             versionLabel="DEFN=UV=VO=1382-20161126"
+             ident="ad2bbr-"
+             url="http://art-decor.org/decor/services/"
+             referencedFrom="zib2017bbr-">
+      <desc language="en-US">
+                <p>
+            <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p>
+         <b>description: </b>
+                <p>Used to enumerate the moods that an observation can take within the body of a clinical document.</p>
+            </desc>
+      <sourceCodeSystem id="2.16.840.1.113883.5.1001"
+                        identifierName="Act Mood"
+                        canonicalUri="http://terminology.hl7.org/CodeSystem/v3-ActMood"
+                        canonicalUriDSTU2="http://hl7.org/fhir/v3/ActMood"
+                        canonicalUriSTU3="http://hl7.org/fhir/v3/ActMood"
+                        canonicalUriR4="http://terminology.hl7.org/CodeSystem/v3-ActMood"
+                        context="external/hl7"/>
+      <publishingAuthority name="Registratie aan de bron" inherited="project">
+         <addrLine type="uri">https://www.registratieaandebron.nl</addrLine>
+         <addrLine type="uri">https://zibs.nl</addrLine>
+      </publishingAuthority>
+      <conceptList>
+         <concept code="APT"
+                  codeSystem="2.16.840.1.113883.5.1001"
+                  displayName="appointment"
+                  level="0"
+                  type="L"/>
+         <concept code="ARQ"
+                  codeSystem="2.16.840.1.113883.5.1001"
+                  displayName="appointment request"
+                  level="0"
+                  type="L"/>
+         <concept code="DEF"
+                  codeSystem="2.16.840.1.113883.5.1001"
+                  displayName="definition"
+                  level="0"
+                  type="L"/>
+         <concept code="EVN"
+                  codeSystem="2.16.840.1.113883.5.1001"
+                  displayName="event (occurrence)"
+                  level="0"
+                  type="L"/>
+         <concept code="GOL"
+                  codeSystem="2.16.840.1.113883.5.1001"
+                  displayName="Goal"
+                  level="0"
+                  type="L"/>
+         <concept code="INT"
+                  codeSystem="2.16.840.1.113883.5.1001"
+                  displayName="intent"
+                  level="0"
+                  type="S"/>
+         <concept code="PRMS"
+                  codeSystem="2.16.840.1.113883.5.1001"
+                  displayName="promise"
+                  level="0"
+                  type="S"/>
+         <concept code="PRP"
+                  codeSystem="2.16.840.1.113883.5.1001"
+                  displayName="proposal"
+                  level="0"
+                  type="S"/>
+         <concept code="RQO"
+                  codeSystem="2.16.840.1.113883.5.1001"
+                  displayName="request"
+                  level="0"
+                  type="L"/>
+         <concept code="RSK"
+                  codeSystem="2.16.840.1.113883.5.1001"
+                  displayName="risk"
+                  level="0"
+                  type="L"/>
+      </conceptList>
+   </valueSet>
+</valueSets>

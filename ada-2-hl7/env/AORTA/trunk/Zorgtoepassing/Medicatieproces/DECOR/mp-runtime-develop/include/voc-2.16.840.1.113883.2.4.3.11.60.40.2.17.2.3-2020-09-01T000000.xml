@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             id="2.16.840.1.113883.2.4.3.11.60.40.2.17.2.3"
+             name="OrganisatieTypeCodelijst"
+             displayName="OrganisatieTypeCodelijst"
+             effectiveDate="2020-09-01T00:00:00"
+             statusCode="final"
+             ident="zib2020bbr-"
+             url="http://decor.nictiz.nl/decor/services/"
+             referencedFrom="mp-">
+      <sourceCodeSystem id="2.16.840.1.113883.2.4.15.1060"
+                        identifierName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                        canonicalUri="http://nictiz.nl/fhir/NamingSystem/organization-type"
+                        canonicalUriDSTU2="http://nictiz.nl/fhir/NamingSystem/organization-type"
+                        canonicalUriSTU3="http://nictiz.nl/fhir/NamingSystem/organization-type"
+                        canonicalUriR4="http://nictiz.nl/fhir/NamingSystem/organization-type"
+                        canonicalUriR4B="http://nictiz.nl/fhir/NamingSystem/organization-type"
+                        canonicalUriR5="http://nictiz.nl/fhir/NamingSystem/organization-type"
+                        context="projects/nictiz2bbr-/RoleCodeNLZorgaanbiederType-2.16.840.1.113883.2.4.15.1060"/>
+      <publishingAuthority name="Nictiz" inherited="project">
+         <addrLine>Nationaal ICT Instituut in de Zorg</addrLine>
+         <addrLine>Oude Middenweg 55</addrLine>
+         <addrLine>2491 AC Den Haag</addrLine>
+         <addrLine type="phone">070-3173450</addrLine>
+         <addrLine>F 070 320 7437</addrLine>
+      </publishingAuthority>
+      <conceptList>
+         <concept code="V4"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Ziekenhuis"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Ziekenhuis</desc>
+         </concept>
+         <concept code="V5"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Universitair Medisch Centrum"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Universitair Medisch Centrum</desc>
+         </concept>
+         <concept code="V6"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Algemeen ziekenhuis"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Algemeen ziekenhuis</desc>
+         </concept>
+         <concept code="BRA"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Brandwondencentrum"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Brandwondencentrum</desc>
+         </concept>
+         <concept code="Z4"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Zelfstandig behandelcentrum"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Zelfstandig behandelcentrum</desc>
+         </concept>
+         <concept code="Z5"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Diagnostisch centrum"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Diagnostisch centrum</desc>
+         </concept>
+         <concept code="B2"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Echocentrum"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Echocentrum</desc>
+         </concept>
+         <concept code="X3"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Verplegings- of verzorgingsinstelling"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Verplegings- of verzorgingsinstelling</desc>
+         </concept>
+         <concept code="R5"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Verpleeghuis"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Verpleeghuis</desc>
+         </concept>
+         <concept code="M1"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Verzorgingstehuis"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Verzorgingstehuis</desc>
+         </concept>
+         <concept code="A1"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Apotheekinstelling"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Apotheekinstelling</desc>
+         </concept>
+         <concept code="J8"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Openbare apotheek"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Openbare apotheek</desc>
+         </concept>
+         <concept code="K9"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Zelfstandig opererende ziekenhuisapotheek"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Zelfstandig opererende ziekenhuisapotheek</desc>
+         </concept>
+         <concept code="H1"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Huisartsinstelling"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Huisartsinstelling</desc>
+         </concept>
+         <concept code="Z3"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Huisartspraktijk (zelfstandig of groepspraktijk)"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Huisartspraktijk (zelfstandig of groepspraktijk)</desc>
+         </concept>
+         <concept code="K3"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Apotheekhoudende huisartspraktijk"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Apotheekhoudende huisartspraktijk</desc>
+         </concept>
+         <concept code="N6"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Huisartsenpost (t.b.v. dienstwaarneming)"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Huisartsenpost (t.b.v. dienstwaarneming)</desc>
+         </concept>
+         <concept code="L1"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Laboratorium"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Laboratorium</desc>
+         </concept>
+         <concept code="P4"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Polikliniek (als onderdeel van een ziekenhuis)"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Polikliniek (als onderdeel van een ziekenhuis)</desc>
+         </concept>
+         <concept code="R8"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Revalidatiecentrum"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Revalidatiecentrum</desc>
+         </concept>
+         <concept code="P6"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Preventieve gezondheidszorg"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Preventieve gezondheidszorg</desc>
+         </concept>
+         <concept code="G5"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Geestelijke Gezondheidszorg"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Geestelijke Gezondheidszorg</desc>
+         </concept>
+         <concept code="G6"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Verstandelijk gehandicaptenzorg"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Verstandelijk gehandicaptenzorg</desc>
+         </concept>
+         <concept code="T2"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Thuiszorg"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Thuiszorg</desc>
+         </concept>
+         <concept code="K4"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Kraamzorg"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Kraamzorg</desc>
+         </concept>
+         <concept code="H2"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Hospice"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Hospice</desc>
+         </concept>
+         <concept code="JGZ"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Jeugdgezondheidszorg"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Jeugdgezondheidszorg</desc>
+         </concept>
+         <concept code="G3"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Verloskundigenpraktijk"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Verloskundigenpraktijk</desc>
+         </concept>
+         <concept code="DIA"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  displayName="Dialysecentrum"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Dialysecentrum</desc>
+         </concept>
+      </conceptList>
+   </valueSet>
+</valueSets>

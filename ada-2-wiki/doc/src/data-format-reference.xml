@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<text-document xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../../../../YATC-shared/xsd/text-document.xsd" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!-- ======================================================================= -->
+    <!-- 
+        Reference text document for the ada-2-wiki application data format.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <macro name="DATAFILENAME" value="{$yatcComponentName}-data"/>
+    
+    <title>Component <code>{$yatcRepositoryName}/{$yatcComponentName}</code> data format reference</title>
+    
+    <xi:include href="../../../../YATC-shared/srcmod/common-data-format-opening-text.xml"/>
+
+    <!-- ======================================================================= -->
+    
+    <xi:include href="../../../../YATC-shared/srcmod/common-data-format-general-remarks.xml"/>
+    
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>Root <elm>ada-2-wiki-data</elm> element</title>
+
+        <element name="ada-2-wiki-data">
+            <children>
+                <choice occurrences="*">
+                    <element name="xi:include" pseudo-attributes="href">
+                        <para>Reference to a file to include.</para>
+                    </element>
+                    <element name="application" attributes-indicator="true">
+                        <para>Definition for a single application.</para>
+                    </element>
+                </choice>
+            </children>
+        </element>
+
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>The <elm>application</elm> element</title>
+
+        <para>The <elm>application</elm> element defines the processing to be performed for a single application/version combination.</para>
+
+        <para>The copied and processed/created documents will be stored underneath <code>{{$ada2wikiBaseStorageDirectory}/{@name}/{@version}</code> (parameter defined in <code>YATC-internal/ada-2-wiki/data/parameters.xml</code>).</para>
+
+        <element name="application">
+            <attributes>
+                <attribute name="name" type="xs:string" required="true">
+                    <para>The name of the application. For instance: <code>lab</code>.</para>
+                </attribute>
+                <attribute name="version" type="xs:string" required="true">
+                    <para>The version of the application. For instance: <code>4.0.0</code>.</para>
+                </attribute>
+                <attribute name="source-project-name" type="xs:string" default="application/@name">
+                    <para>The name of the project (directory) to be used.</para>
+                </attribute>
+                <attribute name="source-adarefs2ada" type="xs:boolean" default="false">
+                    <para>Whether the source documents for setup come from adarefs2ada computations or straight from the ART-DECOR data. See below.</para>
+                </attribute>
+            </attributes>
+            <children>
+                <choice occurrences="*">
+                    <element name="message">
+                        <para>Message which will be output on the console during processing for this application.</para>
+                    </element>
+                    <element name="setup" attributes-indicator="true">
+                        <para>Any setup (data copying) to be done.</para>
+                    </element>
+                    <element name="build" attributes-indicator="true">
+                        <para>Build operations to be performed.</para>
+                    </element>
+                </choice>
+            </children>
+        </element>
+
+        <para>Some applications take their input source from data directly retrieved from ART-DECOR and some from adarefs2ada post-processing (all done by the <code>YATC-shared/get-production-ada-instances</code> component). The <code>@source-adarefs2ada</code> attribute takes care of this:</para>
+        <unorderedlist>
+            <entry>
+                <para><code>source-adarefs2ada="false"</code>: The source documents are supposed to come straight from ART-DECOR. They're taken from <code>{{$productionAdaInstancesBaseStorageDirectory}/{@name}/{@version}/{{$productionAdaInstancesDataSubdir}</code> (parameters defined in <code>YATC-shared/data/parameters.xml</code>).</para>
+            </entry>
+            <entry>
+                <para><code>source-adarefs2ada="true"</code>: The source documents are supposed to come from adarefs2ada post-processing. They're taken from the appropriate subdirectories of <code>{{$adarefs2adaBaseStorageDirectory}/{@name}/{@version}/{@usecase}</code> (parameter defined in <code>YATC-shared/data/parameters.xml</code>).</para>
+            </entry>
+        </unorderedlist>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <xi:include href="../../../../YATC-shared/srcmod/setup-element.mod.xml"/>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title><anchor name="build-element"/>The <elm>build</elm> element</title>
+
+            <para>The <elm>build</elm> element defines a build process, based upon the documents copied in the <elm>setup</elm> element(s).</para>
+
+            <para>The string <code>$BUILDNAME</code> will be substituted with the name of the build in all <code>@name</code> and <code>@value</code> attributes of child elements.</para>
+
+            <element name="build">
+                <attributes>
+                    <attribute name="name" type="xs:string">
+                        <para>The name of this build (used for reporting). If nothing is specified, some unique name will be used.</para>
+                    </attribute>
+                </attributes>
+                <children>
+                    <element name="stylesheet" occurrences="1" pseudo-attributes="href">
+                        <para>Defines, with a <code>@href</code> attribute (see <link href="#common-attributes">common attributes</link>) the XSLT stylesheet that will be run over all the ADA documents specified in the <elm>input-documents</elm> element.</para>
+                    </element>
+                    <element name="input-document" occurrences="?" pseudo-attributes="directory name">
+                        <para>Specifies the input document for the build. Has a required <code>@directory</code> (see <link href="#common-attributes">common attributes</link>) and <code>@name</code> (the filename) attribute. If not present a small dummy XML document is provided as input.</para>
+                    </element>
+                    <element name="ada-working-set" occurrences="?" pseudo-attributes="directory">
+                        <para>The build stylesheets often use an "ADA working set": A set of ADA documents to iterate on. This element defines the directory that holds theses documents, using a required <code>@directory</code> attribute (see <link href="#common-attributes">common attributes</link>).<br/>This directory name is passed to the stylesheet, which then accesses these documents using <code>collection()</code>.</para>
+                    </element>
+                    <element name="output" pseudo-attributes="directory name compare-as-text" occurrences="1">
+                        <para>Defines the name of the output file where the WIKI text is written to. Has a required <code>@directory</code> (see <link href="#common-attributes">common attributes</link>) and <code>@name</code> (the filename) attribute. The encoding of this file can be set using a parameter, see below.<br/>If, by exception, you don't want the output to get compared by the <code>compare-ada-2-wiki</code> command, set the <code>@compare-as-text</code> attribute to <code>false</code>.</para>
+                    </element>
+                    <element name="parameter" occurrences="*" attributes-indicator="true">
+                        <para>Defines an additional parameter to be passed to the stylesheet. See <link href="#parameter-element">below</link>.</para>
+                    </element>
+                </children>
+            </element>
+
+            <para>There is some confusion about the way the WIKI text files must be encoded. The original (Ant based) code used UTF-16BE, but it is not (or no longer) clear why. UTF-8 makes more sense and is probably good enough. Just in case it isn't, the WIKI text file encoding is parametrized using the parameter <code>ada2wikiTextEncoding</code>. Most probable values are <code>UTF-8</code> or <code>UTF-16BE</code>.</para>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <xi:include href="../../../../YATC-shared/srcmod/parameter-element.mod.xml"/>
+
+        </section>
+       
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <xi:include href="../../../../YATC-shared/srcmod/common-definitions.xml"/>
+
+</text-document>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             id="2.16.840.1.113883.2.4.3.11.60.40.2.5.1.1"
+             name="ProbleemTypeCodelijst"
+             displayName="ProbleemTypeCodelijst"
+             effectiveDate="2020-09-01T00:00:00"
+             statusCode="final">
+      <sourceCodeSystem id="2.16.840.1.113883.6.96"
+                        identifierName="SNOMED Clinical Terms"
+                        canonicalUri="http://snomed.info/sct"
+                        canonicalUriDSTU2="http://snomed.info/sct"
+                        canonicalUriSTU3="http://snomed.info/sct"
+                        canonicalUriR4="http://snomed.info/sct"
+                        canonicalUriR4B="http://snomed.info/sct"
+                        canonicalUriR5="http://snomed.info/sct"
+                        hl7v2table0396="SCT"/>
+      <publishingAuthority name="Registratie aan de bron" inherited="project">
+         <addrLine type="uri">https://www.registratieaandebron.nl</addrLine>
+         <addrLine type="uri">https://www.zibs.nl</addrLine>
+      </publishingAuthority>
+      <copyright language="en-US" inherited="true">This artefact includes content from SNOMED Clinical Terms® (SNOMED CT®) which is copyright of the International Health Terminology Standards Development Organisation (IHTSDO). Implementers of these artefacts must have the appropriate SNOMED CT Affiliate license - for more information contact http://www.snomed.org/snomed-ct/getsnomed-ct or info@snomed.org.</copyright>
+      <conceptList>
+         <concept code="282291009"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="interpretatie van diagnose"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Diagnosis interpretation"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="interpretatie van diagnose"/>
+            <desc language="nl-NL">Diagnose</desc>
+         </concept>
+         <concept code="418799008"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="bevinding gerapporteerd door patiënt of andere bron van voorgeschiedenis"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Finding reported by subject or history provider"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="bevinding gerapporteerd door patiënt of andere bron van voorgeschiedenis"/>
+            <desc language="nl-NL">Symptoom</desc>
+         </concept>
+         <concept code="404684003"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="klinische bevinding"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Clinical finding"/>
+            <designation language="nl-NL" type="preferred" displayName="klinische bevinding"/>
+            <desc language="nl-NL">Bevinding</desc>
+         </concept>
+         <concept code="409586006"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="klacht"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Complaint"/>
+            <designation language="nl-NL" type="preferred" displayName="klacht"/>
+            <desc language="nl-NL">Klacht</desc>
+         </concept>
+         <concept code="248536006"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="bevinding van functionele prestatie en activiteit"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Finding of functional performance and activity"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="bevinding van functionele prestatie en activiteit"/>
+            <desc language="nl-NL">Functionele Beperking</desc>
+         </concept>
+         <concept code="116223007"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="complicatie"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Complication"/>
+            <designation language="nl-NL" type="preferred" displayName="complicatie"/>
+            <desc language="nl-NL">Complicatie</desc>
+         </concept>
+      </conceptList>
+   </valueSet>
+</valueSets>

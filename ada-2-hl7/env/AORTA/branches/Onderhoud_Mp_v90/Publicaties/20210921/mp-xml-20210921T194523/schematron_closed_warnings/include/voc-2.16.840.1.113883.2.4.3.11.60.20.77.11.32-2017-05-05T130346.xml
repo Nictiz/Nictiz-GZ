@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             name="AanvWensVV"
+             displayName="Aanvullende wensen voor VV"
+             id="2.16.840.1.113883.2.4.3.11.60.20.77.11.32"
+             statusCode="final"
+             versionLabel="9"
+             effectiveDate="2017-05-05T13:03:46">
+      <sourceCodeSystem id="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2051"
+                        identifierName="G-std thesaurus 2051"
+                        canonicalUri="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2051"
+                        canonicalUriDSTU2="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2051"
+                        canonicalUriSTU3="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2051"
+                        canonicalUriR4="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2051"/>
+      <publishingAuthority name="Nictiz">
+         <addrLine>Oude Middenweg 55</addrLine>
+         <addrLine>2491 AC Den Haag</addrLine>
+         <addrLine>T 070 317 3450</addrLine>
+      </publishingAuthority>
+      <conceptList>
+         <concept code="1"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2051"
+                  displayName="Spoed"
+                  level="0"
+                  type="L"/>
+         <concept code="2"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2051"
+                  displayName="Niet in GDS"
+                  level="0"
+                  type="L"/>
+         <concept code="3"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2051"
+                  displayName="Bezorgen"
+                  level="0"
+                  type="L"/>
+      </conceptList>
+   </valueSet>
+</valueSets>

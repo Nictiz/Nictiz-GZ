@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             id="2.16.840.1.113883.2.4.3.11.60.20.77.11.38"
+             name="RedenWijzigen-StakenCodelijst"
+             displayName="RedenWijzigen-StakenCodelijst"
+             statusCode="pending"
+             versionLabel="9"
+             effectiveDate="2021-06-01T15:00:23">
+      <sourceCodeSystem id="2.16.840.1.113883.6.96"
+                        identifierName="SNOMED Clinical Terms"
+                        canonicalUri="http://snomed.info/sct"
+                        canonicalUriDSTU2="http://snomed.info/sct"
+                        canonicalUriSTU3="http://snomed.info/sct"
+                        canonicalUriR4="http://snomed.info/sct"/>
+      <sourceCodeSystem id="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.2"
+                        identifierName="Reden Medicatieafspraak of -gebruik"
+                        canonicalUri="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.2"
+                        canonicalUriDSTU2="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.2"
+                        canonicalUriSTU3="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.2"
+                        canonicalUriR4="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.2"/>
+      <sourceCodeSystem id="2.16.840.1.113883.5.1008"
+                        identifierName="Null Flavor"
+                        canonicalUri="http://terminology.hl7.org/CodeSystem/v3-NullFlavor"
+                        canonicalUriDSTU2="http://hl7.org/fhir/v3/NullFlavor"
+                        canonicalUriSTU3="http://hl7.org/fhir/v3/NullFlavor"
+                        canonicalUriR4="http://terminology.hl7.org/CodeSystem/v3-NullFlavor"/>
+      <publishingAuthority name="Nictiz">
+         <addrLine>Oude Middenweg 55</addrLine>
+         <addrLine>2491 AC Den Haag</addrLine>
+         <addrLine>T 070 317 3450</addrLine>
+      </publishingAuthority>
+      <copyright language="en-US">This artefact includes content from SNOMED Clinical Terms® (SNOMED CT®) which is copyright of the International Health Terminology Standards Development Organisation (IHTSDO). Implementers of these artefacts must have the appropriate SNOMED CT Affiliate license - for more information contact http://www.snomed.org/snomed-ct/getsnomed-ct or info@snomed.org.</copyright>
+      <conceptList>
+         <concept code="62014003"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Adverse reaction to drug (disorder)"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Adverse reaction to drug"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Ongewenste reactie op medicatie en/of drugs"/>
+         </concept>
+         <concept code="62691000146103"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Incorrect registration (procedure)"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Incorrect registration"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Foutieve registratie"/>
+            <desc language="nl-NL">
+               <div>Foutieve registratie</div>
+            </desc>
+         </concept>
+         <concept code="705046008"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Deficit of medication supply (finding)"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Deficit of medication supply"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Leveringstekort van medicatie"/>
+         </concept>
+         <concept code="266709005"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Medication commenced (finding)"
+                  level="0"
+                  type="D">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Medication commenced"/>
+            <designation language="nl-NL" type="preferred" displayName="Medicatie gestart"/>
+            <desc language="nl-NL">Starten medicamenteuze behandeling</desc>
+         </concept>
+         <concept code="438833006"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Administration of drug or medicament contraindicated (situation)"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Administration of medication contraindicated"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Toedienen van medicatie gecontra-indiceerd"/>
+            <desc language="nl-NL">Contra-indicatie</desc>
+         </concept>
+         <concept code="79899007"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Drug interaction (disorder)"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Medication interaction"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Geneesmiddelinteractie"/>
+            <desc language="nl-NL">Interactie</desc>
+         </concept>
+         <concept code="473010000"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Hypersensitivity condition (disorder)"
+                  level="0"
+                  type="D">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Hypersensitivity condition"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Toestand van overgevoeligheid"/>
+            <desc language="nl-NL">Overgevoeligheid</desc>
+         </concept>
+         <concept code="5"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.2"
+                  displayName="Geen of onvoldoende effect"
+                  level="0"
+                  type="D">
+            <desc language="nl-NL">Geen of onvoldoende effect(DEPRECATED)</desc>
+         </concept>
+         <concept code="58848006"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Lack of drug action (finding)"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Lack of drug action"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Gebrek aan geneesmiddeleffect"/>
+            <desc language="nl-NL">Geen of onvoldoende effect</desc>
+         </concept>
+         <concept code="6"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.2"
+                  displayName="Te sterk effect"
+                  level="0"
+                  type="D">
+            <desc language="nl-NL">Te sterk effect(DEPRECATED)</desc>
+         </concept>
+         <concept code="112251000146103"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Too strong drug action (finding)"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Drug action too strong"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Te sterk effect van medicatie"/>
+            <desc language="nl-NL">Te sterk effect</desc>
+         </concept>
+         <concept code="7"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.2"
+                  displayName="(Mogelijke) bijwerking"
+                  level="0"
+                  type="D">
+            <desc language="nl-NL">(Mogelijke) bijwerking(DEPRECATED)</desc>
+         </concept>
+         <concept code="704417003"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="At risk of medication side effect (finding)"
+                  level="0"
+                  type="D">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="At risk of medication side effect"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Loopt risico op bijwerking van medicatie"/>
+            <desc language="nl-NL">(Mogelijke) bijwerking</desc>
+         </concept>
+         <concept code="8"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.2"
+                  displayName="Toedieningsweg voldoet niet"
+                  level="0"
+                  type="D">
+            <desc language="nl-NL">Toedieningsweg voldoet niet (DEPRECATED)</desc>
+         </concept>
+         <concept code="112191000146101"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Insufficient route of administration (finding)"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Insufficient route of drug administration"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Medicatietoedieningsweg voldoet niet"/>
+            <desc language="nl-NL">Toedieningsweg voldoet niet</desc>
+         </concept>
+         <concept code="9"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.2"
+                  displayName="Indicatie vervallen"
+                  level="0"
+                  type="D">
+            <desc language="nl-NL">Indicatie vervallen(DEPRECATED)</desc>
+         </concept>
+         <concept code="183966005"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Drug treatment not indicated (situation)"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Drug treatment not indicated"/>
+            <desc language="nl-NL">Indicatie vervallen</desc>
+         </concept>
+         <concept code="10"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.2"
+                  displayName="Beleidswijziging"
+                  level="0"
+                  type="D">
+            <desc language="nl-NL">Beleidswijziging(DEPRECATED)</desc>
+         </concept>
+         <concept code="112751000146109"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Medication management changed (situation)"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Beleidswijziging</desc>
+         </concept>
+         <concept code="305335007"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Admission to establishment (procedure)"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Admission to establishment"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Opname in instelling"/>
+            <desc language="nl-NL">Opname</desc>
+         </concept>
+         <concept code="12"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.2"
+                  displayName="Wens patiënt"
+                  level="0"
+                  type="D">
+            <desc language="nl-NL">Wens patiënt(DEPRECATED)</desc>
+         </concept>
+         <concept code="184003006"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Patient requested treatment (situation)"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Patient requested treatment"/>
+            <desc language="nl-NL">Wens patiënt</desc>
+         </concept>
+         <concept code="13"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.2"
+                  displayName="Volgens afspraak"
+                  level="0"
+                  type="D">
+            <desc language="nl-NL">Volgens afspraak(DEPRECATED)</desc>
+         </concept>
+         <concept code="112211000146102"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Patient agreed with treatment"
+                  level="0"
+                  type="D">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Patient agreed with treatment"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Behandeling volgens afspraak met patiënt"/>
+            <desc language="nl-NL">Volgens afspraak</desc>
+         </concept>
+         <concept code="14"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.2"
+                  displayName="Hervatten beleid vorige voorschrijver"
+                  level="0"
+                  type="D">
+            <desc language="nl-NL">Hervatten beleid vorige voorschrijver(DEPRECATED)</desc>
+         </concept>
+         <concept code="112261000146100"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Treatment previous prescriber continued (situation)"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Treatment previous prescriber continued"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Hervatten van beleid van vorige voorschrijver"/>
+            <desc language="nl-NL">Hervatten beleid vorige voorschrijver</desc>
+         </concept>
+         <concept code="15"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.2"
+                  displayName="Geplande procedure"
+                  level="0"
+                  type="D">
+            <desc language="nl-NL">Procedure waaronder ingreep, interferentie met gepland labonderzoek, etc.(DEPRECATED)</desc>
+         </concept>
+         <concept code="405613005"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Planned procedure (situation)"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Planned procedure"/>
+            <designation language="nl-NL" type="preferred" displayName="Verrichting gepland"/>
+            <desc language="nl-NL">Procedure waaronder ingreep, interferentie met gepland labonderzoek, etc.</desc>
+         </concept>
+         <exception code="OTH"
+                    codeSystem="2.16.840.1.113883.5.1008"
+                    displayName="Overig"
+                    level="0"
+                    type="L">
+            <desc language="nl-NL">Overig</desc>
+         </exception>
+      </conceptList>
+   </valueSet>
+</valueSets>

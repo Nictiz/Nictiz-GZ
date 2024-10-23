@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<parameters xmlns="https://nictiz.nl/ns/YATC-shared" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared ../../../YATC-shared/xsd/parameters.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        This is a parameter file for testing the ADA retrieval process, using the special test data file in 
+        YATC-internal/get-production-ada-instances/test/test-application-ada-retrieval-data.xml
+        
+        To apply this test situation, copy this parameters file to {basedirectory}/data/parameters.xml, 
+        so it overrides the regular settings.
+    -->
+    <!-- ======================================================================= -->
+
+    <parameter name="hrefApplicationAdaRetrievalData">
+        <!-- Use the specially prepared ADA retrieval data document: -->
+        <value>{$yatcComponentDirectory}/test/test-application-ada-retrieval-data.xml</value>
+    </parameter>
+    
+    <parameter name="hrefProductionAdaInstancesStorageBasedir">
+        <!-- Store the results not in the regular location but in a tmp/ directory underneath the component: -->
+        <value>{$yatcComponentDirectory}/tmp</value>
+    </parameter>
+    
+    <parameter name="storeIndexFiles">
+        <!-- Always store index files: -->
+        <value>true</value>
+    </parameter>
+
+</parameters>

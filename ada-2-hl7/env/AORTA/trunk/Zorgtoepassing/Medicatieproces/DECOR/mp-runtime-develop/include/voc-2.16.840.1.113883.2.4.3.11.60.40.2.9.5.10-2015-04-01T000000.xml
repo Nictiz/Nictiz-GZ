@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             id="2.16.840.1.113883.2.4.3.11.60.40.2.9.5.10"
+             name="VoorschriftProductPRKCodelijst"
+             displayName="VoorschriftProductPRKCodelijst"
+             effectiveDate="2015-04-01T00:00:00"
+             statusCode="final"
+             ident="zib2015bbr-"
+             url="http://decor.nictiz.nl/decor/services/"
+             referencedFrom="mp-">
+      <desc language="nl-NL">G-Standaard Voorschrijfproducten (PRK) (2.16.840.1.113883.2.4.4.10): Alle waarden</desc>
+      <sourceCodeSystem id="2.16.840.1.113883.2.4.4.10"
+                        identifierName="G-Standaard Voorschrijfproducten (PRK)"
+                        canonicalUri="urn:oid:2.16.840.1.113883.2.4.4.10"
+                        canonicalUriDSTU2="urn:oid:2.16.840.1.113883.2.4.4.10"
+                        canonicalUriSTU3="urn:oid:2.16.840.1.113883.2.4.4.10"
+                        canonicalUriR4="urn:oid:2.16.840.1.113883.2.4.4.10"/>
+      <publishingAuthority name="Nictiz" inherited="project">
+         <addrLine>Oude Middenweg 55</addrLine>
+         <addrLine>2491 AC Den Haag</addrLine>
+         <addrLine>T 070 317 3450</addrLine>
+      </publishingAuthority>
+      <completeCodeSystem codeSystem="2.16.840.1.113883.2.4.4.10"
+                          codeSystemName="G-Standaard Voorschrijfproducten (PRK)"/>
+   </valueSet>
+</valueSets>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../../../YATC-shared/general-engine/sch/general-engine-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<application xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../../xsd/ada-2-hl7-data.xsd" name="mp" version="9.1.0" source-adarefs2ada="true" source-project-name="mp-mp910">
+    <!-- ======================================================================= -->
+    <!-- 
+        ada-2-hl7 application data for mp/9.1.0
+        
+        This is an include file for ../ada-2-hl7-data.xml
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+    <!-- Abbreviations used in mp (medicatieproces):
+        
+         mg     = beschikbaarstellen_medicatiegegevens
+         mg.st  = sturen_medicatiegegevens
+         mg.rp  = raadplegen_medicatiegegevens
+         mo     = beschikbaarstellen_medicatieoverzicht
+         mv     = sturen_medicatievoorschrift
+         mgb    = sturen_medicatiegebruik
+         av     = sturen_afhandeling_medicatievoorschrift
+         vma    = sturen_voorstel_medicatieafspraak
+         avma   = sturen_antwoord_voorstel_medicatieafspraak
+         vvv    = sturen_voorstel_verstrekkingsverzoek
+         avvv   = sturen_antwoord_voorstel_verstrekkingsverzoek
+         xmlv   = xml-voorbeelden
+    -->
+    <!-- ======================================================================= -->
+
+    <macros>
+        <!-- Date used for conversions to HL7: -->
+        <macro name="DATET" value="2020-06-08"/>
+    </macros>
+
+    <!-- ======================================================================= -->
+    <!-- SETUP: -->
+
+    <message>=========================== {$yatcComponentName}/$BASEPATH</message>
+
+    <setup usecase="sturen_medicatievoorschrift" directory-id="mv">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="mv-ada-instance">
+            <include glob="*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="mv-hl7-instance"/>
+        <empty-directory target-subdir="cda_instance" directory-id="mv-cda-instance"/>
+    </setup>
+
+    <setup usecase="beschikbaarstellen_medicatiegegevens" directory-id="mg">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data target-subdir="ada_instance_MA" directory-id="mg-ada-instance-ma">
+            <include glob="*MA*.xml"/>
+        </copy-data>
+        <copy-data target-subdir="ada_instance_VV" directory-id="mg-ada-instance-vv">
+            <include glob="*VV*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_MA" directory-id="mg-hl7-instance-ma"/>
+        <empty-directory target-subdir="hl7_instance_VV" directory-id="mg-hl7-instance-vv"/>
+    </setup>
+
+    <setup usecase="sturen_medicatiegegevens" directory-id="mg.st">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data target-subdir="ada_instance_MA" directory-id="mg.st-ada-instance-ma">
+            <include glob="*MA*.xml"/>
+        </copy-data>
+        <copy-data target-subdir="ada_instance_VV" directory-id="mg.st-ada-instance-vv">
+            <include glob="*VV*.xml"/>
+        </copy-data>
+    </setup>
+
+    <setup usecase="beschikbaarstellen_medicatieoverzicht" directory-id="mo">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data target-subdir="ada_instance_mp" directory-id="mo-ada-instance-mp">
+            <include glob="*output*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_mp" directory-id="mo-hl7-instance-mp"/>
+        <empty-directory target-subdir="cda_instance_mp" directory-id="mo-cda-instance-mp"/>
+    </setup>
+
+    <setup usecase="xml-voorbeelden" directory-id="xmlv">
+        <copy-project-schemas>
+            <include glob="*sturen_medicatievoorschrift.xsd"/>
+            <include glob="*beschikbaarstellen_medicatiegegevens.xsd"/>
+            <include glob="*beschikbaarstellen_medicatieoverzicht.xsd"/>
+            <include glob="*sturen_medicatiegebruik.xsd"/>
+            <include glob="*sturen_afhandeling_medicatievoorschrift.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="xmlv-ada-instance">
+            <include glob="*example*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="xmlv-hl7-instance"/>
+        <empty-directory target-subdir="cda_instance" directory-id="xmlv-cda-instance"/>
+    </setup>
+
+    <!-- ======================================================================= -->
+    <!-- CONVERT: -->
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- sturen_medicatievoorschrift -->
+
+    <build fast="true" name="convert-sturen_medicatievoorschrift-ada-2-hl7">
+        <stylesheet href="../../env/mp/9.1.0/sturen_medicatievoorschrift/payload/sturen_medicatievoorschrift_org.xsl"/>
+        <input-documents directory="@mv-ada-instance"/>
+        <output-documents directory="@mv-hl7-instance"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="dateT" value="$DATET"/>
+    </build>
+    <build fast="true" name="convert-sturen_medicatievoorschrift-ada-2-hl7-cda">
+        <stylesheet href="../../env/mp/MP9_Transform_Organizer2CDA.xsl"/>
+        <input-documents directory="@mv-hl7-instance"/>
+        <output-documents directory="@mv-cda-instance"/>
+    </build>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- beschikbaarstellen_medicatiegegevens -->
+
+    <build fast="true" name="convert-beschikbaarstellen_medicatiegegevens-ma-ada-2-hl7">
+        <stylesheet href="../../env/mp/9.1.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_org.xsl"/>
+        <input-documents directory="@mg-ada-instance-ma"/>
+        <output-documents directory="@mg-hl7-instance-ma"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="dateT" value="$DATET"/>
+    </build>
+    <build fast="true" name="convert-beschikbaarstellen_medicatiegegevens-vv-ada-2-hl7">
+        <stylesheet href="../../env/mp/9.1.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_org.xsl"/>
+        <input-documents directory="@mg-ada-instance-vv"/>
+        <output-documents directory="@mg-hl7-instance-vv"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="dateT" value="$DATET"/>
+    </build>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- beschikbaarstellen_medicatieoverzicht -->
+
+    <build fast="true" name="convert-beschikbaarstellen_medicatieoverzicht-mp-ada-2-hl7">
+        <stylesheet href="../../env/mp/9.1.0/beschikbaarstellen_medicatieoverzicht/payload/beschikbaarstellen_medicatieoverzicht_org.xsl"/>
+        <input-documents directory="@mo-ada-instance-mp"/>
+        <output-documents directory="@mo-hl7-instance-mp"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="dateT" value="$DATET"/>
+    </build>
+    <build fast="true" name="convert-beschikbaarstellen_medicatieoverzicht-mp-ada-2-hl7-cda">
+        <stylesheet href="../../env/mp/MP9_Transform_Organizer2CDA.xsl"/>
+        <input-documents directory="@mo-hl7-instance-mp"/>
+        <output-documents directory="@mo-cda-instance-mp"/>
+    </build>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- Examples: -->
+
+    <build fast="true" name="convert-examples-sturen_medicatievoorschrift-ada-2-hl7">
+        <stylesheet href="../../env/mp/9.1.0/sturen_medicatievoorschrift/payload/sturen_medicatievoorschrift_org.xsl"/>
+        <input-documents directory="@xmlv-ada-instance">
+            <include glob="mv*.xml"/>
+        </input-documents>
+        <output-documents directory="@xmlv-hl7-instance"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="dateT" value="$DATET"/>
+    </build>
+
+    <build fast="true" name="convert-examples-beschikbaarstellen_medicatiegegevens-ada-2-hl7">
+        <stylesheet href="../../env/mp/9.1.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_org.xsl"/>
+        <input-documents directory="@xmlv-ada-instance">
+            <include glob="mg-*.xml"/>
+        </input-documents>
+        <output-documents directory="@xmlv-hl7-instance"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="dateT" value="$DATET"/>
+    </build>
+
+    <build fast="true" name="convert-examples-beschikbaarstellen_medicatieoverzicht-ada-2-hl7">
+        <stylesheet href="../../env/mp/9.1.0/beschikbaarstellen_medicatieoverzicht/payload/beschikbaarstellen_medicatieoverzicht_org.xsl"/>
+        <input-documents directory="@xmlv-ada-instance">
+            <include glob="mo*.xml"/>
+        </input-documents>
+        <output-documents directory="@xmlv-hl7-instance"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="dateT" value="$DATET"/>
+    </build>
+
+    <build fast="true" name="convert-examples-sturen_medicatiegebruik-ada-2-hl7">
+        <stylesheet href="../../env/mp/9.1.0/sturen_medicatiegebruik/payload/sturen_medicatiegebruik_org.xsl"/>
+        <input-documents directory="@xmlv-ada-instance">
+            <include glob="mgb*.xml"/>
+        </input-documents>
+        <output-documents directory="@xmlv-hl7-instance"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="dateT" value="$DATET"/>
+    </build>
+
+    <build fast="true" name="convert-examples-sturen_afhandeling_medicatievoorschrift-ada-2-hl7">
+        <stylesheet href="../../env/mp/9.1.0/sturen_afhandeling_medicatievoorschrift/payload/sturen_afhandeling_medicatievoorschrift_org.xsl"/>
+        <input-documents directory="@xmlv-ada-instance">
+            <include glob="av*.xml"/>
+        </input-documents>
+        <output-documents directory="@xmlv-hl7-instance"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="dateT" value="$DATET"/>
+    </build>
+
+    <!-- All examples to CDA also: -->
+    <build fast="true" name="convert-examples-ada-2-hl7-cda">
+        <stylesheet href="../../env/mp/MP9_Transform_Organizer2CDA.xsl"/>
+        <input-documents directory="@xmlv-hl7-instance"/>
+        <output-documents directory="@xmlv-cda-instance"/>
+    </build>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- Readme: -->
+
+    <copy>
+        <source directory="#../../env/mp/9.1.0">
+            <include glob="ReadMe.txt"/>
+        </source>
+        <target directory="."/>
+    </copy>
+
+</application>

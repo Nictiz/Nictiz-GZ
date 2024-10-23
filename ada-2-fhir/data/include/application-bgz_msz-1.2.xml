@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../sch/ada-2-fhir-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<application name="bgz_msz" version="1.2" source-adarefs2ada="true" xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../../xsd/ada-2-fhir-data.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        ada-2-fhir application data for bgz_msz 1.2
+        
+        This is an include file for ../ada-2-fhir-data.xml
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+    <!-- Setup: -->
+
+    <!-- beschikbaarstellen -->
+    <setup usecase="beschikbaarstellen" directory-id="bsai">
+        <!--<copy-project-schemas target-subdir="ada_schemas">
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>-->
+        <copy-data directory-id="bsai-ada-instance">
+            <include glob="bgz-msz-patA*.xml"/>
+            <include glob="bgz-msz-patB*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="fhir_instance" directory-id="bsai-fhir-instance"/>
+    </setup>
+    
+    
+    <build name="create-fhir-instance-documents">
+        <!-- Remark: Some inputs cause XSLT error XTDE1490: Cannot write more than one result document to the same URI.
+        We have to ignore this (for now?), otherwise we can't compare with the original. -->
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen/payload/beschikbaarstellen_2_fhir.xsl"/>
+        <input-documents directory="@bsai-ada-instance"/>
+        <output-documents directory="@bsai-fhir-instance"/>
+        <parameter name="adaProcessedDirectory" directory="@bsai-ada-instance"/>
+        <parameter name="outputDirectory" directory="@bsai-fhir-instance"/>
+        <!--<parameter name="outputDirectoryBundles" directory="@bs-fhir-instance-bundles"/>-->
+    </build>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+</application>

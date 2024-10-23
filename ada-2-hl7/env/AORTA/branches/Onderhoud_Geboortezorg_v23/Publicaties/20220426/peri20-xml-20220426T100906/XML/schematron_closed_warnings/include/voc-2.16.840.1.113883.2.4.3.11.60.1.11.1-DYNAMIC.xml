@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:decor="http://art-decor.org/ns/decor"
+             xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:peri="urn:nictiz-nl:v3/peri"
+             id="2.16.840.1.113883.2.4.3.11.60.1.11.1"
+             name="RoleCodeNLZorgaanbiedertypen"
+             displayName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+             effectiveDate="2020-05-18T12:30:00"
+             statusCode="final"
+             ident="nictiz2bbr-"
+             url="http://decor.nictiz.nl/decor/services/"
+             referencedFrom="peri20-">
+      <desc language="nl-NL">Deze waardelijst bevat concepten die het roltype bepaalt van een organisatie die als zorgaanbieder optreedt. Het is een invulling van het HL7v3 vocabulairedomein “RoleCode” en wel specifiek het concept “AssignedRoleType”.</desc>
+      <desc language="en-US">This value set contains concepts that determine the role type of an organization that acts as a health care provider. It below is a representation of the HL7 V3 vocabulary domain “RoleCode” and more specifically the concept “AssignedRoleType”.</desc>
+      <sourceCodeSystem id="2.16.840.1.113883.2.4.15.1060"
+                        identifierName="RoleCodeNLZorgaanbiedertypen"
+                        canonicalUri="http://nictiz.nl/fhir/NamingSystem/organization-type"
+                        canonicalUriDSTU2="http://nictiz.nl/fhir/NamingSystem/organization-type"
+                        canonicalUriSTU3="http://nictiz.nl/fhir/NamingSystem/organization-type"
+                        canonicalUriR4="http://nictiz.nl/fhir/NamingSystem/organization-type"/>
+      <publishingAuthority name="Nictiz">
+         <addrLine type="uri">https://www.nictiz.nl</addrLine>
+      </publishingAuthority>
+      <copyright language="nl-NL">Nictiz</copyright>
+      <conceptList>
+         <concept code="AssignedRoleType"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Een roltype wordt gebruikt om een entiteit verder aan te duiden, die een rol speelt met AssignedEntity als modelattribuut RoleClass."
+                  level="0"
+                  type="A">
+            <designation displayName="Een roltype wordt gebruikt om een entiteit verder aan te duiden, die een rol speelt met AssignedEntity als modelattribuut RoleClass."
+                         type="preferred"
+                         language="nl-NL"/>
+         </concept>
+         <concept code="V4"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Ziekenhuis"
+                  level="1"
+                  type="S">
+            <designation displayName="Ziekenhuis" type="preferred" language="nl-NL"/>
+         </concept>
+         <concept code="V5"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Universitair Medisch Centrum"
+                  level="2"
+                  type="L">
+            <designation displayName="Universitair Medisch Centrum"
+                         type="preferred"
+                         language="nl-NL"/>
+         </concept>
+         <concept code="V6"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Algemeen ziekenhuis"
+                  level="2"
+                  type="L">
+            <designation displayName="Algemeen ziekenhuis" type="preferred" language="nl-NL"/>
+         </concept>
+         <concept code="BRA"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Brandwondencentrum"
+                  level="2"
+                  type="L">
+            <designation displayName="Brandwondencentrum" type="preferred" language="nl-NL"/>
+         </concept>
+         <concept code="Z4"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Zelfstandig behandelcentrum"
+                  level="1"
+                  type="S">
+            <designation displayName="Zelfstandig behandelcentrum"
+                         type="preferred"
+                         language="nl-NL"/>
+         </concept>
+         <concept code="Z5"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Diagnostisch centrum"
+                  level="2"
+                  type="L">
+            <designation displayName="Diagnostisch centrum"
+                         type="preferred"
+                         language="nl-NL"/>
+         </concept>
+         <concept code="B1"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Beeldvormende diagnostiek"
+                  level="3"
+                  type="A">
+            <designation displayName="Beeldvormende diagnostiek"
+                         type="preferred"
+                         language="nl-NL"/>
+         </concept>
+         <concept code="B2"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Echocentrum"
+                  level="4"
+                  type="L">
+            <designation displayName="Echocentrum" type="preferred" language="nl-NL"/>
+         </concept>
+         <concept code="X3"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Verplegings- of verzorgingsinstelling"
+                  level="1"
+                  type="S">
+            <designation displayName="Verplegings- of verzorgingsinstelling"
+                         type="preferred"
+                         language="nl-NL"/>
+         </concept>
+         <concept code="R5"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Verpleeghuis"
+                  level="2"
+                  type="L">
+            <designation displayName="Verpleeghuis" type="preferred" language="nl-NL"/>
+         </concept>
+         <concept code="M1"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Verzorgingstehuis"
+                  level="2"
+                  type="L">
+            <designation displayName="Verzorgingstehuis" type="preferred" language="nl-NL"/>
+         </concept>
+         <concept code="A1"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Apotheekinstelling"
+                  level="1"
+                  type="S">
+            <designation displayName="Apotheekinstelling" type="preferred" language="nl-NL"/>
+         </concept>
+         <concept code="J8"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Openbare apotheek"
+                  level="2"
+                  type="L">
+            <designation displayName="Openbare apotheek" type="preferred" language="nl-NL"/>
+         </concept>
+         <concept code="K9"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Zelfstandig opererende ziekenhuisapotheek"
+                  level="2"
+                  type="L">
+            <designation displayName="Zelfstandig opererende ziekenhuisapotheek"
+                         type="preferred"
+                         language="nl-NL"/>
+         </concept>
+         <concept code="H1"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Huisartsinstelling"
+                  level="1"
+                  type="S">
+            <designation displayName="Huisartsinstelling" type="preferred" language="nl-NL"/>
+         </concept>
+         <concept code="Z3"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Huisartspraktijk (zelfstandig of groepspraktijk)"
+                  level="2"
+                  type="S">
+            <designation displayName="Huisartspraktijk (zelfstandig of groepspraktijk)"
+                         type="preferred"
+                         language="nl-NL"/>
+         </concept>
+         <concept code="K3"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Apotheekhoudende huisartspraktijk"
+                  level="3"
+                  type="L">
+            <designation displayName="Apotheekhoudende huisartspraktijk"
+                         type="preferred"
+                         language="nl-NL"/>
+         </concept>
+         <concept code="N6"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Huisartsenpost (t.b.v. dienstwaarneming)"
+                  level="2"
+                  type="L">
+            <designation displayName="Huisartsenpost (t.b.v. dienstwaarneming)"
+                         type="preferred"
+                         language="nl-NL"/>
+         </concept>
+         <concept code="L1"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Laboratorium"
+                  level="1"
+                  type="S">
+            <designation displayName="Laboratorium" type="preferred" language="nl-NL"/>
+         </concept>
+         <concept code="P4"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Polikliniek (als onderdeel van een ziekenhuis)"
+                  level="1"
+                  type="L">
+            <designation displayName="Polikliniek (als onderdeel van een ziekenhuis)"
+                         type="preferred"
+                         language="nl-NL"/>
+         </concept>
+         <concept code="R8"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Revalidatiecentrum"
+                  level="1"
+                  type="L">
+            <designation displayName="Revalidatiecentrum" type="preferred" language="nl-NL"/>
+         </concept>
+         <concept code="P6"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Preventieve gezondheidszorg (waaronder Bevolkingsonderzoek)"
+                  level="1"
+                  type="L">
+            <designation displayName="Preventieve gezondheidszorg (waaronder Bevolkingsonderzoek)"
+                         type="preferred"
+                         language="nl-NL"/>
+         </concept>
+         <concept code="G5"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Geestelijke Gezondheidszorg"
+                  level="1"
+                  type="L">
+            <designation displayName="Geestelijke Gezondheidszorg"
+                         type="preferred"
+                         language="nl-NL"/>
+         </concept>
+         <concept code="G1"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Verslavingszorg"
+                  level="1"
+                  type="L">
+            <designation displayName="Verslavingszorg" type="preferred" language="nl-NL"/>
+         </concept>
+         <concept code="G6"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Verstandelijk gehandicaptenzorg"
+                  level="1"
+                  type="L">
+            <designation displayName="Verstandelijk gehandicaptenzorg"
+                         type="preferred"
+                         language="nl-NL"/>
+         </concept>
+         <concept code="T2"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Thuiszorg"
+                  level="1"
+                  type="L">
+            <designation displayName="Thuiszorg" type="preferred" language="nl-NL"/>
+         </concept>
+         <concept code="K4"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Kraamzorg"
+                  level="1"
+                  type="L">
+            <designation displayName="Kraamzorg" type="preferred" language="nl-NL"/>
+         </concept>
+         <concept code="H2"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Hospice"
+                  level="1"
+                  type="L">
+            <designation displayName="Hospice" type="preferred" language="nl-NL"/>
+         </concept>
+         <concept code="JGZ"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Jeugdgezondheidszorg"
+                  level="1"
+                  type="L">
+            <designation displayName="Jeugdgezondheidszorg"
+                         type="preferred"
+                         language="nl-NL"/>
+         </concept>
+         <concept code="G3"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Verloskundigenpraktijk"
+                  level="1"
+                  type="L">
+            <designation displayName="Verloskundigenpraktijk"
+                         type="preferred"
+                         language="nl-NL"/>
+         </concept>
+         <concept code="GC"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Geboortecentrum"
+                  level="1"
+                  type="L">
+            <designation displayName="Geboortecentrum" type="preferred" language="nl-NL"/>
+         </concept>
+         <concept code="DIA"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Dialysecentrum"
+                  level="1"
+                  type="L">
+            <designation displayName="Dialysecentrum" type="preferred" language="nl-NL"/>
+         </concept>
+         <concept code="JZ"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Jeugdzorg"
+                  level="1"
+                  type="L">
+            <designation displayName="Jeugdzorg" type="preferred" language="nl-NL"/>
+         </concept>
+         <concept code="F1"
+                  codeSystem="2.16.840.1.113883.2.4.15.1060"
+                  codeSystemName="RoleCodeNL - zorgaanbiedertype (organisaties)"
+                  codeSystemVersion="2022-04-25T00:00:00"
+                  displayName="Fysiotherapiepraktijk"
+                  level="1"
+                  type="L">
+            <designation displayName="Fysiotherapiepraktijk"
+                         type="preferred"
+                         language="nl-NL"/>
+         </concept>
+      </conceptList>
+   </valueSet>
+</valueSets>

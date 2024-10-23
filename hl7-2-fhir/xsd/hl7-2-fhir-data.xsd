@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="https://nictiz.nl/ns/YATC-internal" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:yatci="https://nictiz.nl/ns/YATC-internal">
+    <!-- ======================================================================= -->
+    <!--
+    Copyright © Nictiz
+
+    This program is free software; you can redistribute it and/or modify it under the terms of the
+    GNU Lesser General Public License as published by the Free Software Foundation; either version
+    2.1 of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+    without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU Lesser General Public License for more details.
+    
+    The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <xs:annotation>
+        <xs:documentation>Schema for fhir-2-ada processing document. This document defines what to do to perform fhir-2-ada processing for an application/version combination.</xs:documentation>
+    </xs:annotation>
+    <xs:include schemaLocation="../../../YATC-shared/general-engine/xsdmod/general-engine-data.mod.xsd"/>
+    <xs:element name="hl7-2-fhir-data" type="yatci:ct-data"/>
+</xs:schema>

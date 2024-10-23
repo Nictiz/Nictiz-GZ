@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             id="2.16.840.1.113883.2.4.3.11.60.20.77.11.53"
+             name="PrikPlakLocatieCodeLijst"
+             displayName="PrikPlakLocatieCodeLijst"
+             statusCode="final"
+             lastModifiedDate="2022-04-01T14:30:35"
+             versionLabel="MP9"
+             effectiveDate="2022-03-23T18:19:42">
+      <sourceCodeSystem id="2.16.840.1.113883.6.96"
+                        identifierName="SNOMED Clinical Terms"
+                        canonicalUri="http://snomed.info/sct"
+                        canonicalUriDSTU2="http://snomed.info/sct"
+                        canonicalUriSTU3="http://snomed.info/sct"
+                        canonicalUriR4="http://snomed.info/sct"/>
+      <sourceCodeSystem id="2.16.840.1.113883.5.1008"
+                        identifierName="Null Flavor"
+                        canonicalUri="http://terminology.hl7.org/CodeSystem/v3-NullFlavor"
+                        canonicalUriDSTU2="http://hl7.org/fhir/v3/NullFlavor"
+                        canonicalUriSTU3="http://hl7.org/fhir/v3/NullFlavor"
+                        canonicalUriR4="http://terminology.hl7.org/CodeSystem/v3-NullFlavor"
+                        context="external/hl7"/>
+      <publishingAuthority name="Nictiz" inherited="project">
+         <addrLine>Oude Middenweg 55</addrLine>
+         <addrLine>2491 AC Den Haag</addrLine>
+         <addrLine>T 070 317 3450</addrLine>
+      </publishingAuthority>
+      <copyright language="en-US">This artefact includes content from SNOMED Clinical Terms® (SNOMED CT®) which is copyright of the International Health Terminology Standards Development Organisation (IHTSDO). Implementers of these artefacts must have the appropriate SNOMED CT Affiliate license - for more information contact http://www.snomed.org/snomed-ct/getsnomed-ct or info@snomed.org.</copyright>
+      <conceptList>
+         <concept code="160531000146108"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van bovenste gedeelte van lumbale regio van wand van abdomen"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Structure of upper part of lumbar region of abdominal wall (body structure)"/>
+         </concept>
+         <concept code="160481000146106"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van onderste gedeelte van lumbale regio van wand van abdomen"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Structure of lower part of lumbar region of abdominal wall (body structure)"/>
+         </concept>
+         <concept code="160501000146103"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van rechter gedeelte van supra-umbilicale regio"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Structure of upper outer quadrant of buttock (body structure)"/>
+         </concept>
+         <concept code="160441000146104"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van linker gedeelte van infra-umbilicale regio"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Structure of left part of infra-umbilical region (body structure)"/>
+         </concept>
+         <concept code="160451000146101"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van linker gedeelte van supra-umbilicale regio"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Structure of left part of supraumbilical region (body structure)"/>
+         </concept>
+         <concept code="160491000146108"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van rechter gedeelte van infra-umbilicale regio"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Structure of right part of infra-umbilical region (body structure)"/>
+         </concept>
+         <concept code="160521000146106"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van weke delen van laterale bovenkwadrant van anterieur oppervlak van bovenbeen"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Structure of soft tissue of upper outer quadrant of anterior surface of thigh"/>
+         </concept>
+         <concept code="160511000146101"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van weke delen van mediale bovenkwadrant van anterieur oppervlak van bovenbeen "
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Structure of soft tissue of upper inner quadrant of anterior surface of thigh (body structure)"/>
+         </concept>
+         <concept code="160471000146109"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van weke delen van laterale onderkwadrant van anterieur oppervlak van bovenbeen "
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Structure of soft tissue of lower outer quadrant of anterior surface of thigh (body structure)"/>
+         </concept>
+         <concept code="160461000146103"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van weke delen van mediale onderkwadrant van anterieur oppervlak van bovenbeen"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Structure of soft tissue of lower inner quadrant of anterior surface of thigh (body structure)"/>
+         </concept>
+         <concept code="703712000"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van laterale bovenkwadrant van regio glutealis"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Structure of upper outer quadrant of buttock (body structure)"/>
+         </concept>
+         <concept code="160541000146100"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van mediale bovenkwadrant van regio glutealis"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Structure of upper inner quadrant of buttock (body structure)"/>
+         </concept>
+         <concept code="160431000146107"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van laterale onderkwadrant van regio glutealis"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Structure of lower outer quadrant of buttock (body structure)"/>
+         </concept>
+         <concept code="160421000146105"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van mediale onderkwadrant van regio glutealis"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Structure of lower inner quadrant of buttock (body structure)"/>
+         </concept>
+         <concept code="91009005"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van huid van regio clavicularis"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Skin structure of clavicular region (body structure)"/>
+         </concept>
+         <concept code="160371000146104"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van huid van linker gedeelte van achterzijde van bovenste gedeelte van thoracale regio "
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName=" Skin structure of left part of back of upper thoracic region (body structure)"/>
+         </concept>
+         <concept code="160391000146100"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van huid van rechter gedeelte van achterzijde van bovenste gedeelte van thoracale regio"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Skin structure of right part of back of upper thoracic regio (bodystructure)"/>
+         </concept>
+         <concept code="160361000146105"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van huid van linker gedeelte van achterzijde van onderste gedeelte van thoracale regio"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Skin structure of left part of back of lower thoracic region (body structure)"/>
+         </concept>
+         <concept code="160381000146102"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van huid van rechter gedeelte van achterzijde van onderste gedeelte van thoracale regio"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Skin structure of right part of back of lower thoracic region (body structure)"/>
+         </concept>
+         <concept code="160401000146102"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van huid van linker gedeelte van lumbosacrale regio"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Skin structure of left part of lumbosacral region (body structure)"/>
+         </concept>
+         <concept code="160411000146100"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van huid van rechter gedeelte van lumbosacrale regio"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Skin structure of right part of lumbosacral region (body structure)"/>
+         </concept>
+         <concept code="45981001"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van huid van anterieur oppervlak van bovenarm"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Skin structure of anterior surface of upper arm (body structure)"/>
+         </concept>
+         <concept code="15703000"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName=" structuur van posterieur oppervlak van bovenarm"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Structure of posterior surface of upper arm (body structure)"/>
+         </concept>
+         <concept code="35259002"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van musculus deltoideus"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Structure of deltoid muscle (body structure)"/>
+         </concept>
+         <concept code="160561000146104"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van huid van rechter bovenkwadrant van voorzijde van thorax"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Skin structure of right upper quadrant of anterior surface of thorax (body structure)"/>
+         </concept>
+         <concept code="160551000146102"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van huid van linker bovenkwadrant van voorzijde van thorax"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Skin structure of left upper quadrant of anterior surface of thorax (body structure)"/>
+         </concept>
+         <concept code="160581000146107"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van huid van rechter onderkwadrant van voorzijde van thorax"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Skin structure of right lower quadrant of anterior surface of thorax (body structure)"/>
+         </concept>
+         <concept code="160571000146105"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van huid van linker onderkwadrant van voorzijde van thorax"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Skin structure of left lower quadrant of anterior surface of thorax (body structure)"/>
+         </concept>
+         <concept code="45980000"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="structuur van huid van regio scapularis"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Skin structure of scapular region of back (body structure)"/>
+         </concept>
+         <concept code="24483006"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName=" structuur van huid van postauriculaire regio"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Skin structure of postauricular region (body structure)"/>
+         </concept>
+         <exception code="OTH"
+                    codeSystem="2.16.840.1.113883.5.1008"
+                    displayName="Overig"
+                    level="0"
+                    type="L"/>
+      </conceptList>
+   </valueSet>
+</valueSets>

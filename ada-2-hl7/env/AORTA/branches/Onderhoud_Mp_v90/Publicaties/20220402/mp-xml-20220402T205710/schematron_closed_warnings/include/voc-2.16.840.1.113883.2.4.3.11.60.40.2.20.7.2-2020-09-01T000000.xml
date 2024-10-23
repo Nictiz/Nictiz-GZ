@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             id="2.16.840.1.113883.2.4.3.11.60.40.2.20.7.2"
+             name="LateraliteitCodelijst"
+             displayName="LateraliteitCodelijst"
+             effectiveDate="2020-09-01T00:00:00"
+             statusCode="final"
+             ident="zib2020bbr-"
+             url="http://decor.nictiz.nl/decor/services/"
+             referencedFrom="mp-">
+      <sourceCodeSystem id="2.16.840.1.113883.6.96"
+                        identifierName="SNOMED Clinical Terms"
+                        canonicalUri="http://snomed.info/sct"
+                        canonicalUriDSTU2="http://snomed.info/sct"
+                        canonicalUriSTU3="http://snomed.info/sct"
+                        canonicalUriR4="http://snomed.info/sct"/>
+      <publishingAuthority name="Nictiz" inherited="project">
+         <addrLine>Oude Middenweg 55</addrLine>
+         <addrLine>2491 AC Den Haag</addrLine>
+         <addrLine>T 070 317 3450</addrLine>
+      </publishingAuthority>
+      <copyright language="en-US">This artefact includes content from SNOMED Clinical Terms® (SNOMED CT®) which is copyright of the International Health Terminology Standards Development Organisation (IHTSDO). Implementers of these artefacts must have the appropriate SNOMED CT Affiliate license - for more information contact http://www.snomed.org/snomed-ct/getsnomed-ct or info@snomed.org.</copyright>
+      <conceptList>
+         <concept code="7771000"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="links"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Left"/>
+            <designation language="nl-NL" type="preferred" displayName="links"/>
+            <desc language="nl-NL">Links</desc>
+         </concept>
+         <concept code="24028007"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="rechts"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Right"/>
+            <designation language="nl-NL" type="preferred" displayName="rechts"/>
+            <desc language="nl-NL">Rechts</desc>
+         </concept>
+         <concept code="51440002"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="bilateraal"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Right and left"/>
+            <designation language="nl-NL" type="preferred" displayName="bilateraal"/>
+            <desc language="nl-NL">Rechts en links</desc>
+         </concept>
+      </conceptList>
+   </valueSet>
+</valueSets>

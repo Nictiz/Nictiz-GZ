@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             id="2.16.840.1.113883.2.4.3.11.60.20.77.11.31"
+             name="AanvInfoMA"
+             displayName="Aanvullende Informatie voor MA"
+             statusCode="final"
+             versionLabel="9"
+             effectiveDate="2017-05-05T12:48:47">
+      <sourceCodeSystem id="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2050"
+                        identifierName="G-std thesaurus 2050"
+                        canonicalUri="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2050"
+                        canonicalUriDSTU2="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2050"
+                        canonicalUriSTU3="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2050"
+                        canonicalUriR4="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2050"/>
+      <publishingAuthority name="Nictiz">
+         <addrLine>Oude Middenweg 55</addrLine>
+         <addrLine>2491 AC Den Haag</addrLine>
+         <addrLine>T 070 317 3450</addrLine>
+      </publishingAuthority>
+      <conceptList>
+         <concept code="1"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2050"
+                  displayName="Bewust hoge dosering"
+                  level="0"
+                  type="L"/>
+         <concept code="2"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2050"
+                  displayName="Bewust lage dosering"
+                  level="0"
+                  type="L"/>
+         <concept code="3"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2050"
+                  displayName="Bewust afwijkende toedieningsweg"
+                  level="0"
+                  type="L"/>
+         <concept code="4"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2050"
+                  displayName="Medische noodzaak"
+                  level="0"
+                  type="L"/>
+         <concept code="5"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2050"
+                  displayName="Profylaxe"
+                  level="0"
+                  type="L"/>
+         <concept code="6"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2050"
+                  displayName="Wijziging in GDS per direct"
+                  level="0"
+                  type="L"/>
+         <concept code="7"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2050"
+                  displayName="Wijziging in GDS per rolwissel"
+                  level="0"
+                  type="L"/>
+      </conceptList>
+   </valueSet>
+</valueSets>

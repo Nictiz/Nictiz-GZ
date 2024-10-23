@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<text-document xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../../../../YATC-shared/xsd/text-document.xsd" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!-- ======================================================================= -->
+    <!-- 
+        Reference text document for the get-production-ada-instances application data format.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <macro name="DATAFILENAME" value="application-ada-retrieval-data"/>
+
+    <title>Component <code>{$yatcRepositoryName}/{$yatcComponentName}</code> data format reference</title>
+
+    <xi:include href="../../../../YATC-shared/srcmod/common-data-format-opening-text.xml"/>
+
+    <!-- ======================================================================= -->
+
+    <xi:include href="../../../../YATC-shared/srcmod/common-data-format-general-remarks.xml"/>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>Root <elm>application-ada-retrieval-data</elm> element</title>
+
+        <element name="application-ada-retrieval-data">
+            <children>
+                <choice occurrences="*">
+                    <element name="xi:include" pseudo-attributes="href">
+                        <para>Reference to a file to include.</para>
+                    </element>
+                    <element name="application">
+                        <para>Definition for a single application.</para>
+                    </element>
+                    <element name="retrieval-set-definition">
+                        <para>Definition of a <link href="#retrieval-set-definition">retrieval set</link></para>
+                    </element>
+                </choice>
+
+            </children>
+
+        </element>
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>The <elm>application</elm> element</title>
+
+        <para>The <elm>application</elm> element defines the processing to be performed for a single application/version combination.</para>
+
+        <para>All retrieved documents from ART-DECOR will be stored in <code>{{$productionAdaInstancesBaseStorageDirectory}/{@name}/{@version or @version-directory-production-ada-instances}/{{$productionAdaInstancesDataSubdir}</code> (parameters defined in <code>YATC-shared/data/parameters.xml</code>).</para>
+
+        <element name="application">
+            <attributes>
+                <attribute name="name" type="xs:string" required="true">
+                    <para>The name of the application. For instance: <code>lab</code>.</para>
+                </attribute>
+                <attribute name="version" type="xs:string" required="true">
+                    <para>The version of the application. For instance: <code>4.0.0</code>.</para>
+                </attribute>
+                <attribute name="ada-application-name" type="xs:string" default="@name">
+                    <para>The application name for retrieving the data from ART-DECOR. Use this when it differs from <code>@name</code>.</para>
+                </attribute>
+                <attribute name="version-directory-production-ada-instances" type="xs:string" default="@version">
+                    <para>Sometimes the production-ada-instances part of the processing uses a different directory name (instead of <code>@version</code>). Use this attribute to specify this.</para>
+                </attribute>
+            </attributes>
+            <children>
+                <element name="message" occurrences="*">
+                    <para>Message which will be output on the console during processing for this application.</para>
+                </element>
+                <choice occurrences="+">
+                    <element name="retrieval" attributes-indicator="true">
+                        <para>Definition for the <link href="#ada-retrieval">ADA retrieval</link></para>
+                    </element>
+                    <element name="retrieval-set" pseudo-attributes="idref">
+                        <para>Reference to a set of <link href="#ada-retrieval">ADA retrieval</link> definitions. The <code>@idref</code> attribute must reference an existing <link href="#retrieval-set-definition">retrieval set</link>.</para>
+                    </element>
+                </choice>
+                <element name="postprocessing-stylesheet" occurrences="?" pseudo-attributes="href">
+                    <para>Reference to an optional XSLT stylesheet (using an <code>@href</code> attribute) that is applied to all ADA files retrieved from ART-DECOR.</para>
+                </element>
+                <element name="adarefs2ada" occurrences="?">
+                    <para>Definition of the <link href="#adarefs2ada">adarefs2ada processing</link> for this application/version.</para>
+                </element>
+            </children>
+        </element>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title><anchor name="ada-retrieval"/>The <elm>retrieval</elm> element</title>
+
+            <para>The <elm>retrieval</elm> element defines the condition(s) for retrieving ADA files from ART-DECOR.</para>
+
+            <element name="retrieval">
+                <attributes>
+                    <attribute name="transaction" type="xs:string" required="true">
+                        <para>The name of the transaction to retrieve the data for.</para>
+                    </attribute>
+                    <attribute name="contains" type="xs:string">
+                        <para>A string that must be part of the identifier of the retrieved document.</para>
+                    </attribute>
+                </attributes>
+            </element>
+
+        </section>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title><anchor name="adarefs2ada"/>The <elm>adarefs2ada</elm> element</title>
+
+            <para>The <elm>adarefs2ada</elm> element defines the optional adarefs2ada processing done after the ADA documents are retrieved from ART-DECOR.</para>
+
+            <para>All processed documents will be stored in/underneath <code>{{$adarefs2adaBaseStorageDirectory}/{@name}/{@version}/{@usecase}</code> (parameters defined in <code>YATC-shared/data/parameters.xml</code>).</para>
+
+            <para>The projects base directory is <code>{{$projectsBaseStorageDirectory}</code> (parameter defined in <code>YATC-shared/data/parameters.xml</code></para>
+
+            <element name="adarefs2ada">
+                <attributes>
+                    <attribute name="source-project-name" type="xs:string" default="application/@name">
+                        <para>The name of the project (directory) to be used. If not set, the application's name is used.</para>
+                    </attribute>
+                </attributes>
+                <children>
+                    <element name="setup" occurrences="*" attributes-indicator="true">
+                        <para>Any setup (data copying) to be done.</para>
+                    </element>
+                    <choice occurrences="*">
+                        <element name="build" attributes-indicator="true">
+                            <para>Build operations to be performed.</para>
+                        </element>
+                        <element name="build-overwrite" attributes-indicator="true">
+                            <para>Build operations to be performed where the output of the stylesheet overwrites the input.</para>
+                        </element>
+                        <element name="build-copy">
+                            <para>Straight file copy operation to be performed.</para>
+                        </element>
+                    </choice>
+                </children>
+            </element>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <xi:include href="../../../../YATC-shared/srcmod/setup-element.mod.xml"/>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <section>
+                <title><anchor name="build-element"/>The <elm>build</elm> element</title>
+
+                <para>The <elm>build</elm> element defines a build process, based upon the documents copied in the <elm>setup</elm> element(s).</para>
+
+                <para>The stylesheets used here must output there results using an <elm>xsl:result-document</elm> element. The direct stylesheet's output is discarded.</para>
+
+                <element name="build">
+                    <attributes>
+                        <attribute name="name" type="xs:string">
+                            <para>The name of this build (used for reporting). If nothing is specified, some unique name will be used.</para>
+                        </attribute>
+                        <attribute name="fast" type="xs:boolean" default="false">
+                            <para>Whether to run builds with multiple input files in fast mode. See <link href="#build-fast-mode">below</link>.</para>
+                        </attribute>
+                    </attributes>
+                    <children>
+                        <element name="stylesheet" occurrences="1" pseudo-attributes="href">
+                            <para>Defines, with a <code>@href</code> attribute (see <link href="#common-attributes">common attributes</link>) the XSLT stylesheet that will be run over all the ADA documents specified in the <elm>input-documents</elm> element.</para>
+                        </element>
+                        <choice occurrences="1">
+                            <element name="input-documents" occurrences="?" pseudo-attributes="directory" comment="with optional include/exclude">
+                                <para>Specifies the input documents for the build. Has a required <code>@directory</code> attribute (see <link href="#common-attributes">common attributes</link>) and can have child <elm>include</elm> and/or <elm>exclude</elm> elements (see <link href="#include-exclude">include/exclude elements</link>) to further narrow down the set of documents to process. Use either <elm>input-documents</elm> or <elm>no-input</elm>.</para>
+                            </element>
+                            <element name="no-input" occurrences="?">
+                                <para>The stylesheet doesn't need any input. A short dummy document will be provided. Use either <elm>input-documents</elm> or <elm>no-input</elm>.</para>
+                            </element>
+                        </choice>
+                        <element name="ada-working-set" occurrences="?" pseudo-attributes="directory">
+                            <para>The build stylesheets often use an "ADA working set": A set of ADA documents to iterate on. This element defines the directory that holds theses documents, using a required <code>@directory</code> attribute (see <link href="#common-attributes">common attributes</link>).<br/>This directory name is passed to the stylesheet, which then accesses these documents using <code>collection()</code>.</para>
+                        </element>
+                        <element name="output" pseudo-attributes="directory">
+                            <para>Defines the name of the output directory where all the results will be written to. Has a required <code>@directory</code> attribute (see <link href="#common-attributes">common attributes</link>).</para>
+                        </element>
+                        <element name="parameter" occurrences="*" attributes-indicator="true">
+                            <para>Defines an additional parameter to be passed to the stylesheet. See <link href="#parameter-element">below</link>.</para>
+                        </element>
+                    </children>
+
+                </element>
+
+                <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+                <xi:include href="../../../../YATC-shared/srcmod/parameter-element.mod.xml"/>
+
+                <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+                <xi:include href="../../../../YATC-shared/srcmod/build-fast-mode.xml"/>
+
+            </section>
+
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <section>
+                <title><anchor name="build-overwrite-element"/>The <elm>build-overwrite</elm> element</title>
+
+                <para>The <elm>build-overwrite</elm> element defines a build process where the output of the stylesheet overwrites the input. These are "straight" stylesheets, where the actual output is used.</para>
+
+                <element name="build-overwrite">
+                    <attributes>
+                        <attribute name="name" type="xs:string">
+                            <para>The name of this build (used for reporting). If nothing is specified, some unique name will be used.</para>
+                        </attribute>
+                        <attribute name="fast" type="xs:boolean" default="false">
+                            <para>Whether to run builds with multiple input files in fast mode. See <link href="#build-fast-mode">above</link>.</para>
+                        </attribute>
+                    </attributes>
+                    <children>
+                        <element name="stylesheet" occurrences="1" pseudo-attributes="href">
+                            <para>Defines, with a <code>@href</code> attribute (see <link href="#common-attributes">common attributes</link>) the XSLT stylesheet that will be run over all the ADA documents specified in the <elm>input-documents</elm> element.</para>
+                        </element>
+                        <element name="input-documents" occurrences="1" pseudo-attributes="directory" comment="with optional include/exclude">
+                            <para>Specifies the input documents for the build. Has a required <code>@directory</code> attribute (see <link href="#common-attributes">common attributes</link>) and can have child <elm>include</elm> and/or <elm>exclude</elm> elements (see <link href="#include-exclude">include/exclude elements</link>) to further narrow down the set of documents to process. Use either <elm>input-documents</elm> or <elm>no-input</elm>.</para>
+                        </element>
+                        <element name="parameter" occurrences="*" attributes-indicator="true">
+                            <para>Defines an additional parameter to be passed to the stylesheet. See <link href="#parameter-element">below</link>.</para>
+                        </element>
+                    </children>
+                </element>
+
+            </section>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <section>
+                <title><anchor name="build-copy-element"/>The <elm>build-copy</elm> element</title>
+
+                <para>The <elm>build-copy</elm> element defines a straight file copy during the adarefs2ada processing.</para>
+
+                <element name="build-copy">
+                    <attributes>
+                        <attribute name="name" type="xs:string">
+                            <para>The name of this copy (used for reporting). If nothing is specified, some unique name will be used.</para>
+                        </attribute>
+                    </attributes>
+                    <children>
+                        <element name="input-documents" occurrences="1" pseudo-attributes="directory" comment="with optional include/exclude">
+                            <para>Specifies the input documents for the copy. Has a required <code>@directory</code> attribute (see <link href="#common-attributes">common attributes</link>) and can have child <elm>include</elm> and/or <elm>exclude</elm> elements (see <link href="#include-exclude">include/exclude elements</link>) to further narrow down the set of documents to process.</para>
+                        </element>
+                        <element name="output" pseudo-attributes="directory">
+                            <para>Defines the name of the output directory where the files will be copied to. Has a required <code>@directory</code> attribute (see <link href="#common-attributes">common attributes</link>).</para>
+                        </element>
+                    </children>
+                </element>
+
+            </section>
+
+        </section>
+
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title><anchor name="retrieval-set-definition"/>The <elm>retrieval-set-definition</elm> element</title>
+
+        <para>The <elm>retrieval-set-definition</elm> element defines a set of <link href="#ada-retrieval">ADA retrieval</link> definitions for re-use. It is referenced by identifier in <elm>retrieval-set</elm> elements.</para>
+
+        <element name="retrieval-set-definition">
+            <attributes>
+                <attribute name="id" type="identifier" required="true">
+                    <para>The identifier of the retrieval set.</para>
+                </attribute>
+            </attributes>
+            <children>
+                <choice occurrences="+">
+                    <element name="retrieval" attributes-indicator="true">
+                        <para>Definition of a single <link href="#ada-retrieval">ADA retrieval</link>.</para>
+                    </element>
+                    <element name="retrieval-set" pseudo-attributes="idref">
+                        <para>Reference to nested retrieval set (using the <code>@idref</code> attribute).</para>
+                    </element>
+                </choice>
+            </children>
+        </element>
+
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <xi:include href="../../../../YATC-shared/srcmod/common-definitions.xml"/>
+
+</text-document>

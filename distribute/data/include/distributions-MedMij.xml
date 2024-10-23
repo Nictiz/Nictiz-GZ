@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../sch/distribute-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<distributions xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../../xsd/distribute-data.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        The distributions for VZVZ
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <distribution name="MedMij" description="MedMij distribution" target-directory="MedMij/$DISTRIBUTIONNAME-$DISTRIBUTIONVERSION" href-zip="../$DISTRIBUTIONNAME-$DISTRIBUTIONVERSION-$DATECOMPACT-$TIMECOMPACT.zip" base-dir-in-zip="false" allow-overwrite="true" distribution-version-required="true" keep-files="true" source-directory="{$yatcInternalDirectory}">
+
+        <!-- TBD
+             We assume that (most) files are in the YATC-internal repo ({$yatcInternalDirectory}). 
+             We switch back to HL7-mappings where appropriate ({$HL7-mappingsDirectory}).
+        -->
+
+        <message>=============================== MedMij distribution version $DISTRIBUTIONVERSION</message>
+
+        <flatten-stylesheets href-include="common/includes" add-addional-info="#all">
+
+            <macros>
+                <macro name="BASE-BESCHIKBAARSTELLEN" value="ketenzorg/3.0.2/beschikbaarstellen/payload"/>
+            </macros>
+
+            <group target-directory="beschikbaarstellen_diagnostische_bepalingen">
+                <group target-directory="toAda" source-directory="{$HL7-mappingsDirectory}">
+                    <master-document href-source="hl7_2_ada/$BASE-BESCHIKBAARSTELLEN/beschikbaarstellen_diagnostische_bepalingen_2_ada.xsl"/>
+                </group>
+                <group target-directory="fromAda">
+                    <master-document href-source="ada-2-fhir/env/$BASE-BESCHIKBAARSTELLEN/beschikbaarstellen_diagnostische_bepalingen_2_fhir.xsl"/>
+                </group>
+            </group>
+
+            <group target-directory="beschikbaarstellen_contactmomenten">
+                <group target-directory="toAda" source-directory="{$HL7-mappingsDirectory}">
+                    <master-document href-source="hl7_2_ada/$BASE-BESCHIKBAARSTELLEN/beschikbaarstellen_contactmomenten_2_ada.xsl"/>
+                </group>
+                <group target-directory="fromAda">
+                    <master-document href-source="ada-2-fhir/env/$BASE-BESCHIKBAARSTELLEN/beschikbaarstellen_contactmomenten_2_fhir.xsl"/>
+                </group>
+            </group>
+
+            <group target-directory="beschikbaarstellen_contactverslagen">
+                <group target-directory="toAda" source-directory="{$HL7-mappingsDirectory}">
+                    <master-document href-source="hl7_2_ada/$BASE-BESCHIKBAARSTELLEN/beschikbaarstellen_contactverslagen_2_ada.xsl"/>
+                </group>
+                <group target-directory="fromAda">
+                    <master-document href-source="ada-2-fhir/env/$BASE-BESCHIKBAARSTELLEN/beschikbaarstellen_contactverslagen_2_fhir.xsl"/>
+                </group>
+            </group>
+
+            <group target-directory="beschikbaarstellen_episodes">
+                <group target-directory="toAda" source-directory="{$HL7-mappingsDirectory}">
+                    <master-document href-source="hl7_2_ada/$BASE-BESCHIKBAARSTELLEN/beschikbaarstellen_episodes_2_ada.xsl"/>
+                </group>
+                <group target-directory="fromAda">
+                    <master-document href-source="ada-2-fhir/env/$BASE-BESCHIKBAARSTELLEN/beschikbaarstellen_episodes_2_fhir.xsl"/>
+                </group>
+            </group>
+
+            <group target-directory="beschikbaarstellen_medicatieafspraken907">
+                <group target-directory="toAda" source-directory="{$HL7-mappingsDirectory}">
+                    <master-document href-source="hl7_2_ada/$BASE-BESCHIKBAARSTELLEN/beschikbaarstellen_medicatieafspraken907_2_ada.xsl"/>
+                </group>
+                <group target-directory="fromAda">
+                    <master-document href-source="ada-2-fhir/env/$BASE-BESCHIKBAARSTELLEN/beschikbaarstellen_medicatieafspraken907_2_fhir.xsl"/>
+                </group>
+            </group>
+
+            <group target-directory="beschikbaarstellen_allergieintoleranties">
+                <group target-directory="toAda" source-directory="{$HL7-mappingsDirectory}">
+                    <master-document href-source="hl7_2_ada/$BASE-BESCHIKBAARSTELLEN/beschikbaarstellen_allergieintoleranties_2_ada.xsl"/>
+                </group>
+                <group target-directory="fromAda">
+                    <master-document href-source="ada-2-fhir/env/$BASE-BESCHIKBAARSTELLEN/beschikbaarstellen_allergieintoleranties_2_fhir.xsl"/>
+                </group>
+            </group>
+
+            <group target-directory="beschikbaarstellen_medicatiegegevens">
+                <macros>
+                    <macro name="BASE" value="mp/9.0.7/beschikbaarstellen_medicatiegegevens/payload"/>
+                </macros>
+                <group target-directory="toAda" source-directory="{$HL7-mappingsDirectory}">
+                    <master-document href-source="hl7_2_ada/$BASE/beschikbaarstellen_medicatiegegevens_hl7_2_ada.xsl"/>
+                </group>
+                <group target-directory="fromAda">
+                    <master-document href-source="ada-2-fhir/env/$BASE/beschikbaarstellen_medicatiegegevens_2_fhir.xsl"/>
+                </group>
+            </group>
+
+            <group target-directory="beschikbaarstellen_verstrekkingenvertaling">
+                <macros>
+                    <macro name="BASE" value="mp/9.0.7/beschikbaarstellen_verstrekkingenvertaling/payload"/>
+                </macros>
+                <group target-directory="toAda" source-directory="{$HL7-mappingsDirectory}">
+                    <master-document href-source="hl7_2_ada/$BASE/beschikbaarstellen_verstrekkingenvertaling_hl7_2_ada.xsl"/>
+                </group>
+                <group target-directory="fromAda">
+                    <master-document href-source="ada-2-fhir/env/$BASE/beschikbaarstellen_verstrekkingenvertaling_2_fhir.xsl"/>
+                </group>
+            </group>
+
+            <group target-directory="beschikbaarstellen_verstrekkingenvertaling">
+                <macros>
+                    <macro name="BASE" value="cio/1.0.0/beschikbaarstellen_allergie_intolerantie_vertaling/payload"/>
+                </macros>
+                <group target-directory="toAda" source-directory="{$HL7-mappingsDirectory}">
+                    <master-document href-source="hl7_2_ada/$BASE/beschikbaarstellen_allergie_intolerantie_vertaling_hl7_2_ada.xsl"/>
+                </group>
+                <group target-directory="fromAda">
+                    <master-document href-source="ada-2-fhir/env/$BASE/beschikbaarstellen_allergie_intolerantie_vertaling_2_fhir.xsl"/>
+                </group>
+            </group>
+
+        </flatten-stylesheets>
+
+        <!-- Finally, also add the necessary data XML documents to the include directory: -->
+        <directory source-directory="{$yatcSharedDirectory}/xsl/util" target-directory="common/includes" clear-target="false">
+            <include glob="*.xml"/>
+        </directory>
+        <directory source-directory="ada-2-fhir/env/fhir" target-directory="common/fhir">
+            <include glob="QualificationTokens.xml"/>
+        </directory>
+
+        <!-- Add an XML and Markdown information document: -->
+        <additional-xml-document href-target="distribution-info.xml">
+            <distribution xmlns="" name="$DISTRIBUTIONNAME" timestamp="$DATETIMEISO" version="$DISTRIBUTIONVERSION"/>
+        </additional-xml-document>
+        <additional-text-document href-source="#text/README-master.md" href-target="README.md"/>
+
+    </distribution>
+
+    <!-- ======================================================================= -->
+
+    <distribution name="VZVZ-test-distribution" description="Test distribution for VZVZ 202311" target-directory="VZVZ/test-distribution" href-zip="../$DISTRIBUTIONNAME-$DATECOMPACT-$TIMECOMPACT.zip" base-dir-in-zip="false" allow-overwrite="true" source-directory="{$HL7-mappingsDirectory}">
+
+        <!-- This was a very first attempt to create a distribution for VZVZ (contact: Helma van der Linden). It turned out that it was better to 
+             make something that resembled the original directory structure, a so-called "drop-in" distribution. 
+             Therefore, this distribution was reworked into the distribution named VZVZ-test-distribution-drop-in.
+        -->
+
+        <!-- The specification from VZVZ (Helma van der Linden) 20231116: 
+        
+            # HL7-mappings XSLTs
+
+            # Ik gebruik telkens setjes toAda + fromAda.
+            # $HL7Mappings verwijst naar de lokatie van de HL7 Mappings repository op mijn schijf
+            
+            toAda="$HL7Mappings"'/fhir_2_ada-r4/mp/9.3.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_2_ada.xsl'
+            fromAda="$HL7Mappings"'/ada_2_hl7/mp/9.3.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_org.xsl'
+            
+            toAda="$HL7Mappings"'/hl7_2_ada/mp/9.3.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_hl7_2_ada.xsl'
+            fromAda="$HL7Mappings"'/ada_2_fhir-r4/mp/9.3.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_2_fhir.xsl'
+            
+            # ik realiseer me nu dat hiervan nog geen mp-lab versie bestaat.
+            toAda="$HL7Mappings"'/hl7_2_ada/mp/9.3.0/sturen_medicatievoorschrift/payload/sturen_medicatievoorschrift_hl7_2_ada.xsl'
+            fromAda="$HL7Mappings"'/ada_2_fhir-r4/mp/9.3.0/sturen_medicatievoorschrift/payload/sturen_medicatievoorschrift_2_fhir.xsl'
+            
+            toAda="$HL7Mappings"'/fhir_2_ada-r4/mp-lab/payload/sturen_medicatievoorschrift-en-lab.xsl'
+            fromAda="$HL7Mappings"'/ada_2_hl7/mp-lab/payload/sturen_medicatievoorschrift-en-lab.xsl'
+            
+            toAda="$HL7Mappings"'/hl7_2_ada/mp/9.3.0/6.12_2_beschikbaarstellen_medicatiegegevens/payload/6.12_2_beschikbaarstellen_medicatiegegevens_hl7_2_ada.xsl'
+            fromAda="$HL7Mappings"'/ada_2_fhir-r4/mp/9.3.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_2_fhir.xsl'
+            
+            toAda="$HL7Mappings"'/hl7_2_ada/mp/9.3.0/6.12_2_beschikbaarstellen_medicatiegegevens/payload/6.12_2_beschikbaarstellen_medicatiegegevens_hl7_2_ada.xsl'
+            fromAda="$HL7Mappings"'/ada_2_hl7/mp/9.3.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_org.xsl'
+        -->
+
+        <message>=============================== Test distribution for VZVZ</message>
+
+        <flatten-stylesheets href-include="common/includes">
+
+            <group target-directory="pair-1">
+                <group target-directory="toAda">
+                    <master-document href-source="fhir_2_ada-r4/mp/9.3.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_2_ada.xsl"/>
+                </group>
+                <group target-directory="fromAda">
+                    <master-document href-source="ada_2_hl7/mp/9.3.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_org.xsl"/>
+                </group>
+            </group>
+
+            <group target-directory="pair-2">
+                <group target-directory="toAda">
+                    <master-document href-source="hl7_2_ada/mp/9.3.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_hl7_2_ada.xsl"/>
+                </group>
+                <group target-directory="fromAda">
+                    <master-document href-source="ada_2_fhir-r4/mp/9.3.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_2_fhir.xsl"/>
+                </group>
+            </group>
+
+            <group target-directory="pair-3">
+                <group target-directory="toAda">
+                    <master-document href-source="hl7_2_ada/mp/9.3.0/sturen_medicatievoorschrift/payload/sturen_medicatievoorschrift_hl7_2_ada.xsl"/>
+                </group>
+                <group target-directory="fromAda">
+                    <master-document href-source="ada_2_fhir-r4/mp/9.3.0/sturen_medicatievoorschrift/payload/sturen_medicatievoorschrift_2_fhir.xsl"/>
+                </group>
+            </group>
+
+            <group target-directory="pair-4">
+                <group target-directory="toAda">
+                    <master-document href-source="fhir_2_ada-r4/mp-lab/payload/sturen_medicatievoorschrift-en-lab.xsl"/>
+                </group>
+                <group target-directory="fromAda">
+                    <master-document href-source="ada_2_hl7/mp-lab/payload/sturen_medicatievoorschrift-en-lab.xsl"/>
+                </group>
+            </group>
+
+            <group target-directory="pair-5">
+                <group target-directory="toAda">
+                    <master-document href-source="hl7_2_ada/mp/9.3.0/6.12_2_beschikbaarstellen_medicatiegegevens/payload/6.12_2_beschikbaarstellen_medicatiegegevens_hl7_2_ada.xsl"/>
+                </group>
+                <group target-directory="fromAda">
+                    <master-document href-source="ada_2_fhir-r4/mp/9.3.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_2_fhir.xsl"/>
+                </group>
+            </group>
+
+            <group target-directory="pair-6">
+                <group target-directory="toAda">
+                    <master-document href-source="hl7_2_ada/mp/9.3.0/6.12_2_beschikbaarstellen_medicatiegegevens/payload/6.12_2_beschikbaarstellen_medicatiegegevens_hl7_2_ada.xsl"/>
+                </group>
+                <group target-directory="fromAda">
+                    <master-document href-source="ada_2_hl7/mp/9.3.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_org.xsl"/>
+                </group>
+            </group>
+
+        </flatten-stylesheets>
+
+        <!-- Finally, also add the necessary data XML documents to the include directory: -->
+        <directory source-directory="util" target-directory="common/includes" clear-target="false">
+            <include glob="*.xml"/>
+        </directory>
+        <!-- We have to add the QualificationTokens.xml twice, because it is referenced with different paths from different stylesheets :( -->
+        <directory source-directory="ada_2_fhir/fhir" target-directory="common/fhir">
+            <include glob="QualificationTokens.xml"/>
+        </directory>
+        <directory source-directory="ada_2_fhir/fhir" target-directory="ada_2_fhir/fhir">
+            <include glob="QualificationTokens.xml"/>
+        </directory>
+
+    </distribution>
+
+</distributions>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<parameters xmlns="https://nictiz.nl/ns/YATC-shared" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared ../../../YATC-shared/xsd/parameters.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        This is the YATC system parameters file for the YATC-internal/ada-2-wiki component.
+        
+        More information about the YATC parameters system can be found here: ../../../YATC-shared/doc/parameters-system.md
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+    
+    <parameter name="ada2wikiDataDocument">
+        <!-- The *absolute* name of the file with the application data. -->
+        <value>{$yatcComponentDirectory}/data/ada-2-wiki-data.xml</value>
+    </parameter>
+    
+    <parameter name="ada2wikiBaseStorageDirectory">
+        <!-- The absolute URI of the base directory for storing the results of the ada-2-wiki processing.
+             The application's name and version are appended to this, for instance: …/lab/3.0.0. -->
+        <value>{$internalBaseStorageDirectory}/ada_2_wiki</value>
+    </parameter>
+    
+    <parameter name="ada2wikiTextEncoding">
+        <!-- There is some confusion about the way the WIKI text files must be encoded. The original code used UTF-16BE, but nobody
+             seems to remember why anymore… UTF-8 makes more sense and is probably enough.
+             Just in case it isn't, the WIKI text file encoding is parametrized here.
+        -->
+        <value>UTF-8</value>
+        <!-- UTF-16 in Morgana has two flavors: UTF-16BE (BOM: FE FF) and UTF-16LE (BOM: FF FE). By inspecting the original
+             WIKI text files (produced by the Ant system) it was determined this should be UTF-16BE. -->
+        <!--<value>UTF-16BE</value>-->
+    </parameter>
+
+</parameters>

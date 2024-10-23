@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             name="AanvInfoVS"
+             displayName="Aanvullende informatie voor VS"
+             id="2.16.840.1.113883.2.4.3.11.60.20.77.11.33"
+             statusCode="final"
+             versionLabel="9"
+             effectiveDate="2017-05-05T13:14:18">
+      <sourceCodeSystem id="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2052"
+                        identifierName="G-std thesaurus 2052"
+                        canonicalUri="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2052"
+                        canonicalUriDSTU2="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2052"
+                        canonicalUriSTU3="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2052"
+                        canonicalUriR4="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2052"
+                        canonicalUriR4B="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2052"
+                        canonicalUriR5="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2052"/>
+      <publishingAuthority name="Nictiz" inherited="project">
+         <addrLine>Oude Middenweg 55</addrLine>
+         <addrLine>2491 AC Den Haag</addrLine>
+         <addrLine type="phone">070-3173450</addrLine>
+      </publishingAuthority>
+      <conceptList>
+         <concept code="1"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2052"
+                  displayName="Aantal bewust gewijzigd"
+                  level="0"
+                  type="L"/>
+         <concept code="2"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2052"
+                  displayName="Recall"
+                  level="0"
+                  type="L"/>
+         <concept code="3"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2052"
+                  displayName="Retour"
+                  level="0"
+                  type="L"/>
+      </conceptList>
+   </valueSet>
+</valueSets>

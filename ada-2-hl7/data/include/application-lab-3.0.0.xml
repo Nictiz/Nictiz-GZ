@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../../../YATC-shared/general-engine/sch/general-engine-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<application xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../../xsd/ada-2-hl7-data.xsd" name="lab" version="3.0.0" source-adarefs2ada="true">
+    <!-- ======================================================================= -->
+    <!-- 
+        ada-2-hl7 application data for lab/3.0.0
+        
+        This is an include file for ../ada-2-hl7-data.xml
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+    <!-- Used abbreviations:
+        
+         labsr = sturen_laboratoriumresultaten
+         labbr = beschikbaarstellen_laboratoriumresultaten
+    -->
+    <!-- ======================================================================= -->
+    
+    <macros>
+        <!-- Date used for conversions to HL7: -->
+        <macro name="DATET" value="2022-01-01"/>
+    </macros>
+    
+    <!-- ======================================================================= -->
+    <!-- SETUP: -->
+
+    <message>=========================== {$yatcComponentName}/$BASEPATH</message>
+
+    <!-- Remark: There is some confusion around the setup of nictiz_test. The code in the original contained errors, later this was "fixed" by not
+         creating nictiz_test at all (and the fix creates directories that, one step later were deleted/recreated again). 
+         For now, just leave it out. I think however that the out-commented code below was the intention...
+         Original: HL7-mappings/ada_2_hl7/lab/3.0.0/_ant-buildfiles/ant-publish/build-ada2hl7-lab-300.xml line 45 and 65
+    -->
+    <!--<setup usecase="nictiz_test">
+        <copy-project-schemas>
+            <include glob="*sturen_laboratoriumresultaten.xsd"/>
+            <include glob="*beschikbaarstellen_laboratoriumresultaten.xsd"/>
+        </copy-project-schemas>
+    </setup>-->
+
+    <setup usecase="sturen_laboratoriumresultaten" directory-id="labsr">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="labsr-ada-instance">
+            <include glob="*KWAL*.xml"/>
+        </copy-data>
+        <copy-data target-subdir="ada_instance_TEST" directory-id="labsr-ada-instance-test">
+            <include glob="*TEST*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="labsr-hl7-instance"/>
+        <empty-directory target-subdir="hl7_instance_TEST" directory-id="labsr-hl7-instance-test"/>
+        <empty-directory target-subdir="cda_instance" directory-id="labsr-cda-instance"/>
+        <empty-directory target-subdir="cda_instance_TEST" directory-id="labsr-cda-instance-test"/>
+    </setup>
+
+    <setup usecase="beschikbaarstellen_laboratoriumresultaten" directory-id="labbr">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="labbr-ada-instance">
+            <include glob="*KWAL*.xml"/>
+        </copy-data>
+        <copy-data target-subdir="ada_instance_TEST" directory-id="labbr-ada-instance-test">
+            <include glob="*TEST*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="labbr-hl7-instance"/>
+        <empty-directory target-subdir="hl7_instance_TEST" directory-id="labbr-hl7-instance-test"/>
+        <empty-directory target-subdir="cda_instance" directory-id="labbr-cda-instance"/>
+        <empty-directory target-subdir="cda_instance_TEST" directory-id="labbr-cda-instance-test"/>
+    </setup>
+
+    <!-- ======================================================================= -->
+    <!-- CONVERT: -->
+    
+    <!-- Remark: Every conversion that has to do with "test"is set to accept-empty="true" because it turned out
+         that there were not always ADA files to process for these cases. -->
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- beschikbaarstellen_laboratoriumresultaten -->
+
+    <!-- Generate HL7: -->
+    <build name="convert-beschikbaarstellen_laboratoriumresultaten-ada-2-hl7">
+        <stylesheet href="../../env/lab/3.0.0/beschikbaarstellen_laboratoriumresultaten/payload/beschikbaarstellen_laboratoriumresultaten_org.xsl"/>
+        <input-documents directory="@labbr-ada-instance"/>
+        <output-documents directory="@labbr-hl7-instance"/>
+        <parameter name="generateInstructionText" value="true"/>
+    </build>
+    <build name="convert-beschikbaarstellen_laboratoriumresultaten-ada-2-hl7-test">
+        <stylesheet href="../../env/lab/3.0.0/beschikbaarstellen_laboratoriumresultaten/payload/beschikbaarstellen_laboratoriumresultaten_org.xsl"/>
+        <input-documents directory="@labbr-ada-instance-test" accept-empty="true"/>
+        <output-documents directory="@labbr-hl7-instance-test"/>
+        <parameter name="generateInstructionText" value="true"/>
+    </build>
+
+    <!-- Generate CDA: -->
+    <build name="convert-beschikbaarstellen_laboratoriumresultaten-ada-2-hl7-cda">
+        <stylesheet href="../../env/lab/LAB_Transform_Organizer2CDA.xsl"/>
+        <input-documents directory="@labbr-hl7-instance"/>
+        <output-documents directory="@labbr-cda-instance"/>
+    </build>
+    <build name="convert-beschikbaarstellen_laboratoriumresultaten-ada-2-hl7-cda-test">
+        <stylesheet href="../../env/lab/LAB_Transform_Organizer2CDA.xsl"/>
+        <input-documents directory="@labbr-hl7-instance-test" accept-empty="true"/>
+        <output-documents directory="@labbr-cda-instance-test"/>
+    </build>
+    
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- sturen_laboratoriumresultaten -->
+    
+    <!-- Generate HL7: -->
+    <build name="convert-sturen_laboratoriumresultaten-ada-2-hl7">
+        <stylesheet href="../../env/lab/3.0.0/sturen_laboratoriumresultaten/payload/sturen_laboratoriumresultaten_org.xsl"/>
+        <input-documents directory="@labsr-ada-instance"/>
+        <output-documents directory="@labsr-hl7-instance"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="dateT" value="$DATET"/>
+    </build>
+    <build name="convert-sturen_laboratoriumresultaten-ada-2-hl7-test">
+        <stylesheet href="../../env/lab/3.0.0/sturen_laboratoriumresultaten/payload/sturen_laboratoriumresultaten_org.xsl"/>
+        <input-documents directory="@labsr-ada-instance-test" accept-empty="true"/>
+        <output-documents directory="@labsr-hl7-instance-test"/>
+        <parameter name="generateInstructionText" value="true"/>
+        <parameter name="dateT" value="$DATET"/>
+    </build>
+    
+    <!-- Generate CDA: -->
+    <build name="convert-sturen_laboratoriumresultaten-ada-2-hl7-cda">
+        <stylesheet href="../../env/lab/LAB_Transform_Organizer2CDA.xsl"/>
+        <input-documents directory="@labsr-hl7-instance"/>
+        <output-documents directory="@labsr-cda-instance"/>
+    </build>
+    <build name="convert-sturen_laboratoriumresultaten-ada-2-hl7-cda-test">
+        <stylesheet href="../../env/lab/LAB_Transform_Organizer2CDA.xsl"/>
+        <input-documents directory="@labsr-hl7-instance-test" accept-empty="true"/>
+        <output-documents directory="@labsr-cda-instance-test"/>
+    </build>
+    
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- xml-voorbeelden -->
+    
+    <!-- In the original Ant file there is a target "convert_ada_2_hl7_examples_300" that seems to create XML voorbeelden. 
+         However, it doesn't do anything since its input directory ada_instance is not created and filled. Also the schema 
+         directory ada_schemas is fixed and not created. 
+         Since nothing happened there it was left out here, but this might change. 
+    -->
+
+</application>

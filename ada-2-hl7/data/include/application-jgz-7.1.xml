@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../../../YATC-shared/general-engine/sch/general-engine-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<application xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../../xsd/ada-2-hl7-data.xsd" name="jgz" version="7.1">
+    <!-- ======================================================================= -->
+    <!-- 
+        ada-2-hl7 application data for jgz/7.1
+        
+        This is an include file for ../ada-2-hl7-data.xml
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+    <!-- SETUP: -->
+
+    <message>=========================== {$yatcComponentName}/$BASEPATH</message>
+    <message>WARNING: $BASEPATH uses fixed ADA data and schemas!</message>
+
+    <setup usecase="dossieroverdracht" directory-id="jgzd">
+        <!-- Remark: The output directory results cannot be compared because the stylesheet uses the current date/time to compute stuff. -->
+        <empty-directory target-subdir="hl7_instance" directory-id="jgzd-hl7-instance" compare="false"/>
+    </setup>
+
+    <!-- ======================================================================= -->
+    <!-- BUILD: -->
+
+    <build fast="false" name="convert-dossieroverdracht">
+        <stylesheet href="../../env/jgz/7.1/dossieroverdracht/payload/dossieroverdracht_org.xsl"/>
+        <input-documents directory="#../../../../art_decor/adarefs2ada/jgz/7.1/dossieroverdracht/ada_instance"/>
+        <output-documents directory="@jgzd-hl7-instance"/>
+    </build>
+    
+    <build fast="false" name="convert-dossieroverdracht">
+        <stylesheet href="../../env/jgz/7.1/dossieroverdracht/payload/dossieroverdracht_org.xsl"/>
+        <input-documents directory="#../../../../art_decor/adarefs2ada/jgz/7.0/dossieroverdracht/ada_instance"/>
+        <output-documents directory="@jgzd-hl7-instance/"/>
+    </build>
+
+</application>

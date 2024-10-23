@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:decor="http://art-decor.org/ns/decor"
+             xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:peri="urn:nictiz-nl:v3/peri"
+             name="Rookgedrag"
+             displayName="Rookgedrag"
+             effectiveDate="2014-05-19T15:56:59"
+             id="2.16.840.1.113883.2.4.3.11.60.90.77.11.2"
+             statusCode="final">
+      <sourceCodeSystem id="2.16.840.1.113883.2.4.4.13.58"
+                        identifierName="RookgedragVMISLijst"
+                        canonicalUri="urn:oid:2.16.840.1.113883.2.4.4.13.58"
+                        canonicalUriDSTU2="urn:oid:2.16.840.1.113883.2.4.4.13.58"
+                        canonicalUriSTU3="urn:oid:2.16.840.1.113883.2.4.4.13.58"
+                        canonicalUriR4="urn:oid:2.16.840.1.113883.2.4.4.13.58"/>
+      <sourceCodeSystem id="2.16.840.1.113883.5.1008"
+                        identifierName="NullFlavor"
+                        canonicalUri="urn:oid:2.16.840.1.113883.5.1008"
+                        canonicalUriDSTU2="urn:oid:2.16.840.1.113883.5.1008"
+                        canonicalUriSTU3="urn:oid:2.16.840.1.113883.5.1008"
+                        canonicalUriR4="urn:oid:2.16.840.1.113883.5.1008"
+                        context="external/hl7"/>
+      <publishingAuthority name="Nictiz" inherited="project">
+         <addrLine>Nationaal ICT Instituut in de Zorg</addrLine>
+         <addrLine>Oude Middenweg 55</addrLine>
+         <addrLine>2491 AC Den Haag</addrLine>
+         <addrLine>T 070 317 3450</addrLine>
+         <addrLine>F 070 320 7437</addrLine>
+      </publishingAuthority>
+      <conceptList>
+         <concept code="1"
+                  codeSystem="2.16.840.1.113883.2.4.4.13.58"
+                  displayName="niet gerookt"
+                  level="0"
+                  type="L"/>
+         <concept code="2"
+                  codeSystem="2.16.840.1.113883.2.4.4.13.58"
+                  displayName="1 - 10 per dag"
+                  level="0"
+                  type="L"/>
+         <concept code="3"
+                  codeSystem="2.16.840.1.113883.2.4.4.13.58"
+                  displayName="11 - 20 per dag"
+                  level="0"
+                  type="L"/>
+         <concept code="4"
+                  codeSystem="2.16.840.1.113883.2.4.4.13.58"
+                  displayName="meer dan 20 per dag"
+                  level="0"
+                  type="L"/>
+         <concept code="5"
+                  codeSystem="2.16.840.1.113883.2.4.4.13.58"
+                  displayName="gestopt vóór huidige zwangerschap"
+                  level="0"
+                  type="L"/>
+         <concept code="6"
+                  codeSystem="2.16.840.1.113883.2.4.4.13.58"
+                  displayName="gestopt tijdens huidige zwangerschap"
+                  level="0"
+                  type="L"/>
+         <exception code="UNK"
+                    codeSystem="2.16.840.1.113883.5.1008"
+                    displayName="Unknown"
+                    level="0"
+                    type="L"/>
+      </conceptList>
+   </valueSet>
+</valueSets>

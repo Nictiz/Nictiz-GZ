@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application name="cio" version="TEST">
+    <retrieval transaction="beschikbaarstellen_allergie_intolerantie" contains="bs"/>
+    <retrieval transaction="beschikbaarstellen_allergie_intolerantie_vertaling" contains="CIO-"/>
+    <retrieval transaction="beschikbaarstellen_allergie_intolerantie_vertaling" contains="example"/>
+    
+    <adarefs2ada>
+        
+        <setup usecase="beschikbaarstellen_allergie_intolerantie" directory-id="bai">
+            <copy-data target-subdir="ada_instance_extra" directory-id="bai-instance-extra">
+                <include glob="bs*.xml"/>
+            </copy-data>
+            <copy-data directory-id="bai-instance">
+                <include glob="CIO*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE*.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="processed" directory-id="bai-processed"/>
+        </setup>
+        
+        <build>
+            <stylesheet href="../test/xsl/test-build-stylesheet.xsl"/>
+            <input-documents directory="@bai-instance"/>
+            <ada-working-set directory="@bai-instance-extra"/>
+            <output directory="@bai-processed"/>
+        </build>
+        
+    </adarefs2ada>
+</application>

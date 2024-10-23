@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../../../YATC-shared/general-engine/sch/general-engine-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<application xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../../xsd/ada-2-hl7-data.xsd" name="peri" version="3.0" source-adarefs2ada="false" source-project-name="perinatologie">
+    <!-- ======================================================================= -->
+    <!-- 
+        ada-2-hl7 application data for peri/2.3.6
+        
+        This is an include file for ../ada-2-hl7-data.xml
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+    <!-- Used abbreviations:
+        
+         kn = kernset_neonatologie
+    -->
+    <!-- ======================================================================= -->
+
+    <macros>
+        <!-- Date used for conversions to HL7: -->
+        <macro name="DATET" value="2021-01-01"/>
+    </macros>
+
+    <!-- ======================================================================= -->
+    <!-- SETUP: -->
+
+    <message>=========================== {$yatcComponentName}/$BASEPATH</message>
+
+    <setup usecase="kernset_neonatologie" directory-id="kn">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="kn-ada-instance">
+            <include glob="*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="cda_instance" directory-id="kn-cda-instance"/>
+        <empty-directory target-subdir="validate_cda_instance" directory-id="kn-reports" compare="false"/>
+    </setup>
+    
+    <empty-root-directory target-subdir="validate" compare="false" directory-id="validation-results"/>
+
+    <!-- ======================================================================= -->
+    <!-- BUILD: -->
+    
+    <action name="build" default="true" setup="true" description="Build the ada-2-hl7 CDA documents">
+
+        <build fast="true" name="convert-kernset_neonatologie">
+            <stylesheet href="../../env/peri/3.0/kernset_neonatologie/payload/CDA_Kernset_Neo_30.xsl"/>
+            <input-documents directory="@kn-ada-instance"/>
+            <output-documents directory="@kn-cda-instance"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+
+    </action>
+    
+    <!-- ======================================================================= -->
+    <!-- SCHEMA VALIDATION: -->
+    
+    <action name="schema-validate" setup="false" description="Schema-validate the HL7 results">
+        
+        <validate-with-schema>
+            <schema href="../../env/AORTA/branches/Onderhoud_Mp_v90/Publicaties/20210921/mp-xml-20210921T194523/schemas_codeGen_flat/CDANL_extended.xsd"/>
+            <input-documents directory="@kn-cda-instance"/>
+            <output-report directory="@kn-reports" name="schema-report-cda-validate.xml"/>
+        </validate-with-schema>
+        
+    </action>
+    
+    <!-- ======================================================================= -->
+    <!-- SCHEMATRON VALIDATION: -->
+    
+    <!-- REMARK: The original Ant scripts reference a Schematron SVRL stylesheet that isn't there: 
+         AORTA/trunk/Zorgtoepassing/PerinataleZorg/DECOR/peri20-runtime-develop/peri20-ksneo-alg-30_svrl.xsl
+         
+         The subdirectory AORTA/trunk/Zorgtoepassing/PerinataleZorg/DECOR/peri20-runtime-develop doesn't exist (anymore?).
+         
+         Therefore, Schematron validation currently doesn't do anything…
+    -->
+    
+    <action name="schematron-validate" setup="false" description="Schematron-validate the HL7 results">
+        
+        <message>WARNING: Schematron validation disabled because the Schematron-schema doesn't exist (anymore?)</message>
+        
+        <!--<validate-with-schematron>
+            <schema href="../../env/AORTA/trunk/Zorgtoepassing/PerinataleZorg/DECOR/peri20-runtime-develop/peri20-ksneo-alg-30.sch"/>
+            <input-documents directory="@kn-cda-instance"/>
+            <output-report directory="@kn-reports" name="schematron-report-cda-validate.xml"/>
+        </validate-with-schematron>-->
+        
+    </action>
+    
+    <!-- ======================================================================= -->
+    <!-- GATHER VALIDATION REPORTS: -->
+    
+    <action name="gather-validation-results" setup="false" description="Gathers all validation results in XML reports">
+        
+        <build fast="true" name="validation-report-cda-kernset_neonatologie">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="cda_kernset_neonatologie.xml"/>
+            <parameter name="hrefReportDir" directory="@kn-reports"/>
+            <parameter name="filenamePattern" value="schema*cda*.xml"/>
+        </build>
+        
+    </action>
+
+    <!-- ======================================================================= -->
+    
+    <!--<action name="validate" description="Perform all validations and gather results" depends-on="schema-validate schematron-validate gather-validation-results" setup="false"/>-->
+    <action name="validate" description="Perform all validations and gather results" depends-on="schema-validate schematron-validate gather-validation-results" setup="false"/>
+    
+    <!-- ======================================================================= -->
+    
+    <action name="all" description="Performs all builds and validations" depends-on="build validate" setup="true"/>
+    
+</application>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../../YATC-shared/general-engine/sch/general-engine-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<hl7-2-fhir-data xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../xsd/hl7-2-fhir-data.xsd" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!-- ================================================================== -->
+    <!--
+        This is the production data for this component.
+        
+        Information about the format of this document in its schema ../xsd/hl7-2-fhir-data.xsd
+        Information about how this file is used in the documentation in the ../doc/ subdirectory.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <application name="huisartswaarneemgegevens" version="6.10.1.3">
+
+
+        <setup usecase="professionele_samenvatting">
+            <copy-directory directory="#../env/$BASEPATH/hl7v3_instance/" target-subdir="hl7v3_instance" directory-id="hl7v3-instances"/>
+            <empty-directory target-subdir="fhir_instance" directory-id="fhir-instances"/>
+        </setup>
+        
+        <build>
+            <stylesheet href="../env/$BASEPATH/professionele_samenvatting/payload/QUPC_IN990002NL-2-BundleGeneralPractitioner.xsl"/>
+            <input-documents directory="@hl7v3-instances"/>
+            <output-documents directory="@fhir-instances"/>
+        </build>
+        
+
+    </application>
+
+</hl7-2-fhir-data>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../../../YATC-shared/general-engine/sch/general-engine-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<application xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../../xsd/ada-2-hl7-data.xsd" name="cio" version="2.0.0" source-adarefs2ada="false">
+    <!-- ======================================================================= -->
+    <!-- 
+        ada-2-hl7 application data for cio/2.0.0
+        
+        This is an include file for ../ada-2-hl7-data.xml
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+    
+    <!-- VERY IMPORTANT REMARK: ******************************************************
+    
+         When cio/2.0.0 was switched to YATC (202403), the cio/2.0.0 dataset (as returned by yatc get-production-ada-instances cio 2.0.0)
+         was in disarray and returned only a few ADA documents, with the wrong name patterns.
+         
+         We decided to still create the YATC definition, more or less blind.
+         
+         It turned out that the XML Schemas and Schematron Schemas were no longer there. See ../../env/cio/2.0.0/schemas/README.md
+         for more detail. Therefore, the validation actions have been largely commented-out.
+         
+         So, in the (hopefully) near future:
+         * As soon as the correct schemas are found, the validations must be re-instated and tested!
+    -->
+    
+    <!-- ======================================================================= -->
+    <!-- Abbreviations used in cio:
+        
+        bmci  = beschikbaarstellen_medicatie_contra_indicaties
+        bgo  = beschikbaarstellen_geneesmiddelovergevoeligheden
+    -->
+    <!-- ======================================================================= -->
+
+    <macros>
+        <!-- Date used for conversions to HL7: -->
+        <macro name="DATET" value="2024-01-01"/>
+        <macro name="GENERATE-SCHEMATRON-REF" value="false"/>
+        
+        <macro name="SCHEMASDIR" value="../../env/cio/2.0.0/schemas/"/>
+    </macros>
+
+    <!-- ======================================================================= -->
+    <!-- SETUP: -->
+
+    <message>=========================== {$yatcComponentName}/$BASEPATH</message>
+
+    <setup usecase="beschikbaarstellen_medicatie_contra_indicaties" directory-id="bmci">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="bmci-ada-instance">
+            <include glob="cio-bmci-tst-*.xml"/>
+            <exclude glob="cio-bmci-tst-0.1-geenMCi.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="bmci-hl7-instance"/>
+        <empty-directory target-subdir="validate_hl7_instance" directory-id="bmci-reports"/>
+    </setup>
+
+    <setup usecase="beschikbaarstellen_geneesmiddelovergevoeligheden" directory-id="bgo">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="bgo-ada-instance">
+            <include glob="cio-bgo-tst-*.xml"/>
+            <exclude glob="cio-bgo-tst-0.1-geenBB.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="bgo-hl7-instance"/>
+        <empty-directory target-subdir="validate_hl7_instance" directory-id="bgo-reports"/>
+    </setup>
+    
+    <empty-root-directory target-subdir="validate" compare="false" directory-id="validation-results"/>
+
+    <!-- ======================================================================= -->
+    <!-- BUILD: -->
+
+    <action name="build" default="true" description="Build the $BASEPATH HL7 documents">
+
+        <build name="convert-beschikbaarstellen_medicatie_contra_indicaties">
+            <stylesheet href="../../env/cio/2.0.0/beschikbaarstellen_medicatie_contra_indicaties/payload/beschikbaarstellen_medicatie_contra_indicaties_org.xsl"/>
+            <input-documents directory="@bmci-ada-instance"/>
+            <output-documents directory="@bmci-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="$GENERATE-SCHEMATRON-REF"/>
+        </build>
+
+        <build name="convert-beschikbaarstellen_geneesmiddelovergevoeligheden">
+            <stylesheet href="../../env/cio/2.0.0/beschikbaarstellen_geneesmiddelovergevoeligheden/payload/beschikbaarstellen_geneesmiddelovergevoeligheden_org.xsl"/>
+            <input-documents directory="@bgo-ada-instance"/>
+            <output-documents directory="@bgo-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="$GENERATE-SCHEMATRON-REF"/>
+        </build>
+        
+    </action>
+    
+    <!-- ======================================================================= -->
+    <!-- VALIDATE WITH SCHEMA: -->
+    
+    <action name="schema-validate" description="Schema-validate the HL7 results" setup="false">
+        
+        <!-- IMPORTANT REMARK: 
+        
+             Schema validation of the HL7 results is currently not possible. The original Ant scripts reference schemas which could no longer be found.
+             For more information, see ../../env/cio/2.0.0/schemas/README.md
+        -->
+        
+        <macros>
+            <macro name="HL7SCHEMA" value="$SCHEMASDIR/organizer.xsd"/>
+        </macros>
+        
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        
+        <message>=== ERROR: Schema validation of $BASEPATH HL7 results currently not possible: Schema unknown</message>
+        
+        <!--
+        <validate-with-schema name="schema-validate-hl7-beschikbaarstellen_medicatie_contra_indicaties">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@bmci-hl7-instance"/>
+            <output-report directory="@bmci-reports" name="schema-report-hl7-validate.xml"/>
+        </validate-with-schema>
+        
+        <validate-with-schema name="schema-validate-hl7-beschikbaarstellen_geneesmiddelovergevoeligheden">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@bgo-hl7-instance"/>
+            <output-report directory="@bgo-reports" name="schema-report-hl7-validate.xml"/>
+        </validate-with-schema>
+        -->
+        
+    </action>
+    
+    <!-- ======================================================================= -->
+    <!-- VALIDATE WITH SCHEMATRON: -->
+    
+    <action name="schematron-validate" description="Schematron-validate the HL7 results" setup="false">
+        
+        <!-- IMPORTANT REMARK: 
+        
+             Schematron validation of the HL7 results is currently not possible. The original Ant scripts reference schemas which could no longer be found.
+             For more information, see ../../env/cio/2.0.0/schemas/README.md
+        -->
+       
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        
+        <message>=== ERROR: Schematron validation of $BASEPATH HL7 results currently not possible: Schematron schema unknown</message>
+       
+        <!--
+        <validate-with-schematron name="schematron-validate-hl7-beschikbaarstellen_medicatie_contra_indicaties" continue-on-schematron-error="true">
+            <schema href="$SCHEMASDIR/cio-bmci.sch"/>
+            <input-documents directory="@bmci-hl7-instance"/>
+            <output-report directory="@bmci-reports" name="schematron-report-hl7-validate.xml" prune-valid="false"/>
+        </validate-with-schematron>
+        
+        <validate-with-schematron name="schematron-validate-hl7-beschikbaarstellen_geneesmiddelovergevoeligheden" continue-on-schematron-error="true">
+            <schema href="$SCHEMASDIR/cio-bgo.sch"/>
+            <input-documents directory="@bgo-hl7-instance"/>
+            <output-report directory="@bgo-reports" name="schematron-report-hl7-validate.xml" prune-valid="false"/>
+        </validate-with-schematron>
+        -->
+       
+    </action>
+    
+    <!-- ======================================================================= -->
+    
+    <action name="gather-validation-results" setup="false" description="Gathers all validation results in XML reports">
+        
+        <message>=== ERROR: Validation is not possible because the schemas are currently unknown. Therefore, validation reports are also not possible</message>
+        
+        <!--
+        <build fast="true" name="schema-report-hl7-beschikbaarstellen_medicatie_contra_indicaties">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="hl7_beschikbaarstellen_medicatie_contra_indicaties.xml"/>
+            <parameter name="hrefReportDir" directory="@bmci-reports"/>
+            <parameter name="filenamePattern" value="schema*hl7*.xml"/>
+        </build>
+        
+        <build fast="true" name="schema-report-hl7-beschikbaarstellen_geneesmiddelovergevoeligheden">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="hl7_beschikbaarstellen_geneesmiddelovergevoeligheden.xml"/>
+            <parameter name="hrefReportDir" directory="@bgo-reports"/>
+            <parameter name="filenamePattern" value="schema*hl7*.xml"/>
+        </build>
+        -->
+        
+    </action>
+    
+    <!-- ======================================================================= -->
+    
+    <action name="validate" description="Perform all validations and gather results" depends-on="schema-validate schematron-validate gather-validation-results" setup="false"/>
+    
+    <!-- ======================================================================= -->
+    
+    <action name="all" description="Performs all builds and validations" depends-on="build schema-validate schematron-validate gather-validation-results" setup="true"/>
+    
+</application>

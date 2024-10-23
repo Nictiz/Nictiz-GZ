@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<text-document xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../../../../YATC-shared/xsd/text-document.xsd" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!-- ======================================================================= -->
+    <!-- 
+        Reference text document for the application data format for this component.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <macro name="DATAFILENAME" value="{$yatcComponentName}-data"/>
+    <macro name="ROOTELEMENT" value="{$yatcComponentName}-data"/>
+
+    <title>Component <code>{$yatcRepositoryName}/{$yatcComponentName}</code> data format reference</title>
+
+    <xi:include href="../../../../YATC-shared/srcmod/common-data-format-opening-text.xml"/>
+
+    <!-- ======================================================================= -->
+
+    <xi:include href="../../../../YATC-shared/srcmod/common-data-format-general-remarks.xml"/>
+
+    <!-- ======================================================================= -->
+    
+    <xi:include href="../../../../YATC-shared/general-engine/srcmod/data-format-reference.mod.xml"></xi:include>
+    
+</text-document>

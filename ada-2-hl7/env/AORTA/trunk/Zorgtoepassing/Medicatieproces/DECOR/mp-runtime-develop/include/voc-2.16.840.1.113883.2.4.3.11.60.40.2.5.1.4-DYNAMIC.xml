@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             id="2.16.840.1.113883.2.4.3.11.60.40.2.5.1.4"
+             name="VerificatieStatusCodelijst"
+             displayName="VerificatieStatusCodelijst"
+             effectiveDate="2020-09-01T00:00:00"
+             statusCode="final"
+             ident="zib2020bbr-"
+             url="http://decor.nictiz.nl/decor/services/"
+             referencedFrom="mp-">
+      <sourceCodeSystem id="2.16.840.1.113883.5.1008"
+                        identifierName="Null Flavor"
+                        canonicalUri="http://terminology.hl7.org/CodeSystem/v3-NullFlavor"
+                        canonicalUriDSTU2="http://hl7.org/fhir/v3/NullFlavor"
+                        canonicalUriSTU3="http://hl7.org/fhir/v3/NullFlavor"
+                        canonicalUriR4="http://terminology.hl7.org/CodeSystem/v3-NullFlavor"
+                        canonicalUriR4B="http://terminology.hl7.org/CodeSystem/v3-NullFlavor"
+                        canonicalUriR5="http://terminology.hl7.org/CodeSystem/v3-NullFlavor"
+                        hl7v2table0396="NULLFL"
+                        context="external/hl7/2.16.840.1.113883.5.1008"/>
+      <sourceCodeSystem id="2.16.840.1.113883.6.96"
+                        identifierName="SNOMED Clinical Terms"
+                        canonicalUri="http://snomed.info/sct"
+                        canonicalUriDSTU2="http://snomed.info/sct"
+                        canonicalUriSTU3="http://snomed.info/sct"
+                        canonicalUriR4="http://snomed.info/sct"
+                        canonicalUriR4B="http://snomed.info/sct"
+                        canonicalUriR5="http://snomed.info/sct"
+                        hl7v2table0396="SCT"/>
+      <publishingAuthority name="Registratie aan de bron" inherited="project">
+         <addrLine type="uri">https://www.registratieaandebron.nl</addrLine>
+         <addrLine type="uri">https://zibs.nl</addrLine>
+      </publishingAuthority>
+      <copyright language="en-US" inherited="true">This artefact includes content from SNOMED Clinical Terms® (SNOMED CT®) which is copyright of the International Health Terminology Standards Development Organisation (IHTSDO). Implementers of these artefacts must have the appropriate SNOMED CT Affiliate license - for more information contact http://www.snomed.org/snomed-ct/getsnomed-ct or info@snomed.org.</copyright>
+      <conceptList>
+         <concept code="415684004"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="vermoedelijk"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Suspected"/>
+            <designation language="nl-NL" type="preferred" displayName="vermoedelijk"/>
+            <desc language="nl-NL">Werk</desc>
+         </concept>
+         <concept code="410590009"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="mogelijk"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Known possible"/>
+            <designation language="nl-NL" type="preferred" displayName="mogelijk"/>
+            <desc language="nl-NL">Differentiaal</desc>
+         </concept>
+         <concept code="410605003"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="aanwezigheid bevestigd"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Confirmed present"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="aanwezigheid bevestigd"/>
+            <desc language="nl-NL">Bevestigd</desc>
+         </concept>
+         <concept code="410516002"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="afwezigheid bekend"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Known absent"/>
+            <designation language="nl-NL" type="preferred" displayName="afwezigheid bekend"/>
+            <desc language="nl-NL">Uitgesloten</desc>
+         </concept>
+         <exception code="UNK"
+                    codeSystem="2.16.840.1.113883.5.1008"
+                    displayName="Unknown"
+                    level="0"
+                    type="L">
+            <designation language="en-US" type="preferred" displayName="Unknown"/>
+            <designation language="nl-NL" type="preferred" displayName="Onbekend"/>
+         </exception>
+      </conceptList>
+   </valueSet>
+</valueSets>

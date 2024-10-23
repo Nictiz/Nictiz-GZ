@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../../../YATC-shared/general-engine/sch/general-engine-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<application xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../../xsd/ada-2-hl7-data.xsd" name="mp" version="6.12">
+    <!-- ======================================================================= -->
+    <!-- 
+        ada-2-hl7 application data for mp/6.12
+        
+        This is an include file for ../ada-2-hl7-data.xml
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+    <!-- SETUP: -->
+
+    <message>=========================== {$yatcComponentName}/$BASEPATH</message>
+    <message>WARNING: This application uses fixed ADA data set!</message>
+
+    <setup usecase="opleveren_verstrekkingenlijst">
+        <copy-directory directory="#../../env/mp/6.12/$USECASE/ada_instance/" target-subdir="ada_instance" directory-id="ov-ada-instance"/>
+        <empty-directory target-subdir="hl7_instance" directory-id="ov-hl7-instance"/>
+    </setup>
+
+    <setup usecase="sturen_medicatievoorschrift" directory-id="mv">
+        <copy-directory directory="#../../env/mp/6.12/$USECASE/ada_instance/" target-subdir="ada_instance" directory-id="mv-ada-instance"/>
+        <copy-directory directory="#../../env/mp/6.12/$USECASE/ada_new/" target-subdir="ada_new"/>
+        <copy-directory directory="#../../env/mp/6.12/$USECASE/ada_schemas/" target-subdir="ada_schemas"/>
+        <copy-directory directory="#../../env/mp/6.12/$USECASE/wrapper/" target-subdir="wrapper" directory-id="mv-wrapper">
+            <exclude glob="*.xsl"/>
+        </copy-directory>
+        <empty-directory target-subdir="hl7_instance" directory-id="mv-hl7-instance"/>
+        <!-- Also copy the readme for this usecase: -->
+        <copy-directory directory="#../../env/mp/6.12/$USECASE" target-subdir="." clear-target="false">
+            <include glob="ReadMe.txt"/>
+        </copy-directory>
+    </setup>
+
+    <!-- ======================================================================= -->
+    <!-- CONVERT: -->
+
+    <!-- Copy the global mp/6.12 README file: -->
+    <copy>
+        <source directory="#../../env/mp/6.12/">
+            <include glob="README.md"/>
+        </source>
+        <target directory="."/>
+    </copy>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- opleveren_verstrekkingenlijst -->
+
+    <build name="convert-opleveren_verstrekkingenlijst-ada-2-hl7">
+        <stylesheet href="../../env/mp/6.12/opleveren_verstrekkingenlijst/payload/opleveren_verstrekkingenlijst_2_612.xsl"/>
+        <input-documents directory="@ov-ada-instance"/>
+        <output-documents directory="@ov-hl7-instance"/>
+    </build>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- sturen_medicatievoorschrift -->
+
+    <build name="convert-sturen_medicatievoorschrift-ada-2-hl7">
+        <stylesheet href="../../env/mp/6.12/sturen_medicatievoorschrift/payload/sturen_medicatievoorschrift_2_612.xsl"/>
+        <input-documents directory="@mv-ada-instance"/>
+        <output-documents directory="@mv-hl7-instance"/>
+    </build>
+    
+    <build name="convert-sturen_medicatievoorschrift-wrapper-ada-2-hl7">
+        <stylesheet href="../../env/mp/6.12/sturen_medicatievoorschrift/wrapper/sturen_medicatievoorschrift_2_612_wrapper.xsl"/>
+        <input-document directory="@mv-wrapper" name="input_wrapper.xml"/>
+        <output-document directory="@mv-hl7-instance" name="result_input_wrapper.xml"/>
+    </build>
+    
+</application>

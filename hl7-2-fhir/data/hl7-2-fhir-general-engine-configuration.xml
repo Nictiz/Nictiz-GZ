@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<general-engine-configuration xmlns="https://nictiz.nl/ns/YATC-shared/general-engine-configuration" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/general-engiine-configuration ../../../YATC-shared/general-engine/xsd/general-engine-configuration.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        Configuration file for the general engine processing  of this component.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <parname-component-data-document>{$yatcComponentNameShortened}DataDocument</parname-component-data-document>
+    <parname-component-base-storage-directory>{$yatcComponentNameShortened}BaseStorageDirectory</parname-component-base-storage-directory>
+
+    <data-file-schema>{$yatcComponentDirectory}/xsd/{$yatcComponentName}-data.xsd</data-file-schema>
+
+    <original-repo-subdir-name>{$yatcComponentNameTraditional}</original-repo-subdir-name>
+
+</general-engine-configuration>

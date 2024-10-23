@@ -1,0 +1,792 @@
+*{
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    color: #333333;
+}
+/* voorkomt blauwe ring rond geselecteerde items in Safari */
+:focus{
+    outline: none;
+}
+.logoarea{
+    width: 100%;
+    float: left;
+}
+.logo{
+    float: right;
+    margin: 0 0 0 0;
+    background: #ffffff url(logo.png) no-repeat;
+    width: 349px;
+    height: 76px;
+    padding: 0;
+}
+h1{
+    font-size: 16px;
+    font-weight: bold;
+    color: #e16e22;
+}
+h2{
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #ece9e4;
+    color: #e16e22;
+    width: auto;
+}
+h2.toggler{
+    background-image: url(zoominb.png);
+    background-repeat: no-repeat;
+    background-position: center left;
+    margin-left: 0px;
+    margin-right: 2px;
+    margin-top: 1px;
+    margin-bottom: 0px;
+    padding-left: 20px;
+    font-family: sans-serif;
+}
+h2.toggler:hover{
+    cursor: pointer;
+    /*    	color : #e16e22;*/
+}
+h3{
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #ece9e4;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    color: #7a6e62;
+    width: auto;
+    /*	border-top : 1px solid #d7b0c6;*/
+}
+h3.toggler{
+    background-image: url(zoominb.png);
+    background-repeat: no-repeat;
+    background-position: top left;
+    margin-left: 0px;
+    margin-right: 2px;
+    margin-top: 1px;
+    margin-bottom: 0px;
+    padding-left: 20px;
+    font-family: sans-serif;
+}
+h3.toggler:hover{
+    cursor: pointer;
+    /*    	color : #e16e22;*/
+}
+h4{
+    font-weight: bold;
+    background-color: #cecbc6;
+    color: #665a4e;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 4px;
+    width: auto;
+    /*	border-top : 1px solid #d7b0c6;*/
+}
+h4.toggler{
+    background-image: url(zoominb.png);
+    background-repeat: no-repeat;
+    background-position: center left;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 10px;
+    font-family: sans-serif;
+}
+h4.toggler:hover{
+    cursor: pointer;
+    /*    	color : #e16e22;*/
+}
+a{
+    font: inherit;
+    color: inherit;
+}
+a:link{
+    color: green;
+}
+a:visited{
+    color: green;
+}
+a:hover{
+    color: red;
+}
+a:active{
+    color: yellow;
+}
+.content{
+    width: auto;
+    background-color: #ffffff;
+    margin-left: 10px;
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #d7b0c6;
+}
+div{
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 4px;
+    text-align: left;
+    vertical-align: top;
+}
+div.toggle{
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-align: left;
+    vertical-align: top;
+    display: none;
+}
+div.level2{
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 1px;
+    padding-left: 10px;
+    text-align: left;
+    vertical-align: top;
+}
+div.indexline{
+    text-align: right;
+}
+p.note-box,
+div.note-box{
+    padding: 2px;
+    border: 1px solid black;
+}
+/* table.title is in the 'title' bar of the page */
+table.title{
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+/* img.title is used on the custom logo, if any */
+img.title{
+    border: 0px;
+    height: 50px;
+}
+table.values{
+    width: 100%;
+}
+table.bgstrips{
+    background: url(strips.png) repeat;
+}
+/* When a table is marked for highlighting, add a hover color to its rows. Scenarios, 
+ * Transaction (Groups), Template Classifications, Templates, Transaction Templates need a different base color */
+table.highlight > tbody > tr.dsline,
+table.highlight > tbody > tr.scline,
+table.highlight > tbody > tr.vsline,
+table.highlight > tbody > tr.tmclassline, 
+table.highlight > tbody > tr.tmline,
+table.highlight > tbody > tr.tmtrline { 
+    background-color:#f6f3ee; 
+}
+table.highlight > tbody > tr.trgroupline { 
+    background-color:#fff7f2; 
+}
+table.highlight > tbody > tr:hover { 
+    background-color: LightBlue; 
+}
+/* End table highlight */
+tr.plain{
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+tr.alternate{
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: black;
+    background-color: #f6f3ee;
+}
+td.bgBlue{   
+    background-color: #B3D9FF;;
+}td.bgRed{   
+    background-color: #ff3300;
+}
+td.bgYellow{   
+    background-color: #FFFFB3;
+}
+td.value-label{
+    width: 15%;
+    background-color: #ece9e4;
+    color: #7a6e62;
+    font-weight: bold;
+    padding: 2px;
+}
+td.labelSmall{
+    width: 15%;
+    background-color: #ece9e4;
+    color: #7a6e62;
+    font-weight: normal;
+    padding: 1px;
+}
+td.toggler{
+    background-image: url(zoominb.png);
+    background-repeat: no-repeat;
+    background-position: center left;
+    /*width : 30px;*/
+    background-color: #ece9e4;
+    color: #7a6e62;
+    font-weight: normal;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    /* this value matches .nodeproperty padding-right */
+    padding-left: 30px;
+}
+td.toggler:hover{
+    cursor: pointer;
+    /*    	color : #e16e22;*/
+}
+td.togglertreetable{
+    background-color: #ece9e4;
+    color: #7a6e62;
+    font-weight: normal;
+    padding: 1px 5px 1px 0;
+}
+td.togglertreetable:hover{
+    cursor: pointer;
+}
+td.withBorder {
+     border: 1px solid #C0C0C0;
+}
+td.elementHeader{
+    width: 25%;
+    background-color: #ece9e4;
+    color: #7a6e62;
+    font-weight: normal;
+    padding: 1px;
+}
+td.scenarioHeader{
+    vertical-align: top;
+    /*	background-color : #ece9e4;*/
+    color: #7a6e62;
+    font-weight: normal;
+    padding: 1px;
+    border-top: 1px solid #d7b0c6;
+}
+td.value{
+    /*	width : 80%;*/
+    font-weight: normal;
+    padding: 1px;
+}
+td.xmlExample{
+    background-color: #f6f3ee;
+    font-weight: normal;
+    padding: 1px;
+}
+th{
+    background-color: #ece9e4;
+    color: #7a6e62;
+    font-weight: bold;
+}
+td.dt{
+    text-align: center;
+    vertical-align: top;
+}
+td.card{
+    text-align: center;
+    vertical-align: top;
+}
+td.conf{
+    width: 107pt;
+    font-size: 11px;
+    border: 1px solid #C3C0B2;
+    font-weight: normal;
+    color: #e16e22;
+    background-color: #ece9e4;
+    text-align: center;
+    vertical-align: middle;
+}
+td.stron{
+    width: 107pt;
+    font-size: 11px;
+    font-weight: normal;
+    border: 1px solid #c0c0c0;
+    color: #ffffff;
+    background-color: #ff99cc;
+}
+td.defvar{
+    width: 107pt;
+    font-size: 11px;
+    font-weight: normal;
+    border: 1px solid #c0c0c0;
+    color: #ffffff;
+    background-color: #6699cc;
+}
+div.tabtab,
+table.tabtab,
+td.tabtab{
+    border: 1px solid #C0C0C0;
+    background-color: #FFFFFF;
+}
+td.nodetype{
+    /* this value matches .nodeproperty width */
+    width: 80pt;
+    border: 1px solid #C3C0B2;
+    font-size: 11px;
+    font-weight: normal;
+    color: #e16e22;
+    background-color: #dddddd;
+}
+td.nodeproperty{
+    /* this value matches .nodetype width */
+    width: 80pt;
+    /* this value matches .toggler padding-left */
+    padding-right: 30px;
+}
+td.nodename{
+    font-size: 14px;
+    font-weight: bold;
+    color: #e16e22;
+    background-color: #dddddd;
+}
+
+tr.headinglabel{
+    background-color: #99CCFF;
+}
+tr.desclabel{
+    background-color: #FAFAD2;
+}
+tr.descitem{
+    background-color: #FAFAD2;
+}
+tr.vslabel{
+    /*background-color : #FFFF99; */
+    background-color: #CCFFFF;
+}
+tr.explabel{
+    background-color: #E6E6FA;
+}
+tr.include{
+    background-color: #eeeeee;
+    color: #7a6e62;
+    vertical-align: top;
+}
+tr.choice{
+    background-color: #eeeeee;
+    color: #7a6e62;
+    vertical-align: top;
+}
+td.explabelred{
+    background-color: #FFEEEE;
+}
+td.explabelgreen{
+    background-color: #E0FFE0;
+}
+td.explabelblue{
+    background-color: #E6E6FA;
+}
+b{
+    font: inherit;
+    font-weight: bold;
+    color: inherit;
+}
+i{
+    font: inherit;
+    font-style: italic;
+    color: inherit;
+}
+u{
+    font: inherit;
+    text-decoration: underline;
+    color: inherit;
+}
+input,
+textarea{
+    font-size: 12px;
+    font-weight: normal;
+    color: #5D7999;
+}
+input.field,
+textarea.ta{
+    border: 1px solid #C3C0B2;
+    background-color: #FAFAFA;
+}
+select.field{
+    font-size: 12px;
+    font-weight: normal;
+    color: #5D7999;
+    border: 1px solid #C3C0B2;
+    background-color: #FAFAFA;
+}
+input.button{
+    color: #000000;
+}
+input.short-number{
+    width: 3em;
+    margin-bottom: 2px;
+}
+input.short-text{
+    width: 12em;
+    margin-bottom: 2px;
+}
+/*a:link,
+a:active,
+a:visited {
+	color : #7a6e62;
+	text-decoration : none;
+}*/
+/*a:hover {
+	font-family : Tahoma, Arial, Verdana;
+	font-size : 12px;
+	text-decoration : underline;
+}*/
+/*a.toggle:link, a.toggle:visited {
+    text-decoration: none;
+    background-color:inherit;
+    color:inherit;
+}*/
+/*thead td,
+.thead {
+	font-weight : bold;
+	color : #284465;
+	border-bottom : 1px solid #CFD4D9;
+}*/
+fieldset{
+    border: 1px solid #C0C0C0;
+    margin: 5px;
+    padding: 12px;
+}
+legend{
+    font-weight: bold;
+    color: #284465;
+}
+.comment{
+    font-size: 12px;
+    color: #999999;
+}
+.commentBox{
+    background-color: #F5F5F4;
+    padding: 12px;
+}
+.icon{
+    margin-right: 5px;
+    margin-top: 5px;
+}
+.required{
+    font-weight: bold;
+    color: #990000;
+}
+.strong{
+    font-weight: bold;
+}
+.bottomline{
+    border-bottom: 1px solid #F1F1EF;
+}
+.topline{
+    border-top: 1px solid #F1F1EF;
+}
+.page_act{
+    font-weight: bold;
+    color: #284465;
+}
+/*a.page:link,
+a.page:active,
+a.page:visited,
+a.page:hover {
+	font-weight : bold;
+	font-family : Tahoma, Arial, Verdana;
+	font-size : 12px;
+	font-weight : normal;
+	color : #97B201;
+	text-decoration : none;
+}*/
+.page_disable{
+    color: #5D7999;
+}
+.true{
+    color: #009900;
+}
+.false{
+    color: #990000;
+}
+.code{
+    font-family: "Courier New", Courier, mono;
+    font-size: 12px;
+    padding: 5px;
+    border: 1px dashed #C0C0C0;
+}
+.ppsign{
+    color: #000080;
+}
+.ppelement{
+    color: #000080;
+}
+.ppattribute{
+    /*color : #ffa500;*/
+    color: #D2691E;
+}
+.ppcontent{
+    color: #a52a2a;
+}
+.pptext{
+    color: #808080;
+}
+.ppnamespace{
+    color: #0000ff;
+}
+.Accordion .open h3{
+    padding-left: 40px;
+    background-image: url(zoomoutb.png);
+    background-repeat: no-repeat;
+    background-position: top left;
+    margin-left: 0px;
+    margin-right: 2px;
+    margin-top: 1px;
+    margin-bottom: 0px;
+}
+div.acco{
+    background-color: #ece9e4;
+    padding-top: 0px;
+    padding-bottom: 4px;
+    padding-left: 40px;
+    background-image: url(zoominb.png);
+    background-repeat: no-repeat;
+    background-position: 3px 5px;
+    margin-left: 0px;
+    margin-right: 2px;
+    margin-top: 1px;
+    margin-bottom: 0px;
+}
+div.acco h3{
+    margin-top: 1px;
+    margin-bottom: 0px;
+}
+h3.acco{
+    padding-left: 40px;
+    background-image: url(zoominb.png);
+    background-repeat: no-repeat;
+    background-position: top left;
+    margin-left: 0px;
+    margin-right: 2px;
+    margin-top: 1px;
+    margin-bottom: 0px;
+}
+div.acco:hover,
+h3.acco:hover{
+    cursor: pointer;
+    /*    	color : #e16e22;*/
+}
+/* Outer border div of the label */
+.issuelabel-outer{
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    font-size: smaller;
+    border: 1px solid black;
+    margin: 0px 5px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    float: left;
+}
+/* Color part of the label */
+.issuelabel-color{
+    width: 10px;
+    float: left;
+}
+/* Textual part of the label */
+.issuelabel-text{
+    float: left;
+}
+/* tabs */
+#TabbedPanel{
+    border-bottom: 1px solid #CCCCCC;
+    margin: 0;
+    padding: 0;
+    float: left;
+    clear: none;
+    width: 100%; /* IE Hack to force proper layout when preceded by a paragraph. (hasLayout Bug)*/
+}
+#TabbedPanel li{
+    display: inline;
+    border-top: .1em solid #CCCCCC;
+    border-left: .1em solid #CCCCCC;
+    border-right: .1em solid #CCCCCC;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -moz-border-top-left-radius: 5px;
+    -moz-border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    position: relative;
+    top: 1px;
+    float: left;
+    padding: 4px 10px;
+    margin: 0px 1px 0px 0px;
+    font: bold 12px sans-serif;
+    list-style: none;
+    cursor: pointer;
+}
+#TabbedPanel li a{
+    font: inherit;
+    text-decoration: none;
+    padding: 0.25em 1em;
+    color: #FFFFFF;
+}
+.TabbedPanelsTabSelected,
+.TabbedPanelsTabNotSelected:hover{
+    border-bottom: 5px solid #e16e22;
+    background-color: #e16e22;
+    color: white;
+}
+.TabbedPanelsTabNotSelected{
+    border-bottom: .1em solid #7a6e62;
+    background-color: #7a6e62;
+    color: white;
+}
+.TabbedPanelsContent{
+    padding: 30px 10px;
+    background-color: #F6F3EE;
+}
+/* tooltips
+   for mootools tooltips
+*/
+.tip{
+    width: 295px;
+    font-family: tahoma, arial;
+    background: url(tip-text.png) left top repeat-y;
+}
+.tip-top{
+    background: url(tip-top.png) top left no-repeat;
+    height: 26px;
+    width: 295px;
+}
+.tip-title{
+    color: #e95e25;
+    font-weight: bold;
+    margin: 0 30px 0 50px;
+}
+.tip-text{
+    color: #000;
+    padding: 10px 30px 20px 50px;
+}
+.tip-bottom{
+    background: url(tip-bottom.png) left bottom no-repeat;
+    width: 295px;
+    height: 81px;
+}
+/* this class is used on the status icons */
+img.tipsz{
+    width: 15px;
+    height: 15px;
+}
+.tool-tip{
+    color: #faf;
+    width: 139px;
+    z-index: 13000;
+}
+.tool-title{
+    font-weight: bold;
+    font-size: 11px;
+    margin: 0;
+    color: #9FD4FF;
+    padding: 8px 8px 4px;
+    background: url(clock.png) top left;
+}
+.tool-text{
+    font-size: 11px;
+    padding: 4px 8px 8px;
+    background: url(clock.png) bottom right;
+}
+/* example span or div */
+span.expcaption,
+div.expcaption{
+    padding: 0em 0em;
+    margin: 0 0 0.3em 0;
+    border-bottom: 0.1em solid #dddddd;
+}
+td.subcollapsed{
+    background-image: url(images/expand.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 20px !important;
+}
+td.subexpanded{
+    background-image: url(images/collapse.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 20px !important;
+}
+.concepttypeA,
+.concepttypeS,
+.concepttypeD{
+    font-style: italic;
+}
+.concepttypeA,
+.concepttypeD{
+    opacity: 0.5;
+}
+.concepttypeD{
+    text-decoration: line-through;
+}
+.exception{
+    font-style: italic !important;
+}
+.node-snew,
+.node-sdraft,
+.node-spending,
+.node-sfinal{
+    color: inherit;
+}
+.node-s
+.node-scancelled,
+.node-sdeprecated,
+.node-srejected{
+    color: #bbb;
+}
+/* repository iconographics */
+.repobox{
+    display: inline;
+}
+.repo{
+    box-sizing: border-box;
+    display: inline;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    font-style: normal !important;
+    font-weight: normal !important;
+    height: 16px;
+    line-height: 14px;
+    text-align: left;
+    width: auto !important;
+    padding: 1px 5px 1px 5px;
+}
+.ref{
+    background-color: #aaa;
+    color: #fff;
+    margin-right: 0px;
+    text-shadow: #000 1px 0px 2px;
+    width: auto !important;
+    -webkit-border-radius: 3px 0px 0px 3px;
+    -moz-border-radius: 3px 0px 0px 3px;
+    border-radius: 3px 0px 0px 3px;
+}
+.refonly{
+    background-color: #aaa;
+    color: #fff;
+    margin-right: 0px;
+    text-shadow: #000 1px 0px 2px;
+    width: auto !important;
+    -webkit-border-radius: 3px 0px 0px 3px;
+    -moz-border-radius: 3px 0px 0px 3px;
+    border-radius: 3px;
+}
+.refvalue{
+    background-color: blueviolet;
+    color: #fff;
+    margin-left: -4px;
+    width: auto !important;
+    -webkit-border-radius: 0px 3px 3px 0px;
+    -moz-border-radius: 3px 0px 0px 3px;
+    border-radius: 0px 3px 3px 0px;
+}
+.nowrapinline{
+    display: inline;
+    white-space: nowrap !important;
+}

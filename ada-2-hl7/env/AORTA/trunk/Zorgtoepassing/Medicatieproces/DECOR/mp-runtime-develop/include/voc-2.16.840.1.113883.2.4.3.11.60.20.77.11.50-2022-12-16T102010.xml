@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             id="2.16.840.1.113883.2.4.3.11.60.20.77.11.50"
+             name="StopTypeCodelijst"
+             displayName="StopTypeCodelijst"
+             effectiveDate="2022-12-16T10:20:10"
+             statusCode="draft"
+             versionLabel="MP9"
+             lastModifiedDate="2023-01-26T13:53:56">
+      <sourceCodeSystem id="2.16.840.1.113883.6.96"
+                        identifierName="SNOMED Clinical Terms"
+                        canonicalUri="http://snomed.info/sct"
+                        canonicalUriDSTU2="http://snomed.info/sct"
+                        canonicalUriSTU3="http://snomed.info/sct"
+                        canonicalUriR4="http://snomed.info/sct"
+                        canonicalUriR4B="http://snomed.info/sct"
+                        canonicalUriR5="http://snomed.info/sct"
+                        hl7v2table0396="SCT"/>
+      <publishingAuthority name="Nictiz" inherited="project">
+         <addrLine>Oude Middenweg 55</addrLine>
+         <addrLine>2491 AC Den Haag</addrLine>
+         <addrLine type="phone">070-3173450</addrLine>
+      </publishingAuthority>
+      <copyright language="en-US" inherited="true">This artefact includes content from SNOMED Clinical Terms® (SNOMED CT®) which is copyright of the International Health Terminology Standards Development Organisation (IHTSDO). Implementers of these artefacts must have the appropriate SNOMED CT Affiliate license - for more information contact http://www.snomed.org/snomed-ct/getsnomed-ct or info@snomed.org.</copyright>
+      <conceptList>
+         <concept code="113381000146106"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="tijdelijk gestopt met medicatie"
+                  level="0"
+                  type="D">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Drug therapy temporarily stopped (situation)"/>
+            <desc language="nl-NL">
+               <div>tijdelijk</div>
+            </desc>
+         </concept>
+         <concept code="385655000"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="onderbroken"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Suspended (qualifier value)"/>
+            <desc language="nl-NL">
+               <div>tijdelijk stopgezet</div>
+            </desc>
+         </concept>
+         <concept code="113371000146109"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="definitief gestopt met medicatie"
+                  level="0"
+                  type="D">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Drug therapy definitely stopped (situation)"/>
+            <desc language="nl-NL">
+               <div>definitief</div>
+            </desc>
+         </concept>
+         <concept code="410546004"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="stopgezet"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Discontinued (qualifier value)"/>
+            <desc language="nl-NL">
+               <div>definitief stopgezet</div>
+            </desc>
+         </concept>
+         <concept code="89925002"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="geannuleerd"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Canceled (qualifier value)"/>
+            <desc language="nl-NL">
+               <div>geannuleerd</div>
+            </desc>
+         </concept>
+      </conceptList>
+   </valueSet>
+</valueSets>
