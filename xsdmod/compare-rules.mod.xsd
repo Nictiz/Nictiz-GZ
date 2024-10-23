@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <!-- ======================================================================= -->
+    <!--
+    Copyright © Nictiz
+
+    This program is free software; you can redistribute it and/or modify it under the terms of the
+    GNU Lesser General Public License as published by the Free Software Foundation; either version
+    2.1 of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+    without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU Lesser General Public License for more details.
+    
+    The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <xs:annotation>
+        <xs:documentation>Definition of a compare-rules element that defines the exceptions for a comparison by xslmod/compare.mod.xsl. Can be used in any namespace.</xs:documentation>
+    </xs:annotation>
+    <xs:element name="compare-rules">
+        <xs:complexType>
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+                <xs:element name="do-not-compare-text-nodes-on-match">
+                    <xs:annotation>
+                        <xs:documentation>Do not flag differences for text nodes inside elements adressed by @simple-match when their value (in the primary document to compare) matches @regexp.</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:attribute name="simple-match" use="required" type="t-simple-match-element-list">
+                            <xs:annotation>
+                                <xs:documentation>Simple element match list. Either local-element-name or the wildcard *.</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attributeGroup ref="ag-value-match"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="do-not-compare-attribute-values-on-match">
+                    <xs:annotation>
+                        <xs:documentation>Do not flag differences for attribute values inside elements adressed by @simple-match when their value (in the primary document to compare) matches @regexp.</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:attribute name="simple-match" use="required" type="t-simple-match-attribute-list">
+                            <xs:annotation>
+                                <xs:documentation>Simple match expression(s) list: local-element-name/@local-attribute-name. For both names a * can be used as wildcard.</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attributeGroup ref="ag-value-match"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ignore-elements">
+                    <xs:annotation>
+                        <xs:documentation>Ignore elements completely (both existence and value), based on a match with @simple-match. </xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:attribute name="simple-match" use="required" type="t-simple-match-element-list">
+                            <xs:annotation>
+                                <xs:documentation>Simple element match list. Either local-element-name or the wildcard *.</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ignore-attributes">
+                    <xs:annotation>
+                        <xs:documentation>Ignore attributes completely (both existence and value), based on a match with @simple-match. </xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:attribute name="simple-match" use="required" type="t-simple-match-attribute-list">
+                            <xs:annotation>
+                                <xs:documentation>Simple match expression(s) list: local-element-name/@local-attribute-name. For both names a * can be used as wildcard.</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+            <xs:attribute default="true" name="enable-compare" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation>Whether to compare at all.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:attributeGroup name="ag-value-match">
+        <xs:annotation>
+            <xs:documentation>Definition of how a value should match to stop from being compared.</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="regexp" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>XPath regular expression. If this matches, no compare takes place. An absent or empty @regexp value matches all values.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:simpleType name="t-simple-match-element">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\*|[\i-[:]][\c-[:]]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="t-simple-match-element-list">
+        <xs:list itemType="t-simple-match-element"/>
+    </xs:simpleType>
+    <xs:simpleType name="t-simple-match-attribute">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(\*|[\i-[:]][\c-[:]]*)/@(\*|[\i-[:]][\c-[:]]*)"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="t-simple-match-attribute-list">
+        <xs:list itemType="t-simple-match-attribute"/>
+    </xs:simpleType>
+</xs:schema>

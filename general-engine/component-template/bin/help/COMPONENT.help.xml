@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<command-help-text xmlns="https://nictiz.nl/ns/YATC-shared/command-help-text" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/command-help-text ../../../../YATC-shared/xsd/command-help-text.xsd" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!-- ======================================================================= -->
+    <!-- 
+        Command line help text for this command.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <description>*TBD* One-liner about what this component does</description>
+
+    <xi:include href="../../../../YATC-shared/general-engine/chtmod/general-processing-standard-command-line-options.xml"/>
+
+</command-help-text>

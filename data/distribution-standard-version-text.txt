@@ -1,0 +1,9 @@
+Distribution provided by Nictiz:
+
+Application name: $APPLICATION
+Application version: $VERSION
+
+Distribution name: $DISTRIBUTIONNAME
+Distribution version: $DISTRIBUTIONVERSION
+
+Created: $DATE $TIME ($DATETIMEISO)

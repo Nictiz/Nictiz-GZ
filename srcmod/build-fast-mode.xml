@@ -1,0 +1,53 @@
+<section xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../xsd/text-document.xsd" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <!-- ======================================================================= -->
+    <!-- 
+        General text about building (XSLT transformation) in fast mode.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+
+    <title><anchor name="build-fast-mode"/>Building in fast mode</title>
+
+    <para>Fast mode takes care to compile the stylesheet only once, which, usually, results in much faster processing. This uses a (somewhat dirty) trick:</para>
+    <unorderedlist>
+        <entry>
+            <para>A temporary, in-memory, wrapper stylesheet is created that includes (<elm>xsl:include</elm>) the actual stylesheet. </para>
+        </entry>
+        <entry>
+            <para>When started, it gets the full <emph>collection</emph> of documents-to-transform as its input.</para>
+        </entry>
+        <entry>
+            <para>The wrapper stylesheet is started by activating a <emph>named</emph> template (instead of the usual template with <code>match="/"</code>).</para>
+        </entry>
+        <entry>
+            <para>This named template iterates over the collection of input documents, calling the actual stylesheet one by one.</para>
+        </entry>
+    </unorderedlist>
+
+
+    <para>It works in most cases, but you have to test it carefully. There are some known situations where fast mode doesn't fly (and there might be more, unkonwn yet):</para>
+    <unorderedlist>
+        <entry>
+            <para>When a parameter default (<code>xsl:param/@select</code>) or <emph>global</emph> variable value (<code>/*/xsl:variable/@select</code>) references the context item <code>/</code>.</para>
+        </entry>
+        <entry>
+            <para>When the stylesheet produces additional output documents (<elm>xsl:result-document</elm>) with duplicate URIs. This is not allowed in a singular transformation.</para>
+        </entry>
+    </unorderedlist>
+
+</section>

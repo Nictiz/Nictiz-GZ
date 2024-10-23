@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../xsd/text-document.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        General data format remarks section.
+        
+        Macros:
+        * $DATAFILENAME (without extension)
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <!-- Compute the schema references. Take care to use the values from the general engine configuration if present: -->
+    <macro name="SCHEMA" value="{$data-file-schema}" default="{$yatcRepositoryName}/{$yatcComponentName}/xsd/$DATAFILENAME.xsd"/>
+    <macro name="SCHEMATRON" value="{$data-file-schematron}" default="{$yatcRepositoryName}/{$yatcComponentName}/sch/$DATAFILENAME.sch"/>
+
+    <title><anchor name="general-remarks"/>General remarks</title>
+
+    <unorderedlist>
+        <entry>
+            <para>There are two schemas for this document. For full validation both should be applied:</para>
+            <unorderedlist>
+                <entry>
+                    <para>XML Schema: <code>$SCHEMA</code></para>
+                </entry>
+                <entry>
+                    <para>Schematron schema: <code>$SCHEMATRON</code></para>
+                </entry>
+            </unorderedlist>
+        </entry>
+        <entry>
+            <para>All elements <emph>must</emph> be in the <code>https://nictiz.nl/ns/{$yatcRepositoryName}</code> namespace.</para>
+        </entry>
+        <entry>
+            <para>In some places XInclude processing is allowed, using <elm>xi:include</elm> elements. The resulting document (after all XIncludes are dereferenced) must be valid.</para>
+        </entry>
+        <entry>
+            <para>References to <link href="../../../YATC-shared/doc/parameters-system.md">YATC parameters</link> in text or attribute values (using either <code>${{parname}</code> or <code>{{$parname}</code>) will expand. A referenced YATC parameter must exist.</para>
+        </entry>
+        <entry>
+            <para>There are also some more "simple" macros that will expand in an application data file, like <code>$APPLICATION</code> and <code>$VERSION</code>. See <link href="#simple-data-file-macro-expansion">here</link> for more information.</para>
+        </entry>
+    </unorderedlist>
+
+</section>

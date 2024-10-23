@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../xsd/text-document.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        General text about the <parameter> element in application data files.
+        
+        This element is defined in ../xsdmod/application-data-file.mod.xsd
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <title><anchor name="parameter-element"/>The <elm>parameter</elm> element</title>
+
+    <para>The <elm>parameter</elm> element defines an additional parameter to be passed to a stylesheet.</para>
+
+    <element name="parameter">
+        <attributes>
+            <attribute name="name" type="xs:NCName" required="true">
+                <para>The name of the parameter.</para>
+            </attribute>
+            <attribute name="value" type="xs:string">
+                <para>A (straight) value for the parameter.</para>
+            </attribute>
+            <attribute name="href" type="URI">
+                <para>A URI as value for the parameter, see <link href="#common-attributes">common attributes</link>.</para>
+            </attribute>
+            <attribute name="directory" type="URI">
+                <para>A directory as value for the parameter, see <link href="#common-attributes">common attributes</link>.</para>
+            </attribute>
+            <attribute name="force-string" type="xs:boolean">
+                <para>When <code>false</code> (or absent), the system will try to cast a value to the most appropriate data type. When <code>true</code>, a value will always be passed as a string.</para>
+            </attribute>
+        </attributes>
+    </element>
+
+    <para>When multiple attributes are present, the processing is in this order:</para>
+    <unorderedlist>
+        <entry>
+            <para>When <emph>both</emph>
+                <code>@value</code> and <code>@directory</code> are present, a filename is constructed with <code>@directory</code> as the directory (after resolving of directory identifiers and relative path, see <link href="#common-attributes">common attributes</link>) and <code>@value</code> as the filename.</para>
+        </entry>
+        <entry>
+            <para>When <code>@value</code> is present, its value will be used for the value of the parameter. If this is <code>true</code> or <code>false</code>, it will be converted to a boolean parameter (instead of string).</para>
+        </entry>
+        <entry>
+            <para>When <code>@directory</code> is present, its absolute value will be used for the value of the parameter (after resolving of directory identifiers and relative path, see <link href="#common-attributes">common attributes</link>).</para>
+        </entry>
+        <entry>
+            <para>When <code>@href</code> is present, its absolute value will be used for the value of the parameter (after resolving a relative path, see <link href="#common-attributes">common attributes</link>).</para>
+        </entry>
+        <entry>
+            <para>When no attributes are present, the parameter's value will be the empty string.</para>
+        </entry>
+    </unorderedlist>
+
+</section>

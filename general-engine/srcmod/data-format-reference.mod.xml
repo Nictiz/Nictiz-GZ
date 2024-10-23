@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../../xsd/text-document.xsd" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!-- ======================================================================= -->
+    <!-- 
+        General text that documents the general engine data format (as a section, to be included in 
+        the component's data format documentation).
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <title>Root <elm>$ROOTELEMENT</elm> element</title>
+
+    <element name="$ROOTELEMENT">
+        <children>
+            <element name="macros" occurrences="?">
+                <para>Define simple macros for use in attributes and text. See <link href="#simple-data-file-macro-expansion">simple macro expansion</link>.</para>
+            </element>
+            <choice occurrences="*">
+                <element name="xi:include" pseudo-attributes="href" close="true">
+                    <para>Reference to a file to include.</para>
+                </element>
+                <element name="application" attributes-indicator="true">
+                    <para>Definition for a single application.</para>
+                </element>
+            </choice>
+        </children>
+    </element>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <section>
+        <title>The <elm>application</elm> element</title>
+
+        <para>The <elm>application</elm> element defines the processing to be performed for a single application/version combination. This is done by specifying the steps that need to be taken (like <elm>build</elm>, <elm>copy</elm>, etc.) to get to the end result.</para>
+
+        <para>Processing for an <elm>application</elm> element is as follows:</para>
+        <unorderedlist>
+            <entry>
+                <para>Any <elm>setup</elm> elements are always processed <emph>first</emph> (unless processing setup was disabled on the command line).</para>
+            </entry>
+            <entry>
+                <para>After the setup, all steps that are a <emph>direct</emph> child of the <elm>application</elm> element, if any, are executed.</para>
+            </entry>
+            <entry>
+                <para>After this, the steps in the <elm>action</elm> elements, if any, are processed. This is either the default action or the action(s) specified on the command line.</para>
+            </entry>
+        </unorderedlist>
+
+        <para>This means that you can specify what needs to be done within an <elm>application</elm> element in several ways:</para>
+        <unorderedlist>
+            <entry>
+                <para>If your application/version has only one thing to do, for instance "convert something", just specify the steps for this as direct children of the <elm>application</elm> element.</para>
+            </entry>
+            <entry>
+                <para>Sometimes however you want to be able to make a choice about what needs to be done, for instance "convert something", "convert something else", "validate the result", etc. In that case define these things in separate <elm>action</elm> elements.</para>
+            </entry>
+            <entry>
+                <para>It is possible to combine these two approaches: add steps as direct children of <elm>application</elm> <emph>and</emph> use <elm>action</elm> elements containing steps. This is more of a side effect of the way the processing takes place, we will have to wait and see whether this is also useful in practice.</para>
+            </entry>
+        </unorderedlist>
+
+        <emptyline/>
+        <element name="application">
+            <attributes>
+                <attribute name="name" type="xs:string" required="true">
+                    <para>The name of the application. For instance: <code>lab</code>.</para>
+                </attribute>
+                <attribute name="version" type="xs:string" required="true">
+                    <para>The version of the application. For instance: <code>4.0.0</code>.</para>
+                </attribute>
+                <attribute name="source-project-name" type="xs:string" default="application/@name">
+                    <para>The name of the project (directory) to be used.</para>
+                </attribute>
+                <attribute name="source-adarefs2ada" type="xs:boolean" default="false">
+                    <para>Whether the source documents for setup come from adarefs2ada computations or straight from the ART-DECOR data. See below.</para>
+                </attribute>
+                <attribute name="source-version" type="xs:string" required="false" default="@version">
+                    <para>The version number of the application for getting the source data from. Use only when it's different from <code>@version</code>.</para>
+                </attribute>
+            </attributes>
+            <children>
+                <element name="macros" occurrences="?">
+                    <para>Define simple macros for use in attributes and text. See <link href="#simple-data-file-macro-expansion">simple macro expansion</link>.</para>
+                </element>
+                <choice occurrences="*">
+                    <element name="message" occurrences="?">
+                        <para>Message which will be output on the console during processing for this application.</para>
+                    </element>
+                    <element name="setup" attributes-indicator="true" occurrences="?">
+                        <para>Any setup (data copying) to be done. See <link href="#setup-element">setup element</link></para>
+                    </element>
+                    <element name="build" attributes-indicator="true" occurrences="?">
+                        <para>Build operations to be performed. See <link href="#build-step">build element</link></para>
+                    </element>
+                    <element name="copy" attributes-indicator="true" occurrences="?">
+                        <para>Copy operations to be performed. See <link href="#copy-step">copy element</link></para>
+                    </element>
+                    <element name="validate-with-schema" attributes-indicator="true" occurrences="?">
+                        <para>Validate operation using an W3C XML Schema. See <link href="#validate-with-x-step">validate-with-* elements</link></para>
+                    </element>
+                    <element name="validate-with-schematron" attributes-indicator="true" occurrences="?">
+                        <para>Validate operation using an ISO Schematron schema. See <link href="#validate-with-x-step">validate-with-* elements</link></para>
+                    </element>
+                    <element name="empty-root-directory" occurrences="?" attributes-indicator="true" close="true">
+                        <para>Defines an empty directory in the application root/main directory. See <link href="#empty-root-directory-element">empty-root-directory element</link>.</para>
+                    </element>
+                    <element name="action" attributes-indicator="true" occurrences="?">
+                        <para>Defines the steps to execute for a given action. See <link href="#action-element">action element</link>.</para>
+                    </element>
+                </choice>
+            </children>
+        </element>
+
+        <para>Some applications take their input source from data directly retrieved from ART-DECOR and some from <code>adarefs2ada</code> post-processing (all done by the <code>YATC-shared/get-production-ada-instances</code> component). The <code>@source-adarefs2ada</code> attribute takes care of this:</para>
+        <unorderedlist>
+            <entry>
+                <para><code>source-adarefs2ada="false"</code>: The source documents are supposed to come straight from ART-DECOR. They're taken from <code>{{$productionAdaInstancesBaseStorageDirectory}/{@name}/{@version}/{{$productionAdaInstancesDataSubdir}</code> (parameters defined in <code>YATC-shared/data/parameters.xml</code>).</para>
+            </entry>
+            <entry>
+                <para><code>source-adarefs2ada="true"</code>: The source documents are supposed to come from <code>adarefs2ada</code> post-processing. They're taken from the appropriate subdirectories of <code>{{$adarefs2adaBaseStorageDirectory}/{@name}/{@version}/{@usecase}</code> (parameter defined in <code>YATC-shared/data/parameters.xml</code>).</para>
+            </entry>
+        </unorderedlist>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <xi:include href="../../srcmod/setup-element.mod.xml"/>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title><anchor name="action-element"/>The <elm>action</elm> element</title>
+
+            <para>The <elm>action</elm> element defines the steps to execute for a named action. </para>
+
+            <element name="action">
+                <attributes>
+                    <attribute name="name" type="xs:NCName" required="true">
+                        <para>The name of this action.</para>
+                    </attribute>
+                    <attribute name="description" type="xs:string">
+                        <para>Short description of the action.</para>
+                    </attribute>
+                    <attribute name="default" type="xs:boolean" default="false">
+                        <para>Whether this action is the default for this application/version. The default action is executed when no other action is specified on the command line.</para>
+                    </attribute>
+                    <attribute name="depends-on" type="list of xs:NCName">
+                        <para>A whitespace-separated list of action names this action depends on. When this action is executed these dependent actions are executed first (and, recursively, the actions these depend on).</para>
+                    </attribute>
+                    <attribute name="setup" type="xs:boolean" default="true">
+                        <para>Defines whether this action needs the application setup to be done first or rather not. Setup is usually on, but in some actions you might want to turn it off, for instance when this is a validate-only action and you do not want to build everything every time you're validating.<br/>When multiple actions are specified: if any of the specified action requires a setup, setup will be done.<br/>You can also force whether a setup must be done using the command line with the <code>-setup</code> or <code>-nosetup</code> option. A command line flag will always take precedence over <code>@setup</code> attributes.</para>
+                    </attribute>
+                </attributes>
+                <children>
+                    <element name="macros" occurrences="?">
+                        <para>Define simple macros for use in attributes and text. See <link href="#simple-data-file-macro-expansion">simple macro expansion</link>.</para>
+                    </element>
+                    <choice occurrences="*">
+                        <element name="message" occurrences="?">
+                            <para>Message which will be output on the console during processing for this action.</para>
+                        </element>
+                        <element name="build" attributes-indicator="true" occurrences="?">
+                            <para>Build operations to be performed. See <link href="#build-step">build element</link></para>
+                        </element>
+                        <element name="copy" attributes-indicator="true" occurrences="?">
+                            <para>Copy operations to be performed. See <link href="#copy-step">copy element</link></para>
+                        </element>
+                        <element name="validate-with-schema" attributes-indicator="true" occurrences="?">
+                            <para>Validate operation using an W3C XML Schema. See <link href="#validate-with-x-step">validate-with-* elements</link></para>
+                        </element>
+                        <element name="validate-with-schematron" attributes-indicator="true" occurrences="?">
+                            <para>Validate operation using an ISO Schematron schema. See <link href="#validate-with-x-step">validate-with-* elements</link></para>
+                        </element>
+                    </choice>
+                </children>
+            </element>
+        </section>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <xi:include href="../../srcmod/standard-build-element.mod.xml"/>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <xi:include href="../../srcmod/standard-copy-element.mod.xml"/>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <xi:include href="../../srcmod/standard-validate-with-x-element.mod.xml"/>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <xi:include href="../../srcmod/empty-root-directory-element.xml"/>
+
+    </section>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <xi:include href="../../srcmod/common-definitions.xml"/>
+
+
+</section>

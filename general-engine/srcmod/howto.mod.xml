@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<group xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../../xsd/text-document.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        General howto text for components based on the general engine.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>Introduction</title>
+
+        <para>This document tries to explain how to configure the <code>{$yatcComponentName}</code> component setup.</para>
+
+        <para>The following documentation might also be of interest for this:</para>
+        <unorderedlist>
+            <entry>
+                <para><link href="command.md">Command reference</link>: What commands are available.</para>
+            </entry>
+            <entry>
+                <para><link href="data-format-reference.md">Application data format reference</link>: Reference documentation for the base data file {$yatcRepositoryName}/{$yatcComponentName}/data/{$yatcComponentName}-data.xml.</para>
+            </entry>
+            <entry>
+                <para><link href="../../../YATC-shared/doc/parameters-system.md">The parameters system</link>: Some things are defined using parameters which is documented here</para>
+            </entry>
+        </unorderedlist>
+
+        <para>And of course it is useful and sensible to see how things are done for other applications. Better stolen well than badly made up…</para>
+
+    </section>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <section>
+        <title>Adding an application to the base data file</title>
+
+        <para>All the magic of <code>{$yatcComponentName}</code> is defined in its base data file <code>{$yatcRepositoryName}/{$yatcComponentName}/data/{$yatcComponentName}-data.xml</code>.  Important remarks about this file:</para>
+
+        <unorderedlist>
+            <entry>
+                <para>The name/location of this file is not a given. It is defined using parameter <code>{$yatcComponentNameShortened}DataDocument</code> in <code>{$yatcRepositoryName}/{$yatcComponentName}/data/parameters.xml</code>. This can be interesting when you want to replace the normal data file with one of your own in a test/development/debug situation. For this, redefine the parameter in your local parameters override file <code>{{$yatcBaseDirectory}/data/parameters.xml</code>.</para>
+            </entry>
+            <entry>
+                <para>The file can, if necessary/convenient, be segmented by storing <elm>application</elm>> elements in separate XML documents and include these in the main file using <elm>xi:include</elm> elements (the namespace prefix <code>xi</code> must be bound to the XInclude namespace <code>http://www.w3.org/2001/XInclude</code>).</para>
+            </entry>
+            <entry>
+                <para>There are two schemas involved validating this file. See the <link href="data-format-reference.md">application data format reference</link> for more information. Editing this file (in oXygen for instance) works best when these schemas are referenced/used. This also applies to files included using <elm>xi:include</elm>.</para>
+            </entry>
+        </unorderedlist>
+
+        <para>To add a new application to the data file, simply add an <code>/{$yatcComponentName}-data/application</code> element. Add the name and version of the application in its (required) <code>@name</code> and <code>@version</code> attributes. All storage will now be done underneath <code>{{$ada2fhirBaseStorageDirectory}/{@application}/{@version}</code>.</para>
+
+        <para>Originally the data file was set up keeping alphabetical order using the application's name and version. Whether you want to keep it that way is up to you.</para>
+
+        <para>There are two important attributes on <elm>application</elm>:</para>
+        <unorderedlist>
+            <entry>
+                <para><code>@source-project-name</code> defines the name of the project in the projects directory tree (mainly used for copying schemas from). The default is <code>@name</code> but this is rarely correct, so you'll probably have to set it explicitly. Projects are located using parameter <code>projectsBaseStorageDirectory</code> in <code>YATC-shared/data/parameters.xml</code>.</para>
+            </entry>
+            <entry>
+                <para><code>@source-adarefs2ada</code> defines where the source files for <elm>setup</elm> elements come from (default: false):</para>
+                <unorderedlist>
+                    <entry>
+                        <para><code>source-adarefs2ada="false"</code>: The source documents are supposed to come straight from ART-DECOR. They're taken from <code>{{$productionAdaInstancesBaseStorageDirectory}/{@name}/{@version}/{{$productionAdaInstancesDataSubdir}</code> (parameters defined in <code>YATC-shared/data/parameters.xml</code>).</para>
+                    </entry>
+                    <entry>
+                        <para><code>source-adarefs2ada="true"</code>: The source documents are supposed to come from <code>adarefs2ada</code> post-processing. They're taken from the appropriate subdirectories of <code>{{$adarefs2adaBaseStorageDirectory}/{@name}/{@version}/{@usecase}</code> (parameter defined in <code>YATC-shared/data/parameters.xml</code>).</para>
+                    </entry>
+                </unorderedlist>
+            </entry>
+        </unorderedlist>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title>Setting up the environment for a usecase</title>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <section>
+                <title>The <elm>setup</elm> element</title>
+
+                <para>A <elm>setup</elm> element (it can occur multiple times as child of <elm>application</elm>) defines what files must copied to the <code>{$yatcComponentName}</code> result location  and where. The <code>@usecase</code> attribute defines the name of the usecase for the setup. This will become the name of the sub-directory underneath the application/version main directory. The details are <link href="data-format-reference.md#setup-element">here</link>. Some hints and clues:</para>
+
+                <unorderedlist>
+                    <entry>
+                        <para>You can copy documents using the <elm>copy-data</elm> child element. Add <elm>include</elm> and <elm>exclude</elm> elements to filter.</para>
+                    </entry>
+                    <entry>
+                        <para>You can copy schemas (from the projects directory tree) using the <elm>copy-project-schemas</elm> child element. Add <elm>include</elm> and <elm>exclude</elm> elements to filter.</para>
+                    </entry>
+                    <entry>
+                        <para>The setup can also create empty result directories using the <elm>empty-directory</elm> element. Usually these directories are filled during the build (see below).<br/>Creating these directories up-front is not strictly necessary, because any non-existing directories are automatically created by the build process. However it makes senses to define them here because the <code>compare-{$yatcComponentName}</code> command now knows there's a result directory and takes it into account.</para>
+                    </entry>
+                    <entry>
+                        <para>Exceptionally, it is necessary to copy fixed data files, usually CSS/JavaScript and the likes. This can be done using the <elm>copy-directory</elm> element.<br/>Very often, because they're fixed/constant, the source for these files is in the code directory tree. To refer to such a directory without resorting to absolute path names, start the @directory attribute with a #. For instance: <code>directory="#../env/mp/9.0.7/…/assets</code>". Such a path is relative to the location of the data file it is used in.</para>
+                    </entry>
+                    <entry>
+                        <para>Even more exceptional is retrieving data files from a REST URL (usually something in ART-DECOR) during setup. This can be done using the <elm>retrieve</elm> element.</para>
+                    </entry>
+                </unorderedlist>
+
+                <para>Although not required, it makes sense to define directory identifiers for all directories using @directory-id attributes. See <link href="data-format-reference.md#resolving-directory-attribute">here</link> for more information. this allows referring to these directories during the build without having to repeat there names.</para>
+            </section>
+
+        </section>
+
+    </section>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <section>
+        <title>The <code>{$yatcComponentName}</code> stylesheets and accompanying data</title>
+        <para>The actual creation of the output documents is done using regular XSLT stylesheets. These stylesheets are run by the <elm>build</elm> elements (see <link href="ata-format-reference.md#build-step">here</link>) in the data file. Some hints and clues:</para>
+        <unorderedlist>
+            <entry>
+                <para>They usually reside in a sub-directory of <code>{$yatcRepositoryName}/{$yatcComponentName}/env</code></para>
+            </entry>
+            <entry>
+                <para>The build system passes these stylesheets a standard set of parameters. You can find these parameters, documented, in <code>YATC-shared/general-engine/xslmod/build-standard-parameters.mod.xsl</code>. If you need any of these include (<elm>xsl:include</elm>) this module at the top of your stylesheet.</para>
+            </entry>
+        </unorderedlist>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title>Stand-alone testing of stylesheets</title>
+
+            <para>It is preferable to develop and test <code>{$yatcComponentName}</code> stylesheets outside of the context of XProc, for instance directly from oXygen. There is some support for this. Here is how to set this up:</para>
+            <unorderedlist>
+                <entry>
+                    <para>The standard build parameters passed to the stylesheets get some hopefully appropriate default value here. So if you just run the stylesheets without setting any parameters, they will not complain about missing parameters.</para>
+                </entry>
+                <entry>
+                    <para>In oXygen, setup a transformation scenario that takes an appropriate input file and transforms this using the stylesheet to test/develop. Depending on the stylesheet, you might have to set parameters to some appropriate (URI or other) value.</para>
+                </entry>
+            </unorderedlist>
+        </section>
+
+    </section>
+</group>

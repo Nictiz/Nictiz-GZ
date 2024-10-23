@@ -1,0 +1,29 @@
+<section xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../xsd/text-document.xsd" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <!-- ======================================================================= -->
+    <!-- 
+        General text about the <distributions> element in application data files.
+        
+        This element is defined in ../xsdmod/application-data-file.mod.xsd
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <title><anchor name="distributions"/>The <elm>distributions</elm> element</title>
+
+    <para>The <elm>distributions</elm> defines one or more distributions. For a description of distributions in general and the details of the <elm>distributions</elm> element, see <link href="../../../YATC-shared/doc/distributions.md">here</link>.</para>
+
+</section>

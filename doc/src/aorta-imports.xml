@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<text-document xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../../xsd/text-document.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        Documentation for the AORTA import mechanism/conventions.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <title>AORTA imports</title>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>Introduction</title>
+
+        <para>Some YATC components/applications/versions need documents that are stored in the AORTA repository. In most cases this concerns XML  Schemas (<code>.xsd</code>) and Schematron-schemas (<code>.sch</code>).</para>
+
+        <para>The SVN AORTA repository (<code>https://next.gforge.com/svn/aorta</code>) is gargantuan. The checkout is (spring 2024) over 75Gb! Luckily it is also (relatively) stable. So, to prevent all YATC users need to checkout this gigantic bucket of data (and use very little of it), the decision was made to <emph>copy</emph> the relevant AORTA files to YATC.</para>
+
+        <para>Copying a schema is not a straightforward task due to the inclusion of referenced documents. AORTA schemas are typically complex and rely on many external dependencies. Manually determining which documents to copy can be a tedious process. To simplify this, an AORTA import utility has been developed. This utility automatically handles the copying of all necessary documents. Additionally, it offers the advantage of easily updating a document in AORTA with just a single command when needed.</para>
+
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>AORTA documents in YATC</title>
+
+        <para>The following conventions apply to storing AORTA documents in YATC:</para>
+
+        <unorderedlist>
+            <entry>
+                <para>All AORTA documents reside underneath the <code>env/AORTA/</code> sub-directory of a YATC component. For instance, there is a <code>YATC-internal/ada-2-hl7/env/AORTA/</code> sub-directory.</para>
+            </entry>
+            <entry>
+                <para>The directory structure inside AORTA is mimicked in YATC. For instance, a document from AORTA <code>AORTA/trunk/XML/coreschemas/datatypes.xsd</code> is copied to <code>YATC-internal/ada-2-hl7/env/AORTA/trunk/XML/coreschemas/datatypes.xsd</code></para>
+            </entry>
+        </unorderedlist>
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>Importing documents</title>
+
+        <para>For using the AORTA import facilities in YATC, do the following:</para>
+
+        <unorderedlist>
+            <entry>
+                <para>SVN checkout the AORTA repository to a location somewhere on your disk</para>
+            </entry>
+            <entry>
+                <para>Define the location of the checkout of the AORTA repository as a YATC parameter called <code>AORTADirectory</code>. For this edit (or create) the <code>{basedirectory}/data/parameters.xml</code> document (<code>{basedirectory}</code> is the directory where all the YATC repositories (and <code>HL7-mappings</code> and <code>art_decor</code>) are checked out).<br/>Here is an example of what this looks like:</para>
+            </entry>
+        </unorderedlist>
+
+        <codeblock language="xml" xml:space="preserve"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<parameters xmlns="https://nictiz.nl/ns/YATC-shared" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared ../YATC-shared/xsd/parameters.xsd">
+   
+    …
+    
+    <parameter name="AORTADirectory">
+        <value>{{$baseDriveRoot}/somewhere/on/your/disk/AORTA</value>
+    </parameter>
+
+    …
+
+</parameters>]]>
+        </codeblock>
+
+        <unorderedlist>
+            <entry>
+                <para>Sometimes the documents to copy are in zip files inside AORTA. Unzip the relevant zip files.</para>
+            </entry>
+            <entry>
+                <para>Write a document that describes what to import using the <link href="#import-format">YATC AORTA import format</link>. An example of such a document can be found in <code>YATC-internal/ada-2-hl7/data/import-aorta-documents.xml</code>.</para>
+            </entry>
+            <entry>
+                <para>The recommended location to store such a document is the <code>data/</code> sub-directory of the component in question. The recommend filename is <code>import-aorta-documents.xml</code>.</para>
+            </entry>
+            <entry>
+                <para>Open a command line window in the directory where the specification document is stored and issue the command: <code>yatc&#160;import-aorta-documents&#160;{specification-document}</code>. When using the conventions this is <code>yatc&#160;import-aorta-documents&#160;import-aorta-documents.xml</code>.</para>
+            </entry>
+            <entry>
+                <para>This will copy all the specified documents to YATC. It will automatically find out which documents are imported/included and copy these as well.</para>
+            </entry>
+        </unorderedlist>
+
+        <para>Some additional remarks:</para>
+        <unorderedlist>
+            <entry>
+                <para>The <code>import-aorta-documents</code> command does <emph>not</emph> clean the target directory. So if you want a completely fresh import, remove it yourself before issuing the command.</para>
+            </entry>
+            <entry>
+                <para>It turned out that some of the documents to copy resided in zip files stored in AORTA. You need to expand these zip files first.</para>
+            </entry>
+        </unorderedlist>
+
+
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title><anchor name="import-format"/>The AORTA import format</title>
+
+        <unorderedlist>
+            <entry>
+                <para>The schema for the AORTA import format is in <code>YATC-shared/support/import-aorta-documents.xsd</code></para>
+            </entry>
+            <entry>
+                <para>All markup for the YATC text format must be in the <code>https://nictiz.nl/ns/YATC-shared/import-aorta-documents</code> namespace.</para>
+            </entry>
+        </unorderedlist>
+
+        <section>
+            <title>Root element: <elm>import-aorta-documents</elm></title>
+
+            <element name="import-aorta-documents">
+                <attributes>
+                    <attribute name="href-target" type="xs:anyURI">
+                        <para>The target directory. A relative name is resolved against the location of the YATC-internal repository (the value of the <code>yatcInternalDirectory</code> YATC parameter). For example, when importing for the <code>ada-2-hl7</code> component and following the conventions, this attribute must be stated as <code>href-target="ada-2-hl7/env/AORTA"</code>.</para>
+                    </attribute>
+                </attributes>
+                <children>
+                    <choice occurrences="*">
+                        <element name="document" pseudo-attributes="href">
+                            <para>URI of the document to import. Any includes/imports in this document are imported also.<br/>The <code>@href</code> attribute must be a relative path to a document in AORTA. It is resolved against the AORTA directory or against the location set by a parent <elm>directory</elm> element.</para>
+                        </element>
+                        <element name="directory" pseudo-attributes="href">
+                            <para>Set the directory to import from. The contents of a <elm>directory</elm> element is, recursive, ca choice of <elm>document</elm>/<elm>directory</elm> elements.<br/>The <code>@href</code> attribute must be the relative path of a directory in AORTA. It is resolved against the AORTA directory or against the location set by a parent <elm>directory</elm> element.<br/>For instance: <code>href="branches/Onderhoud_Mp_v90/Publicaties/20210921/mp-xml-20210921T194523"</code>. </para>
+                        </element>
+                    </choice>
+                </children>
+            </element>
+        </section>
+    </section>
+
+</text-document>

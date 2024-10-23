@@ -1,0 +1,713 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<text-document xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../../xsd/text-document.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        Document that explains the basics of the YATC system.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <title>Introduction to YATC</title>
+
+    <para>This document introduces the YATC (Yet Another ADA Toolchain) system. It describes how it is constructed, introduces terminology and provides  pointers to further reading.</para>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>A little history</title>
+
+        <para>Around 2022, Nictiz had two code/data repositories in which various (mainly XML) document conversion operations took place: <link href="https://github.com/Nictiz/art_decor">art_decor</link> (code and data for internal usage only) and <link href="https://github.com/Nictiz/HL7-mappings">HL7-mappings</link> (code and data also available externally).</para>
+
+        <para>The technical foundation for these conversions are a large number of highly specialized XSLT stylesheets, governed by Ant scripts. Code and data were kept together in the same repository, intertwined. This whole system had "grown organically" over the years and was in dire need of refactoring.</para>
+
+        <para>In 2022 we started building YATC (Yet Another ADA Toolchain):</para>
+        <unorderedlist>
+            <entry>
+                <para>Ant as the main processing engine is phased out and replaced by a DSL (Domain Specific Language) approach, based on XProc 3.0.</para>
+            </entry>
+            <entry>
+                <para>Code is gradually moved into (Nictiz private) YATC repositories.</para>
+            </entry>
+            <entry>
+                <para>Data will remain in the original <link href="https://github.com/Nictiz/art_decor">art_decor</link> and <link href="https://github.com/Nictiz/HL7-mappings">HL7-mappings</link> repositories. Directory structures here are left unchanged.</para>
+            </entry>
+            <entry>
+                <para>There are customers that need access to some of the conversion stylesheets. Since these are no longer publicly available, a distribution mechanism is added.</para>
+            </entry>
+        </unorderedlist>
+
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>YATC general structure and terminology</title>
+
+        <para>To understand how YATC is constructed, it is necessary to take note of its general structure and introduce some terminology.</para>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title>Terminology</title>
+
+            <section>
+                <title><anchor name="components"/>The main building blocks: Components</title>
+
+                <para>The main building blocks in the original and YATC system are called <emph>components</emph>. A component (usually) transforms something from one data format to another. Examples are <code>ada-2-wiki</code>, <code>fhir-2-ada</code>, etc.</para>
+
+                <para>Component names translate directly to the directory structure of the repositories. For instance, you&#x2019;ll find an <code>art_decor/ada_2_wiki/</code> sub-directory for the data in <link href="https://github.com/Nictiz/art_decor">art_decor</link> and a <code>YATC-internal/ada-2-wiki/</code> sub-directory for the code in <link href="https://github.com/Nictiz/YATC-internal">YATC-internal</link>.</para>
+
+                <para>A component consists of:</para>
+                <unorderedlist>
+                    <entry>
+                        <para><emph>Code</emph>, on a number of levels:</para>
+                        <unorderedlist>
+                            <entry>
+                                <para>To define what needs to be done, YATC uses code written in task-specific DSLs (Domain Specific Languages). A DSL describes operations like creating/clearing directories, copying files, performing conversions, validations, etc.</para>
+                            </entry>
+                            <entry>
+                                <para>The conversions themselves are done using highly specialized XSLT stylesheets.</para>
+                            </entry>
+                            <entry>
+                                <para>The interpretation and execution of the YATC DSLs is done using code written in <link href="https://xproc.org/">XProc&#160;3.0</link> and XSLT.</para>
+                            </entry>
+                        </unorderedlist>
+                    </entry>
+                    <entry>
+                        <para><emph>Data</emph>. Both the source and the transformed data are part of the component.</para>
+                    </entry>
+                </unorderedlist>
+
+                <para>There a number of important differences between components in the original system and YATC:</para>
+
+                <unorderedlist>
+                    <entry>
+                        <para>In the original system, all code for the components was either in the <link href="https://github.com/Nictiz/art_decor">art_decor</link> or <link href="https://github.com/Nictiz/HL7-mappings">HL7-mappings</link> repository. In YATC all code is in the (Nictiz private) <link href="https://github.com/Nictiz/YATC-internal">YATC-internal</link> repository.</para>
+                    </entry>
+                    <entry>
+                        <para>In the original system, code and data were kept together. YATC separates this: code is moved to the YATC <link href="https://github.com/Nictiz/YATC-internal">YATC-internal</link> repository, data remains in the original <link href="https://github.com/Nictiz/art_decor">art_decor</link> and <link href="https://github.com/Nictiz/HL7-mappings">HL7-mappings</link> repositories (with unchanged directory structure).</para>
+                    </entry>
+                    <entry>
+                        <para>In the original system, the overarching management code was based on Ant. The YATC system uses a DSL (Domain Specific Language) approach, which is interpreted by code written in <link href="https://xproc.org/">XProc&#160;3.0</link>.</para>
+                    </entry>
+                    <entry>
+                        <para>YATC introduces some new naming conventions. This means that components in YATC usually have a slightly different name than in the original. For instance, the original <code>ada_to_wiki</code> is called <code>ada-2-wiki</code> in YATC.</para>
+                    </entry>
+                </unorderedlist>
+            </section>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <section>
+                <title>Applications and versions</title>
+
+                <para>Most components are internally divided into <emph>applications</emph> and <emph>versions</emph>. An application has a <emph>name</emph> (usually some abbreviation) and a <emph>version</emph>. For instance <code>mp</code> (which stands for (Dutch) &#x201c;medicatie proces&#x201d;), version <code>9.3.0</code>. An application includes both a set of data (stored in <link href="https://github.com/Nictiz/art_decor">art_decor</link> or <link href="https://github.com/Nictiz/HL7-mappings">HL7-mappings</link>) and the code to handle this (stored in <link href="https://github.com/Nictiz/YATC-internal">YATC-internal</link>). </para>
+
+                <para>Application names and versions translate directly to the directory structure. For instance,  you&#x2019;ll find a <code>mp/9.3.0/</code> sub-directories underneath the <code>ada-2-hl7</code> component directories.</para>
+
+                <para>When talking about an application and version, it is often written/mentioned as <code>name/version</code>, for instance <code>mp/9.3.0</code>.</para>
+
+            </section>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <section>
+                <title>Usecases</title>
+
+                <para>Most applications are internally divided in <emph>usecases</emph>. For instance the <code>mp/9.3.0</code> application has usecases like <code>sturen_afhandeling_medicatievoorschrift</code>, <code>sturen_voorstel_verstrekkingsverzoek</code>, etc. </para>
+
+                <para>Again, this translates to the directory structure. For instance, there is a <code>ada-2-hl7/mp/9.3.0/sturen_voorstel_verstrekkingsverzoek/</code> sub-directory.</para>
+            </section>
+
+        </section>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title>Structure overview</title>
+
+            <para>The following picture provides an overview of the general structure of the YATC system:</para>
+
+            <image href="figures/structure-overview.png" scale="50%"/>
+        </section>
+
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title><anchor name="yatc-repository-structure"/>YATC repository structure</title>
+
+        <para>In working with the YATC system, you need access to the following repositories:</para>
+
+        <table>
+            <header>
+                <entry>
+                    <para>Repository</para>
+                </entry>
+                <entry>
+                    <para>Description</para>
+                </entry>
+            </header>
+            <row>
+                <entry>
+                    <para><link href="https://github.com/Nictiz/YATC-tools">YATC-tools</link></para>
+                </entry>
+                <entry>
+                    <para>Contains all the (open source) tools needed for running the YATC system.</para>
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    <para><link href="https://github.com/Nictiz/YATC-shared">YATC-shared</link></para>
+                </entry>
+                <entry>
+                    <para>Contains all the shared, generic, code for the YATC system.</para>
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    <para><link href="https://github.com/Nictiz/YATC-internal">YATC-internal</link></para>
+                </entry>
+                <entry>
+                    <para>Contains all the YATC <link href="#components">components</link>.</para>
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    <para><link href="https://github.com/Nictiz/YATC-public">YATC-public</link></para>
+                </entry>
+                <entry>
+                    <para>Used for distributing data to customers.</para>
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    <para><link href="https://github.com/Nictiz/art_decor">art_decor</link></para>
+                </entry>
+                <entry>
+                    <para>Contains the (Nictiz private) data.</para>
+                </entry>
+            </row>
+
+            <row>
+                <entry>
+                    <para><link href="https://github.com/Nictiz/HL7-mappings">HL7-mappings</link></para>
+                </entry>
+                <entry>
+                    <para>Contains all the public data.</para>
+                </entry>
+            </row>
+        </table>
+
+        <para>For more information on how to use these repositories, see the <link href="installation-notes.md">installation-notes</link>.</para>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title>Components and conversion to YATC</title>
+
+            <para>Not all components are currently (spring 2024) converted to YATC. The state of this is as follows:</para>
+
+            <table>
+                <header>
+                    <entry>
+                        <para>Original repository</para>
+                    </entry>
+                    <entry>
+                        <para>Original component</para>
+                    </entry>
+                    <entry>
+                        <para>YATC equivalent</para>
+                    </entry>
+                    <entry>
+                        <para>Status/Remarks</para>
+                    </entry>
+                </header>
+                <!-- art_decor: -->
+                <row>
+                    <entry>
+                        <para><code>art_decor</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>ada_2_ada</code></para>
+                    </entry>
+                    <entry>
+                        <para>-</para>
+                    </entry>
+                    <entry>
+                        <para>Not (yet) converted.</para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>art_decor</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>ada_2_community</code></para>
+                    </entry>
+                    <entry>
+                        <para>-</para>
+                    </entry>
+                    <entry>
+                        <para>Not (yet) converted.</para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>art_decor</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>ada_2_test-xslt</code></para>
+                    </entry>
+                    <entry>
+                        <para>-</para>
+                    </entry>
+                    <entry>
+                        <para>Not (yet) converted.</para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>art_decor</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>ada_2_wiki</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>ada-2-wiki</code></para>
+                    </entry>
+                    <entry>
+                        <para>Done.</para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>art_decor</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>adarefs2ada</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>get-production-ada-instances</code></para>
+                    </entry>
+                    <entry>
+                        <para>Done. Merged with the <code>production_ada_instances</code> component.</para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>art_decor</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>production_ada_instances</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>get-production-ada-instances</code></para>
+                    </entry>
+                    <entry>
+                        <para>Done. Merged with the <code>adarefs2ada</code> component.</para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>art_decor</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>projects</code></para>
+                    </entry>
+                    <entry>
+                        <para>-</para>
+                    </entry>
+                    <entry>
+                        <para>Not (yet) converted.</para>
+                    </entry>
+                </row>
+                <!-- HL7-mappings: -->
+                <row>
+                    <entry>
+                        <para><code>HL7-mappings</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>ada_2_ada</code></para>
+                    </entry>
+                    <entry>
+                        <para>-</para>
+                    </entry>
+                    <entry>
+                        <para>Not (yet) converted.</para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>HL7-mappings</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>ada_2_fhir</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>ada-2-fhir</code></para>
+                    </entry>
+                    <entry>
+                        <para>Done.</para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>HL7-mappings</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>ada_2_fhir_r4</code></para>
+                    </entry>
+                    <entry>
+                        <para>-</para>
+                    </entry>
+                    <entry>
+                        <para>Not (yet) converted.</para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>HL7-mappings</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>ada_2_hl7</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>ada-2-hl7</code></para>
+                    </entry>
+                    <entry>
+                        <para>Done.</para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>HL7-mappings</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>fhir-narrativegenerator</code></para>
+                    </entry>
+                    <entry>
+                        <para>-</para>
+                    </entry>
+                    <entry>
+                        <para>Not (yet) converted.</para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>HL7-mappings</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>fhir_2_ada</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>fhir-2-ada</code></para>
+                    </entry>
+                    <entry>
+                        <para>Done.</para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>HL7-mappings</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>fhir_2_ada_r4</code></para>
+                    </entry>
+                    <entry>
+                        <para>-</para>
+                    </entry>
+                    <entry>
+                        <para>Not (yet) converted.</para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>HL7-mappings</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>hl7_2_ada</code></para>
+                    </entry>
+                    <entry>
+                        <para>-</para>
+                    </entry>
+                    <entry>
+                        <para>Not (yet) converted.</para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>HL7-mappings</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>hl7_2_fhir</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>hl7-2-fhir</code></para>
+                    </entry>
+                    <entry>
+                        <para>Done.</para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>HL7-mappings</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>hl7_2_hl7</code></para>
+                    </entry>
+                    <entry>
+                        <para>-</para>
+                    </entry>
+                    <entry>
+                        <para>Not (yet) converted.</para>
+                    </entry>
+                </row>
+            </table>
+
+
+        </section>
+
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>YATC dataflow</title>
+
+        <para>Most YATC components use the same dataflow. The first part of this is as follows:</para>
+
+        <image href="figures/dataflow1.png" scale="50%"/>
+
+        <unorderedlist>
+            <entry>
+                <para>YATC component <code>YATC-internal/get-production-ada-instances</code> reads data from the <code>ART-DECOR</code> database (using REST calls).</para>
+            </entry>
+            <entry>
+                <para>The results are stored in the <link href="https://github.com/Nictiz/art_decor">art_decor</link> repository, sub-directory <code>production-ada-instances/</code>.</para>
+            </entry>
+            <entry>
+                <para>Sometimes the results need to be post-processed. The results of this are stored in the sub-directory <code>adarefs2ada/</code>.</para>
+            </entry>
+        </unorderedlist>
+
+        <para>When you run one of the other components, it takes its input from what was produced here:</para>
+
+        <image href="figures/dataflow2.png" scale="50%"/>
+
+        <para>Usually a component &#x201c;fills&#x201d; a component/application specific sub-directory in <code>HL7-mappings</code>:</para>
+        <unorderedlist>
+            <entry>
+                <para><emph>Setup</emph> phase:</para>
+                <unorderedlist>
+                    <entry>
+                        <para>XML Schemas and sometimes other information is copied from the appropriate sub-directory of <link href="https://github.com/Nictiz/art_decor">art_decor</link>.</para>
+                    </entry>
+                    <entry>
+                        <para>Data is copied from either <code>art_decor/production-ada-instances/</code> or <code>art_decor/adarefs2ada/</code>.</para>
+                    </entry>
+                </unorderedlist>
+            </entry>
+            <entry>
+                <para><emph>Build</emph> phase</para>
+                <unorderedlist>
+                    <entry>
+                        <para>From there the builds/conversions are done using XSLT stylesheets. The results are also stored in <link href="https://github.com/Nictiz/HL7-mappings">HL7-mappings</link>.</para>
+                    </entry>
+                </unorderedlist>
+            </entry>
+
+        </unorderedlist>
+
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title><anchor name="yatc-component-anatomy"/>Anatomy of a YATC component</title>
+
+        <para>YATC components use the DSL (Domain Specific Language) concept. A DSL is a mini (programming) language, specifically targeted to a very specific goal. This enables you to hide a lot of complexity in handling data and transformations and move this to generic code where it has to be written (and maintained) only once.</para>
+
+        <para>For YATC this means that the actions involved in handling a component/application/usecase are described in a DSL. The maintainer of this can focus on the &#x201c;what&#x201d; and leave the &#x201c;how&#x201d; to the DSL interpreter. Things like sub-directory name constructions, the right way to call stylesheets, where to copy data from, etc. are hidden.</para>
+
+        <para>Using the DSL approach, there are two levels of code to deal with:</para>
+        <unorderedlist>
+            <entry>
+                <para><link href="#dsls">The DSL itself</link>, the code that describes the actions.</para>
+            </entry>
+            <entry>
+                <para><link href="#dsls-interpreters">The DSL interpreter</link>, the code that interprets what is written in the DSL and turns this in to action.</para>
+            </entry>
+        </unorderedlist>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title><anchor name="dsls"/>The DSLs</title>
+            <para>Before you read on, maybe it&#x2019;s a good idea to look at some examples of these DSLs. For this, move to the <code>data/</code> sub-directory of a component and look at the file called <code>{component-name}-data.xml</code>, for instance <code>YATC-internal/ada-2-fhir/data/ada-2-fhir-data.xml</code>. Often this uses include files, which you&#x2019;ll find in the <code>data/include/</code> sub-directory.</para>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <section>
+                <title><anchor name="dsl-types"/>Types of DSLs</title>
+
+                <para>As far as the YATC DSLs are concerned, there has been evolution. At the start of developing the YATC system (beginning 2023), the assumption was that every component would need its own DSL. Of course, some constructions in the DSLs could be shared/re-used, but all would be (slightly) different.</para>
+
+                <para>This turned out not to be entirely true: the actions for most components could be handled by a single DSL. And that is a good thing: a re-used DSL means maintainers don&#x2019;t have to switch between language variants when working on different components. It also means a single code-base and a single set of documentation. This generic YATC DSL is coined the &#x201c;General Engine DSL&#x201d; (the General Engine is the name of the DSL interpreter code for this, see <link href="#dsl-interpreters">below</link>). It is expected that the General Engine DSL can be used in most of the components still to convert to YATC.
+            </para>
+
+                <para>The state of things with respect to YATC DSLs/components is now (spring 2024) as follows:</para>
+                <table>
+                    <header>
+                        <entry>
+                            <para>YATC component</para>
+                        </entry>
+                        <entry>
+                            <para>DSL</para>
+                        </entry>
+                    </header>
+                    <row>
+                        <entry>
+                            <para><code>ada-2-fhir</code></para>
+                        </entry>
+                        <entry>
+                            <para>General Engine DSL</para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para><code>ada-2-hl7</code></para>
+                        </entry>
+                        <entry>
+                            <para>General Engine DSL</para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para><code>ada-2-wiki</code></para>
+                        </entry>
+                        <entry>
+                            <para>Component specific DSL</para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para><code>distribute</code></para>
+                        </entry>
+                        <entry>
+                            <para>Component specific DSL</para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para><code>fhir-2-ada</code></para>
+                        </entry>
+                        <entry>
+                            <para>General Engine DSL</para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para><code>get-production-ada-instances</code></para>
+                        </entry>
+                        <entry>
+                            <para>Component specific DSL</para>
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <para><code>hl7-2-fhir</code></para>
+                        </entry>
+                        <entry>
+                            <para>General Engine DSL</para>
+                        </entry>
+                    </row>
+                </table>
+            </section>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <section>
+                <title>Structure of DSL: applications, setups and builds</title>
+
+                <para>Within the DSL sources, for instance <code>YATC-internal/ada-2-fhir/data/ada-2-fhir-data.xml</code>, the same structures appear over and over:</para>
+                <unorderedlist>
+                    <entry>
+                        <para>Every application within a component has its own <elm>application</elm> element.</para>
+                    </entry>
+                    <entry>
+                        <para>The first things that usually happens there is setting up the environment, in <elm>setup</elm> elements. This means that for a certain usecase all relevant files are copied:</para>
+                        <unorderedlist>
+                            <entry>
+                                <para>Schemas are copied from <code>art_decor/projects</code></para>
+                            </entry>
+                            <entry>
+                                <para>Data (usually ADA documents) is copied from the data gathered by the <code>get-production-ada-instances</code> component.</para>
+                            </entry>
+                        </unorderedlist>
+                    </entry>
+                    <entry>
+                        <para>After that, the actual builds take place. This is done mainly using <elm>build</elm> elements that trigger XSLT transformations over collections of documents gathered during the setup.</para>
+                    </entry>
+                </unorderedlist>
+
+            </section>
+        </section>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title><anchor name="dsl-interpreters"/>The DSL interpreters</title>
+
+            <para>Interpretation of the YATC DSLs is done using code written in XProc&#160;3.0. The situation is different for components that use a specific DSL and components that use the General Engine DSL:</para>
+
+            <unorderedlist>
+                <entry>
+                    <para>The code for component specific DSLs is in the component itself. For instance, <code>YATC-internal/ada-2-wiki</code> contains XProc pipelines that interpret the DSL in the <code>YATC-internal/ada-2-wiki/xpl/</code> sub-directory. Of course, heavy use is made of the facilities and code that <code>YATC-shared</code> offers, but the main DSL interpretation is done in the component itself.</para>
+                </entry>
+                <entry>
+                    <para>The code for interpreting the General Engine DSL is in <code>YATC-shared/general-engine</code>. It has separate <link href="general-engine.md">documentation</link>. </para>
+                </entry>
+            </unorderedlist>
+
+            <emptyline/>
+            <para>All DSL interpreters follow roughly the same pattern:</para>
+            <unorderedlist>
+                <entry>
+                    <para>The command line (that started the YATC command) is interpreted.</para>
+                </entry>
+                <entry>
+                    <para>The DSL document is read, all includes are resolved, and the result is validated (usually against both an XML Schema and Schematron-schema).</para>
+                </entry>
+                <entry>
+                    <para>Based on what was on the command line, the DSL document is pruned, so only the relevant applications are left.</para>
+                </entry>
+                <entry>
+                    <para>The DSL document is enhanced with additional information. For instance, all relative directory names are turned into absolute ones. Directories that are implicit in the DSL (so you don&#x2019;t have to worry about them) are added.</para>
+                </entry>
+                <entry>
+                    <para>The setups are executed first, so all data is in place before we start to build.</para>
+                </entry>
+                <entry>
+                    <para>All the builds are performed.</para>
+                </entry>
+            </unorderedlist>
+        </section>
+
+    </section>
+
+</text-document>

@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../xsd/text-document.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        General text about the <setup> element in application data files.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <title><anchor name="setup-element"/>The <elm>setup</elm> element</title>
+
+    <para>The <elm>setup</elm> element defines the data-copying operations to be performed.</para>
+
+    <element name="setup">
+        <attributes>
+            <attribute name="usecase" type="xs:string" required="true">
+                <para>Name of the usecase this setup is for. This becomes the name of the subdirectory where the usecase results are stored.</para>
+            </attribute>
+            <attribute name="directory-id" type="identifier">
+                <para>Defines the identifier for the base usecase directory. See <link href="#common-attributes">common attributes</link> for a usage example.</para>
+            </attribute>
+            <attribute name="source-project-name" type="xs:string" default="application/@name">
+                <para>The name of the project (directory) to be used. Overrides a value for this defined on a parent element.</para>
+            </attribute>
+        </attributes>
+        <children>
+            <element name="macros" occurrences="?">
+                <para>Define simple macros for use in attributes and text. See <link href="#simple-data-file-macro-expansion">simple macro expansion</link>.</para>
+            </element>
+            <choice occurrences="*">
+                <element name="copy-data" attributes-indicator="true">
+                    <para>Copies retrieved ADA documents to application/version specific sub-directories.</para>
+                </element>
+                <element name="copy-project-schemas" attributes-indicator="true">
+                    <para>Copies project schemas to application/version specific sub-directories.</para>
+                </element>
+                <element name="empty-directory" attributes-indicator="true" close="true">
+                    <para>Creates an empty directory (or empties an existing one).</para>
+                </element>
+                <element name="copy-directory" attributes-indicator="true">
+                    <para>Copies a directory, optionally with subdirectories, to an application/version specific sub-directory.</para>
+                </element>
+                <element name="retrieve" attributes-indicator="true" close="true">
+                    <para>Retrieves a single XML document from a REST URL and stores this in an application/version specific sub-directory.</para>
+                </element>
+            </choice>
+        </children>
+
+    </element>
+
+    <para>Additional remarks:</para>
+    <unorderedlist>
+        <entry>
+            <para>Although not strictly necessary (non-existent directories are created by the build steps as well), it is advised that the setup creates <emph>all</emph> directories, empty or not. This ensures that, during the setup process, these directories are emptied. It also allows referring to these directories using the directory identifier mechanism.</para>
+        </entry>
+        <entry>
+            <para>Some components have commands that allow developers to compare the XML results created here against the XML results of the original (Ant based) system. By default, all directories that are created are compared. You can stop this comparison by adding a <code>compare="false"</code> attribute. This allows you to add (usually empty) directories for documents that are not created in the original code, like reports. Directories created with <elm>copy-directory</elm> are never compared (because this was meant for copying fixed resources).</para>
+        </entry>
+    </unorderedlist>
+
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <section>
+        <title>The <elm>copy-data</elm> element</title>
+
+        <para>The <elm>copy-data</elm> element defines which files must be copied, and to where.</para>
+
+        <element name="copy-data">
+            <attributes>
+                <attribute name="target-subdir" type="xs:string" default="ada_instance">
+                    <para>The name of the sub-directory to copy the data to.</para>
+                </attribute>
+                <attribute name="source-subdir" type="xs:string">
+                    <para>The name of the source sub-directory. Base directory and default depends on the component it is used in.</para>
+                </attribute>
+                <attribute name="directory-id" type="identifier">
+                    <para>Defines the identifier for the target sub-directory. See <link href="#common-attributes">common attributes</link> for a usage example.</para>
+                </attribute>
+                <attribute name="compare" type="xs:boolean" default="true">
+                    <para>Whether this directory should be included in a comparison with results of the original code.</para>
+                </attribute>
+                <attribute name="compare-flags" type="list of xs:string">
+                    <para>Specific settings for comparing this directory with the results of the original code. See <link href="#compare-flags-attribute">below</link> for details.</para>
+                </attribute>
+                <attribute name="clear-target" type="xs:boolean" default="true">
+                    <para>Whether to clear the target directory before copying.</para>
+                </attribute>
+            </attributes>
+            <children>
+                <choice occurrences="*">
+                    <element name="include">
+                        <para>Definition of any files to include. See <link href="#include-exclude">include/exclude elements</link></para>
+                    </element>
+                    <element name="exclude">
+                        <para>Definition of any files to exclude. See <link href="#include-exclude">include/exclude elements</link></para>
+                    </element>
+                </choice>
+            </children>
+        </element>
+
+    </section>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <section>
+        <title>The <elm>copy-project-schemas</elm> element</title>
+
+        <para>The <elm>copy-project-schemas</elm> element defines which schemas (from a project definition) must be copied, and to where. The location for source project files is defined using parameter <code>projectsBaseStorageDirectory</code>.</para>
+
+        <element name="copy-project-schemas">
+            <attributes>
+                <attribute name="target-subdir" type="xs:string" default="ada_schemas">
+                    <para>The name of the sub-directory to copy the data to.</para>
+                </attribute>
+                <attribute name="copy-ada-meta" type="xs:boolean" default="true">
+                    <para>Whether to copy the default <code>ada_meta.xsd</code> schema also.</para>
+                </attribute>
+                <attribute name="source-project-name" type="xs:string" default="application/@name">
+                    <para>The name of the project (directory) to be used. Overrides a value for this defined on a parent element.</para>
+                </attribute>
+                <attribute name="directory-id" type="identifier">
+                    <para>Defines the identifier for the target sub-directory. See <link href="#common-attributes">common attributes</link> for a usage example.</para>
+                </attribute>
+                <attribute name="compare" type="xs:boolean" default="true">
+                    <para>Whether this directory should be included in a comparison (with results from the original code).</para>
+                </attribute>
+                <attribute name="compare-flags" type="list of xs:string">
+                    <para>Specific settings for comparing this directory with the results of the original code. See <link href="#compare-flags-attribute">below</link> for details.</para>
+                </attribute>
+                <attribute name="clear-target" type="xs:boolean" default="true">
+                    <para>Whether to clear the target directory before copying.</para>
+                </attribute>
+            </attributes>
+            <children>
+                <choice occurrences="*">
+                    <element name="include">
+                        <para>Definition of any files to include. See <link href="#include-exclude">include/exclude elements</link></para>
+                    </element>
+                    <element name="exclude">
+                        <para>Definition of any files to exclude. See <link href="#include-exclude">include/exclude elements</link></para>
+                    </element>
+                </choice>
+            </children>
+        </element>
+    </section>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <section>
+        <title>The <elm>empty-directory</elm> element</title>
+
+        <para>The <elm>empty-directory</elm> element creates an empty directory (underneath the setup's main target directory). If such a directory already exists it will be emptied (unless you set <code>@clear-target="false"</code>, which will only be necessary in very rare circumstances).</para>
+
+        <element name="empty-directory">
+            <attributes>
+                <attribute name="target-subdir" type="xs:string" required="true">
+                    <para>The name of the sub-directory to create.</para>
+                </attribute>
+                <attribute name="directory-id" type="identifier">
+                    <para>Defines the identifier for the empty sub-directory. See <link href="#common-attributes">common attributes</link> for a usage example.</para>
+                </attribute>
+                <attribute name="compare" type="xs:boolean" default="true">
+                    <para>Whether this directory should be included in a comparison (with results from the original code).</para>
+                </attribute>
+                <attribute name="compare-flags" type="list of xs:string">
+                    <para>Specific settings for comparing this directory with the results of the original code. See <link href="#compare-flags-attribute">below</link> for details.</para>
+                </attribute>
+                <attribute name="clear-target" type="xs:boolean" default="true">
+                    <para>Whether to clear the target directory.</para>
+                </attribute>
+            </attributes>
+        </element>
+    </section>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <section>
+        <title>The <elm>copy-directory</elm> element</title>
+
+        <para>The <elm>copy-directory</elm> element performs a straight copy from one directory to the other, including (optionally) subdirectories.</para>
+
+        <para>It was created for copying HTML assets to the result (but can of course also be used for other purposes). When you're copying from a directory in the code repository (which makes sense if it's a set of fixed asset files), use the <code>#…</code> notation for the <code>@directory</code> attribute. For instance <code>directory="#mp/9.0.7/beschikbaarstellen_medicatiegegevens/html_instance_kwal/assets"</code>: the directory name after the <code>#</code> is relative to the data file it is used in.</para>
+
+        <element name="copy-directory">
+            <attributes>
+                <attribute name="target-subdir" type="xs:string" required="true">
+                    <para>The name of the sub-directory to copy the data to.</para>
+                </attribute>
+                <attribute name="directory" type="xs:string" required="true">
+                    <para>The name of the source directory. See <link href="#common-attributes">common attributes</link> for special handling.</para>
+                </attribute>
+                <attribute name="recurse" type="xs:boolean" default="true">
+                    <para>Whether to recurse into subdirectories and copy these as well.</para>
+                </attribute>
+                <attribute name="directory-id" type="identifier">
+                    <para>Defines the identifier for the target sub-directory. See <link href="#common-attributes">common attributes</link> for a usage example.</para>
+                </attribute>
+                <attribute name="clear-target" type="xs:boolean" default="true">
+                    <para>Whether to clear the target directory before copying.</para>
+                </attribute>
+            </attributes>
+            <children>
+                <choice occurrences="*">
+                    <element name="include">
+                        <para>Definition of any files to include. See <link href="#include-exclude">include/exclude elements</link></para>
+                    </element>
+                    <element name="exclude">
+                        <para>Definition of any files to exclude. See <link href="#include-exclude">include/exclude elements</link></para>
+                    </element>
+                </choice>
+            </children>
+        </element>
+
+    </section>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <section>
+        <title>The <elm>retrieve</elm> element</title>
+
+        <para>The <elm>retrieve</elm> element specifies a single XML document for download from a REST URL.</para>
+
+        <element name="retrieve">
+            <attributes>
+                <attribute name="target-subdir" type="xs:string" default="ada_instance">
+                    <para>The name of the sub-directory to copy the data to.</para>
+                </attribute>
+                <attribute name="url" type="xs:anyURI" required="true">
+                    <para>The REST URL to use for retrieving the XML document</para>
+                </attribute>
+                <attribute name="name" type="xs:string" required="true">
+                    <para>The filename for the retrieved XML document.</para>
+                </attribute>
+                <attribute name="directory-id" type="identifier">
+                    <para>Defines the identifier for the target sub-directory. See <link href="#common-attributes">common attributes</link> for a usage example.</para>
+                </attribute>
+            </attributes>
+        </element>
+
+    </section>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <section>
+        <title><anchor name="compare-flags-attribute"/>The <code>compare-flags</code> attribute</title>
+
+        <para>The <code>compare-flags</code> attribute sets some specific flags for comparing the results of the new with those of the original code. It was introduced because sometimes the code produces documents with generated filenames. These generated names differ between the new and the old code and therefore comparison is not possible. Its contents is a whitespace separated list of zero or more of the following strings:</para>
+
+        <table>
+            <header>
+                <entry>
+                    <para>Compare flag</para>
+                </entry>
+                <entry>
+                    <para>Description</para>
+                </entry>
+            </header>
+            <row>
+                <entry>
+                    <para><code>no-hex-filenames</code></para>
+                </entry>
+                <entry>
+                    <para>Do not compare files with names that are hexadecimal strings. For instance: <code>d46e243.xml</code></para>
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    <para><code>no-uuid-filenames</code></para>
+                </entry>
+                <entry>
+                    <para>Do not compare files with names that <emph>are</emph> UUIDs. For instance: <code>4b248570-6aa9-11ec-0000-020000000000.xml</code></para>
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    <para><code>no-uuid-containing-filenames</code></para>
+                </entry>
+                <entry>
+                    <para>Do not compare files with names that <emph>contain</emph> UUIDs. For instance: <code>nl-core-organization-mp9-4b248570-6aa9-11ec-0000-020000000000.xml</code></para>
+                </entry>
+            </row>
+        </table>
+    </section>
+
+</section>

@@ -1,0 +1,86 @@
+<section xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../xsd/text-document.xsd" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <!-- ======================================================================= -->
+    <!-- 
+        General text about the <build> element in application data files.
+        
+        This element is defined in ../xsdmod/application-data-file.mod.xsd
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <title><anchor name="build-step"/>The <elm>build</elm> element</title>
+
+    <para>The <elm>build</elm> defines a single build step to be performed as part of an action. A build step is an XSLT transformation performed on one or more input documents.</para>
+
+    <element name="build">
+        <attributes>
+            <attribute name="name" type="xs:string">
+                <para>The name of this build (used for reporting). If nothing is specified, some name will be used.</para>
+            </attribute>
+            <attribute name="fast" type="xs:boolean" default="false">
+                <para>Whether to run builds with multiple input files in fast mode. See <link href="#build-fast-mode">below</link>.</para>
+            </attribute>
+            <attribute name="silent" type="xs:boolean" default="false">
+                <para>When using <elm>input-documents</elm>: Whether the build should be silent about the name(s) of the input document(s).<br/>Setting this to <code>true</code> makes processing much more quiet, but also makes it rather hard to find the name of the input document when something goes wrong.</para>
+            </attribute>
+        </attributes>
+        <children>
+            <element name="stylesheet" occurrences="1" pseudo-attributes="href" close="true">
+                <para>Defines, with a <code>@href</code> attribute (see <link href="#common-attributes">common attributes</link>) the XSLT stylesheet that will be run over the specified input document(s).</para>
+            </element>
+            <choice occurrences="1">
+                <element name="input-document" pseudo-attributes="directory name" close="true">
+                    <para>Specifies a single input document for this build.<br/>Has a required <code>@directory</code> (see <link href="#common-attributes">common attributes</link>) and <code>@name</code>attribute.</para>
+                </element>
+                <element name="input-documents" pseudo-attributes="directory accept-empty" close="false">
+                    <para>Specifies a set of input documents.<br/>Has a required <code>@directory</code> attribute (see <link href="#common-attributes">common attributes</link>) and can have child <elm>include</elm> and/or <elm>exclude</elm> elements (see <link href="#include-exclude">include/exclude elements</link>) to further narrow down the set of documents to process.<br/>Set <code>accept-empty="true"</code> if you want empty input sets handled without raising an error.<br/>You cannot specify a single output (<elm>output-document</elm> element) when specifying multiple input documents, use either <elm>output-documents</elm> or <elm>discard-output</elm>.</para>
+                </element>
+                <element name="no-input" close="true">
+                    <para>Specifies that the stylesheet needs no input document (a small dummy document will be provided).</para>
+                </element>
+            </choice>
+            <choice occurrences="1">
+                <element name="output-document" pseudo-attributes="directory name" close="true">
+                    <para>Specifies where the direct output of the stylesheet must be written to. This will always be done using XML serialization.<br/>Has a required <code>@directory</code> (see <link href="#common-attributes">common attributes</link>) and <code>@name</code>attribute.</para>
+                </element>
+                <element name="output-documents" pseudo-attributes="directory result-filename-suffix" close="true">
+                    <para>Specifies that all direct outputs of the stylesheet must be written to this location, using the same filename as the input document. Usually used in conjunction with the <elm>input-documents</elm> element.<br/>Has a required <code>@directory</code> (see <link href="#common-attributes">common attributes</link>).<br/>If the optional <code>@result-filename-suffix</code> attribute contains text, the extension (including the dot) of the original filename is stripped off and the value of <code>@result-filename-suffix</code> is suffixed. Example values are <code>".xsl"</code> or <code>"_svrl.xsl"</code>.</para>
+                </element>
+                <element name="discard-output" close="true">
+                    <para>Specifies that the direct output of the stylesheet must be discarded.</para>
+                </element>
+            </choice>
+            <element name="parameter" occurrences="*" attributes-indicator="true" close="true">
+                <para>Defines an additional parameter to be passed to the stylesheet. See <link href="#parameter-element">below</link>.</para>
+            </element>
+        </children>
+
+    </element>
+
+    <para>The directory/document for the output(s) is allowed to be the same as the one for the input(s). In the case the input(s) will be overwritten.</para>
+
+    <para>Besides direct output, a stylesheet can also produce secondary output(s) using the <elm>xsl:result-document</elm> instruction. These outputs will be written to disk, using the serialization options as specified on the <elm>xsl:result-document</elm> element.</para>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <xi:include href="build-fast-mode.xml"/>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <xi:include href="parameter-element.mod.xml"/>
+
+</section>

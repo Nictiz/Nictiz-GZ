@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="https://nictiz.nl/ns/YATC-shared/general-engine-configuration" xmlns:yatcs-gec="https://nictiz.nl/ns/YATC-shared/general-engiine-configuration">
+    <!-- ======================================================================= -->
+    <!--
+    Copyright © Nictiz
+
+    This program is free software; you can redistribute it and/or modify it under the terms of the
+    GNU Lesser General Public License as published by the Free Software Foundation; either version
+    2.1 of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+    without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU Lesser General Public License for more details.
+    
+    The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <xs:annotation>
+        <xs:documentation>Configuration format for the general engine
+</xs:documentation>
+    </xs:annotation>
+    <xs:element name="general-engine-configuration">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="parname-component-data-document" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>The name of the YATC parameter that points to the component's data file.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="parname-component-base-storage-directory" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>The name of the YATC parameter that points to the component's base storage directory.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="data-file-schema" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>The URI of the XML Schema to validate the data file against.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="data-file-schematron" type="xs:string" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>The URI of the Schematron schema to validate the data file against. If not present, a suitable default is used.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" name="original-repo-subdir-name" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>The name of the data sub-directory in the original repository, used for compares. For instance: fhir_2_ada</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

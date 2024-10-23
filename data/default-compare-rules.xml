@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<compare-rules xmlns="https://nictiz.nl/ns/YATC-shared/compare-rules"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/compare-rules ../xsd/compare-rules.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        These are the default compare rules when we compare original outputs against 
+        the ones YATC produces…
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+    <!-- Some important regular expressions (cut and paste when needed): 
+        
+         Hex value:
+            [a-fA-F0-9]+
+            
+         UUID:
+            [a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}
+    -->
+    <!-- ======================================================================= -->
+    
+    <!-- Do not compare attributes whose value starts with urn:uuid: -->
+    <do-not-compare-attribute-values-on-match simple-match="*/@*" regexp="^urn:uuid:"/>
+    
+    <!-- Do not compare attribute with hex values (with optional # suffix): -->
+    <do-not-compare-attribute-values-on-match simple-match="id/@value id/@extension reference/@value content/@ID" regexp="^#?[a-fA-F0-9]+$"/>
+    
+    <!-- Do not compare attribute values that might contain a UUID somewhere in their value: -->
+    <do-not-compare-attribute-values-on-match simple-match="id/@value id/@extension setId/@extension reference/@value" regexp="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+    
+    <!-- Ignore these attributes (contain generated dates/times): -->
+    <ignore-attributes simple-match="meta/@creation-date meta/@last-update-date effectiveTime/@value creationTime/@value"/>
+    
+    <!-- Do not compare any text nodes that contain a UUID: -->
+    <do-not-compare-text-nodes-on-match simple-match="*" regexp="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"/>
+    
+</compare-rules>

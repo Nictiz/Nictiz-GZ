@@ -1,0 +1,81 @@
+<section xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../xsd/text-document.xsd" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <!-- ======================================================================= -->
+    <!-- 
+        General text about the <validate-with-*> element in application data files.
+        
+        This element is defined in ../xsdmod/application-data-file.mod.xsd
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <title><anchor name="validate-with-x-step"/>The <elm>validate-with-*</elm> elements</title>
+
+    <para>A <elm>validate-with-*</elm> element implements validation of the documents produced with one of the following languages:</para>
+
+    <unorderedlist>
+        <entry>
+            <para>W3C XML Schema (<elm>validate-with-schema</elm>). This returns a report in [XVRL](https://spec.xproc.org/master/head/xvrl/).</para>
+        </entry>
+        <entry>
+            <para>Schematron (<elm>validate-with-schematron</elm>). This returns a report in SVRL.</para>
+        </entry>
+    </unorderedlist>
+
+    <para>By default, validation problems/errors do <emph>not</emph> stop processing: errors and problems are reported but processing continues. You can change this behaviour using the <code>@stop-on-detection</code> attribute.</para>
+
+    <element name="validate-with-*">
+        <attributes>
+            <attribute name="name" type="xs:string">
+                <para>The name of this validation (used for reporting). If nothing is specified, some name will be used.</para>
+            </attribute>
+            <attribute name="optional" type="xs:boolean" default="false">
+                <para>When <code>false</code>, the schema must exist. When <code>true</code> and the schema does not exist, validation is skipped and processing continues.</para>
+            </attribute>
+            <attribute name="stop-on-detection" type="xs:boolean" default="false">
+                <para>When absent or <code>false</code>, validation problems will be reported but processing continues. When <code>true</code>, validation problems will stop any further processing.<br/>Remark: detections with a severity <code>info</code> are not considered validation problems/errors and will not stop processing.</para>
+            </attribute>
+            <!-- Schematron only: -->
+            <attribute name="fast" type="xs:boolean" default="true">
+                <para>Schematron validation only. Whether to validate multiple input files in fast mode.<br/>Fast mode takes care to compile the schema only once, which usually results in much faster processing. However, there might be situations where fast mode does not fly, so you can optionally turn it off.</para>
+            </attribute>
+            <attribute name="continue-on-schematron-error" type="xs:boolean" default="false" required="false">
+                <para>Schematron validation only. Whether to continue after detecting a processing or syntax error in the Schematron itself.</para>
+            </attribute>
+            <attribute name="fix-global-variables" type="xs:boolean" default="false">
+                <para>Schematron validation only. Some (usually generated) Schematron schemas contain multiple global variables with the same name. That is not allowed and breaks processing. If you set this to <code>true</code>, an attempt is made to fix this by renaming the invalid global variables. Success not completely guaranteed, test well before going in production!</para>
+            </attribute>
+        </attributes>
+        <children>
+            <element name="schema" occurrences="1" pseudo-attributes="href">
+                <para>Defines, with a <code>@href</code> attribute (see <link href="#common-attributes">common attributes</link>) the Schematron schema to be used.</para>
+            </element>
+            <choice occurrences="1">
+                <element name="input-document" pseudo-attributes="directory name" close="true">
+                    <para>Specifies a single input document for this validation.<br/>Has a required <code>@directory</code> (see <link href="#common-attributes">common attributes</link>) and <code>@name</code>attribute.</para>
+                </element>
+                <element name="input-documents" pseudo-attributes="directory accept-empty">
+                    <para>Specifies a set of input documents to validate.<br/>Has a required <code>@directory</code> attribute (see <link href="#common-attributes">common attributes</link>) and can have child <elm>include</elm> and/or <elm>exclude</elm> elements (see <link href="#include-exclude">include/exclude elements</link>) to further narrow down the set of documents to process.<br/>Set <code>accept-empty="true"</code> if you want empty input sets handled without raising an error.</para>
+                </element>
+            </choice>
+            <element name="output-report" occurrences="?" pseudo-attributes="directory name prune-valid sanitize-filenames" close="true">
+                <para>If present, all the individual validation reports are wrapped and collected in an XML document, as specified by the <code>@directory</code> (see <link href="#common-attributes">common attributes</link>) and <code>@name</code> attributes.<br/>By default, validation reports without errors or warnings are discarded (only an empty element with the URI of the file will remain). Specify <code>prune-valid="false"</code> if you want to see all reports (including the reports for the documents that are valid).<br/>The <code>@sanitize-filenames</code> attribute turns sanitizing filenames on/off (default: <code>true</code>). Sanitizing means the he local part of the filename is removed, leaving only the path in the repository. This hides your disk layout from the generated reports.</para>
+            </element>
+        </children>
+
+    </element>
+
+</section>

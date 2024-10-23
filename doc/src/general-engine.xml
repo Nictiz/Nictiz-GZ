@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<text-document xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../../xsd/text-document.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        Documentation for the general engine
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <title>The general engine</title>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>Introduction</title>
+
+        <para>During the development of the YATC components, the progressive insight arose that the parts of the code that drove the transformations was remarkably (but not completely…) alike. The same could be said about the data format. And, as these things go, gradually the insight arose how we could make this more general and share most, if not all, of the code. This culminated in what is now called the <emph>general engine</emph>. For instance, <code>ada-2-fhir</code> and <code>fhir-2-ada</code> are implemented using this mechanism.</para>
+
+        <para>The general engine is a layer on top of already existing general/shared code in YATC-shared. Some features/highlights:</para>
+        <unorderedlist>
+            <entry>
+                <para>The batch/shell scrips in a component's <code>bin/</code> sub-directory now just call generic batch/shell scripts of the general engine that do the actual work. </para>
+            </entry>
+            <entry>
+                <para>The format of the component's data file (for instance, have a look at <code>YATC-internal/ada-2-fhir/data/ada-2-fhir-data.xml</code>) is standardized, as are the kind of things you can do. But, of course, all the important stuff is there, such as running stylesheets over (sets of) XML documents, validate results, etc.</para>
+            </entry>
+            <entry>
+                <para>This also means that the schema for such a data document <emph>and</emph> the documentation for it is now standardized. </para>
+            </entry>
+            <entry>
+                <para>Setting up a component using the general engine is made as easy as possible: there's a <link href="#template-usage-general-engine">template implementation</link> that only needs a few adjustments and off we go! </para>
+            </entry>
+        </unorderedlist>
+
+        <para>Of course, using the general engine does not mean that there is no work to be done for the various applications/versions the component services. There still is and this is usually a lot of work. However the tedious preliminary work setting up pipelines that <emph>drive</emph> the DSL can now be skipped almost completely.</para>
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title><anchor name="template-usage-general-engine"/>Setting up an application using the general engine</title>
+
+        <para>For setting up a component using the general engine there's a template that must be copied and adjusted as follows. As an example, we're going to set up a component named <code>abc-2-def</code>. When in doubt, you can always have a look at components that already utilize the general engine, such as <code>ada-2-fhir</code> or <code>fhir-2-ada</code>.</para>
+
+        <unorderedlist>
+            <entry>
+                <para>Copy and rename the template code:</para>
+                <unorderedlist>
+                    <entry>
+                        <para>Copy <code>YATC-shared/general-engine/component-template/</code>.</para>
+                    </entry>
+                    <entry>
+                        <para>Paste it as a sub-directory of <code>YATC-internal</code>.</para>
+                    </entry>
+                    <entry>
+                        <para>Rename the result to the name of the component. In our example we should now have a directory called <code>YATC-internal/abc-2-def/</code>.</para>
+                    </entry>
+                </unorderedlist>
+            </entry>
+            <entry>
+                <para>Check <emph>all</emph> files/documents in the newly created component directory for use of the string <code>COMPONENT</code> in their filename and replace this with the name of the component itself.<br/>For instance: <code>YATC-internal/abc-2-def/bin/help/compare-COMPONENT.help.xml</code> must be renamed to <code>YATC-internal/abc-2-def/bin/help/compare-abc-2-def.help.xml</code>.</para>
+            </entry>
+            <entry>
+                <para>Search <emph>all</emph> files in the newly created component directory for containing the string <code>COMPONENT</code> (in all upper-case) and replace this with the name of the component itself. Only replace this string if it's in all upper-case!<br/>Tip: oXygen can find these strings this for you: in the project viewer, right click on the component directory and choose <emph>Find/Replace in Files…</emph>. </para>
+            </entry>
+            <entry>
+                <para>Search <emph>all</emph> files in the newly created component directory for containing the string <code>*TBD*</code>. This marks the locations where some more work is needed, for instance write a short description of the component.<br/>You can delete the comments/lines that contain this <code>*TBD*</code> marker.<br/>Tip: see the tip in bullet above.</para>
+            </entry>
+            <entry>
+                <para>Run the documentation generation command: <code>yatc text-documents-2-markdown</code>.</para>
+            </entry>
+        </unorderedlist>
+
+        <emptyline/>
+        <para>That should be all! You're now ready to implement the processing for the applications/versions by:</para>
+        <unorderedlist>
+            <entry>
+                <para>Filling in the component's DSL source file. In our example: <code>YATC-internal/abc-2-def/data/abc-2-def-data.xml</code>. Documentation for its format was automatically generated in <code>YATC-internal/abc-2-def/doc/data-format-reference.xml</code>.</para>
+            </entry>
+            <entry>
+                <para>Add all the specific stylesheets and other documents for the applications/versions underneath a <code>YATC-internal/abc-2-def/env/{application}/{version}</code> sub-directory.</para>
+            </entry>
+        </unorderedlist>
+
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title><anchor name="general-engine-configuration-format"/>The general engine configuration document</title>
+
+        <para>The general engine needs a small configuration document that defines the various things that might be different across the components that rely on the general engine.</para>
+        <unorderedlist>
+            <entry>
+                <para>A component relying on the general engine <emph>must</emph> have a <link href="parameters-system.md">YATC parameter</link> named <code>generalEngineConfiguration</code> in its <code>doc/parameters.xml</code> document. The value of this parameter usually points to a document <code>data/{component}-general-engine-configuration.xml</code>.<br/>The value of this parameter is therefore usually <code>{{$yatcComponentDirectory}/data/{{$yatcComponentName}-general-engine-configuration.xml</code>. If you use the <link href="#template-usage-general-engine">template implementation</link> to set up a general engine component, this YATC parameter is already defined as such.</para>
+            </entry>
+            <entry>
+                <para>Before this configuration document is interpreted by the general engine, its contents is pre-processed and all references to <link href="parameters-system.md#yatc-parameter-references">YATC parameters</link> are expanded.<br/>Because of this, the <link href="#template-usage-general-engine">template implementation</link> this configuration document does not need to be changed.</para>
+            </entry>
+            <entry>
+                <para>There is a schema for such a configuration document in <code>YATC-shared/general-engine/xsd/general-engine-configuration.xsd</code>. It must be in the <code>https://nictiz.nl/ns/YATC-shared/general-engine-configuration</code> namespace.</para>
+            </entry>
+        </unorderedlist>
+
+        <emptyline/>
+        <para>The definition of the general engine configuration document is as follows:</para>
+
+        <element name="general-engine-configuration">
+            <children>
+                <element name="parname-component-data-document" occurrences="1">
+                    <para>The name of the <link href="parameters-system.md">YATC parameter</link> that points to the component's data document.</para>
+                </element>
+                <element name="parname-component-base-storage-directory" occurrences="1">
+                    <para>The name of the <link href="parameters-system.md">YATC parameter</link> that points to the component's base storage directory (where it will write its results).</para>
+                </element>
+                <element name="data-file-schema" occurrences="1">
+                    <para>The URI of the W3C XML Schema for the component's data document.</para>
+                </element>
+                <element name="data-file-schematron" occurrences="?">
+                    <para>The URI of the Schematron schema for validating the component's data document.<br/>Default value: <code>YATC-shared/general-engine/sch/general-engine-data.sch</code>.</para>
+                </element>
+                <element name="original-repo-subdir-name" occurrences="?">
+                    <para>The name of the sub-directory in Hl7-mappings where the original/old Ant based code stores its results. This is used by the compare commands. Example value: <code>fhir_2_ada</code>.</para>
+                </element>
+            </children>
+
+        </element>
+    </section>
+    
+</text-document>

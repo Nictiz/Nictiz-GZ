@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<command-line-options xmlns="https://nictiz.nl/ns/YATC-shared/command-help-text" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/command-help-text ../../xsd/command-help-text.xsd" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!-- ======================================================================= -->
+    <!-- 
+        Standard command line options for the general engine command line
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <xi:include href="../../chtmod/help-command-line-option.xml"/>
+    <xi:include href="../../chtmod/list-command-line-option.xml"/>
+    <command-line-option>
+        <flag name="actionlist" optional="false"/>
+        <argument name="application" optional="true"/>
+        <argument name="version" optional="true"/>
+        <description>Get a list of available actions (if any) for the given application/version combinations. To get the actions for all applications/versions available, use either `#all` or `%all` for the argument(s) or leave the argument(s) empty.</description>
+    </command-line-option>
+    <command-line-option>
+        <flag name="process" optional="true"/>
+        <flag name="nosetup" optional="true">Do not process the setup elements.</flag>
+        <flag name="setup" optional="true">Always process the setup elements, even when an action turns setup off. Takes precedence over -nosetup.</flag>
+        <flag name="action" optional="true" argument="...">Perform the action(s) specified. Separate multiple actions with a `+` (for instance `-action:ac1+ac2`). If not specified, the action flagged as default is processed (if any).</flag>
+        <flag name="testmode" optional="true">Run in test mode. This will reduce the set of input documents for build and validate steps to only one.</flag>
+        <argument name="application"/>
+        <argument name="version"/>
+
+        <description>Process the available application/version combinations. To process all applications/versions available, use either `#all` or `%all` for the argument(s).</description>
+
+    </command-line-option>
+
+</command-line-options>

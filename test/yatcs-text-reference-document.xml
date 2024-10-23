@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<text-document xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../xsd/text-document.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+       This is a YATCS reference text document. 
+       It tries to hit as many things in the markup of these kinds of documents as possible.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <macro name="MACRO1" value="VALUEOFMACRO1"/>
+    <macro name="MACRO2" value="VALUEOFMACRO2"/>
+    <macro name="COMBINED" value="$MACRO1-$MACRO2-$NOMACRO"/>
+    <macro name="ADA" value="ada"/>
+
+    <title>Reference text document</title>
+
+    <para>This is a YATCS reference text document. It tries to hit as many things in the markup of these kinds of documents as possible.</para>
+    
+    <para>YATC Macro <code>baseUri</code>: <code>{$baseUri}</code></para>
+
+    <para>Macro-1=$MACRO1 - Macro-2=$MACRO2 - Combined=$COMBINED</para>
+    
+    <include-command-help-text href="../../YATC-internal/ada-2-fhir/xpl/$ADA-2-fhir-cw.xpl"/>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <section>
+        <title>Testing mixed contents stuff</title>
+
+        <para>This is <emph>emphasized</emph>, and <emph bold="true" italic="false">bold</emph> and <emph bold="true">both</emph>.</para>
+        <para>This is <code>in code</code>.</para>
+        <para>Here is an anchor: <anchor name="test-anchor"/>.</para>
+        <para>Here is a reference to the anchor <link href="#test-anchor"/>. A break: <br/>A link to something external: <link href="https://nictiz.nl/">Nictiz</link></para>
+
+    </section>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <dividerline/>
+    <section>
+        <macro name="MACRO1" value="VALUEOFMACRO1NESTED"/>
+        
+        <title>Testing block contents stuff</title>
+
+        <para>All kinds of block contents… </para>
+        
+        <para>Macro-1=$MACRO1 - Macro-2=$MACRO2 - Combined=$COMBINED</para>
+
+        <group>
+            <para>Paragraph in a group, followed by an empty line.</para>
+            <emptyline/>
+            <para>Another paragraph in a group.</para>
+        </group>
+
+        <emptyline/>
+        <markdown>
+This is a piece of markdown
+* bulleted list 1
+* bulleted list 2
+        </markdown>
+
+
+
+        <emptyline/>
+        <codeblock language="blabla">This is a code block
+Line 2
+Line 3</codeblock>
+
+        <para>Lists:</para>
+
+        <unorderedlist>
+            <entry>
+                <para>Entry 1</para>
+            </entry>
+            <entry>
+                <para>Entry 2, another one with <code>code</code> and <emph>emphasis</emph></para>
+                <unorderedlist>
+                    <entry>
+                        <para>A nested list, entry 1</para>
+                    </entry>
+                    <entry>
+                        <para>A nested list, entry 2</para>
+                        <orderedlist>
+                            <entry>
+                                <para>A nested ordered list, entry 1</para>
+                            </entry>
+                            <entry>
+                                <para>A nested ordered list, entry 2</para>
+                            </entry>
+                        </orderedlist>
+                    </entry>
+                </unorderedlist>
+            </entry>
+        </unorderedlist>
+
+        <orderedlist>
+            <entry>
+                <para>Entry 1</para>
+            </entry>
+            <entry>
+                <para>Entry 2, another one with <code>code</code> and <emph>emphasis</emph></para>
+            </entry>
+        </orderedlist>
+
+        <para>Table:</para>
+
+        <table>
+            <header>
+                <entry>
+                    <para>col 1</para>
+                </entry>
+                <entry>
+                    <para>col 2</para>
+                </entry>
+            </header>
+            <row>
+                <entry>
+                    <para><code>abcdefg</code></para>
+                </entry>
+                <entry>
+                    <para>Dit is een cel</para>
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    <para>Nog een rij... </para>
+                </entry>
+                <entry>
+                    <para>En nog wat</para>
+                </entry>
+            </row>
+        </table>
+
+        <para>And the last line</para>
+
+    </section>
+
+    <section>
+        <title>XML</title>
+
+        <element name="test">
+            <attributes>
+                <attribute name="a" type="xs:boolean">
+                    <para>A or not</para>
+                </attribute>
+                <attribute name="b" type="xs:string" required="true">
+                    <para>Must be!</para>
+                </attribute>
+
+            </attributes>
+
+            <children>
+                <element name="bla">
+                    <para>Something</para>
+                </element>
+                <element name="multioptional" occurrences="*">
+                    <para>Multi optional</para>
+                </element>
+                <choice occurrences="*">
+                    <element name="blachoice">
+                        <para>Something</para>
+                    </element>
+                    <element name="multioptionalchoice" occurrences="*">
+                        <para>Multi optional</para>
+                    </element>
+                </choice>
+            </children>
+
+            <additional-text>Another something!</additional-text>
+
+        </element>
+    </section>
+
+</text-document>

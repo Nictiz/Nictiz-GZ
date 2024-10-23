@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<parameters xmlns="https://nictiz.nl/ns/YATC-shared" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared ../xsd/parameters.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        This is the YATC system parameters file for YATC-shared.
+        
+        More information about the YATC parameters system can be found here: ../doc/parameters-system.md
+        
+        All parameter names are defined as variables/static options in:
+        - ../xplmod/component-parameter-names.mod.xpl
+        - ../xslmod/component-parameter-names.mod.xsl
+        When adding to this parameter file, please maintain these definitions also!
+        
+        Remark: When the value of a parameter is a URI, it must start with the file:// protocol specifier!
+                However, usually directory names are derived from the YATC base directory (parameter yatcBaseDirectory) 
+                and this already is a URI.
+    -->
+    <!-- ======================================================================= -->
+    <!-- Locations of the repositories we work with. By default, all are assumed to be checked out 
+         in the same base directory. -->
+    
+    <parameter name="HL7-mappingsDirectory">
+        <!-- The absolute URI of the (original) HL7-mappings repository checkout. -->
+        <value>{$yatcBaseDirectory}/HL7-mappings</value>
+    </parameter>
+    
+    <parameter name="art_decorDirectory">
+        <!-- The absolute URI of the (original) art_decor repository checkout. -->
+        <value>{$yatcBaseDirectory}/art_decor</value>
+    </parameter> 
+    
+    <parameter name="yatcSharedDirectory">
+        <!-- The absolute URI of the YATC-shared repository checkout.  -->
+        <value>{$yatcBaseDirectory}/YATC-shared</value>
+    </parameter>
+    
+    <parameter name="yatcInternalDirectory">
+        <!-- The absolute URI of the YATC-internal repository checkout.  -->
+        <value>{$yatcBaseDirectory}/YATC-internal</value>
+    </parameter>
+    
+    <parameter name="yatcPublicDirectory">
+        <!-- The absolute URI of the YATC-public repository checkout.  -->
+        <value>{$yatcBaseDirectory}/YATC-public</value>
+    </parameter>
+    
+    <parameter name="AORTADirectory">
+        <!-- Directory where AORTA is checked out. Only used during YATC development by some support/utility commands,
+             not used when just using YATC. 
+             The value of the parameter *must* end with /AORTA
+        -->
+        <!-- NOT DEFINED HERE. Do this in your local override parameters file (data/parameters.xml) if needed. -->
+    </parameter>
+    
+    <!-- ======================================================================= -->
+    <!-- Locations for storing the results of the components. -->
+    
+    <parameter name="internalBaseStorageDirectory">
+        <!-- The absolute URI of the base directory for storage operations done by the components, internal data. -->
+        <value>{$art_decorDirectory}</value>
+    </parameter>
+
+    <parameter name="publicBaseStorageDirectory">
+        <!-- The absolute URI of the base directory for storage operations done by the components, public data. -->
+        <value>{$HL7-mappingsDirectory}</value>
+    </parameter>
+    
+    <parameter name="publicBaseDistributionDirectory">
+        <!-- The absolute URI of the base directory for distribution operations done by the components. -->
+        <value>{$yatcPublicDirectory}</value>
+    </parameter>
+
+    <!-- ======================================================================= -->
+    <!-- The following parameters are defined here, although they actually belong to components in the
+         YATC-internal repo. This is because documents in these directories are needed all over the place
+         and so it's way easier to have their definitions centralized here. -->
+
+    <parameter name="productionAdaInstancesBaseStorageDirectory">
+        <!-- The absolute URI of the base directory for storing retrieved ADA files by the 
+             YATC-internal/get-production-ada-instances component. 
+             The application's name and version are appended to this, for instance: …/lab/3.0.0. -->
+        <value>{$internalBaseStorageDirectory}/production-ada-instances</value>
+    </parameter>
+
+    <parameter name="productionAdaInstancesDataSubdir">
+        <!-- The subdirectory name for storing retrieved ADA files from ART-DECOR in. This will usually be simply 'data'… -->
+        <value>data</value>
+    </parameter>
+
+    <parameter name="adarefs2adaBaseStorageDirectory">
+        <!-- The absolute URI of the base directory for storing results for the adarefs2ada processing
+             by the YATC-internal/get-production-ada-instances component. 
+             The application's name, version and usecase are appended to this, 
+             for instance: …/lab/3.0.0/beschikbaarstellen_laboratoriumresultaten. -->
+        <value>{$internalBaseStorageDirectory}/adarefs2ada</value>
+    </parameter>
+
+    <parameter name="projectsBaseStorageDirectory">
+        <!-- The absolute URI of the base directory where project information is stored. 
+             The name of the actual project is appended to this.  -->
+        <value>{$art_decorDirectory}/projects</value>
+    </parameter>
+    
+    <!-- ======================================================================= -->
+    <!-- Parameters for turning general debug/test functionality on/off. All are set to false (off) here
+         and should be overridden in the local override parameters file (data/parameters.xml) if needed. -->
+    
+    <parameter name="storeProcessedApplicationData">
+        <!-- Most components (for instance YATC-internal/get-production-ada-instances) use files with  
+             application data. This data is first pruned, so only the application that needs to be processed is left, and
+             then enhanced with full directory and file names. The result can be interesting while developing to
+             see what actually happens and whether the enhancement process is OK. 
+             Turning this parameter to true causes the pruned and enhanced file to be written to 
+             {componentdirectory}/tmp/application-data.xml.
+             The code for all this is in ../xplmod/yatc-application-data.mod.xpl.
+             Set its value to true to make this happen. Any other value turns it off.
+             
+             As a bonus, setting this parameter to true will also write the compare list to 
+             {componentdirectory}/tmp/compare-list.xml
+        -->
+        <value>false</value>
+    </parameter>
+    
+    <!-- ======================================================================= -->
+    <!-- Parameters for the comparison commands: -->
+    
+    <parameter name="yatcDocumentCompareRules">
+        <!-- The absolute URI of the compare rules in effect for the compare commands. This governs how XML documents are 
+             compared against each other (for instance ignoring attribute values based on regular expressions, etc.).
+             If you need a different set of compare rules for a specific component, create a compare rules document and 
+             *overwrite* this parameter in the local data/parameters.xml document.
+        -->
+        <value>{$yatcSharedDirectory}/data/default-compare-rules.xml</value>
+    </parameter>
+
+    <parameter name="ArtDecorRepoForComparisonsBaseDirectory">
+        <!-- The absolute URI of a checkout of the art_decor repository used for comparison operations. -->
+        <!-- NOT DEFINED HERE. Do this in your local override parameters file (data/parameters.xml) -->
+    </parameter>
+
+    <parameter name="HL7MappingsRepoForComparisonsBaseDirectory">
+        <!-- The absolute URI of a checkout of the HL7-mappings repository used for comparison operations. -->
+        <!-- NOT DEFINED HERE. Do this in your local override parameters file (data/parameters.xml) -->
+    </parameter>
+    
+    <parameter name="mappingsRepoForComparisonsBaseDirectory">
+        <!-- The absolute URI of a checkout of the actual repository used for comparison operations. 
+             Usually this is the HL7-mappings repo. Overwrite in the component parameter file if different. -->
+        <value>{$HL7MappingsRepoForComparisonsBaseDirectory}</value>
+    </parameter>
+
+</parameters>
