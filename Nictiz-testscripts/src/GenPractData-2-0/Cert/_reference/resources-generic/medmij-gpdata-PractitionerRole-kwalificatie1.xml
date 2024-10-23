@@ -1,0 +1,44 @@
+<?xml-model href="http://hl7.org/fhir/STU3/practitionerrole.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?><PractitionerRole xmlns="http://hl7.org/fhir" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://hl7.org/fhir http://hl7.org/fhir/STU3/practitionerrole.xsd">
+   <id value="gpdata-practitionerrole-kwalificatie1"/>
+   <meta>
+      <profile value="http://fhir.nl/fhir/StructureDefinition/nl-core-practitionerrole"/>
+   </meta>
+   <identifier>
+      <system value="http://fhir.nl/fhir/NamingSystem/uzi-nr-pers"/>
+      <value value="000001111"/>
+   </identifier>
+   <practitioner>
+      <reference value="Practitioner/gpdata-practitioner-kwalificatie1"/>
+      <display value="Dokter Bernard"/>
+   </practitioner>
+   <organization>
+      <reference value="Organization/gpdata-organization-kwalificatie1"/>
+      <display value="Aesculaap"/>
+   </organization>
+   <specialty>
+      <coding>
+         <system value="http://fhir.nl/fhir/NamingSystem/uzi-rolcode"/>
+         <code value="01.015"/>
+         <display value="Huisarts"/>
+      </coding>
+   </specialty>
+   <telecom>
+      <extension url="http://nictiz.nl/fhir/StructureDefinition/zib-ContactInformation-TelecomType">
+         <valueCodeableConcept>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.2.4.3.11.60.40.4.22.1"/>
+               <code value="LL"/>
+               <display value="Vast telefoonnummer"/>
+            </coding>
+         </valueCodeableConcept>
+      </extension>
+      <system value="phone"/>
+      <value value="+31434073576"/>
+      <use value="work"/>
+   </telecom>
+   <telecom>
+      <system value="email"/>
+      <value value="dokterbernard@aesculaap.nl"/>
+      <use value="work"/>
+   </telecom>
+</PractitionerRole>

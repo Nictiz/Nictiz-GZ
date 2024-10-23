@@ -1,0 +1,50 @@
+<?xml-model href="http://hl7.org/fhir/STU3/condition.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?><Condition xmlns="http://hl7.org/fhir" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://hl7.org/fhir http://hl7.org/fhir/STU3/fhir-all.xsd">
+   <id value="gpdata-condition-icpc-l8601"/>
+   <meta>
+      <profile value="http://nictiz.nl/fhir/StructureDefinition/zib-Problem"/>
+   </meta>
+   <identifier>
+      <system value="urn:oid:2.16.840.1.113883.2.4.3.11.999.7.6"/>
+      <value value="b715d72c-041c-11ec-1066-020000000000"/>
+   </identifier>
+   <clinicalStatus value="active">
+      <extension url="http://nictiz.nl/fhir/StructureDefinition/code-specification">
+         <valueCodeableConcept>
+            <coding>
+               <system value="http://snomed.info/sct"/>
+               <code value="55561003"/>
+               <display value="Actueel"/>
+            </coding>
+         </valueCodeableConcept>
+      </extension>
+   </clinicalStatus>
+   <category>
+      <coding>
+         <system value="http://snomed.info/sct"/>
+         <code value="282291009"/>
+         <display value="Diagnose"/>
+      </coding>
+   </category>
+   <code>
+      <coding>
+         <system value="http://hl7.org/fhir/sid/icpc-1-nl"/>
+         <code value="L86.01"/>
+         <display value="HNP (thoracaal/lumbaal)"/>
+      </coding>
+   </code>
+   <subject>
+      <reference value="Patient/gpdata-patient-kwalificatie1"/>
+      <display value="Jacqueline XXX_Cevat"/>
+   </subject>
+   <onsetDateTime value="${DATE, T, D, -120}"/>
+   <asserter>
+      <extension url="http://nictiz.nl/fhir/StructureDefinition/practitionerrole-reference">
+         <valueReference>
+            <reference value="PractitionerRole/gpdata-practitionerrole-kwalificatie1"/>
+            <display value="Dokter Bernard"/>
+         </valueReference>
+      </extension>
+      <reference value="Practitioner/gpdata-practitioner-kwalificatie1"/>
+      <display value="Dokter Bernard"/>
+   </asserter>
+</Condition>
