@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<group xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../xsd/text-document.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        General opening text for the commands descriptions.
+        
+        Macros:
+        * $DATAFILENAME
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <para>This is the documentation for the commands of the Nictiz YATC <code>{$yatcRepositoryName}/{$yatcComponentName}</code> component. These commands reside in the <code>{$yatcRepositoryName}/{$yatcComponentName}/bin</code> subdirectory.</para>
+
+    <unorderedlist>
+        <entry>
+            <para>It is recommended that the <code>YATC-shared/bin</code> subdirectory is on the system's path. This makes sure the base <code>yatc</code> command can be found.</para>
+        </entry>
+        <entry>
+            <para>All commands have a <code>-help</code> flag that provides a brief explanation of the command. </para>
+        </entry>
+        <entry>
+            <para>To specify all applications or versions for a command, you can use either  <code>#all</code> or <code>%all</code> as argument. The <code>%all</code> was added because in some systems (for instance Windows Powershell), the <code>#</code> character acts as the start of a comment.</para>
+        </entry>
+        <entry>
+            <para>All processing is governed by the component's <code>data/$DATAFILENAME</code> document. See <link href="data-format-reference.md">here</link> for documentation.</para>
+        </entry>
+        <entry>
+            <para>See <link href="../../../YATC-shared/doc/parameters-system.md">here</link> for general information on YATC parameters.</para>
+        </entry>
+    </unorderedlist>
+
+</group>

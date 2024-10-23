@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<text-document xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../../xsd/text-document.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        Documentation for the compare rules mechanism
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <title>Compare rules</title>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>Introduction</title>
+
+        <para>Most of the YATC components have a command for comparing the outcome of the old Ant based code with new YATC code. For instance, for the <code>fhir-2-ada</code>: <code>yatc compare-fhir-2-ada</code>.</para>
+
+        <para>However, this comparison cannot always be made directly. Sometimes the generated data contains computed values based on random numbers or identifiers produced by the Saxon processor (the <code>generate-id()</code> function). These mechanisms are used, for instance, in generating internal identifiers and UUID values. Different times and different Saxon versions produce different outcomes. And sometimes dates and times are part of the result, which of course also differ over time.</para>
+
+        <para>We therefore had to implement a mechanism to stop the comparison from failing in these kinds of situations. This works as follows:</para>
+
+        <unorderedlist>
+            <entry>
+                <para>There's an XML format that defines which elements/attributes should be ignored on comparison. This is called the compare rules format. Its definition can be found <link href="#compare-rules-format">below</link>.</para>
+                <unorderedlist>
+                    <entry>
+                        <para>There's a schema for this format in <code>YATC-shared/xsd/compare-rules.xsd</code>. </para>
+                    </entry>
+                    <entry>
+                        <para>The namespace for compare rules documents is <code>https://nictiz.nl/ns/YATC-shared/compare-rules</code> (preferred prefix: <code>yatcs-cr</code>).</para>
+                    </entry>
+                </unorderedlist>
+            </entry>
+            <entry>
+                <para>There are default compare rules (which are in effect if you don't specify anything else) in <code>YATC-shared/data/default-compare-rules.xml</code>.</para>
+            </entry>
+            <entry>
+                <para>The compare rules document in effect is defined by the <link href="parameters-system.md">YATC parameter</link> <code>yatcDocumentCompareRules</code>.</para>
+                <unorderedlist>
+                    <entry>
+                        <para>The main definition for this parameter is in <code>YATC-shared/data/parameters.xml</code>. This points to the default compare rules document <code>YATC-shared/data/default-compare-rules.xml</code>.</para>
+                    </entry>
+                    <entry>
+                        <para>If a component needs a different set of compare rules, create a compare rules document for this component (preferably in its <code>data</code> sub-directory) and overwrite the <code>yatcDocumentCompareRules</code> parameter in the component's YATC parameter file <code>data/parameters.xml</code>.</para>
+                    </entry>
+                </unorderedlist>
+            </entry>
+        </unorderedlist>
+
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title><anchor name="compare-rules-format"/>The compare rules document format</title>
+
+        <para>The compare rules format defines which elements, attributes and text nodes must be ignored when comparing documents.</para>
+        <para>The namespace for compare rules documents is <code>https://nictiz.nl/ns/YATC-shared/compare-rules</code> (preferred prefix: <code>yatcs-cr</code>).</para>
+
+        <element name="compare-rules">
+            <attributes>
+                <attribute name="enable-compare" type="xs:boolean" default="true">
+                    <para>Whether to compare <emph>at all</emph>. When <code>false</code>, any document pair will always come out as identical, regardless of their contents.</para>
+                </attribute>
+            </attributes>
+            <children>
+                <choice occurrences="*">
+                    <element name="do-not-compare-text-nodes-on-match" occurrences="1" pseudo-attributes="simple-match regexp">
+                        <para>Do not compare text nodes for which the parent element is in the <code>@simple-match</code> element list <emph>and</emph> when both their contents matches the <code>@regexp</code> regular expression.</para>
+                    </element>
+                    <element name="do-not-compare-attribute-values-on-match" occurrences="1" pseudo-attributes="simple-match regexp">
+                        <para>Do not compare attribute values for which the attribute is in the <code>@simple-match</code> attribute list <emph>and</emph> when both their contents matches the <code>@regexp</code> regular expression.</para>
+                    </element>
+                    <element name="ignore-elements" pseudo-attributes="simple-match">
+                        <para>Do not compare (completely ignore any difference) elements that match the <code>@simple-match</code> element list.</para>
+                    </element>
+                    <element name="ignore-attributes" pseudo-attributes="simple-match">
+                        <para>Do not compare (completely ignore any difference) attributes that match the <code>@simple-match</code> attribute list.</para>
+                    </element>
+                </choice>
+            </children>
+        </element>
+        
+        <unorderedlist>
+            <entry>
+                <para>All simple matches work with local names (so you cannot distinguish between elements/attributes in different namespaces).</para>
+            </entry>
+            <entry>
+                <para>The <code>@simple-match</code> attribute for <emph>elements</emph> must contain a whitespace separated list of either the wildcard <code>*</code> or the elements local names. For instance: <code>simple-match="*"</code> or <code>simple-match="id value"</code>.</para>
+            </entry>
+            <entry>
+                <para>The <code>@simple-match</code> attribute for <emph>attributes</emph> must contain a whitespace separated list of <code>{element-local-name}/@{attribute-local-name}</code>. The wildcard <code>*</code> can be used for both local names. For instance: <code>simple-match="*/@*"</code> or <code>simple-match="id/@value value/@*"</code>.</para>
+            </entry>
+            <entry>
+                <para>The value of the <code>@regexp</code> attribute must be a valid XPath regular expression. If this attribute is absent or empty anything matches (equivalent to <code>regexp=".*"</code>).</para>
+            </entry>
+        </unorderedlist>
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>Developers remarks</title>
+
+        <para>The <emph>actual</emph> definition of the compare rules format is in the Schema module <code>YATC-shared/xsdmod/compare-rules.mod.xsd</code> (which is included by the main compare rules document Schema <code>YATC-shared/xsd/compare-rules.xsd</code>). This is done because it's not unlikely that somewhere in the future, we might want to specify compare rules embedded in some other format. The schema for this embedding format can now simply include <code>compare-rules.mod.xsd</code> to get its definitions on board. </para>
+
+        <para>To help this further, compare rules can be set up in any namespace. The code that processes this (in <code>YATC-shared/xslmod/compare.mod.xsl</code>) makes no distinction in with regard to the namespace of the compare rules. Therefore, if desired, embedded compare rules can be in the namespace of the main, embedding, document.</para>
+    </section>
+
+</text-document>

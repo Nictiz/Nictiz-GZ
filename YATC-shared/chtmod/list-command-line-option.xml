@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<command-line-option xmlns="https://nictiz.nl/ns/YATC-shared/command-help-text" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/command-help-text ../xsd/command-help-text.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        Standard text for the -list flag on YATC command lines.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <flag name="list"/>
+    <argument name="application" optional="true"/>
+    <argument name="version" optional="true"/>
+
+    <description>Get a list of available application/version combinations. To list all applications/versions available, use either `#all` or `%all` for the argument(s) or leave the argument(s) empty.</description>
+
+</command-line-option>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../xsd/text-document.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        General text about the <include> and <exclude> elements in application data files.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <title><anchor name="include-exclude"/>The <elm>include</elm> and <elm>exclude</elm> elements</title>
+
+    <para>The <elm>include</elm> and <elm>exclude</elm> elements define which files will be processed/copied:</para>
+    <unorderedlist>
+        <entry>
+            <para>If there are no <elm>include</elm> elements, all files are included.</para>
+        </entry>
+        <entry>
+            <para>A file is processed/copied when it's included and not excluded.</para>
+        </entry>
+    </unorderedlist>
+
+    <element name="include">
+        <attributes>
+            <attribute name="pattern" type="xs:string">
+                <para>A regular expression, matched against filenames. For instance <code>\.xml$</code> for all XML files.</para>
+            </attribute>
+            <attribute name="glob" type="xs:string">
+                <para>A (UNIX style) glob matched against filenames. For instance <code>*.xml</code> for all XML files.</para>
+            </attribute>
+        </attributes>
+        <additional-text>Use either @pattern or @glob, not both.</additional-text>
+    </element>
+
+    <unorderedlist>
+        <entry>
+            <para>Matching on patterns or globs is on file<emph>name</emph> only (not on its path).</para>
+        </entry>
+        <entry>
+            <para>Globs can <emph>not</emph> contain character class entries (<code>[…]</code>) and other more sophisticated constructs. Therefore, if your name matching gets complicated, you'll have to use patterns, not globs.</para>
+        </entry>
+    </unorderedlist>
+
+
+    <para>The definition of the <elm>exclude</elm> element is identical to that of the <elm>include</elm> element.</para>
+
+</section>

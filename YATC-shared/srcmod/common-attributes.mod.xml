@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../xsd/text-document.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        General text about the common attributes in application data files.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <title><anchor name="common-attributes"/>Common attributes</title>
+
+    <para>The following attributes appear on multiple elements:</para>
+
+    <table>
+        <header>
+            <entry>
+                <para>Attribute name</para>
+            </entry>
+            <entry>
+                <para>Description</para>
+            </entry>
+        </header>
+        <row>
+            <entry>
+                <para><code>directory</code></para>
+            </entry>
+            <entry>
+                <para>The URI of a directory, <emph>by default</emph> located <emph>underneath the target directory</emph>.<br/>However, there's magic going on resolving such a directory name. See <link href="#resolving-directory-attribute">below</link>.</para>
+            </entry>
+        </row>
+        <row>
+            <entry>
+                <para><code>href</code></para>
+            </entry>
+            <entry>
+                <para>Reference to a file, <emph>by default</emph> situated <emph>in the code repository</emph> itself (for instance a stylesheet). A relative name is resolved against the location of the data document it is in. <br/>An absolute name must start with <code>file://</code>. Using this for production code is strongly discouraged, because several people use the system, all with different disk layouts.<br/>For consistency reasons, a leading <code>#</code> character will be removed/ignored. This is because <code>@directory</code> can also start with a <code>#</code>, which gives <code>@directory</code> the same base directory as <code>@href</code>. See <link href="#resolving-directory-attribute">below</link>.</para>
+            </entry>
+        </row>
+    </table>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <section>
+        <title><anchor name="resolving-directory-attribute"/>Resolving the <code>@directory</code> attribute</title>
+
+        <para>In resolving the value of the <code>@directory</code> attribute the following magic applies:</para>
+        <unorderedlist>
+            <entry>
+                <para>An absolute path must start with <code>file://</code> (for instance <code>directory="file:///C:/some/dir/somefile.xml"</code>). Using this for production code is <emph>strongly discouraged</emph>, because several people use the system, all with different disk layouts.</para>
+            </entry>
+            <entry>
+                <para>A (straight) relative path is resolved against the <emph>target directory</emph> (usually <code>…/{application-name}/{version}</code> or <code>…/{application-name}/{version}/{usecase}</code>).</para>
+            </entry>
+            <entry>
+                <para>When its value starts with <code>#</code>, it's value is resolved against <emph>the location of the data document</emph> it is in (for instance <code>directory="#mp/9.0.7/beschikbaarstellen_medicatiegegevens/html_kwal"</code>). This is used for referencing fixed/constant files that reside in the YATC codebase.</para>
+            </entry>
+            <entry>
+                <para>When its value starts with either <code>@</code> or <code>^</code>, it is a reference to a <emph>directory identifier</emph> specified in one of the <elm>setup</elm> elements (or its children), for this application. This is done using the values of the <code>@directory-id</code> attributes. The following rules apply (examples below):</para>
+                <unorderedlist>
+                    <entry>
+                        <para>When it starts with <code>@</code>, this is a reference to the <emph>target</emph> directory for the specified directory identifier.</para>
+                    </entry>
+                    <entry>
+                        <para>When it starts with <code>^</code>, this is a reference to the <emph>source</emph> directory for the specified directory identifier. This is rarely used.</para>
+                    </entry>
+                </unorderedlist>
+            </entry>
+        </unorderedlist>
+
+        <para>Some examples that reference target directory identifiers:</para>
+
+        <codeblock><![CDATA[<setup usecase="testusecase" directory-id="tuc">
+    …
+</setup>  ]]>          
+            
+<![CDATA[<build name="…">
+    …
+    <output directory="@tuc/ada_instance"/>
+</build>]]></codeblock>
+
+        <codeblock><![CDATA[<setup usecase="testusecase">
+    <copy-data directory-id="tuc-instance">
+        …
+    </copy-data>
+    …
+</setup>  ]]>          
+            
+<![CDATA[<build name="…">
+    …
+    <output directory="@tuc-instance"/>
+</build>]]></codeblock>
+
+        <para>In both examples, the value of the <code>build/output/@directory</code> attribute will expand to <code>…/{application-name}/{version}/testusecase/ada_instance</code></para>
+
+        <para/>
+    </section>
+</section>

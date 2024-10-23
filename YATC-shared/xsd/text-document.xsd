@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:yatcs-td="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!-- ======================================================================= -->
+    <!--
+    Copyright © Nictiz
+
+    This program is free software; you can redistribute it and/or modify it under the terms of the
+    GNU Lesser General Public License as published by the Free Software Foundation; either version
+    2.1 of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+    without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU Lesser General Public License for more details.
+    
+    The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <xs:annotation>
+        <xs:documentation>Schema for the special text documents that are used to document XML formats.</xs:documentation>
+    </xs:annotation>
+    <xs:include schemaLocation="../xsdmod/general.mod.xsd"/>
+
+    <xs:import namespace="http://www.w3.org/2001/XInclude" schemaLocation="../xsdmod/xinclude.mod.xsd"/>
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="../xsdmod/xml.mod.xsd"/>
+    <xs:element name="text-document">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="yatcs-td:ct-section">
+                    <xs:attribute default="true" name="toc" type="xs:boolean">
+                        <xs:annotation>
+                            <xs:documentation>Whether to add a toc section upfront.</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:group name="g-titlle">
+        <xs:sequence>
+            <xs:element name="title" type="yatcs-td:ct-mixed-contents"/>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="g-para">
+        <xs:sequence>
+            <xs:element name="para" type="yatcs-td:ct-mixed-contents"/>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="g-block-contents">
+        <xs:sequence>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element ref="xi:include"/>
+                <xs:group ref="yatcs-td:g-para"/>
+                <xs:element name="codeblock">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="yatcs-td:t-non-zero-length-string">
+                                <xs:attribute name="language" type="yatcs-td:t-non-zero-length-string">
+                                    <xs:annotation>
+                                        <xs:documentation>This will be set as the language used. Not sure whether it has any effect...</xs:documentation>
+                                    </xs:annotation>
+                                </xs:attribute>
+                                <xs:attribute ref="xml:space"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="dividerline" type="yatcs-td:ct-empy"/>
+                <xs:element name="emptyline" type="yatcs-td:ct-empy"/>
+                <xs:element name="markdown">
+                    <xs:annotation>
+                        <xs:documentation>Straight markdown text, copied verbatim.</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="xs:string">
+                                <xs:attribute ref="xml:space"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="subheading" type="yatcs-td:ct-mixed-contents"/>
+                <xs:group ref="yatcs-td:g-lists"/>
+                <xs:group ref="yatcs-td:g-table"/>
+                <xs:group ref="yatcs-td:g-element"/>
+                <xs:element ref="yatcs-td:group"/>
+                <xs:element ref="yatcs-td:section"/>
+                <xs:element name="include-command-help-text">
+                    <xs:annotation>
+                        <xs:documentation>Include a command help text as Markdown</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="yatcs-td:ct-empy">
+                                <xs:attribute name="href" type="xs:anyURI" use="required"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="image">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="yatcs-td:ct-empty">
+                                <xs:attribute name="href" type="xs:anyURI" use="required"/>
+                                <xs:attribute name="scale" type="xs:string">
+                                    <xs:annotation>
+                                        <xs:documentation>Any scaling accepted by CSS. For instance "25%".</xs:documentation>
+                                    </xs:annotation>
+                                </xs:attribute>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="g-lists">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="unorderedlist" type="yatcs-td:ct-list"/>
+                <xs:element name="orderedlist" type="yatcs-td:ct-list"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="g-table">
+        <xs:sequence>
+            <xs:element name="table">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="header" type="yatcs-td:ct-table-row"/>
+                        <xs:element maxOccurs="unbounded" name="row" type="yatcs-td:ct-table-row"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="g-element">
+        <xs:sequence>
+            <xs:element name="element">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="attributes">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element maxOccurs="unbounded" minOccurs="0" name="attribute">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:group ref="yatcs-td:g-para"/>
+                                            </xs:sequence>
+                                            <xs:attribute name="name" type="yatcs-td:t-non-zero-length-string" use="required"/>
+                                            <xs:attribute name="type" type="xs:string" use="required"/>
+                                            <xs:attribute default="false" name="required" type="xs:boolean"/>
+                                            <xs:attribute name="default" type="xs:string"/>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element minOccurs="0" name="children">
+                            <xs:complexType>
+                                <xs:choice maxOccurs="unbounded" minOccurs="0">
+                                    <xs:group ref="yatcs-td:g-child-element"/>
+                                    <xs:element name="choice">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:group maxOccurs="unbounded" ref="yatcs-td:g-child-element"/>
+                                            </xs:sequence>
+                                            <xs:attributeGroup ref="yatcs-td:ag-occurrences"/>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:choice>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element minOccurs="0" name="additional-text" type="yatcs-td:t-non-zero-length-string"/>
+                    </xs:sequence>
+                    <xs:attribute name="name" type="yatcs-td:t-non-zero-length-string" use="required"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="g-child-element">
+        <xs:sequence>
+            <xs:element name="element">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:group ref="yatcs-td:g-para"/>
+                    </xs:sequence>
+                    <xs:attribute name="name" type="yatcs-td:t-non-zero-length-string" use="required"/>
+                    <xs:attributeGroup ref="yatcs-td:ag-occurrences"/>
+                    <xs:attribute name="pseudo-attributes">
+                        <xs:annotation>
+                            <xs:documentation>List of attributes that will be shown as attr="..."</xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:list itemType="xs:string"/>
+                        </xs:simpleType>
+                    </xs:attribute>
+                    <xs:attribute name="comment" type="yatcs-td:t-non-zero-length-string">
+                        <xs:annotation>
+                            <xs:documentation>Short text displayed after the element in the code listing only.</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute default="false" name="attributes-indicator" type="xs:boolean">
+                        <xs:annotation>
+                            <xs:documentation>Add a ... to indicate that attributes are present (but not specifically mentioned here, probably below in another section)</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute default="false" name="close" type="xs:boolean">
+                        <xs:annotation>
+                            <xs:documentation>Whether the element should be closed (indicating no children)</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:attributeGroup name="ag-occurrences">
+        <xs:attribute default="1" name="occurrences">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:length value="1"/>
+                    <xs:enumeration value="*"/>
+                    <xs:enumeration value="1"/>
+                    <xs:enumeration value="?"/>
+                    <xs:enumeration value="+"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:group name="g-macros">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="macro">
+                <xs:annotation>
+                    <xs:documentation>Definition of a (simple) macro for expansion in test</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="yatcs-td:ct-empy">
+                            <xs:attribute name="name" type="xs:NCName" use="required"/>
+                            <xs:attribute name="value" type="xs:string" use="required"/>
+                            <xs:attribute name="default" type="xs:string">
+                                <xs:annotation>
+                                    <xs:documentation>If @value (caused by parameter substitutions) expands to empty, this value will be used.</xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:complexType name="ct-table-row">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="entry">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:group ref="yatcs-td:g-para"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ct-section">
+        <xs:sequence>
+            <xs:group ref="yatcs-td:g-macros"/>
+            <xs:group ref="yatcs-td:g-titlle"/>
+            <xs:group ref="yatcs-td:g-block-contents"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType mixed="true" name="ct-mixed-contents">
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element name="code" type="yatcs-td:t-non-zero-length-string"/>
+            <xs:element name="emph">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="yatcs-td:t-non-zero-length-string">
+                            <xs:attribute default="false" name="bold" type="xs:boolean"/>
+                            <xs:attribute default="true" name="italic" type="xs:boolean"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="link">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="href" type="xs:anyURI" use="required"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="anchor">
+                <xs:complexType>
+                    <xs:attribute name="name" type="yatcs-td:t-identifier" use="required"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="br" type="yatcs-td:ct-empy"/>
+            <xs:element name="elm" type="yatcs-td:t-non-zero-length-string"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="ct-list">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="entry">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:group ref="yatcs-td:g-para"/>
+                        <xs:group minOccurs="0" ref="yatcs-td:g-lists"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ct-empy"/>
+    <xs:element name="section" type="yatcs-td:ct-section">
+        <xs:annotation>
+            <xs:documentation>A section in the document</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="group">
+        <xs:annotation>
+            <xs:documentation>A group of block content. Use this for including pieces of text.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:group ref="yatcs-td:g-block-contents"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

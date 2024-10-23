@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<group xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../xsd/text-document.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        The common text at the top of data format descriptions.
+        
+        Depends on the $DATAFILENAME macro.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <para>This documents the XML format for the <code>{$yatcRepositoryName}/{$yatcComponentName}</code> component's data file in <code>{$yatcRepositoryName}/{$yatcComponentName}/data/$DATAFILENAME.xml</code>, as used by the <code>{$yatcComponentName}</code> and related commands.</para>
+
+</group>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!-- ======================================================================= -->
+    <!--
+    Copyright © Nictiz
+
+    This program is free software; you can redistribute it and/or modify it under the terms of the
+    GNU Lesser General Public License as published by the Free Software Foundation; either version
+    2.1 of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+    without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU Lesser General Public License for more details.
+    
+    The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <xs:annotation>
+        <xs:documentation>Schema module for use by component data files that use the general engine.</xs:documentation>
+    </xs:annotation>
+    <xs:import namespace="http://www.w3.org/2001/XInclude" schemaLocation="../../xsdmod/xinclude.mod.xsd"/>
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="../../xsdmod/xml.mod.xsd"/>
+    <xs:include schemaLocation="../../xsdmod/general.mod.xsd"/>
+    <xs:include schemaLocation="../../xsdmod/application-data-file.mod.xsd"/>
+    <xs:element name="application">
+        <xs:annotation>
+            <xs:documentation>The definitions for an application/version combination.
+Can also be used as root element for XIncluded documents.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:group minOccurs="0" ref="g-macros"/>
+                <xs:choice maxOccurs="unbounded" minOccurs="0">
+                    <xs:group ref="g-setup"/>
+                    <xs:group ref="g-standard-steps"/>
+                    <xs:group ref="g-empty-root-directory"/>
+                    <xs:element name="action">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:group minOccurs="0" ref="g-macros"/>
+                                <xs:group ref="g-standard-steps"/>
+                            </xs:sequence>
+                            <xs:attribute name="name" type="t-action-name" use="required">
+                                <xs:annotation>
+                                    <xs:documentation>The name of this action</xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                            <xs:attribute default="false" name="default" type="xs:boolean">
+                                <xs:annotation>
+                                    <xs:documentation>Whether this is the default action to be performed when none was specified.</xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                            <xs:attribute name="depends-on">
+                                <xs:annotation>
+                                    <xs:documentation>Whitespace separated list of action names to be performed *before* this action can start. </xs:documentation>
+                                </xs:annotation>
+                                <xs:simpleType>
+                                    <xs:list itemType="t-action-name"/>
+                                </xs:simpleType>
+                            </xs:attribute>
+                            <xs:attribute name="description" type="t-non-zero-length-string">
+                                <xs:annotation>
+                                    <xs:documentation>Optional short description for this action.</xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                            <xs:attribute default="true" name="setup" type="xs:boolean">
+                                <xs:annotation>
+                                    <xs:documentation>Whether a setup is adviced for this action or not. Some actions, like validate-only ones, usuaully don't need/want a setup, because this would overwrite the build results.</xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attributeGroup ref="ag-application-name-version"/>
+            <xs:attributeGroup ref="ag-source-project-name"/>
+            <xs:attributeGroup ref="ag-source-adarefs2ada"/>
+            <xs:attribute ref="xml:base"/>
+            <xs:attribute name="source-version" type="t-non-zero-length-string">
+                <xs:annotation>
+                    <xs:documentation>Sometimes we have to take our source data from the same application, but with a different version number.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="ct-data">
+        <xs:annotation>
+            <xs:documentation>Definition for the root element of a data file meant for the general engine.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:group minOccurs="0" ref="g-macros"/>
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>A list of applications, either directly defined or by XInclude.</xs:documentation>
+                </xs:annotation>
+                <xs:element ref="xi:include"/>
+                <xs:element ref="application"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute ref="xml:base"/>
+    </xs:complexType>
+    <xs:simpleType name="t-action-name">
+        <xs:restriction base="xs:NCName"/>
+    </xs:simpleType>
+</xs:schema>

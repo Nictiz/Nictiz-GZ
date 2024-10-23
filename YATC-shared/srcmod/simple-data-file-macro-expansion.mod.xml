@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../xsd/text-document.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        General text about the simple macro expansions in application data files.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <title><anchor name="simple-data-file-macro-expansion"/>Simple macro expansion in data files</title>
+
+    <para>Everywhere in an application data file, in attribute values and text, some simple macros will expand. There are a number of predefined ones and you can define your own. For instance, <code>$APPLICATION</code> is a predefined macro and will expand to the name of the application (the value of the  <code>application/@name</code> attribute). </para>
+    
+    <para>A simple macros starts with a <code>$</code> sign. They can be used in attribute values and text. To stop a macro from expanding, double the <code>$</code> sign (for instance, <code>$$APPLICATION</code> will become <code>$APPLICATION</code>). </para>
+
+    <para>The following macros are predefined:</para>
+
+    <table>
+        <header>
+            <entry>
+                <para>Macro</para>
+            </entry>
+            <entry>
+                <para>Description</para>
+            </entry>
+            <entry>
+                <para>Value example</para>
+            </entry>
+        </header>
+        <row>
+            <entry>
+                <para><code>$APPLICATION</code></para>
+            </entry>
+            <entry>
+                <para>The name of the application (from <code>application/@name</code>).</para>
+            </entry>
+            <entry>
+                <para><code>mp</code></para>
+            </entry>
+        </row>
+        <row>
+            <entry>
+                <para><code>$VERSION</code></para>
+            </entry>
+            <entry>
+                <para>The version of the application (from <code>application/@version</code>).</para>
+            </entry>
+            <entry>
+                <para><code>9.0.2</code></para>
+            </entry>
+        </row>
+        <row>
+            <entry>
+                <para><code>$USECASE</code></para>
+            </entry>
+            <entry>
+                <para>Only valid within <elm>setup</elm> elements: the name of the current usecase (from <code>setup/@usecase</code>).</para>
+            </entry>
+            <entry>
+                <para><code>beschikbaarstellen_medicatiegegevens</code></para>
+            </entry>
+        </row>
+        <row>
+            <entry>
+                <para><code>$BASEPATH</code></para>
+            </entry>
+            <entry>
+                <para>The current base path.<br/>Outside a <elm>setup</elm> elements this is <code>$APPLICATION/$VERSION</code>.<br/>In <elm>setup</elm> elements this is <code>$APPLICATION/$VERSION/$USECASE</code>.</para>
+            </entry>
+            <entry>
+                <para>Outside a <elm>setup</elm> element: <code>mp/9.0.2</code><br/>In a <elm>setup</elm> element: <code>mp/9.0.2/beschikbaarstellen_medicatiegegevens</code></para>
+            </entry>
+        </row>
+    </table>
+    
+    <emptyline/>
+    
+    <para>There are several locations in an application data file where you can define your own macros. This can be useful when, for instance, you have to pass the same parameter value to a lot of build steps. To define macros, use the <elm>macros</elm> element:</para>
+    
+    <element name="macros">
+        <children>
+            <element name="macro" pseudo-attributes="name value" occurrences="*">
+                <para>Define a macro with a given name (<code>@name</code> attribute) and value (<code>@value</code> attribute).<br/>The rules for a name are the same as those for an XML element/attribute name. As a guideline, to distinguish it from the surrounding text, use all-uppercase.</para>
+            </element>
+        </children>
+    </element>
+    <para>Macro substitution is recursive, a macro value can contain references to other macros.</para>
+
+</section>

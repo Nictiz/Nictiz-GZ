@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<text-document xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../../xsd/text-document.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        Documentation for the parameters XML format. 
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <title>Parameters XML format reference</title>
+
+    <para>Parameters are defined using XML documents in the parameters format.</para>
+    <unorderedlist>
+        <entry>
+            <para>The schema for these documents is in <code>YATC-shared/xsd/parameters.xsd</code>.</para>
+        </entry>
+        <entry>
+            <para>Documentation of the parameters system in general can be found <link href="parameters-system.md">here</link>.</para>
+        </entry>
+    </unorderedlist>
+
+    <para>The parameters format, as described here, has a dual purpose:</para>
+    <unorderedlist>
+        <entry>
+            <para>It is meant for the parameters XML documents that define the value(s) for the parameters. Most of these are in <code>data/parameters.xml</code> documents.</para>
+        </entry>
+        <entry>
+            <para>Some attributes and elements will be filled in by the system that gathers everything and creates the parameters XML document that applications can work with. You can see this in action using the <code>get-parameters-xml</code> command.</para>
+        </entry>
+    </unorderedlist>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>Root <elm>parameters</elm> element</title>
+
+        <element name="parameters">
+            <attributes>
+                <attribute name="caller-static-base-uri" type="xs:anyURI">
+                    <para>(Filled in by the parameter gathering process)<br/>The base URI of the caller when gathering the parameters. This can be interesting since the set of parameters depends on this location.</para>
+                </attribute>
+            </attributes>
+            <children>
+                <element name="sources" occurrences="?">
+                    <para>(Filled in by the parameter gathering process.)<br/>A list of source document URIs for the parameters in the document.</para>
+                </element>
+                <element name="parameter" occurrences="*">
+                    <para>Definition of a single parameter.</para>
+                </element>
+            </children>
+        </element>
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title><elm>parameter</elm> element</title>
+
+        <para>A <elm>parameter</elm> element defines the value(s) for a single parameter.</para>
+
+        <element name="parameter">
+            <attributes>
+                <attribute name="name" type="xs:NCName" required="true">
+                    <para>The name of the parameter.</para>
+                </attribute>
+                <attribute name="source-idref" type="xs:NCName">
+                    <para>(Filled in by the parameter gathering process.)<br/>The identifier of the <code>/*/sources/source</code> element that is the source for this parameter value.<br/>Remark: Some parameters do not have a source because they're created by the parameter gathering process (like <code>yatcBaseDirectory</code>. In that case this attribute will be absent</para>
+                </attribute>
+            </attributes>
+            <children>
+                <element name="value" occurrences="*">
+                    <para>Contains the (string) value of the parameter.</para>
+                </element>
+            </children>
+        </element>
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title><elm>sources</elm> element</title>
+
+        <para>The <elm>sources</elm> element is a list of source documents for the value(s) of the parameters. All source documents have an identifier. Parameters reference these identifiers with their <code>@source-idref</code> attribute. It is filled in/created by the parameter gathering process.</para>
+        
+        <element name="sources">
+           <children>
+               <element name="source" occurrences="*">
+                   <para>A single source document.</para>
+               </element>
+           </children>
+        </element>
+        
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        
+        <section>
+            <title><elm>source</elm> element</title>
+            
+            <element name="source">
+                <attributes>
+                    <attribute name="id" type="xs:NCName" required="true">
+                        <para>The identifier as used by <elm>parameter</elm> elements to reference this source</para>
+                    </attribute>
+                </attributes>
+                <additional-text>The URI of the source document.</additional-text>
+            </element>
+            
+        </section>
+    </section>
+
+</text-document>

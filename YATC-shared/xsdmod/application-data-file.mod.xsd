@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <!-- ======================================================================= -->
+    <!--
+    Copyright © Nictiz
+
+    This program is free software; you can redistribute it and/or modify it under the terms of the
+    GNU Lesser General Public License as published by the Free Software Foundation; either version
+    2.1 of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+    without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU Lesser General Public License for more details.
+    
+    The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <xs:annotation>
+        <xs:documentation>General schema components for application data files (use this in an xs:include)</xs:documentation>
+    </xs:annotation>
+    <xs:group name="g-setup">
+        <xs:annotation>
+            <xs:documentation>Specification for setting up a directory structure for YATC.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="setup">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:group minOccurs="0" ref="g-macros"/>
+                        <xs:choice maxOccurs="unbounded" minOccurs="0">
+                            <xs:element name="copy-data">
+                                <xs:annotation>
+                                    <xs:documentation>Copies data files (from the data source directory) to the usecase base directory, subdirectory @target-subdir</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:complexContent>
+                                        <xs:extension base="ct-copy-patterns">
+                                            <xs:attribute default="ada_instance" name="target-subdir" type="t-non-zero-length-string">
+                                                <xs:annotation>
+                                                    <xs:documentation>The name of the subdirectory for the target of the copy action, residing underneath the usecase directory.</xs:documentation>
+                                                </xs:annotation>
+                                            </xs:attribute>
+                                            <xs:attribute name="source-subdir" type="t-non-zero-length-string">
+                                                <xs:annotation>
+                                                    <xs:documentation>The name of the subdirectory for the source of the copy action. What the base directory for this is depends on the application.
+</xs:documentation>
+                                                </xs:annotation>
+                                            </xs:attribute>
+                                            <xs:attributeGroup ref="ag-directory-id"/>
+                                            <xs:attributeGroup ref="ag-compare"/>
+                                            <xs:attributeGroup ref="ag-clear-target"/>
+                                        </xs:extension>
+                                    </xs:complexContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="copy-project-schemas">
+                                <xs:annotation>
+                                    <xs:documentation>Copies data files (from the project schemas) to the usecase base directory, subdirectory @target-subdir</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:complexContent>
+                                        <xs:extension base="ct-copy-patterns">
+                                            <xs:attribute default="ada_schemas" name="target-subdir" type="t-non-zero-length-string">
+                                                <xs:annotation>
+                                                    <xs:documentation>The name of the subdirectory for the copy action, residing underneath the usecase directory.</xs:documentation>
+                                                </xs:annotation>
+                                            </xs:attribute>
+                                            <xs:attribute default="true" name="copy-ada-meta" type="xs:boolean">
+                                                <xs:annotation>
+                                                    <xs:documentation>Whether to copy the default ada_meta.xsd schema also.</xs:documentation>
+                                                </xs:annotation>
+                                            </xs:attribute>
+                                            <xs:attributeGroup ref="ag-directory-id"/>
+                                            <xs:attributeGroup ref="ag-source-project-name"/>
+                                            <xs:attributeGroup ref="ag-compare"/>
+                                            <xs:attributeGroup ref="ag-clear-target"/>
+                                        </xs:extension>
+                                    </xs:complexContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="empty-directory">
+                                <xs:annotation>
+                                    <xs:documentation>Creates an empty directory (or empties the exisiting one).</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:attributeGroup ref="ag-empty-directory"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="copy-directory">
+                                <xs:annotation>
+                                    <xs:documentation>Copies a directory, plain, as is. Usually for copying images/css and other html goodies.</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:complexContent>
+                                        <xs:extension base="ct-copy-patterns">
+                                            <xs:attributeGroup ref="ag-directory">
+                                                <xs:annotation>
+                                                    <xs:documentation>Source directory for the copy operation.</xs:documentation>
+                                                </xs:annotation>
+                                            </xs:attributeGroup>
+                                            <xs:attribute name="target-subdir" type="t-non-zero-length-string" use="required">
+                                                <xs:annotation>
+                                                    <xs:documentation>The name of the subdirectory for the target of the copy action, residing underneath the usecase directory.</xs:documentation>
+                                                </xs:annotation>
+                                            </xs:attribute>
+                                            <xs:attributeGroup ref="ag-directory-id"/>
+                                            <xs:attribute default="true" name="recurse" type="xs:boolean">
+                                                <xs:annotation>
+                                                    <xs:documentation>Whether to recurse into subdirectories and copy these also.</xs:documentation>
+                                                </xs:annotation>
+                                            </xs:attribute>
+                                            <xs:attributeGroup ref="ag-clear-target"/>
+                                        </xs:extension>
+                                    </xs:complexContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="retrieve">
+                                <xs:annotation>
+                                    <xs:documentation>Retrieve an XML document using a URL.</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:attribute name="name" type="t-non-zero-length-string" use="required">
+                                        <xs:annotation>
+                                            <xs:documentation>The name of the retrieved XML document</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                    <xs:attribute default="ada_instance" name="target-subdir" type="t-non-zero-length-string">
+                                        <xs:annotation>
+                                            <xs:documentation>The name of the subdirectory for the target of the retrieve action, residing underneath the usecase directory.</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                    <xs:attribute name="url" type="xs:anyURI" use="required">
+                                        <xs:annotation>
+                                            <xs:documentation>The URL to retrieve the XML document from.</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                    <xs:attributeGroup ref="ag-directory-id"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:choice>
+                    </xs:sequence>
+                    <xs:attribute name="usecase" type="t-non-zero-length-string" use="required">
+                        <xs:annotation>
+                            <xs:documentation>The name of the usecase. This becomes the name of the subdirectory where the usecase results are stored.</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attributeGroup ref="ag-directory-id"/>
+                    <xs:attributeGroup ref="ag-source-project-name"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="g-empty-root-directory">
+        <xs:annotation>
+            <xs:documentation>Specifies an empty directory on the application root level</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="empty-root-directory">
+                <xs:complexType>
+                    <xs:attributeGroup ref="ag-empty-directory"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="g-message">
+        <xs:annotation>
+            <xs:documentation>A message for output during processing</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="message" type="xs:string"/>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="g-standard-build-step">
+        <xs:annotation>
+            <xs:documentation>Definition for a standard build (XSLT) step</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="build">
+                <xs:annotation>
+                    <xs:documentation>Specifies a build step (XSLT transformation) in this action. </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="stylesheet">
+                            <xs:annotation>
+                                <xs:documentation>The stylesheet to use for this build. 
+</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:attributeGroup ref="ag-href"/>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:choice>
+                            <xs:element name="input-documents">
+                                <xs:annotation>
+                                    <xs:documentation>Specification of a set of input documents for this build. The stylesheet will be run once for each of these documents.</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:complexContent>
+                                        <xs:extension base="ct-copy-patterns">
+                                            <xs:attributeGroup ref="ag-directory"/>
+                                            <xs:attribute default="false" name="accept-empty" type="xs:boolean">
+                                                <xs:annotation>
+                                                    <xs:documentation>Whether to accept an empty input set without error</xs:documentation>
+                                                </xs:annotation>
+                                            </xs:attribute>
+                                        </xs:extension>
+                                    </xs:complexContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="input-document">
+                                <xs:annotation>
+                                    <xs:documentation>Specifies a specific input document for the build.</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:attributeGroup ref="ag-directory"/>
+                                    <xs:attribute name="name" type="t-non-zero-length-string" use="required">
+                                        <xs:annotation>
+                                            <xs:documentation>The name of the input XML document</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="no-input" type="ct-empty">
+                                <xs:annotation>
+                                    <xs:documentation>The build doesn't need an input (a short dummy document is provided).</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                        </xs:choice>
+                        <xs:choice>
+                            <xs:element name="output-document">
+                                <xs:annotation>
+                                    <xs:documentation>Specifies a specific output directory and filename for the result of this build process.</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:attributeGroup ref="ag-directory"/>
+                                    <xs:attribute name="name" type="t-non-zero-length-string" use="required">
+                                        <xs:annotation>
+                                            <xs:documentation>The name of the output document.</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="output-documents">
+                                <xs:annotation>
+                                    <xs:documentation>Specifies a specific output directory. The output filenames will be the same as the input filename(s).</xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:attributeGroup ref="ag-directory"/>
+                                    <xs:attribute name="result-filename-suffix" type="xs:string">
+                                        <xs:annotation>
+                                            <xs:documentation>If set, the original filename extension (inclusing the dot) is stripped off and this is suffixed. Example values: ".xsl" or "_svrl.xsl".</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="discard-output" type="ct-empty">
+                                <xs:annotation>
+                                    <xs:documentation>The (direct) output document(s) of this build will be discarded.</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
+                        </xs:choice>
+                        <xs:group maxOccurs="unbounded" minOccurs="0" ref="g-build-parameter"/>
+                    </xs:sequence>
+                    <xs:attribute name="name" type="xs:string">
+                        <xs:annotation>
+                            <xs:documentation>Name for this action step (only for reporting/documentation purposes)</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute default="true" name="fast" type="xs:boolean">
+                        <xs:annotation>
+                            <xs:documentation>Whether to run transformations with multiple inputs in fast mode. This might not always fly, so you can turn it off here.</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute default="false" name="silent" type="xs:boolean">
+                        <xs:annotation>
+                            <xs:documentation>Whether the build should not output the name(s) of the input file(s) it is processing.</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="g-build-parameter">
+        <xs:annotation>
+            <xs:documentation>A parameter for a build</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="parameter">
+                <xs:annotation>
+                    <xs:documentation>Optional parameter for the build stylesheet. @value has precedence over @directory has precedence over @href.</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:attribute name="name" type="xs:NCName" use="required">
+                        <xs:annotation>
+                            <xs:documentation>The name of the parameter. Names must be unique. The names 'baseDirectory', 'outputDirectory', 'application' and 'version' can not be used. </xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="value" type="xs:string">
+                        <xs:annotation>
+                            <xs:documentation>Straight string value for the parameter. If both @value and @directory are present, @value is used as the name of a file and appended to @directory.</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attributeGroup ref="ag-href-optional"/>
+                    <xs:attributeGroup ref="ag-directory-optional"/>
+                    <xs:attribute default="false" name="force-string" type="xs:boolean">
+                        <xs:annotation>
+                            <xs:documentation>When false (or absent), the system will try to cast a value to the most appropriate data type. When true, it will always be passed as a string.</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="g-standard-validate-with-schema-step">
+        <xs:annotation>
+            <xs:documentation>Definition for a standard validate with schema step.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="validate-with-schema" type="ct-validation-step"/>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="g-standard-validate-with-schematron-step">
+        <xs:annotation>
+            <xs:documentation>Definition for a standard validate with schematron step.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="validate-with-schematron">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="ct-validation-step">
+                            <xs:attribute default="false" name="continue-on-schematron-error" type="xs:boolean">
+                                <xs:annotation>
+                                    <xs:documentation>Whether to continue when the Schematron processor reports a schema error during processing </xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                            <xs:attribute default="true" name="fast" type="xs:boolean">
+                                <xs:annotation>
+                                    <xs:documentation>Whether to run Schematron validations with multiple inputs in fast mode. This might not always fly, so you can turn it off here.</xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                            <xs:attribute default="false" name="fix-global-variables" type="xs:boolean">
+                                <xs:annotation>
+                                    <xs:documentation>Whether to try to fix the global variables with the same name.</xs:documentation>
+                                </xs:annotation>
+                            </xs:attribute>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="g-standard-validation-step">
+        <xs:annotation>
+            <xs:documentation>Definition for a step that performs validation.</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:group ref="g-standard-validate-with-schema-step"/>
+            <xs:group ref="g-standard-validate-with-schematron-step"/>
+        </xs:choice>
+    </xs:group>
+    <xs:group name="g-standard-copy-step">
+        <xs:annotation>
+            <xs:documentation>Definition for a step that performs straight file copies.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="copy">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="source">
+                            <xs:annotation>
+                                <xs:documentation>Specification of a set of input documents to validate.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:complexContent>
+                                    <xs:extension base="ct-copy-patterns">
+                                        <xs:attributeGroup ref="ag-directory"/>
+                                        <xs:attribute default="false" name="accept-empty" type="xs:boolean">
+                                            <xs:annotation>
+                                                <xs:documentation>Whether to accept an empty input set without error</xs:documentation>
+                                            </xs:annotation>
+                                        </xs:attribute>
+                                    </xs:extension>
+                                </xs:complexContent>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="target">
+                            <xs:complexType>
+                                <xs:attributeGroup ref="ag-directory"/>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="name" type="xs:string">
+                        <xs:annotation>
+                            <xs:documentation>Name for this action step (only for reporting/documentation purposes)</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute default="false" name="recurse" type="xs:boolean">
+                        <xs:annotation>
+                            <xs:documentation>Whether to copy subdirectories as well.</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="g-standard-steps">
+        <xs:annotation>
+            <xs:documentation>Definition of the elements that are standard steps + messages</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+                <xs:group ref="g-message"/>
+                <xs:group ref="g-standard-build-step"/>
+                <xs:group ref="g-standard-validation-step"/>
+                <xs:group ref="g-standard-copy-step"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="g-macros">
+        <xs:annotation>
+            <xs:documentation>Definition of a set of simple macros for expansion in the data file.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="macros">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="macro">
+                            <xs:complexType>
+                                <xs:attribute name="name" type="xs:NCName" use="required"/>
+                                <xs:attribute name="value" type="xs:string" use="required"/>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:complexType name="ct-validation-step">
+        <xs:annotation>
+            <xs:documentation>Complex type for a step element that performs validation.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="schema">
+                <xs:annotation>
+                    <xs:documentation>The schema to use.
+</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:attributeGroup ref="ag-href"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:choice>
+                <xs:element name="input-documents">
+                    <xs:annotation>
+                        <xs:documentation>Specification of a set of input documents to validate.</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="ct-copy-patterns">
+                                <xs:attributeGroup ref="ag-directory"/>
+                                <xs:attribute default="false" name="accept-empty" type="xs:boolean">
+                                    <xs:annotation>
+                                        <xs:documentation>Whether to accept an empty input set without error</xs:documentation>
+                                    </xs:annotation>
+                                </xs:attribute>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="input-document">
+                    <xs:annotation>
+                        <xs:documentation>Specifies a specific input document to validate.</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:attributeGroup ref="ag-directory"/>
+                        <xs:attribute name="name" type="t-non-zero-length-string" use="required">
+                            <xs:annotation>
+                                <xs:documentation>The name of the input XML document</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+            <xs:element minOccurs="0" name="output-report">
+                <xs:annotation>
+                    <xs:documentation>Specifies a specific output directory and filename for the XVRL or SVRL report of the validation(s).</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:attributeGroup ref="ag-directory"/>
+                    <xs:attribute name="name" type="t-non-zero-length-string" use="required">
+                        <xs:annotation>
+                            <xs:documentation>The name of the output document.</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute default="true" name="prune-valid" type="xs:boolean">
+                        <xs:annotation>
+                            <xs:documentation>Whether to prune valid reports (to make the outcome less cluttered)</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute default="true" name="sanitize-filenames" type="xs:boolean">
+                        <xs:annotation>
+                            <xs:documentation>Whether to sanitize the filenames in the reports (remove the local path leading up to know repository directories)</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>Name for this action step (only for reporting/documentation purposes)</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute default="false" name="optional" type="xs:boolean">
+            <xs:annotation>
+                <xs:documentation>When false, the schema must exist. When true and the schema does not exist, processing will continue.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute default="false" name="stop-on-detection" type="xs:boolean">
+            <xs:annotation>
+                <xs:documentation>Stops further processing on detection of a validation problem/error. Detections with severity=info will not stop the processing.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:complexType name="ct-copy-patterns">
+        <xs:annotation>
+            <xs:documentation>Complex type for specifying include/exclude names for copy operations</xs:documentation>
+        </xs:annotation>
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element name="include">
+                <xs:annotation>
+                    <xs:documentation>Files to include in the copy operation</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:attributeGroup ref="ag-copy-pattern"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="exclude">
+                <xs:annotation>
+                    <xs:documentation>Files to exclude from the copy operation</xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:attributeGroup ref="ag-copy-pattern"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    <xs:attributeGroup name="ag-directory-id">
+        <xs:annotation>
+            <xs:documentation>An identifier for the directory involved for this element.</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="directory-id" type="t-identifier"/>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="ag-clear-target">
+        <xs:attribute default="true" name="clear-target" type="xs:boolean">
+            <xs:annotation>
+                <xs:documentation>Whether to clear the target directory before any action takes place.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="ag-copy-pattern">
+        <xs:annotation>
+            <xs:documentation>Attribute group that defines files to include/exclude in a copy operation. Use either @pattern or @glob, never both. 
+If using @glob, you *must* pre-process the attributes using YATC-shared/xslmod/prepare-copy-pattern.mod.xsl!</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="pattern" type="t-non-zero-length-string">
+            <xs:annotation>
+                <xs:documentation>XPath regular expression, used on filenames, for including/excluding files to copy</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="glob" type="t-non-zero-length-string">
+            <xs:annotation>
+                <xs:documentation>Unix simple glob pattern. Allowed are * and ?, nothing else.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="ag-href">
+        <xs:annotation>
+            <xs:documentation>An href of some file. A relative path is resolved against the location of the containing document.</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="href" type="xs:anyURI" use="required"> </xs:attribute>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="ag-href-optional">
+        <xs:annotation>
+            <xs:documentation>An optional href of some file. A relative path is resolved against the location of the containing document.</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="href" type="xs:anyURI"> </xs:attribute>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="ag-directory">
+        <xs:annotation>
+            <xs:documentation>A directory for storing or loading documents. A relative name is resolved against the base directory for this application/version (for instance against .../lab/3.0.0).</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="directory" type="xs:anyURI" use="required"> </xs:attribute>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="ag-directory-optional">
+        <xs:annotation>
+            <xs:documentation>An optional directory for storing or loading documents. A relative name is resolved against the base directory for this application/version (for instance against .../lab/3.0.0).</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="directory" type="xs:anyURI"> </xs:attribute>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="ag-source-project-name">
+        <xs:annotation>
+            <xs:documentation>The name of the project where the schemas are copied from. The base directory for projects is in parameter hrefProjectsStorageBasedir. If not set the default is the application name.
+Overrides an optional project name defined on a parent element.</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="source-project-name" type="t-non-zero-length-string"> </xs:attribute>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="ag-application-name-version">
+        <xs:annotation>
+            <xs:documentation>Definition of the standard application name and version attributes (for use on an application element).</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="name" type="t-non-zero-length-string" use="required">
+            <xs:annotation>
+                <xs:documentation>The name of the application (for instance lab).</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="version" type="t-non-zero-length-string" use="required">
+            <xs:annotation>
+                <xs:documentation>The version of the application (for instance 3.0.0)</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="ag-compare">
+        <xs:annotation>
+            <xs:documentation>Attributes for the compare commands</xs:documentation>
+        </xs:annotation>
+        <xs:attribute default="true" name="compare" type="xs:boolean">
+            <xs:annotation>
+                <xs:documentation>Whether to use this directory in a compare operation. Default true.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="compare-flags">
+            <xs:annotation>
+                <xs:documentation>Whitespace separated list of compare settings.</xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:list itemType="t-compare-flag"/>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="ag-source-adarefs2ada">
+        <xs:annotation>
+            <xs:documentation>Whether the source data documents for setup operations come from adarefs2ada computations or straight from the ART-DECOR data.</xs:documentation>
+        </xs:annotation>
+        <xs:attribute default="false" name="source-adarefs2ada" type="xs:boolean"> </xs:attribute>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="ag-empty-directory">
+        <xs:annotation>
+            <xs:documentation>The attributes for an empty directory producing element</xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="target-subdir" type="t-non-zero-length-string" use="required">
+            <xs:annotation>
+                <xs:documentation>The name of the subdirectory for the target of the copy action, residing underneath the usecase directory.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attributeGroup ref="ag-directory-id"/>
+        <xs:attributeGroup ref="ag-compare"/>
+        <xs:attributeGroup ref="ag-clear-target"/>
+    </xs:attributeGroup>
+    <xs:simpleType name="t-filename-only">
+        <xs:annotation>
+            <xs:documentation>A filename only (no path allowed)</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:pattern value="[^/\\]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="t-compare-flag">
+        <xs:annotation>
+            <xs:documentation>Compare setting</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="no-hex-filenames"/>
+            <xs:enumeration value="no-uuid-filenames"/>
+            <xs:enumeration value="no-uuid-containing-filenames"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

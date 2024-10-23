@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../xsd/text-document.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        General text about the <empty-root-directory> element in application data files.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <title><anchor name="empty-root-directory-element"/>The <elm>empty-root-directory</elm> element</title>
+
+    <para>The <elm>empty-root-directory</elm> element specifies a directory in the application's root/main output directory (in <code>…/{application}/{version}/</code>, not adding a usecase sub-directory). If such a directory already exists it will be emptied (unless you set <code>@clear-target="false"</code>, which will only be necessary in very rare circumstances).</para>
+
+    <element name="empty-root-directory">
+        <attributes>
+            <attribute name="target-subdir" type="xs:string" required="true">
+                <para>The name of the sub-directory to create.</para>
+            </attribute>
+            <attribute name="directory-id" type="identifier">
+                <para>Defines the identifier for the sub-directory. See <link href="#common-attributes">common attributes</link> for a usage example.</para>
+            </attribute>
+            <attribute name="compare" type="xs:boolean" default="true">
+                <para>Whether this directory should be included in a comparison (with results from the original code).</para>
+            </attribute>
+            <attribute name="compare-flags" type="list of xs:string">
+                <para>Specific settings for comparing this directory with the results of the original code. See the <link href="#compare-flags-attribute">description of these attributes</link> for details.</para>
+            </attribute>
+            <attribute name="clear-target" type="xs:boolean" default="true">
+                <para>Whether to clear the target directory.</para>
+            </attribute>
+        </attributes>
+    </element>
+
+</section>

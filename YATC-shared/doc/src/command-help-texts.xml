@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<text-document xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../../xsd/text-document.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        Documentation about how to write command help texts for YATC.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <title>Command help texts in YATC</title>
+
+    <para>The aim is to provide every YATC command with the option of a help text. To make this easier, a specific markup format for this is used.</para>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>Introduction</title>
+
+        <para>Initially, command help texts were written in plain text files. However, this soon ran into limitations:</para>
+        <unorderedlist>
+            <entry>
+                <para>Pieces of text (for instance the description of often used flags and options) were re-used and there was no import/include mechanism.</para>
+            </entry>
+            <entry>
+                <para>Maintaining a consistent layout (indentation, notation conventions, etc.) was difficult, boring and error-prone.</para>
+            </entry>
+            <entry>
+                <para>Because of the usually limited number of characters on a line in a command line window, text lines needed to wrap to the next lines frequently. It proved rather hard to do this in a correct and consistent way manually.</para>
+            </entry>
+        </unorderedlist>
+
+        <para>To overcome these shortcomings, a proprietary, simple, YATC markup format for command line help texts was introduced, with code to generate the actual help text from this.</para>
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>Creating help texts</title>
+
+        <unorderedlist>
+            <entry>
+                <para>A YATC command line command help text must reside in a sub-directory <code>help/</code> of the directory where the actual command resides (usually the <code>bin/</code> directory).</para>
+            </entry>
+            <entry>
+                <para>The document with the help text must be named <code>{command}.help.xml</code>.</para>
+            </entry>
+            <entry>
+                <para>It is also still possible (but not recommended) to provide help texts as plain text documents. For this, name the document <code>{command}.help.txt</code>.</para>
+
+            </entry>
+            <entry>
+                <para>This document must be written following the <link href="#help-text-format">help text format</link>.</para>
+            </entry>
+        </unorderedlist>
+
+        <para>For example:</para>
+        <unorderedlist>
+            <entry>
+                <para>Assume there is a YATC command <code>do-it</code>, residing somewhere in the YATC system as <code>bin/do-it.bat</code> and <code>bin/do-it.sh</code>.</para>
+            </entry>
+            <entry>
+                <para>Its help text then resides in <code>bin/help/do-it.help.xml</code>.</para>
+            </entry>
+        </unorderedlist>
+
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>Providing help texts</title>
+
+        <unorderedlist>
+            <entry>
+                <para>The (XProc) code for showing a help text is  in <code>YATC-shared/xplmod/yatc-cw.mod.xpl</code>, step <code>yatcs:get-cw-help</code> (cw&#160;=&#160;command wrapper).</para>
+            </entry>
+            <entry>
+                <para>Examples of how to use this can be found in, for instance, <code>YATC-shared/general-engine/xplmod/general-engine.mod.xpl</code>.</para>
+            </entry>
+        </unorderedlist>
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title><anchor name="hel-text-format"/>The help text format</title>
+
+        <unorderedlist>
+            <entry>
+                <para>The schema for the YATC command help text format is in <code>YATC-shared/xsd/command-help-text.xsd</code></para>
+            </entry>
+            <entry>
+                <para>All markup for the YATC text format must be in the <code>https://nictiz.nl/ns/YATC-shared/command-help-text</code> namespace.</para>
+            </entry>
+        </unorderedlist>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title>Root element: <elm>command-help-text</elm></title>
+
+            <para>All command help text documents must have the <elm>command-help-text</elm> element as root.</para>
+
+            <element name="command-help-text">
+                <attributes>
+                    <attribute name="command" type="xs:string">
+                        <para>The name of the command. Use this to override the command name that is inferred from the static base URI of the command itself.</para>
+                    </attribute>
+                </attributes>
+                <children>
+                    <choice occurrences="1">
+                        <element name="command-line-options">
+                            <para>The command line options for the command.</para>
+                        </element>
+                        <element name="xi:include" pseudo-attributes="href">
+                            <para>Reference to an include file (which must start with <elm>command-line-options</elm> here).</para>
+                        </element>
+                    </choice>
+                    <element name="description" occurrences="1">
+                        <para>A description of the command.</para>
+                    </element>
+                </children>
+            </element>
+        </section>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title>Specifying command line options: <elm>command-line-options</elm></title>
+
+            <para>A command line option is a set of flags and arguments that belong together. For instance, most YATC commands have separate command line options for listing (<code>-list</code>), processing (<code>-process</code> or no flag), etc.</para>
+
+            <element name="command-line-options">
+                <children>
+                    <choice occurrences="*">
+                        <element name="command-line-option">
+                            <para>A single command line option.</para>
+                        </element>
+                        <element name="xi:include" pseudo-attributes="href">
+                            <para>Reference to an include file (which must start with <elm>command-line-option</elm> here).</para>
+                        </element>
+                    </choice>
+                </children>
+            </element>
+
+            <emptyline/>
+            <element name="command-line-option">
+                <children>
+                    <choice occurrences="+">
+                        <element name="flag" pseudo-attributes="name optional argument">
+                            <para>A flag that is part of the command line option, see <link href="#flags">flags</link>.</para>
+                        </element>
+                        <element name="argument" pseudo-attributes="name optional">
+                            <para>An argument that is part of the command line option, see <link href="#arguments">arguments</link>.</para>
+                        </element>
+                    </choice>
+                    <element name="description" occurrences="1">
+                        <para>A description for this command line option</para>
+                    </element>
+                </children>
+            </element>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <section>
+                <title><anchor name="flags"/>Flags: <elm>flag</elm></title>
+
+                <para>A flag is something you specify with a minus (<code>-</code>) in front on the command line, for instance <code>-help</code> or <code>-list</code>.</para>
+
+                <para>A flag sometimes has arguments. For instance, the <code>-action</code> flag must be followed by one or more actions, like <code>-action:build+validate</code></para>
+
+                <element name="flag">
+                    <attributes>
+                        <attribute name="name" type="xs:string" required="true">
+                            <para>Name of the flag. Specify this <emph>without</emph> the leading hyphen!</para>
+                        </attribute>
+                        <attribute name="optional" type="xs:boolean" default="false">
+                            <para>Whether this flag is optional or mandatory for this command line option.</para>
+                        </attribute>
+                        <attribute name="argument" type="xs:string">
+                            <para>If the flag has an argument, this is how this is depicted in the help text. For instance: <code>argument="..."</code>.</para>
+                        </attribute>
+                    </attributes>
+                    <additional-text>Contents is the description of the flag.</additional-text>
+                </element>
+
+            </section>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <section>
+                <title>Arguments: <elm>argument</elm></title>
+
+                <para>Examples of arguments in YATC are the name of the application and its version, as in <code>yatc ada-2-hl7 mp 9.3.0</code>. Arguments are written <emph>without</emph> a leading minus (<code>-</code>).</para>
+
+                <element name="argument">
+                    <attributes>
+                        <attribute name="name" type="xs:string" required="true">
+                            <para>Name of the argument.</para>
+                        </attribute>
+                        <attribute name="optional" type="xs:boolean" default="false">
+                            <para>Whether this argument is optional or mandatory for this command line option.</para>
+                        </attribute>
+                    </attributes>
+                    <additional-text>Contents is the description of the flag.</additional-text>
+                </element>
+
+            </section>
+
+        </section>
+
+    </section>
+
+</text-document>

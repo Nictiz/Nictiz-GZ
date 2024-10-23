@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<text-document xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../../xsd/text-document.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        Documentation about how documentation works in YATC
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <title>Documentation in YATC</title>
+
+    <para>One of the goals of YATC was to provide better documentation than the old system.</para>
+    <para>This document provides information about how documentation works within YATC. This is important when you want to adjust something, or write a new piece of documentation yourself.</para>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>Introduction</title>
+
+        <para>There are a number of basic conventions for YATC documentation:</para>
+        <unorderedlist>
+            <entry>
+                <para>Documentation is in the English language (so also possible future non-Dutch developers can read it).</para>
+            </entry>
+            <entry>
+                <para>Generic documentation about YATC (like you're reading now) is in the `YATC-shared/doc/` sub-directory.</para>
+            </entry>
+            <entry>
+                <para>All components in <code>YATC-internal</code> have a sub-directory called <code>doc/</code> for their own documentation.</para>
+            </entry>
+            <entry>
+                <para>The basic format for documentation is [Markdown](https://www.markdownguide.org/).</para>
+            </entry>
+            <entry>
+                <para>Usually a <code>doc/</code> sub-directory contains an `index.md` document, that describes the documentation available.</para>
+            </entry>
+        </unorderedlist>
+
+        <para>While YATC was being developed, it became clear that Markdown alone was not enough:</para>
+
+        <unorderedlist>
+            <entry>
+                <para>Pieces of text were re-used and Markdown has no include/import mechanism.</para>
+            </entry>
+            <entry>
+                <para>The need arose for more complex documentation, like document element descriptions (see [here](parameters-format-reference.md) for a simple example). The easiest way to create this is to use some (usually proprietary) markup. Markdown has no mechanism for this.</para>
+            </entry>
+            <entry>
+                <para>Things like the [help texts for commands](command-help-texts.md) were already there, using a specific markup. Sometimes you want to include this information in more general documentation. Again, this is not possible in Markdown.</para>
+            </entry>
+            <entry>
+                <para>Sometimes you want a table of contents at the top of the document, with links to the sections. Maintaining this is a bore and error-prone.</para>
+            </entry>
+        </unorderedlist>
+
+        <para>To overcome these shortcomings, a proprietary, simple, YATC markup format for text was introduced, with code to generate Markdown from this.</para>
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>Writing YATC text documents and generating Markdown</title>
+
+        <para>For writing YATC text documents:</para>
+        <unorderedlist>
+            <entry>
+                <para>Any documentation in the YATC text format must reside in the <code>doc/src</code> directory. </para>
+            </entry>
+            <entry>
+                <para>A YATC text format document must be valid against <code>YATC-shared/xsd/text-document.xsd</code>.</para>
+            </entry>
+            <entry>
+                <para>There are lots of fragments of shared texts. These reside in the <code>YATC-shared/srcmod/</code> sub-directory.</para>
+            </entry>
+        </unorderedlist>
+
+        <para>There are numerous examples in the <code>doc/src/</code> sub-directories across the YATC system.</para>
+
+        <emptyline/>
+
+        <para>Once you've written (or changed) a YATC text document, you have to generate the Markdown from it. For this, issue the command <code>yatc text-documents-2-markdown</code>. This will process <emph>all</emph> YATC text documents (in both <code>YATC-shared</code> and <code>YATC-internal</code>) and generate Markdown from it.</para>
+
+        <para><emph bold="true">Remark:</emph> The <code>yatc text-documents-2-markdown</code> command processes <emph>all</emph> YATC text documents, regardless of whether they were changed or not. The unwanted effect is that GIT notices changed files (because their timestamp changed), even when nothing was changed in their contents. A tool like Sourcetree makes this visible. It's your choice whether you want to commit these files or revert their changes. The effect on their contents will of course be the same: nothing.</para>
+
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>The YATC text format</title>
+
+        <unorderedlist>
+            <entry>
+                <para>The schema for the YATC text format is in <code>YATC-shared/xsd/text-document.xsd</code></para>
+            </entry>
+            <entry>
+                <para>All markup for the YATC text format must be in the <code>https://nictiz.nl/ns/YATC-shared/text-document</code> namespace.</para>
+            </entry>
+            <entry>
+                <para>All references to <link href="parameters-system.md#yatc-parameter-references">YATC parameters</link> are expanded.</para>
+            </entry>
+        </unorderedlist>
+        
+            
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title>Root element <elm>text-document</elm></title>
+
+            <element name="text-document">
+                <attributes>
+                    <attribute name="toc" type="xs:boolean" default="true">
+                        <para>Whether to generate a table of contents.</para>
+                    </attribute>
+                </attributes>
+                <children>
+                    <element name="macro" occurrences="*">
+                        <para>Define (simple) macros for expansion in text. See <link href="#macros">macros</link>.</para>
+                    </element>
+                    <element name="title" occurrences="1">
+                        <para>The title of this document. Can contain <link href="#inline-markup">inline markup</link>.</para>
+                    </element>
+                    <element name="(block markup)" occurrences="+">
+                        <para>The contents of the document, as defined in <link href="#block-markup">block markup</link>.</para>
+                    </element>
+                </children>
+            </element>
+        </section>
+    </section>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <section>
+        <title><anchor name="block-markup"/>Block markup</title>
+
+        <para>Block markup consists of one or more of the following elements:</para>
+
+        <element name="…">
+            <children>
+                <choice>
+                    <element name="xi:include" pseudo-attributes="href">
+                        <para>Reference to a document to include here.</para>
+                    </element>
+                    <element name="section">
+                        <para>Starts a (sub)section. See <link href="#sections">sections</link>.</para>
+                    </element>
+                    <element name="para">
+                        <para>A paragraph of text. Can contain <link href="#inline-markup">inline markup</link>.</para>
+                    </element>
+                    <element name="codeblock" pseudo-attributes="language xml:space">
+                        <para>A block of code.<br/>The <code>@language</code> attribute sets the programming language, not sure whether this has any effect on the rendering.<br/>Best to set the <code>@xml:space</code> attribute to <code>"preserve"</code> to prevent pretty printing ruining your code layout.</para>
+                    </element>
+                    <element name="dividerline">
+                        <para>Add a horizontal divider line.</para>
+                    </element>
+                    <element name="emptyline">
+                        <para>Add an empty line (vertical whitespace).</para>
+                    </element>
+                    <element name="markdown">
+                        <para>Straight Markdown, copied verbatim.</para>
+                    </element>
+                    <element name="subheading">
+                        <para>A subheading (a heading that does not start a section).</para>
+                    </element>
+                    <element name="unorderedlist">
+                        <para>Start an unordered (bullet) list. See <link href="#lists">lists</link>.</para>
+                    </element>
+                    <element name="orderedlist">
+                        <para>Start an ordered (numbered) list. See <link href="#lists">lists</link>.</para>
+                    </element>
+                    <element name="table">
+                        <para>Start a table. See <link href="#tables">tables</link>.</para>
+                    </element>
+                    <element name="image" pseudo-attributes="href scale">
+                        <para>Inserts an image. The <code>@scale</code> attribute can contain any CSS scaling indicator, for instance <code>"50%"</code>.<br/><emph bold="true" italic="false">Watch out:</emph> The resulting Markdown file resides in a different directory than the text document. Make sure the (usually relative) <code>@href</code> attribute can be resolved from the Markdown file location!</para>
+                    </element>
+                    <element name="group">
+                        <para>Generic grouping element, has no effect on the output. Introduced as a root element for include files. Can contain <link href="#block-markup">block markup</link>.</para>
+                    </element>
+                    <element name="element">
+                        <para>Start an element description. See <link href="#element-descriptions">element descriptions</link>.</para>
+                    </element>
+                    <element name="include-command-help-text" pseudo-attributes="href">
+                        <para>Inserts the help text for the given command.</para>
+                    </element>
+                </choice>
+            </children>
+
+        </element>
+
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title><anchor name="sections"/>Sections: <elm>section</elm></title>
+
+            <para>The <elm>section</elm> element is used to divide the text into sections. Sections can be nested.</para>
+
+            <element name="section">
+                <children>
+                    <element name="macro" occurrences="*">
+                        <para>Define (simple) macros for expansion in text. See <link href="#macros">macros</link>.</para>
+                    </element>
+                    <element name="title" occurrences="1">
+                        <para>The title of this section. Can contain <link href="#inline-markup">inline markup</link>.</para>
+                    </element>
+                    <element name="(block markup)" occurrences="+">
+                        <para>The contents of the section, as defined in <link href="#block-markup">block markup</link>.</para>
+                    </element>
+                </children>
+            </element>
+        </section>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title><anchor name="tables"/>Tables: <elm>table</elm></title>
+
+            <para>Use the <elm>table</elm> element to insert a table. Due to the nature of Markdown, the contents of table cells is limited to a single paragraph.</para>
+
+            <element name="table">
+                <children>
+                    <element name="header" occurrences="1">
+                        <para>The (mandatory) table header. Contains <elm>entry></elm> elements for the table cells.</para>
+                    </element>
+                    <element name="row" occurrences="+">
+                        <para>A table row. Contains <elm>entry></elm> elements for the table cells.</para>
+                    </element>
+                </children>
+            </element>
+
+            <emptyline/>
+            <para>Both the <elm>header</elm> and the <elm>row</elm> element must contain one or more <elm>entry</elm> elements for the table cells:</para>
+
+            <element name="entry">
+                <children>
+                    <element name="para" occurrences="1">
+                        <para>A single paragraph of text. Can contain <link href="#inline-markup">inline markup</link>.<br/>Tip: Use a <elm>br/</elm> to insert newlines and simulate multiple paragraphs.</para>
+                    </element>
+                </children>
+            </element>
+
+        </section>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title><anchor name="lists"/>Lists: <elm>orderedlist</elm>, <elm>unorderedlist</elm></title>
+
+            <para>YATC text has two types of lists: <elm>orderedlist</elm> (numbered) and <elm>unorderedlist</elm> (bulleted). Due to the nature of Markdown, the contents of list entries is limited to a single paragraph with an optional nested list.</para>
+
+            <element name="orderedlist">
+                <children>
+                    <element name="entry" occurrences="+">
+                        <para>An entry in the list.</para>
+                    </element>
+                </children>
+            </element>
+
+            <emptyline/>
+
+            <element name="entry">
+                <children>
+                    <element name="para">
+                        <para>A single paragraph of text. Can contain <link href="#inline-markup">inline markup</link>.<br/>Tip: Use a <elm>br/</elm> to insert newlines and simulate multiple paragraphs.</para>
+                    </element>
+                    <choice occurrences="1">
+                        <element name="orderedlist">
+                            <para>A nested ordered list</para>
+                        </element>
+                        <element name="unorderedlist">
+                            <para>A nested unordered list</para>
+                        </element>
+                    </choice>
+                </children>
+            </element>
+
+            <para>The definition for <elm>unorderedlist</elm> is identical.</para>
+
+        </section>
+
+    </section>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <section>
+        <title><anchor name="inline-markup"/>Inline markup</title>
+
+        <para>YATC text supports the following inline markup:</para>
+
+        <element name="…">
+            <children>
+                <choice>
+                    <element name="code">
+                        <para>A piece of code, for instance a variable name.</para>
+                    </element>
+                    <element name="emph" pseudo-attributes="bold italic">
+                        <para>Emphasize a piece of text. Only bold and italic are supported. Default is italic.</para>
+                    </element>
+                    <element name="link" pseudo-attributes="href">
+                        <para>Create a link to something. To link to an anchor (see the <elm>anchor</elm> inline element), use <elm>link href="#{anchorname}"</elm></para>
+                    </element>
+                    <element name="anchor" pseudo-attributes="name">
+                        <para>Define an anchor: a location you can link to using <elm>link href="#{anchorname}"</elm>.</para>
+                    </element>
+                    <element name="br" close="true">
+                        <para>A line break.</para>
+                    </element>
+                    <element name="elm">
+                        <para>An element. The text inside is set as in an <elm>code</elm> inline element with <code>&lt;</code> before and <code>&gt;</code> after.</para>
+                    </element>
+                </choice>
+            </children>
+        </element>
+    </section>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <section>
+        <title><anchor name="element-descriptions"/>Element descriptions: <elm>element</elm></title>
+
+        <para>YATC text frequently describes elements. The document you're reading now is a good example of this. To achieve a uniform layout, specific markup is used. An element description consists of:</para>
+        <unorderedlist>
+            <entry>
+                <para>A so called "code view": A view of what the element looks like, in a block of code. This is meant to be informative and is <code>not</code> well-formed!</para>
+            </entry>
+            <entry>
+                <para>An optional table describing the attributes.</para>
+            </entry>
+            <entry>
+                <para>An optional table describing the child elements.</para>
+            </entry>
+        </unorderedlist>
+        
+        <element name="element">
+            <attributes>
+                <attribute name="name" type="xs:string" required="true">
+                    <para>The name of the element.</para>
+                </attribute>
+            </attributes>
+            <children>
+                <element name="attributes" occurrences="?">
+                    <para>Description of the attributes.</para>
+                </element>
+                <element name="children" occurrences="?">
+                    <para>Description of the child elements</para>
+                </element>
+                <element name="additional-text" occurrences="?">
+                    <para>An additional text that will appear as a comment in the element's code view.</para>
+                </element>
+            </children>
+        </element>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title>Defining attributes: <elm>attributes</elm></title>
+
+            <element name="atributes">
+                <children>
+                    <element name="attribute" occurrences="*">
+                        <para>An attribute of the element.</para>
+                    </element>
+                </children>
+            </element>
+
+            <emptyline/>
+            <element name="attribute">
+                <attributes>
+                    <attribute name="name" type="xs:string" required="true">
+                        <para>The name of the attribute.</para>
+                    </attribute>
+                    <attribute name="type" type="xs:string">
+                        <para>The type of the attribute.</para>
+                    </attribute>
+                    <attribute name="required" type="xs:boolean" default="false">
+                        <para>Whether the attribute is required.</para>
+                    </attribute>
+                    <attribute name="default" type="xs:string">
+                        <para>The defaulkt value for the attribute.</para>
+                    </attribute>
+                </attributes>
+                <children>
+                    <element name="para">
+                        <para>A single paragraph of text describing the attribute. Can contain <link href="#inline-markup">inline markup</link>.<br/>Tip: Use a <elm>br/</elm> to insert newlines and simulate multiple paragraphs.</para>
+                    </element>
+                </children>
+            </element>
+        </section>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+
+        <section>
+            <title>Defining child elements: <elm>children</elm></title>
+
+            <element name="children">
+                <children>
+                    <choice occurrences="*">
+                        <element name="element">
+                            <para>A child element of the element.</para>
+                        </element>
+                        <element name="choice" pseudo-attributes="occurrences">
+                            <para>A choice out of several child elements, all defined using nested <elm>element</elm> elements.<br/>The <code>@occurrences</code> attribute can be either <code>1</code> (mandatory), <code>?</code> (optional), <code>*</code> (zero or more) or <code>+</code> (one or more)</para>
+                        </element>
+                    </choice>
+                </children>
+            </element>
+
+            <emptyline/>
+            <element name="element">
+                <attributes>
+                    <attribute name="name" type="xs:string" required="true">
+                        <para>The name of the child element.</para>
+                    </attribute>
+                    <attribute name="occurrences" type="xs:string" default="1">
+                        <para>The number of occurrences for this child element. Use either <code>1</code> (mandatory), <code>?</code> (optional), <code>*</code> (zero or more) or <code>+</code> (one or more)</para>
+                    </attribute>
+                    <attribute name="pseudo-attributes" type="list of xs:string">
+                        <para>Add these attributes in the code view.<br/>For instance, <elm>element name="x" pseudo-attributes="a b"</elm> will produce <elm>x a="…" b="…"</elm>.</para>
+                    </attribute>
+                    <attribute name="attributes-indicator" type="xs:boolean" default="false">
+                        <para>Add a <code>…</code> marker after the child element in the code view, to indicate there are (unmentioned) attributes.</para>
+                    </attribute>
+                    <attribute name="comment" type="xs:string">
+                        <para>Add this text as a comment to the child element in the code view.</para>
+                    </attribute>
+                    <attribute name="close" type="xs:boolean" default="false">
+                        <para>Close this element, to indicate it has no further child elements.</para>
+                    </attribute>
+                </attributes>
+                <children>
+                    <element name="para">
+                        <para>A single paragraph of text describing the child element. Can contain <link href="#inline-markup">inline markup</link>.<br/>Tip: Use a <elm>br/</elm> to insert newlines and simulate multiple paragraphs.</para>
+                    </element>
+                </children>
+            </element>
+
+        </section>
+
+    </section>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <section>
+        <title><anchor name="macros"/>Defining and using macros: <elm>macros</elm></title>
+
+        <para>In several places you can define simple macros using the <elm>macro</elm> element. This defines a reusable piece of text. You can reference (expand) a macro using the <code>$macroname</code> notation in text.</para>
+        
+        <para>For instance: at the beginning of the document the following macro is defined: <elm>macro name="TITLE" value="bla bla bla"</elm>. You can reference this macro in a paragraph: <code>&lt;para>The title is $TITLE&lt;/para></code>.</para>
+        
+        <element name="macro"> 
+            <attributes>
+                <attribute name="name" type="xs:NCName" required="true">
+                    <para>The name of the macro.</para>
+                </attribute>
+                <attribute name="value" type="xs:string" required="true">
+                    <para>The value of the macro. Can contain references to other macros.</para>
+                </attribute>
+                <attribute name="default" type="xs:string">
+                    <para>When the <code>@value</code> attribute is the empty string (which might happen due to, for instance, parameter substitutions), this value is used.</para>
+                </attribute>
+            </attributes>
+        </element>
+    </section>
+
+</text-document>

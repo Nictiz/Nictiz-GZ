@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<text-document xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../../xsd/text-document.xsd" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!-- ======================================================================= -->
+    <!-- 
+        Documentation for DSL maintainers
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <title>Hints and tips for DSL maintainers</title>
+
+    <para>This document contains several hints and tips for DSL maintainers. It was written mainly for components that use the [general engine](general-engine.md). Components it does <emph>not</emph> apply to:</para>
+
+    <unorderedlist>
+        <entry>
+            <para><code>get-production-ada-instances</code> and <code>ada-2-wiki</code>: These components use their own DSL. However, with some exceptions, most of the tips and hints below still apply.</para>
+        </entry>
+        <entry>
+            <para><code>distribute</code>: This is a completely different kind of component and this document does not apply.</para>
+        </entry>
+    </unorderedlist>
+
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>Where to find stuff</title>
+
+        <unorderedlist>
+            <entry>
+                <para>The DSL source code for a component is always stored in the component <code>data\</code> sub-directory and called <code>{componentname}-data.xml</code>. For instance, the DSL source code for the <code>ada-2-hl7</code> component can be found in <code>YATC-internal/ada-2-hl7/data/ada-2-hl7-data.xml</code>.</para>
+            </entry>
+            <entry>
+                <para>It is often useful to segment the DSL source code and put the definitions for a specific application in a document of its own. For instance, the <code>ada-2-hl7</code> component uses this mechanism.</para>
+                <unorderedlist>
+                    <entry>
+                        <para>The separate DSL source code documents for the applications are stored in the <code>data/include</code> sub-directory.</para>
+                    </entry>
+                    <entry>
+                        <para>The main DSL source code file includes these using the XInclude mechanism (<elm>xi:include</elm>). For instance, in <code>YATC-internal/ada-2-hl7/data/ada-2-hl7-data.xml</code> you'll find a line including the definitions for the <code>mp/9.3.0</code> application: <elm>xi:include href="include/application-mp-9.3.0.xml"/</elm>.<br/>Remark: The <code>xi</code> namespace prefix must be bound to the <code>http://www.w3.org/2001/XInclude</code> namespace.</para>
+                    </entry>
+                </unorderedlist>
+            </entry>
+            <entry>
+                <para>Detailed documentation for the DSL of a component can always be found in <code>doc/data-format-reference.md</code>. For instance, for the <code>ada-2-hl7</code> component this is <link href="../../../YATC-internal/ada-2-hl7/doc/data-format-reference.md">YATC-internal/ada-2-hl7/doc/src/data-format-reference.xml</link>.</para>
+            </entry>
+            <entry>
+                <para>For most components, all stylesheets and other documents used by the DSL processing are stored underneath the <code>env/</code> directory of the component. The directory structure within <code>env/</code> has been kept as similar as possible to that of the original structure in <code>HL7-mappings</code> or <code>art_decor</code>.</para>
+            </entry>
+        </unorderedlist>
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>Validating DSL source code documents</title>
+
+        <para>It is highly recommended to validate DSL code while editing it. For this you have to link the DSL source code documents to the right schemas.</para>
+
+        <para>For full validation, you'll have to link to <emph>two</emph> schemas:</para>
+        <unorderedlist>
+            <entry>
+                <para>The XML Schema for the DSL code. This is stored in the component <code>xsd/</code> sub-directory and called <code>{componentname}-data.xsd</code>. For instance, for the <code>ada-2-hl7</code> component the XML Schema is <code>YATC-internal/ada-2-hl7/xsd/ada-2-hl7-data.xsd</code>.</para>
+            </entry>
+            <entry>
+                <para>The Schematron Schema for the DSL code. For general engine based components there is only one, which is stored in the <code>YATC-shared</code> repository as <code>YATC-shared/general-engine/sch/general-engine-data.sch</code>.</para>
+            </entry>
+        </unorderedlist>
+
+        <para>To actually link these files to your DSL source code, add the correct <code>xml-model </code>processing instructions and <code>@xsi:schemaLocation</code> attribute. For instance, the main <code>ada-2-hl7</code> DSL source code document <code>YATC-internal/ada-2-hl7/data/ada-2-hl7-data.xml</code> starts like this:</para>
+
+        <codeblock><![CDATA[<?xml-model href="../../../YATC-shared/general-engine/sch/general-engine-data.sch" 
+    type="application/xml"
+    schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<ada-2-hl7-data xmlns="https://nictiz.nl/ns/YATC-internal" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../xsd/ada-2-hl7-data.xsd" 
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+    …]]></codeblock>
+
+        <para>And include files (in the <code>data/include/</code> sub-directory) start like this:</para>
+
+        <codeblock><![CDATA[<?xml-model href="../../../../YATC-shared/general-engine/sch/general-engine-data.sch"
+    type="application/xml"
+    schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<ada-2-hl7-data xmlns="https://nictiz.nl/ns/YATC-internal" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../../xsd/ada-2-hl7-data.xsd">
+    …]]></codeblock>
+
+    </section>
+
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>Specifying files and directories</title>
+
+        <para>When maintaining DSL source code, you'll regularly have to specify documents and directories. In the vast majority of cases, these names are <emph>relative</emph> names. How exactly these relative names are resolved into absolute ones depends:</para>
+        <unorderedlist>
+            <entry>
+                <para>Any <code>@href</code> attribute points to something in the component directory itself, for instance a processing stylesheet. It is resolved against the location of the DSL code document it is used in.<br/>oXygen tip: Drag a file from your project view into the code to automatically insert a relative path to this file.</para>
+            </entry>
+            <entry>
+                <para>Anything else is relative against the data location we're processing, in <code>HL7-mappings</code> or <code>art_decor</code>.</para>
+            </entry>
+        </unorderedlist>
+
+        <para>Here is a repeat of information regarding this subject that is also present in the data format references:</para>
+
+        <xi:include href="../../srcmod/common-attributes.mod.xml"/>
+        <xi:include href="../../srcmod/include-exclude.mod.xml"/>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title><anchor name="debug-tips"/>Debug tip: Find out the absolute directory names used</title>
+
+            <para>Sometimes it is handy and insightful to find out exactly what absolute directories/files are addressed. Here is how to do this:</para>
+
+            <unorderedlist>
+                <entry>
+                    <para>Set the YATC parameter <code>storeProcessedApplicationData</code>to <code>true</code> for your local system. For this edit (or create) the <code>{basedirectory}/data/parameters.xml</code> document (<code>{basedirectory}</code> is the directory where all the YATC repositories (and <code>HL7-mappings</code> and <code>art_decor</code>) are checked out).<br/>Here is an example of what this looks like:</para>
+                </entry>
+            </unorderedlist>
+
+            <codeblock language="xml" xml:space="preserve"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<parameters xmlns="https://nictiz.nl/ns/YATC-shared" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared ../YATC-shared/xsd/parameters.xsd">
+   
+    …
+    
+    <parameter name="storeProcessedApplicationData">
+        <value>true</value>
+    </parameter>
+
+    …
+
+</parameters>]]>
+        </codeblock>
+
+            <unorderedlist>
+                <entry>
+                    <para>Run the YATC command you're interested in. </para>
+                </entry>
+                <entry>
+                    <para>There must now be an additional component directory called <code>tmp/</code> with a document called <code>application-data.xml</code>. For instance for the <code>ada-2-hl7</code> component this is <code>YATC-internal/ada-2-hl7/tmp/application-data.xml</code>.</para>
+                </entry>
+                <entry>
+                    <para>This document contains the internal representation for the DSL engine after all directory and document references are resolved. You'll find the relevant information in the attributes, sometimes with a slightly different name than the original you're used to and/or starting with an underscore (<code>_</code>).</para>
+                </entry>
+            </unorderedlist>
+
+        </section>
+
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>Segmenting builds into actions</title>
+
+        <para>In the original Ant processing code, processing for a component/application/version was sometimes subdivided. For instance, for the original <code>ada_2_hl7/mp/9.3.0</code>, there were commands for the actual build, validating with XML Schema, validating with Schematron, etc. In YATC these separate commands are moved into what is called <emph>actions</emph>. Using actions for subdividing the processing is optional.</para>
+
+        <para>To use actions: </para>
+        <unorderedlist>
+            <entry>
+                <para>Surround the build steps that belong together with an <elm>action</elm> element. </para>
+            </entry>
+            <entry>
+                <para>An action has a mandatory name (<code>@name</code> attribute) and optional (but recommend) description (<code>@description</code> attribute).</para>
+            </entry>
+            <entry>
+                <para>One of your actions can be defined as the default action by adding <code>default="true"</code> as attribute. This action will start if you don't specify a specific action in the conversion command.</para>
+            </entry>
+            <entry>
+                <para>If an action is dependent on other actions to be performed first, specify these in an <code>@depends-on</code> attribute. Its value must be a whitespace separated list of other action names.</para>
+            </entry>
+            <entry>
+                <para>By default the setup processing for an application/version is always performed first. However, for some actions, in particular validation, you do not always want this to be done because it will clean everything that was build. For these actions specify <code>setup="false"</code> as attribute.<br/>You can always overwrite this behaviour from the command line using the <code>-setup</code> flag.</para>
+            </entry>
+        </unorderedlist>
+
+        <para>Information on how to work with actions, for instance find out which actions there are or start a specific one, can be found in the <link href="basic-command-usage.md">basic command usage</link> document.</para>
+
+        <para>For an example of an application/version that uses actions have a look at <code>YATC-internal/ada-2-hl7/data/include/application-mp-9.3.0.xml</code>.</para>
+
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>Using YATC parameters and macros</title>
+
+        <para>YATC DSL source code files can reference/use <link href="parameters-system.md">YATC parameters</link>. They also have an additional mechanism called "simple" macros. Unfortunately, for historic reasons, the notation/usage for these two mechanisms differs.</para>
+
+        <unorderedlist>
+            <entry>
+                <para><link href="parameters-system.md">YATC parameters</link> are defined outside of the DSL in special <link href="parameters-format-reference.md">parameter documents</link>.<br/>A reference to a YATC parameter is written as <code>{{$parametername}</code> or <code>${{parametername}</code>.<br/>To find out which YATC parameters are available, open a command line window and navigate (the current directory) to the component you're interested in. Issue the command <code>yatc get-parameters</code> (see also <link href="command.md">here</link>).</para>
+            </entry>
+            <entry>
+                <para>Simple macros are defined in the DSL document itself, in <elm>macro</elm> elements, or automatically generated.<br/>A reference to a simple macro is written as <code>$macroname</code>.</para>
+            </entry>
+        </unorderedlist>
+
+        <para>To see how the expansion of YATC parameters and simple macros works out, use the mechanism described <link href="#debug-tips">here</link>.</para>
+
+        <para>Here is a repeat of information regarding this subject that is also present in the data format references:</para>
+
+        <xi:include href="../../srcmod/simple-data-file-macro-expansion.mod.xml"/>
+
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>Build stylesheets</title>
+
+        <para>The original Ant based conversions used a lot of XSLT stylesheets. The same stylesheets are also used in YATC. However, some of them had to be slightly changed. Here is an overview of the changes and some other hints:</para>
+        
+        <unorderedlist>
+            <entry>
+                <para>Most stylesheets include other ones, but the directory structure is not always the same as in the original code. Especially generic supporting stylesheets (for instance from the <code>util/</code> sub-directory) are in a different location.</para>
+            </entry>
+            <entry>
+                <para>Some stylesheets write multiple result documents using <elm>xsl:result-document</elm>. In the original code, the output directory could be specified as a relative filename, because the data locations were next to the stylesheet locations. However, in YATC, data and code are separated, so relative filenames here are no longer possible. Therefore, you'll need to pass the name of the actual output directory from the DSL to the stylesheet and construct the absolute output filenames.<br/>An example of this can be found in <code>YATC-internal/ada-2-hl7/data/include/application-mp-9.3.0.xml</code>. Search for <code>bouwstenen</code>. The actual stylesheet called here (<code>YATC-internal/ada-2-hl7/env/mp/9.3.0/xml-voorbeelden/bouwstenen_transacties/bouwstenen_transacties_org.xsl</code>) uses the <code>outputDir</code> parameter to construct a full filename in its <elm>xsl:result-document</elm> instructions, for instance <elm>xsl:result-document href="{$outputDir}/bsmve-example-930-1.xml"</elm>.</para>
+            </entry>
+            <entry>
+                <para>The YATC DSL mechanism passes several standard parameters to the stylesheets (whether you use them or not). For the general engine, these can be found in <code>YATC-shared/general-engine/xslmod/build-standard-parameters.mod.xsl</code>. If you want to use these parameters, include this file in your stylesheet.</para>
+            </entry>
+            <entry>
+                <para>The <code>YATC-shared/xslmod/</code> sub-directory contains general libraries for stylesheets. Most of these are for the DSL processing engine and not very useful in conversion stylesheets. However, there are two that may contain code useful for conversion stylesheets also:</para>
+                <unorderedlist>
+                    <entry>
+                        <para><code>YATC-shared/xslmod/general.mod.xsl</code>: A function library with generic functions for conversions, error handling, etc. All functions are documented.</para>
+                    </entry>
+                    <entry>
+                        <para><code>YATC-shared/xslmod/href.mod.xsl</code>: A function library with generic functions for working with filenames. For instance: get the name, path or extension of a full filename, make a name canonical (resolve <code>.</code> and <code>..</code> parts), etc. All functions are documented.</para>
+                    </entry>
+                </unorderedlist>
+            </entry>
+        </unorderedlist>
+        
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        
+        <section>
+            <title>Build stylesheets and fast mode</title>
+            
+            <para>The <elm>build</elm> command (that runs a stylesheet) has the option to run in "fast" mode by setting the attribute <code>fast="true"</code>. This applies to situations where multiple input files, for instance the contents of a directory, are transformed using the same stylesheet. By loading and compiling the stylesheet only once, an impressive performance increase was achieved.</para>
+            
+            <para>The underlying engine for the DSL, XProc, does not do this natively, so we had to fool the XSLT engine a little. What happens is that the actual stylesheet becomes part of (is included in) a small overarching stylesheet. This overarching stylesheet receives the <emph>collection</emph> of input documents when instantiated and runs them through the actual code one by one.</para>
+            
+            <para>Because of this trick, not all stylesheets can run in fast mode. Referencing the context document in global variables and parameters makes them unsuitable for this. For instance, a stylesheet containing a global parameter defined as <code>&lt;xsl:param name="doc" select="/"/></code> will not run in fast mode because, in fast mode, there is no context document.</para>
+            
+         <para>Finding out whether or not a stylesheet runs in fast mode is easy:</para>   
+            <unorderedlist>
+                <entry>
+                    <para>Remember that fast mode applies to situations where multiple input documents are converted using the same stylesheet only. Other stylesheet usage will not run faster, probably even slower.</para>
+                </entry>
+                <entry>
+                    <para>First try whether your stylesheet runs at all in normal (non-fast) mode. To speed this kind of testing up you can run in test mode (use the <code>-testmode</code> flag on the command line, see also [here](basic-command-usage.md)). </para>
+                </entry>
+                <entry>
+                    <para>Set <code>fast="true"</code> on the relevant <elm>build</elm> element and run it again. If the stylesheet is unsuitable it will produce a nice fat error message. If this does not happen, fast mode can be used.</para>
+                </entry>
+            </unorderedlist>
+        </section>
+        
+    </section>
+
+</text-document>
