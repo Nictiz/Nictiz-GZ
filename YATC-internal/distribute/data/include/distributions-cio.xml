@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../sch/distribute-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<distributions xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../../xsd/distribute-data.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        The distributions for VZVZ
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <distribution name="cio-2.0.0" description="cio 2.0.0 distribution" target-directory="cio/cio-2.0.0-$DISTRIBUTIONVERSION" href-zip="../$DISTRIBUTIONNAME-$DISTRIBUTIONVERSION-$DATECOMPACT-$TIMECOMPACT.zip" base-dir-in-zip="false" allow-overwrite="false" source-directory="{$HL7-mappingsDirectory}" distribution-version-required="true" keep-files="true">
+
+        <!-- This distribution specifically follows the original directory structure.
+             Some master documents were specified twice, these are mentioned but are commented out.  
+        -->
+
+        <message>=============================== Medicatie Overdracht distribution for VZVZ</message>
+
+        <flatten-stylesheets href-include="common/includes" add-addional-info="distribution-comment provenance-comment">
+            
+            <macros>
+                <macro name="CIOVERSION" value="2.0.0"/>
+            </macros>
+         
+
+            <master-document-directory source-directory="ada_2_fhir-r4/cio/$CIOVERSION" target-directory="$SOURCE" recurse="true">
+                <include glob="*.xsl"/>
+              
+            </master-document-directory>
+            
+            <!-- We also need the stylesheets from ada_2_hl7/mp/$MPVERSION. This was already moved to YATC-internal: -->
+            <master-document-directory source-directory="{$yatcInternalDirectory}/ada-2-hl7/env/cio/$CIOVERSION" target-directory="ada_2_hl7/cio/$CIOVERSION" recurse="true">
+                <include glob="*.xsl"/>
+            </master-document-directory>
+            
+
+        </flatten-stylesheets>
+
+        <!--Add the necessary data XML documents to the include directory: -->
+        <directory source-directory="util" target-directory="common/includes" clear-target="false">
+            <include glob="*.xml"/>
+        </directory>
+        <!-- We have to add the QualificationTokens.xml twice, because it is referenced with different paths from different stylesheets :( -->
+        <directory source-directory="ada_2_fhir/fhir" target-directory="common/fhir">
+            <include glob="QualificationTokens.xml"/>
+        </directory>
+        <directory source-directory="ada_2_fhir/fhir" target-directory="ada_2_fhir/fhir">
+            <include glob="QualificationTokens.xml"/>
+        </directory>
+
+        <!-- Add an XML and Markdown information document: -->
+        <additional-xml-document href-target="distribution-info.xml">
+            <distribution xmlns="" name="$DISTRIBUTIONNAME" timestamp="$DATETIMEISO" version="$DISTRIBUTIONVERSION"/>
+        </additional-xml-document>
+        <additional-text-document href-source="#text/README-master.md" href-target="README.md"/>
+
+    </distribution>
+
+    <distribution name="cio-1.0.0" description="cio 1.0.0 distribution" target-directory="cio/cio-1.0.0-$DISTRIBUTIONVERSION" href-zip="../$DISTRIBUTIONNAME-$DISTRIBUTIONVERSION-$DATECOMPACT-$TIMECOMPACT.zip" base-dir-in-zip="false" allow-overwrite="false" source-directory="{$HL7-mappingsDirectory}" distribution-version-required="true" keep-files="true">
+
+        <!-- This distribution specifically follows the original directory structure.
+             Some master documents were specified twice, these are mentioned but are commented out.  
+        -->
+
+        <message>=============================== Medicatie Overdracht distribution for VZVZ</message>
+
+        <flatten-stylesheets href-include="common/includes" add-addional-info="distribution-comment provenance-comment">
+            
+            <macros>
+                <macro name="CIOVERSION" value="1.0.0"/>
+            </macros>
+         
+
+            <master-document-directory source-directory="{$yatcInternalDirectory}/ada-2-fhir/env/cio/$CIOVERSION" target-directory="ada_2_fhir/cio/$CIOVERSION" recurse="true">
+                <include glob="*.xsl"/>
+              
+            </master-document-directory>
+            
+            <master-document-directory source-directory="{$yatcInternalDirectory}/ada-2-fhir/env/cio/1.0.0-2020.01" target-directory="ada_2_fhir/cio/1.0.0-2020.01" recurse="true">
+                <include glob="*.xsl"/>
+              
+            </master-document-directory>
+
+            
+            <master-document-directory source-directory="hl7_2_ada/cio/$CIOVERSION" target-directory="$SOURCE" recurse="true">
+                <include glob="*.xsl"/>
+            </master-document-directory>
+            
+
+        </flatten-stylesheets>
+
+        <!--Add the necessary data XML documents to the include directory: -->
+        <directory source-directory="util" target-directory="common/includes" clear-target="false">
+            <include glob="*.xml"/>
+        </directory>
+        <!-- We have to add the QualificationTokens.xml twice, because it is referenced with different paths from different stylesheets :( -->
+        <directory source-directory="ada_2_fhir/fhir" target-directory="common/fhir">
+            <include glob="QualificationTokens.xml"/>
+        </directory>
+        <directory source-directory="ada_2_fhir/fhir" target-directory="ada_2_fhir/fhir">
+            <include glob="QualificationTokens.xml"/>
+        </directory>
+
+        <!-- Add an XML and Markdown information document: -->
+        <additional-xml-document href-target="distribution-info.xml">
+            <distribution xmlns="" name="$DISTRIBUTIONNAME" timestamp="$DATETIMEISO" version="$DISTRIBUTIONVERSION"/>
+        </additional-xml-document>
+        <additional-text-document href-source="#text/README-master.md" href-target="README.md"/>
+
+    </distribution>
+
+
+
+</distributions>

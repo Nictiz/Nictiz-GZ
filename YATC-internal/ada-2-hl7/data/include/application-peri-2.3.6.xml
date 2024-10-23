@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../../../YATC-shared/general-engine/sch/general-engine-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<application xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../../xsd/ada-2-hl7-data.xsd" name="peri" version="2.3.6" source-adarefs2ada="true" source-project-name="perinatologie-236">
+    <!-- ======================================================================= -->
+    <!-- 
+        ada-2-hl7 application data for peri/2.3.6
+        
+        This is an include file for ../ada-2-hl7-data.xml
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+    <!-- Used abbreviations:
+        
+         kz = kernset_geboortezorg
+    -->
+    <!-- ======================================================================= -->
+
+    <macros>
+        <!-- Date used for conversions to HL7: -->
+        <macro name="DATET" value="2022-01-01"/>
+    </macros>
+
+    <!-- ======================================================================= -->
+    <!-- SETUP: -->
+
+    <message>=========================== {$yatcComponentName}/$BASEPATH</message>
+
+    <setup usecase="kernset_geboortezorg" directory-id="kv">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="kv-ada-instance">
+            <include glob="*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="kv-hl7-instance"/>
+        <empty-directory target-subdir="validate_hl7_instance" directory-id="kv-reports" compare="false"/>
+    </setup>
+    
+    <empty-root-directory target-subdir="validate" compare="false" directory-id="validation-results"/>
+
+    <!-- ======================================================================= -->
+    <!-- BUILD: -->
+    
+    <action name="build" default="true" setup="true" description="Build the ada-2-hl7 documents">
+
+        <build fast="false" name="convert-kernset_geboortezorg">
+            <!-- Remark: Do *not* run this transformation in fast mode, because some global parameter defaults reference the context item (which is not allowed in fast mode). -->
+            <stylesheet href="../../env/peri/2.3.6/kernset_geboortezorg/wrapper/kernset_geboortezorg_wrapper.xsl"/>
+            <input-documents directory="@kv-ada-instance"/>
+            <output-documents directory="@kv-hl7-instance"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="input_xml_wrapper" href="../../env/peri/2.3.6/kernset_geboortezorg/wrapper/input_wrapper.xml"/>
+        </build>
+
+    </action>
+    
+    <!-- ======================================================================= -->
+    <!-- SCHEMA VALIDATION: -->
+    
+    <action name="schema-validate" setup="false" description="Schema-validate the HL7 results">
+        
+        <validate-with-schema>
+            <schema href="../../env/AORTA/trunk/XML/schemas_codeGen/REPC_IN004014NL.xsd"/>
+            <input-documents directory="@kv-hl7-instance"/>
+            <output-report directory="@kv-reports" name="schema-report-hl7-validate.xml"/>
+        </validate-with-schema>
+        
+    </action>
+    
+    <!-- ======================================================================= -->
+    <!-- SCHEMATRON VALIDATION: -->
+    
+    <action name="schematron-validate" setup="false" description="Schematron-validate the HL7 results">
+        
+        <validate-with-schematron>
+            <schema href="../../env/AORTA/branches/Onderhoud_Geboortezorg_v23/Publicaties/20220426/peri20-xml-20220426T100906/XML/schematron_closed_warnings/peri20-ksgz-alg-23.sch"/>
+            <input-documents directory="@kv-hl7-instance"/>
+            <output-report directory="@kv-reports" name="schematron-report-hl7-validate.xml"/>
+        </validate-with-schematron>
+        
+    </action>
+    
+    <!-- ======================================================================= -->
+    <!-- GATHER VALIDATION REPORTS: -->
+    
+    <action name="gather-validation-results" setup="false" description="Gathers all validation results in XML reports">
+        
+        <build fast="true" name="schematron-report-hl7-kernset_geboortezorg">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="hl7_kernset_geboortezorg.xml"/>
+            <parameter name="hrefReportDir" directory="@kv-reports"/>
+            <parameter name="filenamePattern" value="schema*hl7*.xml"/>
+        </build>
+        
+    </action>
+
+    <!-- ======================================================================= -->
+    
+    <action name="validate" description="Perform all validations and gather results" depends-on="schema-validate schematron-validate gather-validation-results" setup="false"/>
+    
+    <!-- ======================================================================= -->
+    
+    <action name="all" description="Performs all builds and validations" depends-on="build validate" setup="true"/>
+    
+</application>

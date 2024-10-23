@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>ADDENDUM VOOR KWALIFICATOR - MEDICATIEGEGEVENS RAADPLEGEN</title>
+      <link href="assets/decor.css" rel="stylesheet" type="text/css" />
+      <link href="assets/css/retrieve-template.css" rel="stylesheet" type="text/css" />
+      <script>window.treeTableCollapsed = true;window.treeTableStringCollapse ='Inklappen';window.treeTableStringExpand = 'Uitklappen';window.treeTableColumn = 0;</script>
+      <script src="assets/scripts/jquery-1.11.1.min.js"></script>
+      <script src="assets/scripts/jquery.treetable.js"></script>
+      <script src="assets/scripts/retrieve-transaction.js"></script>
+   </head>
+   <body>
+      <h1>Inleiding</h1>
+      <p>Dit document bevat een aangepaste versie van het addendum met inhoudelijke gegevens voor de systeemrol 'Medicatiegegevens Raadplegen'. Deze aanpassingen zijn gemaakt om de MedMij kwalificator te ondersteunen tijdens het kwalificeren, opdat het kwalificatieproces inhoudelijk zo objectief mogelijk plaatsvindt. </p>
+      <p>De doelgroep van dit document is de MedMij kwalificator, die de functionele beoordeling uitvoert op het kwalificatiemateriaal dat de leverancier, die wil kwalificeren voor 'Medicatiegegevens Raadplegen', aanlevert.</p>
+      <p>Dit document is alleen bestemd voor de kwalificatie van een Dienstverlenend Persoon (DVP), die komt kwalificeren met een Persoonlijke Gezondheidsomgeving (PGO). </p>
+      <p>Hieronder volgt een aantal belangrijke aandachtspunten.</p>
+      <h2>Opzet van dit document</h2>
+      <p>Dit document bevat het oorspronkelijke addendum voor Medicatiegegevens Raadplegen, aangepast op de volgende punten:</p>
+      <ul>
+         <li>De volgorde van de bouwstenen is gewijzigd, zodat alle bouwstenen die bij één MBH horen onder elkaar worden getoond. Deze gebundelde weergave zorgt ervoor dat de kwalificator gemakkelijker en beter kan controleren of de DVP de MBH's en bijbehorende bouwstenen op een juiste wijze weergeeft.</li>
+         <li>Er zijn kleuren toegevoegd om aan te geven welke onderdelen van het addendum verplicht, optioneel of optioneel onder voorwaarde zijn.</li>
+         <li>Er zijn toelichtingen toegevoegd indien er een voorwaarde of andere opmerking op een onderdeel van het addendum van toepassing is.</li>
+      </ul>
+      <h2>Legenda</h2>
+      <p>De tabel hieronder geeft de functie weer van de kleuren die in dit document gebruikt worden. Met 'data-element' wordt de combinatie van het conceptlabel (bijv. 'Naam') en de bijbehorende waarde (bijv. 'Jansen') bedoeld.</p>
+      <table class="treetable" width="100%" border="0" cellspacing="3" cellpadding="2">
+         <tr>
+            <th class="columnName" width="30%" style="text-align: left;">Kleur</th>
+            <th class="columnDetails" style="text-align: left;">Functie</th>
+         </tr>
+         <tr>
+            <td class="togglertreetable">Witte achtergrond</td>
+            <td class="withBorder">Data-element is verplicht om te tonen.</td>
+         </tr>
+         <tr>
+            <td class="togglertreetable">Gele achtergrond</td>
+            <td class="withBorder bgYellow">Data-element is optioneel om te tonen.</td>
+         </tr>
+         <tr>
+            <td class="togglertreetable">Blauwe achtergrond</td>
+            <td class="withBorder bgBlue">Data-element is optioneel om te tonen onder voorwaarde. Tonen is niet verplicht, maar het data-element dient wel op een manier verwerkt te worden. Zie voor meer informatie <i>de toelichting over de voorwaarde</i> bij het betreffende data-element.</td>
+         </tr>
+         <tr>
+            <td class="togglertreetable">Rode achtergrond</td>
+            <td class="withBorder bgRed">Data-element is niet toegestaan om te tonen.</td>
+         </tr>
+         <tr>
+            <td class="togglertreetable">Bold tekst</td>
+            <td class="withBorder">
+               <b>Alternatief/synoniem voor het conceptlabel of de waarde.</b>
+            </td>
+         </tr>
+      </table>
+      <p>Let op: de ‘technische stop’ bouwstenen (dit staat in de titel aangegeven) zijn optioneel om te tonen.</p>
+      <h2>Synoniemen</h2>
+      <p>Het kan voorkomen dat een leverancier een conceptlabel gebruikt dat afwijkt van het conceptlabel in het addendum. <br />Indien het afwijkende conceptlabel volgens de informatieanalist van de gegevensdienst een correct synoniem blijkt te zijn, voegt de kwalificator dit goedgekeurde synoniem toe aan dit addendum voor de kwalificator (via de kwalificatie community?). <br />Het synoniem van het conceptlabel wordt dan in de rechterkolom dikgedrukt weergegeven, achter de tekst ‘Toegestane synoniemen’. </p>
+      <h2>Achtergrond Medicatiegegevens</h2>
+      <p>De gegevensdienst 'Medicatiegegevens' bevat transacties waarbij de MBH bouwstenen van een patiënt opgevraagd worden op basis van query parameters. De volgende aspecten spelen bij Medicatiegegevens een rol:</p>
+      <ul>
+         <li>Verschillende soorten bouwsteentypes, waaronder ook de logistieke bouwstenen VV (Verstrekkingsverzoek) en MVE (Verstrekking).</li>
+         <li>De transactie wordt gedaan op basis van een periode.</li>
+         <li>Alleen bouwstenen worden getoond waarvan de zorgaanbieder zelf de bron is.</li>
+      </ul>
+      <h2>Aanvullende instructie</h2>
+      <p>Bij het beoordelen van 'Medicatiegegevens Raadplegen' spelen enkele complexe begrippen een belangrijke rol:</p>
+      <ol>
+         <li>Samenhang</li>
+         <li>Actualiteit</li>
+         <li>Wijzigingen</li>
+      </ol>
+      <p>Voor een MedMij kwalificator is het van belang om de toepassing van deze begrippen door de leverancier op een juiste wijze te beoordelen. Een korte uitleg van de begrippen en de bijbehorende kwalificatiewijze is te vinden in het bestand ‘Kwalificatie instructie - Medicatieproces’.</p>
+      <h1>Inhoudelijke gegevens</h1>
+
+      <!-- the imports below don't actually work in HTML, we apply an XSLT to resolve them -->
+      <import xmlns="" href="../html_instance_kwal/XXX_Dirksz-907.html"></import>
+      <import xmlns="" href="../html_instance_kwal/XXX_Bourgonje-907.html"></import>
+      <import xmlns="" href="../html_instance_kwal/XXX_Ruys-907.html"></import>
+      <import xmlns="" href="../html_instance_kwal/XXX_Gobee-907.html"></import>
+      <import xmlns="" href="../html_instance_kwal/XXX_Cnossen-907.html"></import>
+      <import xmlns="" href="../html_instance_kwal/XXX_Strengersz-907.html"></import>
+      <import xmlns="" href="../html_instance_kwal/XXX_Amaya-907.html"></import>
+      <import xmlns="" href="../html_instance_kwal/XXX_Kilkenny-907.html"></import>
+   </body>
+</html>

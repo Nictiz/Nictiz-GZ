@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../sch/ada-2-fhir-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<application name="cio" version="1.0.0-2020.01" source-adarefs2ada="false" source-version="1.0.0" xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../../xsd/ada-2-fhir-data.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        ada-2-fhir application data for cio 1.0.0-2020.01
+        
+        This is an include file for ../ada-2-fhir-data.xml
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+    <!-- Setup: -->
+
+    <!-- beschikbaarstellen_allergie_intolerantie -->
+    <setup usecase="beschikbaarstellen_allergie_intolerantie" directory-id="bsai">
+        <copy-project-schemas target-subdir="ada_schemas">
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="bsai-ada-instance">
+            <include glob="bs*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="fhir_instance" directory-id="bsai-fhir-instance"/>
+    </setup>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <!-- beschikbaarstellen_allergie_intolerantie_vertaling -->
+    <setup usecase="beschikbaarstellen_allergie_intolerantie_vertaling" directory-id="bsaiv">
+        <copy-project-schemas target-subdir="ada_schemas">
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="bsaiv-ada-instance">
+            <include glob="CIO-*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="fhir_instance" directory-id="bsaiv-fhir-instance"/>
+    </setup>
+
+    <!-- ======================================================================= -->
+    <!-- Builds: -->
+
+    <!-- Builds for beschikbaarstellen_allergie_intolerantie  -->
+    <build name="build-resources-beschikbaarstellen_allergie_intolerantie">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen_allergie_intolerantie/payload/beschikbaarstellen_allergie_intolerantie_2_fhir_resources.xsl"/>
+        <input-documents directory="@bsai-ada-instance"/>
+        <discard-output/>
+        <parameter name="outputDirectory" directory="@bsai-fhir-instance"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+    </build>
+
+    <build name="build-beschikbaarstellen_allergie_intolerantie">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen_allergie_intolerantie/payload/beschikbaarstellen_allergie_intolerantie_2_fhir.xsl"/>
+        <input-documents directory="@bsai-ada-instance"/>
+        <output-documents directory="@bsai-fhir-instance"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+    </build>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <!-- Builds for beschikbaarstellen_allergie_intolerantie-vertaling -->
+    <build name="build-resources-beschikbaarstellen_allergie_intolerantie-vertaling">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen_allergie_intolerantie_vertaling/payload/beschikbaarstellen_allergie_intolerantie_vertaling_2_fhir_resources.xsl"/>
+        <input-documents directory="@bsaiv-ada-instance"/>
+        <discard-output/>
+        <parameter name="outputDirectory" directory="@bsaiv-fhir-instance"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+    </build>
+
+    <build name="build-beschikbaarstellen_allergie_intolerantie-vertaling">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen_allergie_intolerantie_vertaling/payload/beschikbaarstellen_allergie_intolerantie_vertaling_2_fhir.xsl"/>
+        <input-documents directory="@bsaiv-ada-instance"/>
+        <output-documents directory="@bsaiv-fhir-instance"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+    </build>
+
+</application>

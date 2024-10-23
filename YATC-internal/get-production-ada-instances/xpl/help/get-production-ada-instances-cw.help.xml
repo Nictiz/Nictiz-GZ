@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<command-help-text xmlns="https://nictiz.nl/ns/YATC-shared/command-help-text" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/command-help-text ../../../../YATC-shared/xsd/command-help-text.xsd" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!-- ======================================================================= -->
+    <!-- 
+        Command line help text for the get-production-ada-instances command.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <description>Get production ADA instances from ART-DECOR for an application/version. When specified, it also performs adarefs2ada processing.</description>
+
+    <command-line-options>
+        <xi:include href="../../../../YATC-shared/chtmod/help-command-line-option.xml"/>
+        <xi:include href="../../../../YATC-shared/chtmod/list-command-line-option.xml"/>
+        <command-line-option>
+            <flag name="process" optional="true"/>
+            <flag name="reporturls" optional="true">Report all used TEST URLs.</flag>
+            <flag name="noretrieval" optional="true">Do not retrieve data from ART-DECOR, perform the adarefs2ada processing only.</flag>
+            <flag name="noadarefs2ada" optional="true">Do not execute the adarefs2ada processing (if any).</flag>
+            <argument name="application"/>
+            <argument name="version"/>
+            
+            <description>Retrieve the ADA production documents for an application/version from ART-DECOR. Perform the adarefs2ada post-processing (if specified). To get all versions/applications, use either #all or %all.</description>
+        </command-line-option>
+    </command-line-options>
+
+</command-help-text>

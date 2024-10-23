@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<import-aorta-documents xmlns="https://nictiz.nl/ns/YATC-shared/import-aorta-documents" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/import-aorta-documents ../../../YATC-shared/support/import-aorta-documents.xsd" href-target="ada-2-hl7/env/AORTA">
+    <!-- ======================================================================= -->
+    <!-- 
+        This document specifies imports/copies from the AORTA repository for use in the ada-2-hl7 processing.
+        
+        It is meant to be processed by the import-aorta-documents command (which runs YATC-shared/support/import-aorta-documents.xpl)
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+    <!-- For mp/9.2.0beta: -->
+
+    <!-- Remark: The AORTA repo has the files in a zip: branches/Onderhoud_Mp_v90/Publicaties/20210921/mp-xml-20210921T194523.zip 
+         To be able to import these documents, this zip must be unzipped first (in the same location).
+    -->
+    <directory href="branches/Onderhoud_Mp_v90/Publicaties/20210921/mp-xml-20210921T194523">
+
+        <!-- XML Schemas: -->
+        <directory href="schemas_codeGen_flat">
+            <document href="organizer.xsd"/>
+            <document href="CDANL_extended.xsd"/>
+        </directory>
+
+        <!-- Schematrons: -->
+        <!-- The order here is the order in which they're used in both the old Ant scripts and in include/application-mp-9.2.0beta.xml -->
+        <directory href="schematron_closed_warnings">
+            <document href="mp-mp92_mgb.sch"/>
+            <document href="mp-mp92_mob.sch"/>
+            <document href="mp-mp92_avvv.sch"/>
+            <document href="mp-mp92_mgbs.sch"/>
+            <document href="mp-mp92_vos.sch"/>
+            <document href="mp-mp92_vma.sch"/>
+            <document href="mp-mp92_vvv.sch"/>
+            <document href="mp-mp92-av.sch"/>
+            <!-- Remark: notice the use of -av instead of _av, as would be expected, given the other document names. Don't know why. -->
+        </directory>
+
+    </directory>
+
+    <!-- ======================================================================= -->
+    <!-- For mp/9.2.0: -->
+
+    <!-- Remark: The AORTA repo has the files in a zip: branches/Onderhoud_Mp_v90/Publicaties/20220402/mp-xml-20220402T205710.zip
+         To be able to import these documents, this zip must be unzipped first (in the same location).
+    -->
+
+    <directory href="branches/Onderhoud_Mp_v90/Publicaties/20220402/mp-xml-20220402T205710">
+
+        <!-- XML Schemas: -->
+        <directory href="schemas_codeGen_flat">
+            <document href="organizer.xsd"/>
+            <document href="CDANL_extended.xsd"/>
+        </directory>
+
+        <!-- Schematrons: -->
+        <!-- The order here is the order in which they're used in both the old Ant scripts and in include/application-mp-9.2.0.xml -->
+        <directory href="schematron_closed_warnings">
+            <document href="mp-mp92_mgb.sch"/>
+            <document href="mp-mp92_av.sch"/>
+            <document href="mp-mp92_avvv.sch"/>
+            <document href="mp-mp92_vos.sch"/>
+            <document href="mp-mp92_vma.sch"/>
+            <document href="mp-mp92_avma.sch"/>
+            <document href="mp-mp92_vvv.sch"/>
+        </directory>
+
+    </directory>
+
+    <!-- ======================================================================= -->
+    <!-- For mp/9.3.0: -->
+
+    <!-- Remark: The AORTA repo has the files in a zip: branches/Onderhoud_Mp_v90/Publicaties/20231017/mp-xml-20231017T223005.zip
+         To be able to import these documents, this zip must be unzipped first (in the same location).
+    -->
+
+    <directory href="branches/Onderhoud_Mp_v90/Publicaties/20240229/mp-xml-20240229T110214">
+        <!-- XML Schemas: -->
+        <directory href="schemas_codeGen_flat">
+            <document href="organizer.xsd"/>
+            <document href="CDANL_extended.xsd"/>
+        </directory>
+    </directory>    
+
+    <directory href="trunk/Zorgtoepassing/Medicatieproces/DECOR/mp-runtime-develop">
+        <!-- Schematrons: -->
+        <!-- The order here is the order in which they're used in both the old Ant scripts and in include/application-mp-9.3.0.xml -->
+        <document href="mp-mp93_mgb.sch"/>
+        <document href="mp-mp93_av.sch"/>
+        <document href="mp-mp93_avvv.sch"/>
+        <document href="mp-mp93_vos.sch"/>
+        <document href="mp-mp93_vma.sch"/>
+        <document href="mp-mp93_avma.sch"/>
+        <document href="mp-mp93_mob.sch"/>
+        <document href="mp-mp93_vvv.sch"/>
+        <!-- For bouwstenen: -->
+        <document href="mp-mp93_mg_ma.sch"/>
+        <document href="mp-mp93_mg_wds.sch"/>
+        <document href="mp-mp93_mg_vv.sch"/>
+        <document href="mp-mp93_mg_ta.sch"/>
+        <document href="mp-mp93_mg_mve.sch"/>
+        <document href="mp-mp93_mg_mgb.sch"/>
+        <document href="mp-mp93_mg_mtd.sch"/>
+    </directory>
+
+    <!-- ======================================================================= -->
+    <!-- For peri/2.3.6: -->
+
+    <!-- trunk/XML/schemas_codeGen/REPC_IN004014NL.xsd -->
+
+    <directory href="trunk/XML/schemas_codeGen">
+        <!-- XML Schemas: -->
+        <document href="REPC_IN004014NL.xsd"/>
+    </directory>
+
+    <directory href="branches/Onderhoud_Geboortezorg_v23/Publicaties/20220426/peri20-xml-20220426T100906/XML/schematron_closed_warnings">
+        <document href="peri20-ksgz-alg-23.sch"/>
+    </directory>
+    
+    <!-- ======================================================================= -->
+    <!-- For peri/3.0: -->
+    
+    <!-- Uses the CDA schema that is already imported for mp/9.2.0beta: 
+         branches/Onderhoud_Mp_v90/Publicaties/20210921/mp-xml-20210921T194523/schemas_codeGen_flat/CDANL_extended.xsd -->
+    
+    <directory href="trunk/Zorgtoepassing/PerinataleZorg/DECOR/peri20-runtime-develop">
+        <!-- Schematrons: -->
+        
+        
+    </directory>
+    
+</import-aorta-documents>

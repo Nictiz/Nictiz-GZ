@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             name="AanvInfoTA"
+             displayName="Aanvullende informatie toedieningsafspraak"
+             id="2.16.840.1.113883.2.4.3.11.60.20.77.11.34"
+             statusCode="final"
+             versionLabel="9"
+             effectiveDate="2017-05-05T13:29:41">
+      <sourceCodeSystem id="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"
+                        identifierName="G-std thesaurus 2053"
+                        canonicalUri="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"
+                        canonicalUriDSTU2="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"
+                        canonicalUriSTU3="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"
+                        canonicalUriR4="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"/>
+      <publishingAuthority name="Nictiz">
+         <addrLine>Oude Middenweg 55</addrLine>
+         <addrLine>2491 AC Den Haag</addrLine>
+         <addrLine>T 070 317 3450</addrLine>
+      </publishingAuthority>
+      <conceptList>
+         <concept code="1"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"
+                  displayName="Geneesmiddel niet verstrekt"
+                  level="0"
+                  type="L"/>
+         <concept code="2"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"
+                  displayName="Niet leverbaar"
+                  level="0"
+                  type="L"/>
+         <concept code="3"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"
+                  displayName="Medicatieafspraak gewijzigd: substantie"
+                  level="0"
+                  type="L"/>
+         <concept code="4"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"
+                  displayName="Medicatieafspraak gewijzigd: dosering"
+                  level="0"
+                  type="L"/>
+         <concept code="5"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"
+                  displayName="Medicatieafspraak gewijzigd: farmaceutische vorm"
+                  level="0"
+                  type="L"/>
+         <concept code="6"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"
+                  displayName="Medicatieafspraak gewijzigd: verwisseling van persoon"
+                  level="0"
+                  type="L"/>
+         <concept code="7"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"
+                  displayName="Machtiging aangevraagd"
+                  level="0"
+                  type="L"/>
+         <concept code="8"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"
+                  displayName="Machtiging afgewezen"
+                  level="0"
+                  type="L"/>
+         <concept code="9"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"
+                  displayName="Machtiging in gebruik nemen"
+                  level="0"
+                  type="L"/>
+         <concept code="10"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"
+                  displayName="Gebruiksinstructie gegeven"
+                  level="0"
+                  type="L"/>
+         <concept code="11"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"
+                  displayName="Controle inhalatietechniek"
+                  level="0"
+                  type="L"/>
+         <concept code="12"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"
+                  displayName="Meter periodieke controle"
+                  level="0"
+                  type="L"/>
+         <concept code="13"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"
+                  displayName="Pen controle/omruil"
+                  level="0"
+                  type="L"/>
+         <concept code="14"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"
+                  displayName="Bijwerking besproken"
+                  level="0"
+                  type="L"/>
+         <concept code="15"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"
+                  displayName="Afhandeling bijwerking niet-lareb"
+                  level="0"
+                  type="L"/>
+         <concept code="16"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"
+                  displayName="Melding lareb"
+                  level="0"
+                  type="L"/>
+         <concept code="17"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2053"
+                  displayName="Medicatiebewaking OTC"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">Medicatiebewaking Over The Counter (OTC)</desc>
+         </concept>
+      </conceptList>
+   </valueSet>
+</valueSets>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../../YATC-shared/general-engine/sch/general-engine-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<ada-2-fhir-data xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../xsd/ada-2-fhir-data.xsd" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!-- ================================================================== -->
+    <!--
+        This is the production data for the ada-2-fhir processing.
+        
+        Information about the format of this document in its schema ../xsd/ada-2-fhir-data.xsd
+        Information about how this file is used in the documentation in the ../doc/ subdirectory.
+        
+        Some of the application definitions became quite big, therefore this file uses 
+        include files for some of the applications to make stuff more manageable.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+    <!-- bgz_mm -->
+
+    <application name="bgz_mm" version="3.1">
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- Beschikbaarstellen -->
+
+        <message>WARNING: This conversion uses *static* ADA data (source: YATC-internal/ada-2-fhir/env/bgz_mm/3.1/beschikbaarstellen/ada_instance/)</message>
+
+        <setup usecase="beschikbaarstellen" directory-id="bs">
+            <empty-directory target-subdir="ada_processed" directory-id="bs-ada-processed"/>
+            <empty-directory target-subdir="fhir_instance_resources" directory-id="bs-fhir-instance-resources"/>
+            <copy-directory directory="#../env/$BASEPATH/ada_instance/" target-subdir="ada_instance"/>
+            <!-- The current setup creates no bundles, so do not create a directory for this: -->
+            <!--<empty-directory target-subdir="fhir_instance_bundles" directory-id="bs-fhir-instance-bundles"/>-->
+        </setup>
+
+        <build name="create-ada-processed-documents">
+            <stylesheet href="../env/$BASEPATH/beschikbaarstellen/payload/ada_processing/bgz_mm-adarefs2ada.xsl"/>
+            <input-documents directory="#../env/bgz_mm/3.1/beschikbaarstellen/ada_instance"/>
+            <discard-output/>
+            <parameter name="outputDirectory" directory="@bs-ada-processed"/>
+        </build>
+
+        <build name="create-fhir-instance-documents">
+            <stylesheet href="../env/$BASEPATH/beschikbaarstellen/payload/beschikbaarstellen_2_fhir.xsl"/>
+            <input-documents directory="@bs-ada-processed"/>
+            <discard-output/>
+            <parameter name="adaProcessedDirectory" directory="@bs-ada-processed"/>
+            <parameter name="outputDirectory" directory="@bs-fhir-instance-resources"/>
+            <!--<parameter name="outputDirectoryBundles" directory="@bs-fhir-instance-bundles"/>-->
+        </build>
+       
+    </application>
+
+    <!-- ======================================================================= -->
+    <!-- bgz_msz -->
+    
+    <xi:include href="include/application-bgz_msz-1.2.xml"/>
+
+    <!-- ======================================================================= -->
+    <!-- cio -->
+
+    <xi:include href="include/application-cio-1.0.0.xml"/>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <xi:include href="include/application-cio-1.0.0-2020.01.xml"/>
+
+    <!-- ======================================================================= -->
+    <!-- ketenzorg -->
+
+    <xi:include href="include/application-ketenzorg-3.0.2.xml"/>
+
+    <!-- ======================================================================= -->
+    <!-- medicatieproces -->
+
+    <xi:include href="include/application-mp-9.0.7.xml"/>
+
+    <!-- ======================================================================= -->
+    <!-- vragenlijsten -->
+
+    <xi:include href="include/application-vragenlijsten-1.0.0.xml"/>
+    
+</ada-2-fhir-data>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../sch/distribute-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<distributions xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../../xsd/distribute-data.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        The distributions for testing the distribution mechanism itself.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <distribution name="test-distribution" target-directory="test/TEST-DISTRIBUTION" href-zip="../ZIP-$DISTRIBUTIONNAME-$DATECOMPACT-$TIMECOMPACT.zip" description="Testing the distribution mechanism" allow-overwrite="true">
+
+        <!-- Test distribution (that uses all allowed children). The result is utter nonsense. -->
+
+        <message>THIS IS A TEST DISTRIBUTION!</message>
+
+        <directory source-directory="ada-2-fhir/env/zibs2017/payload/" target-directory="payload-straight">
+            <include glob="*.xsl"/>
+        </directory>
+
+        <file href-source="README.md" href-target="$SOURCE"/>
+
+        <additional-text-document href-source="README.md" href-target="additional-$SOURCENAME"/>
+
+        <combine-additional-text-documents href-target="README-additional-combined.md">
+            <text-document href-source="README.md"/>
+            <text-document href-source="distribute/README.md"/>
+        </combine-additional-text-documents>
+
+        <additional-xml-document href-target="XML-additional.xml">
+            <versioninfo xmlns="" name="$DISTRIBUTIONNAME" version="$DISTRIBUTIONVERSION">$DATETIMEISO</versioninfo>
+        </additional-xml-document>
+
+        <flatten-stylesheets source-directory="ada-2-fhir" target-directory="$SOURCE" href-include="include-stylesheets" add-addional-info="#all">
+            <macros>
+                <macro name="ZIBS" value="zibs2017"/>
+            </macros>
+            <group source-directory="env/$ZIBS/">
+                <master-document-directory source-directory="payload" target-directory="payload-dest">
+                    <include glob="package*.xsl"/>
+                </master-document-directory>
+            </group>
+            <master-document href-source="env/bgz_mm/3.1/beschikbaarstellen/payload/beschikbaarstellen_2_fhir.xsl"/>
+            <master-document href-source="env/bgz_mm/3.1/beschikbaarstellen/payload/beschikbaarstellen_2_fhir.xsl" href-target="xxx/$SOURCENAME"/>
+            <!-- Non exist tests: -->
+            <master-document href-source="env/bgz_mm/3.1/beschikbaarstellen/payload/DOESNOTEXIST.xsl" must-exist="false"/>
+            <master-document-directory source-directory="DOESNOTEXIST" allow-empty="true"/>
+        </flatten-stylesheets>
+        <flatten-schemas source-directory="distribute/xsd" target-directory="SCHEMAS-FLATTENED" href-include="include-schemas">
+            <master-document-directory/>
+        </flatten-schemas>
+        <flatten-schematrons source-directory="distribute/sch" target-directory="SCHEMATRONS-FLATTENED" href-include="include-schematrons">
+            <master-document-directory/>
+        </flatten-schematrons>
+
+    </distribution>
+
+</distributions>

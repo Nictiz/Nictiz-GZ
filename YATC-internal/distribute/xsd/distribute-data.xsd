@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="https://nictiz.nl/ns/YATC-internal" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:yatci="https://nictiz.nl/ns/YATC-internal">
+    <!-- ======================================================================= -->
+    <!--
+    Copyright © Nictiz
+
+    This program is free software; you can redistribute it and/or modify it under the terms of the
+    GNU Lesser General Public License as published by the Free Software Foundation; either version
+    2.1 of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+    without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU Lesser General Public License for more details.
+    
+    The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <xs:annotation>
+        <xs:documentation>Schema for the distribute data document. This document defines the possible distributions of the YATC stylesheets and/or data.</xs:documentation>
+    </xs:annotation>
+    <xs:import namespace="http://www.w3.org/2001/XInclude" schemaLocation="../../../YATC-shared/xsdmod/xinclude.mod.xsd"/>
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="../../../YATC-shared/xsdmod/xml.mod.xsd"/>
+    <xs:include schemaLocation="../../../YATC-shared/xsdmod/general.mod.xsd"/>
+    <xs:include schemaLocation="../../../YATC-shared/xsdmod/application-data-file.mod.xsd"/>
+    <xs:element name="distribute-data">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:group minOccurs="0" ref="yatci:g-macros"/>
+                <xs:choice maxOccurs="unbounded" minOccurs="0">
+                    <xs:element ref="yatci:distributions"/>
+                    <xs:element ref="yatci:distribution"/>
+                    <xs:element ref="xi:include"/>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attribute default="{$yatcInternalDirectory}" name="source-directory" type="xs:anyURI">
+                <xs:annotation>
+                    <xs:documentation>The base source directory for the distributions. A relative (or absent) value is resolved against the YATC-internal base directory (in YATC parameter yatcInternalDirectory).</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute default="{$publicBaseDistributionDirectory}" name="target-directory" type="xs:anyURI">
+                <xs:annotation>
+                    <xs:documentation>The base target directory for the distributions. A relative (or absent) value is resolved against the base global distribution directory (in YATC parameter publicBaseDistributionDirectory).</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute ref="xml:base"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="distributions">
+        <xs:annotation>
+            <xs:documentation>A group of distributions
+</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:group minOccurs="0" ref="yatci:g-macros"/>
+                <xs:choice maxOccurs="unbounded" minOccurs="0">
+                    <xs:element ref="yatci:distribution"/>
+                    <xs:element ref="xi:include"/>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attribute ref="xml:base"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="distribution">
+        <xs:annotation>
+            <xs:documentation>A single distribution</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="yatci:ct-distribution-components">
+                    <xs:attribute name="name" type="yatci:t-non-zero-length-string" use="required">
+                        <xs:annotation>
+                            <xs:documentation>The name/identifier of the distribution</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="description" type="yatci:t-non-zero-length-string">
+                        <xs:annotation>
+                            <xs:documentation>Optional short description of this distribution.</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="href-zip" type="xs:anyURI">
+                        <xs:annotation>
+                            <xs:documentation>The name of the zip file for this distribution. If not specified or empty, no zip file will be produced. A relative name is resolved against the target directory settings of the ancestor elements (from the ancestors @target-directory attributes).</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute default="true" name="base-dir-in-zip" type="xs:boolean">
+                        <xs:annotation>
+                            <xs:documentation>Whether the distribution's base directory will be included as root directory in the zip.</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute default="true" name="keep-files" type="xs:boolean">
+                        <xs:annotation>
+                            <xs:documentation>Whether to keep the output files produced by the distribution mechanism. Set to false and specfy @href-zip if you only want a zip file.</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute default="false" name="allow-overwrite" type="xs:boolean">
+                        <xs:annotation>
+                            <xs:documentation>Whether to allow overwriting an existing distribution (with the same target directory).</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute default="false" name="distribution-version-required" type="xs:boolean">
+                        <xs:annotation>
+                            <xs:documentation>Whether an explicit distribution version is required for this distribution.</xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute ref="xml:base"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="ct-distribution-components">
+        <xs:annotation>
+            <xs:documentation>All components (possible actions) of a distribution</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:group minOccurs="0" ref="yatci:g-macros"/>
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+                <xs:group ref="yatci:g-message"/>
+                <xs:element name="directory">
+                    <xs:annotation>
+                        <xs:documentation>A directory to add to the distribution</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="yatci:ct-copy-patterns">
+                                <xs:attributeGroup ref="yatci:ag-source-target-directories"/>
+                                <xs:attribute default="false" name="allow-empty" type="xs:boolean">
+                                    <xs:annotation>
+                                        <xs:documentation>When false, an empty directory copy results in an error.</xs:documentation>
+                                    </xs:annotation>
+                                </xs:attribute>
+                                <xs:attribute default="true" name="recurse" type="xs:boolean">
+                                    <xs:annotation>
+                                        <xs:documentation>Whether to copy sub-directories (recursively) also.</xs:documentation>
+                                    </xs:annotation>
+                                </xs:attribute>
+                                <xs:attribute default="true" name="clear-target" type="xs:boolean">
+                                    <xs:annotation>
+                                        <xs:documentation>Whether to clear the target directory before copying</xs:documentation>
+                                    </xs:annotation>
+                                </xs:attribute>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="file">
+                    <xs:annotation>
+                        <xs:documentation>A single fir to add to the distribution, unchanged.</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="yatci:ct-empty">
+                                <xs:attributeGroup ref="yatci:ag-href-source"/>
+                                <xs:attributeGroup ref="yatci:ag-href-target"/>
+                                <xs:attribute default="true" name="must-exist" type="xs:boolean">
+                                    <xs:annotation>
+                                        <xs:documentation>Whether this file must exist </xs:documentation>
+                                    </xs:annotation>
+                                </xs:attribute>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="additional-text-document">
+                    <xs:annotation>
+                        <xs:documentation>Specifies some additional text document, for things like readme-s, version indicators, etc. In these files, the usual macros are substituted on copy.</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="yatci:ct-empty">
+                                <xs:attributeGroup ref="yatci:ag-href-source"/>
+                                <xs:attributeGroup ref="yatci:ag-href-target"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="combine-additional-text-documents">
+                    <xs:annotation>
+                        <xs:documentation>Specifies additional text document to combine/join, for things like readme-s, version indicators, etc. In these files, the usual macros are substituted.</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="text-document">
+                                <xs:complexType>
+                                    <xs:complexContent>
+                                        <xs:extension base="yatci:ct-empty">
+                                            <xs:attributeGroup ref="yatci:ag-href-source"/>
+                                        </xs:extension>
+                                    </xs:complexContent>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attributeGroup ref="yatci:ag-href-target"/>
+                        <xs:attribute default="$NL$NL$NL" name="separator" type="xs:string">
+                            <xs:annotation>
+                                <xs:documentation>The separator string for the text documents. Use $NL to get a newline.</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="additional-xml-document">
+                    <xs:annotation>
+                        <xs:documentation>Specifies an additional XML document, for things like version specification files, etc. In these files, the usual macros are substituted in attributes and text nodes. You can either specify a @source-href or put the document inline. </xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:any minOccurs="0" namespace="##any" processContents="skip"/>
+                        </xs:sequence>
+                        <xs:attributeGroup ref="yatci:ag-href-source-optional"/>
+                        <xs:attributeGroup ref="yatci:ag-href-target"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="flatten-stylesheets" type="yatci:ct-flatten">
+                    <xs:annotation>
+                        <xs:documentation>A directory with stylesheets that must copied and its include structure flattened.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="flatten-schemas" type="yatci:ct-flatten">
+                    <xs:annotation>
+                        <xs:documentation>A directory with schemas that must copied and its include structure flattened.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="flatten-schematrons" type="yatci:ct-flatten">
+                    <xs:annotation>
+                        <xs:documentation>A directory with schematrons that must copied and its include structure flattened.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="group" type="yatci:ct-distribution-components">
+                    <xs:annotation>
+                        <xs:documentation>Group of components/actions. Use this to specify common source/target directories.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attributeGroup ref="yatci:ag-source-target-directories"/>
+    </xs:complexType>
+    <xs:complexType name="ct-flatten">
+        <xs:sequence>
+            <xs:group minOccurs="0" ref="yatci:g-macros"/>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element name="master-document">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="yatci:ct-empty">
+                                <xs:attributeGroup ref="yatci:ag-href-source"/>
+                                <xs:attributeGroup ref="yatci:ag-href-target-optional">
+                                    <xs:annotation>
+                                        <xs:documentation>Target href. If empty or absent, the href will be a document with the same name as the source in the current target directory.</xs:documentation>
+                                    </xs:annotation>
+                                </xs:attributeGroup>
+                                <xs:attribute default="true" name="must-exist" type="xs:boolean"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="master-document-directory">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="yatci:ct-copy-patterns">
+                                <xs:attributeGroup ref="yatci:ag-source-target-directories"/>
+                                <xs:attribute default="false" name="allow-empty" type="xs:boolean">
+                                    <xs:annotation>
+                                        <xs:documentation>Whether to allow this flattening when there are no input documents to be processed. </xs:documentation>
+                                    </xs:annotation>
+                                </xs:attribute>
+                                <xs:attribute default="false" name="recurse" type="xs:boolean">
+                                    <xs:annotation>
+                                        <xs:documentation>Whether to also look for stylesheets in sub-directories (recursively).</xs:documentation>
+                                    </xs:annotation>
+                                </xs:attribute>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="group" type="yatci:ct-flatten">
+                    <xs:annotation>
+                        <xs:documentation>Group of master documents/directories. Use this to specify common source/target directories.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attributeGroup ref="yatci:ag-source-target-directories"/>
+        <xs:attribute default="include" name="href-include" type="yatci:t-non-zero-length-string">
+            <xs:annotation>
+                <xs:documentation>The href of the directory that is used to store the include files. Relative to the target directory.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute default="true" name="clear-target" type="xs:boolean">
+            <xs:annotation>
+                <xs:documentation>Whether to clear the target directory before processing. Only the main/root target directory will be cleared!</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="add-addional-info">
+            <xs:simpleType>
+                <xs:list itemType="yatci:t-additional-info"/>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:attributeGroup name="ag-source-target-directories">
+        <xs:attribute name="source-directory" type="xs:anyURI">
+            <xs:annotation>
+                <xs:documentation>The base directory for the source. A relative name is resolved against the source directory settings of the ancestor elements (from the ancestors @source-directory attributes).</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="target-directory" type="xs:anyURI">
+            <xs:annotation>
+                <xs:documentation>The base directory for the target. A relative name is resolved against the target directory settings of the ancestor elements (from the ancestors @target-directory attributes).</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="ag-href-source">
+        <xs:attribute name="href-source" type="xs:anyURI" use="required">
+            <xs:annotation>
+                <xs:documentation>The URI of a source document. A relative name is resolved against the source directory settings of the ancestor elements (from the ancestors @source-directory attributes).</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="ag-href-source-optional">
+        <xs:attribute name="href-source" type="xs:anyURI" use="optional">
+            <xs:annotation>
+                <xs:documentation>The URI of a source document. A relative name is resolved against the source directory settings of the ancestor elements (from the ancestors @source-directory attributes).</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="ag-href-target">
+        <xs:attribute name="href-target" type="xs:anyURI" use="required">
+            <xs:annotation>
+                <xs:documentation>The URI of a target document. A relative name is resolved against the target directory settings of the ancestor elements (from the ancestors @target-directory attributes).</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:attributeGroup name="ag-href-target-optional">
+        <xs:attribute name="href-target" type="xs:anyURI" use="optional">
+            <xs:annotation>
+                <xs:documentation>The URI of a target document. A relative name is resolved against the target directory settings of the ancestor elements (from the ancestors @target-directory attributes).</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:simpleType name="t-additional-info">
+        <xs:annotation>
+            <xs:documentation>Defines the values for the flatten-*/@add-addional-info attribute</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="provenance-comment"/>
+            <xs:enumeration value="provenance-pi"/>
+            <xs:enumeration value="distribution-comment"/>
+            <xs:enumeration value="distribution-pi"/>
+            <xs:enumeration value="#all"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

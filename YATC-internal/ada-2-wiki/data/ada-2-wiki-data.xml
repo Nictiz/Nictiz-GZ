@@ -1,0 +1,2805 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../sch/ada-2-wiki-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<ada-2-wiki-data xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../xsd/ada-2-wiki-data.xsd">
+    <!-- ================================================================== -->
+    <!--
+        This is the production data for the ada-2-wiki processing.
+        
+        Information about the format of this document in its schema ../xsd/ada-2-wiki-data.xsd
+        Information about how this file is used in the documentation in the ../doc/ subdirectory.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+    <!-- bgz -->
+
+    <application name="bgz_msz" version="1.2" source-project-name="zib2017">
+
+        <setup usecase="kwalificatie" directory-id="bgzkwal">
+            <retrieve name="searchset.xml" url="https://decor.nictiz.nl/ada/projects/zib2017/?raw=true" directory-id="bgzkwal-instance"/>
+        </setup>
+
+        <build>
+            <stylesheet href="../xsl/bgz_msz/1.2/kwalificatie/ADA2test-wiki-table-bgz.xsl"/>
+            <input-document directory="@bgzkwal-instance" name="searchset.xml"/>
+            <!-- Remark: We cannot compare this file because the original directory layout is different (and so the
+                 system cannot find the original). -->
+            <output directory="@bgzkwal/wiki_instance" name="wiki-bgz.txt" compare-as-text="false"/>
+            <parameter name="adaReleaseFilename" value="zib2017bbr-decor.xml"/>
+        </build>
+
+    </application>
+
+    <!-- ======================================================================= -->
+    <!-- cio -->
+
+    <application name="cio" version="1.0.0" source-adarefs2ada="false">
+
+        <setup usecase="beschikbaarstellen_allergie_intolerantie" directory-id="bsai">
+            <!-- cio instances beschikbaarstellen_allergie_intolerantie -->
+            <copy-data target-subdir="ada_instance_kwal" directory-id="bsai-instance-repo">
+                <include glob="bs*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="bsai-wiki-instance"/>
+        </setup>
+
+        <setup usecase="beschikbaarstellen_allergie_intolerantie_vertaling" directory-id="bsaiv">
+            <!-- cio instances beschikbaarstellen_allergie_intolerantie_vertaling -->
+            <copy-data directory-id="bsaiv-instance-repo">
+                <include glob="CIO-*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="bsaiv-wiki-instance"/>
+        </setup>
+
+        <build>
+            <stylesheet href="../xsl/cio/1.0.0/beschikbaarstellen_allergie_intolerantie/ADA2test-wiki-table-cio-bs-aig.xsl"/>
+            <input-document directory="@bsai-instance-repo" name="bs-aig-1-1.xml"/>
+            <ada-working-set directory="@bsai-instance-repo"/>
+            <output directory="@bsai-wiki-instance" name="beschikbaarstellen_allergie_intolerantie-kwal.txt"/>
+        </build>
+
+        <build>
+            <stylesheet href="../xsl/cio/1.0.0/beschikbaarstellen_allergie_intolerantie_vertaling/ADA2test-wiki-table-cio-bs-aiv.xsl"/>
+            <input-document directory="@bsaiv-instance-repo" name="CIO-01-AlleOnderdelen.xml"/>
+            <ada-working-set directory="@bsaiv-instance-repo"/>
+            <output directory="@bsaiv-wiki-instance" name="result-CIO-01-AlleOnderdelen.txt"/>
+        </build>
+
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="cio" version="2.0.0" source-adarefs2ada="false" source-project-name="cio-2.0">
+
+        <setup usecase="beschikbaarstellen_medicatie_contra_indicaties" directory-id="bmci">
+            <!-- cio instances beschikbaarstellen_medicatie_contra_indicaties -->
+            <copy-data directory-id="bmci-instance-repo">
+                <include glob="cio-bmci-tst*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="bmci-wiki-instance"/>
+        </setup>
+
+        <setup usecase="beschikbaarstellen_geneesmiddelovergevoeligheden" directory-id="bgmo">
+            <!-- cio instances beschikbaarstellen_geneesmiddelovergevoeligheden -->
+            <copy-data directory-id="bgmo-instance-repo">
+                <include glob="cio-bgmo-tst*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="bgmo-wiki-instance"/>
+        </setup>
+        
+        <setup usecase="sturen_voorstel_contra_indicatie" directory-id="svci">
+            <!-- cio instances sturen_voorstel_contra_indicatie -->
+            <copy-data directory-id="svci-instance-repo">
+                <include glob="cio-svci-tst*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="svci-wiki-instance"/>
+        </setup>
+        
+        <setup usecase="sturen_antwoord_voorstel_contra_indicatie" directory-id="savc">
+            <!-- cio instances sturen_antwoord_voorstel_contra_indicatie -->
+            <copy-data directory-id="savc-instance-repo">
+                <include glob="cio-savc-tst*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="savc-wiki-instance"/>
+        </setup>
+        
+        <build>
+            <stylesheet href="../xsl/cio/2.0.0/beschikbaarstellen_medicatie_contra_indicaties/ADA2test-wiki-table-cio-bs-mci.xsl"/>
+            <ada-working-set directory="@bmci-instance-repo"/>
+            <output directory="@bmci-wiki-instance" name="bmci-test.txt"/>
+            <!-- Remark adaReleaseFilename: For some reason the name of the ADA release file is not named 
+                 {source-project-name}-ada-release.xml but {projectname}-ada-release.xml, so we have to set this parameter explicitly: -->
+            <parameter name="adaReleaseFilename" value="cio-ada-release.xml"/>
+        </build>
+
+        <build>
+            <stylesheet href="../xsl/cio/2.0.0/beschikbaarstellen_geneesmiddelovergevoeligheden/ADA2test-wiki-table-cio-bs-gmo.xsl"/>
+            <ada-working-set directory="@bgmo-instance-repo"/>
+            <output directory="@bgmo-wiki-instance" name="bgmo-test.txt"/>
+            <!-- Remark adaReleaseFilename: For some reason the name of the ADA release file is not named 
+                 {source-project-name}-ada-release.xml but {projectname}-ada-release.xml, so we have to set this parameter explicitly: -->
+            <parameter name="adaReleaseFilename" value="cio-ada-release.xml"/>
+        </build>
+        
+        <build>
+            <stylesheet href="../xsl/cio/2.0.0/sturen_voorstel_contra_indicatie/ADA2test-wiki-table-cio-s-vci.xsl"/>
+            <ada-working-set directory="@svci-instance-repo"/>
+            <output directory="@svci-wiki-instance" name="svci-test.txt"/>
+            <!-- Remark adaReleaseFilename: For some reason the name of the ADA release file is not named 
+                 {source-project-name}-ada-release.xml but {projectname}-ada-release.xml, so we have to set this parameter explicitly: -->
+            <parameter name="adaReleaseFilename" value="cio-ada-release.xml"/>
+        </build>
+        
+        <build>
+            <stylesheet href="../xsl/cio/2.0.0/sturen_antwoord_voorstel_contra_indicatie/ADA2test-wiki-table-cio-s-avci.xsl"/>
+            <ada-working-set directory="@savc-instance-repo"/>
+            <output directory="@savc-wiki-instance" name="savc-test.txt"/>
+            <!-- Remark adaReleaseFilename: For some reason the name of the ADA release file is not named 
+                 {source-project-name}-ada-release.xml but {projectname}-ada-release.xml, so we have to set this parameter explicitly: -->
+            <parameter name="adaReleaseFilename" value="cio-ada-release.xml"/>
+        </build>
+
+    </application>
+
+    <!-- ======================================================================= -->
+    <!-- e-overdracht -->
+
+    <application name="e-overdracht" version="4.0" source-adarefs2ada="false" source-project-name="e-overdracht-4.0">
+
+        <setup usecase="sturen_overdrachtsbericht_volwassenen" directory-id="sobvw">
+            <copy-data directory-id="sobvw-instance-repo">
+                <include glob="eOvd-SOV*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="sobvw-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="sobvw-wiki-instance"/>
+        </setup>
+
+        <setup usecase="sturen_aanmeldbericht" directory-id="saa">
+            <copy-data directory-id="saa-instance-repo">
+                <include glob="eovd-saa*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="saa-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="saa-wiki-instance"/>
+        </setup>
+
+        <setup usecase="sturen_antwoordbericht" directory-id="saw">
+            <copy-data directory-id="saw-instance-repo">
+                <include glob="eovd-saw*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="saw-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="saw-wiki-instance"/>
+        </setup>
+
+        <build name="sturen_overdrachtsbericht_volwassenen">
+            <stylesheet href="../xsl/e-overdracht/4.0/sturen_overdrachtsbericht_volwassenen/ADA2test-wiki-table-eovd-sobvw.xsl"/>
+            <ada-working-set directory="@sobvw-instance-repo"/>
+            <output directory="@sobvw-wiki-instance" name="sobvw.txt"/>
+            <parameter name="doAdaFiles" value="true"/>
+            <!-- Remark adaReleaseFilename: For some reason the name of the ADA release file is not named 
+                 {projectname}-ada-release.xml but {projectname}-release.xml, so we have to set this parameter explicitly: -->
+            <parameter name="adaReleaseFilename" value="e-overdracht-4.0-release.xml"/>
+        </build>
+
+        <build name="sturen_overdrachtsbericht_volwassenen dekkingsgraad">
+            <stylesheet href="../xsl/e-overdracht/4.0/sturen_overdrachtsbericht_volwassenen/ADA2testdekkingsgraad-wiki-table-eovd-sobvw.xsl"/>
+            <ada-working-set directory="@sobvw-instance-repo"/>
+            <output directory="@sobvw-wiki-instance" name="dg-sobvw.txt"/>
+            <parameter name="doAdaFiles" value="true"/>
+            <!-- Remark adaReleaseFilename: See above. -->
+            <parameter name="adaReleaseFilename" value="e-overdracht-4.0-release.xml"/>
+            <parameter name="docAdaNewFilename" directory="^sobvw-project-schemas/../new" value="sturen_overdrachtsbericht_volwassenen.xml"/>
+        </build>
+
+        <build name="sturen_aanmeldbericht">
+            <stylesheet href="../xsl/e-overdracht/4.0/sturen_aanmeldbericht/ADA2test-wiki-table-eovd-saa.xsl"/>
+            <ada-working-set directory="@saa-instance-repo"/>
+            <output directory="@saa-wiki-instance" name="saa.txt"/>
+            <parameter name="doAdaFiles" value="true"/>
+            <!-- Remark adaReleaseFilename: See above. -->
+            <parameter name="adaReleaseFilename" value="e-overdracht-4.0-release.xml"/>
+        </build>
+
+        <build name="sturen_aanmeldbericht dekkingsgraad">
+            <stylesheet href="../xsl/e-overdracht/4.0/sturen_aanmeldbericht/ADA2testdekkingsgraad-wiki-table-eovd-saa.xsl"/>
+            <ada-working-set directory="@saa-instance-repo"/>
+            <output directory="@saa-wiki-instance" name="dg-saa.txt"/>
+            <parameter name="doAdaFiles" value="true"/>
+            <!-- Remark adaReleaseFilename: See above. -->
+            <parameter name="adaReleaseFilename" value="e-overdracht-4.0-release.xml"/>
+            <parameter name="docAdaNewFilename" directory="^saa-project-schemas/../new" value="sturen_aanmeldbericht.xml"/>
+        </build>
+
+        <build name="sturen_antwoordbericht">
+            <stylesheet href="../xsl/e-overdracht/4.0/sturen_antwoordbericht/ADA2test-wiki-table-eovd-saw.xsl"/>
+            <ada-working-set directory="@saw-instance-repo"/>
+            <output directory="@saw-wiki-instance" name="saw.txt"/>
+            <parameter name="doAdaFiles" value="true"/>
+            <!-- Remark adaReleaseFilename: See above. -->
+            <parameter name="adaReleaseFilename" value="e-overdracht-4.0-release.xml"/>
+        </build>
+
+        <build name="sturen_antwoordbericht dekkingsgraad">
+            <stylesheet href="../xsl/e-overdracht/4.0/sturen_antwoordbericht/ADA2testdekkingsgraad-wiki-table-eovd-saw.xsl"/>
+            <ada-working-set directory="@saw-instance-repo"/>
+            <output directory="@saw-wiki-instance" name="dg-saw.txt"/>
+            <parameter name="doAdaFiles" value="true"/>
+            <!-- Remark adaReleaseFilename: See above. -->
+            <parameter name="adaReleaseFilename" value="e-overdracht-4.0-release.xml"/>
+            <parameter name="docAdaNewFilename" directory="^saw-project-schemas/../new" value="sturen_antwoordbericht.xml"/>
+        </build>
+
+    </application>
+
+    <!-- ======================================================================= -->
+    <!-- hg - EersteLijnsZorg -->
+
+    <application name="hg" version="0.2.0-beta.1" source-adarefs2ada="false" source-project-name="hg-0.2.0-beta.1">
+
+        <setup usecase="sturen_verwijzing_of_update_huisarts_naar_paramedicus" directory-id="hg">
+            <copy-data directory-id="hg-ada-instance">
+                <include glob="hg-*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*sturen_verwijzing_of_update_huisarts_naar_paramedicus*.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="hg-wiki-instance"/>
+        </setup>
+
+        <build name="hg-VerwijzingHuisartsParamedicusMaximaalbericht">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@hg-ada-instance" name="$BUILDNAME.xml"/>
+            <output directory="@hg-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build>
+
+        <build name="hg-VerwijzingHuisartsParamedicusMinimaalbericht">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@hg-ada-instance" name="$BUILDNAME.xml"/>
+            <output directory="@hg-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build>
+
+        <build name="hg-VerwijzingFysiotherapeut">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@hg-ada-instance" name="$BUILDNAME.xml"/>
+            <output directory="@hg-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build>
+
+        <build name="hg-VerwijzingLogopedist">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@hg-ada-instance" name="$BUILDNAME.xml"/>
+            <output directory="@hg-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build>
+    </application>
+
+    <!-- ======================================================================= -->
+    <!-- imm -->
+
+    <application name="imm" version="1.0.0" source-adarefs2ada="true" source-project-name="imm-1.0.0">
+
+        <setup usecase="raadplegenbeschikbaarstellen_immunisatiegegevens" directory-id="imm">
+            <copy-data directory-id="imm-ada-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*beschikbaarstellen_immunisatiegegevens*.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="imm-wiki-instance"/>
+        </setup>
+
+        <build name="Beschikbaarstellen_immunisatiegegevens-voorbeeldbericht_1">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@imm-ada-instance" name="$BUILDNAME.xml"/>
+            <output directory="@imm-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build>
+
+        <build name="Beschikbaarstellen_immunisatiegegevens-voorbeeldbericht_2">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@imm-ada-instance" name="$BUILDNAME.xml"/>
+            <output directory="@imm-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build>
+
+        <build name="Beschikbaarstellen_immunisatiegegevens-voorbeeldbericht_3">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@imm-ada-instance" name="$BUILDNAME.xml"/>
+            <output directory="@imm-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build>
+
+        <build name="Beschikbaarstellen_immunisatiegegevens-voorbeeldbericht_4">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@imm-ada-instance" name="$BUILDNAME.xml"/>
+            <output directory="@imm-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build>
+
+        <build name="Beschikbaarstellen_immunisatiegegevens-voorbeeldbericht_5">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@imm-ada-instance" name="$BUILDNAME.xml"/>
+            <output directory="@imm-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build>
+
+    </application>
+
+    <application name="imm" version="2.0" source-adarefs2ada="false" source-project-name="imm-2.0.0-alpha.3">
+        
+        <!-- <setup usecase="raadplegenbeschikbaarstellen_immunisatiegegevens" directory-id="imm">
+            <copy-data directory-id="imm-ada-instance">
+                <include glob="imm-*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*beschikbaarstellen_immunisatiegegevens*.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="imm-wiki-instance"/>
+        </setup>
+        
+        <build name="build-raadplegenbeschikbaarstellen_immunisatiegegevens">
+            <stylesheet href="../xsl/imm/ADA2test-wiki-table-imm.xsl"/>
+            <ada-working-set directory="@imm-ada-instance"/>
+            <output directory="@imm-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build> -->
+        
+        <!-- config based on custom stylesheet -->
+        <!--<setup usecase="raadplegenbeschikbaarstellen_immunisatiegegevens" directory-id="imm">
+            <copy-data directory-id="imm-instance-repo">
+                <include glob="imm-*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="raadplegen-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="imm-wiki-instance"/>
+        </setup>
+        
+        <build name="raadplegenbeschikbaarstellen_immunisatiegegevens">
+            <stylesheet href="../xsl/imm/raadplegenbeschikbaarstellen/ADA2test-wiki-table-imm-ra-be.xsl"/>
+            <ada-working-set directory="@imm-instance-repo"/>
+            <output directory="@imm-wiki-instance" name="imm.txt"/>
+            <parameter name="doAdaFiles" value="true"/>
+            <!-\- Remark adaReleaseFilename: For some reason the name of the ADA release file is not named 
+                 {projectname}-ada-release.xml but {projectname}-release.xml, so we have to set this parameter explicitly: -\->
+            <parameter name="adaReleaseFilename" value="imm-2.0.0-alpha.3-ada-release.xml"/>
+        </build>-->
+        
+        <!-- config based on default stylesheet -->
+        <setup usecase="raadplegenbeschikbaarstellen_immunisatiegegevens" directory-id="imm">
+            <copy-data  directory-id="imm-ada-instance">
+                <include glob="imm-*.xml"/>
+                <exclude glob="*voorbeeld*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*beschikbaarstellen_immunisatiegegevens*.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="imm-wiki-instance"/>
+        </setup>
+        
+        <build name="raadplegenbeschikbaarstellen_immunisatiegegevens">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <ada-working-set directory="@imm-ada-instance"/>
+            <!--<output directory="@imm-wiki-instance" name="$BUILDNAME.txt"/>-->
+            <output directory="@imm-wiki-instance" name="imm.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+            <parameter name="projectPrefix" value="imm-2.0.0-alpha.3"/>
+            <parameter name="adaReleaseFilename" value="imm-2.0.0-alpha.3-ada-release.xml"/>
+            <parameter name="transactionId" value="2.16.840.1.113883.2.4.3.11.60.131.4.3"/>
+        </build>
+    </application>
+    
+
+    <!-- ======================================================================= -->
+    <!-- jeugdgezondheidszorg -->
+
+    <application name="jeugdgezondheidszorg" version="6.12.9.5" source-adarefs2ada="true" source-project-name="jgz-7.0.0">
+
+        <message>WARNING: NO PRODUCTION INSTANCES AVAILABLE, ALL BUILDS WILL FAIL!</message>
+
+        <setup usecase="dossieroverdracht" directory-id="jgz">
+            <copy-data directory-id="jgz-ada-instance">
+                <include glob="*DOB-Fase-1.1*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE*.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="jgz-wiki-instance"/>
+        </setup>
+
+        <build name="DOB-Fase-1.1-ontvangen-0-3-XXX_Liere-G">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@jgz-ada-instance" name="$BUILDNAME.xml"/>
+            <output directory="@jgz-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build>
+
+        <build name="DOB-Fase-1.1-ontvangen-0-3-XXX_Winkel-M">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@jgz-ada-instance" name="$BUILDNAME.xml"/>
+            <output directory="@jgz-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build>
+
+        <build name="DOB-Fase-1.1-ontvangen-0-13-XXX_Bakker-R">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@jgz-ada-instance" name="$BUILDNAME.xml"/>
+            <output directory="@jgz-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build>
+
+        <build name="DOB-Fase-1.1-versturen-0-3-XXX_Waterman-F">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@jgz-ada-instance" name="$BUILDNAME.xml"/>
+            <output directory="@jgz-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build>
+
+        <build name="DOB-Fase-1.1-versturen-0-13-XXX_Viskanic-P">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@jgz-ada-instance" name="$BUILDNAME.xml"/>
+            <output directory="@jgz-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build>
+
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="jeugdgezondheidszorg" version="7.0.0" source-adarefs2ada="true" source-project-name="jgz-7.0.0">
+
+        <setup usecase="dossieroverdracht" directory-id="jgz">
+            <copy-data directory-id="jgz-ada-instance">
+                <include glob="*DOB-3.0.0*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE*.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="jgz-wiki-instance"/>
+        </setup>
+
+        <build name="DOB-3.0.0-qual-ontvangen-XXX_Braaks">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@jgz-ada-instance" name="$BUILDNAME.xml"/>
+            <output directory="@jgz-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build>
+
+        <build name="DOB-3.0.0-qual-ontvangen-XXX_Musumeci">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@jgz-ada-instance" name="$BUILDNAME.xml"/>
+            <output directory="@jgz-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build>
+
+        <build name="DOB-3.0.0-qual-ontvangen-XXX_Veens">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@jgz-ada-instance" name="$BUILDNAME.xml"/>
+            <output directory="@jgz-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build>
+
+        <build name="DOB-3.0.0-qual-versturen-XXX_Caarls">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@jgz-ada-instance" name="$BUILDNAME.xml"/>
+            <output directory="@jgz-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build>
+
+        <build name="DOB-3.0.0-qual-versturen-XXX_Kallasingh">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@jgz-ada-instance" name="$BUILDNAME.xml"/>
+            <output directory="@jgz-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build>
+
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="jeugdgezondheidszorg" version="7.1.1" source-adarefs2ada="false" source-project-name="jgz-7.1.1">
+
+        <setup usecase="dossieroverdracht" directory-id="jgz">
+            <copy-data directory-id="jgz-ada-instance">
+                <include glob="DOB*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE*.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="jgz-wiki-instance"/>
+        </setup>
+
+        <build name="DOB-3.1.0-test-ontvangen-XXX_Hollander">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@jgz-ada-instance" name="$BUILDNAME.xml"/>
+            <output directory="@jgz-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build>
+
+        <build name="DOB-3.1.0-test-versturen-XXX_Paridon">
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@jgz-ada-instance" name="$BUILDNAME.xml"/>
+            <output directory="@jgz-wiki-instance" name="$BUILDNAME.txt"/>
+            <parameter name="tabelKopNiveau" value="4"/>
+        </build>
+
+    </application>
+
+    <!-- ======================================================================= -->
+    <!-- ketenzorg -->
+
+    <!--<application name="ketenzorg" version="3.0.2">
+        <message>WARNING: Original code contained no Ant setup/build scripts. Not implemented!</message>
+    </application>-->
+    <application name="huisartsgegevens" version="2.0" source-adarefs2ada="false" source-project-name="ketenzorg-3.0">
+        
+        <setup usecase="kwalificatie" directory-id="hgkwal">
+            <retrieve name="searchset.xml" url="https://decor.nictiz.nl/ada/projects/ketenzorg-3.0/?raw=true" directory-id="hgkwal-instance"/>
+        </setup>
+        
+        <build>
+            <stylesheet href="../xsl/utils/adainstance_2_wikitable_sa.xsl"/>
+            <input-document directory="@hgkwal-instance" name="searchset.xml"/>
+            <!-- Remark: We cannot compare this file because the original directory layout is different (and so the
+                 system cannot find the original). -->
+            <output directory="@hgkwal/wiki_instance" name="wiki-huisartsgegevens.txt" compare-as-text="false"/>
+        </build>
+        
+    </application>
+
+    <!-- ======================================================================= -->
+
+    <!-- lab 0.0-->
+    <!--<application name="lab" version="0.0" source-adarefs2ada="true" source-project-name="lab">
+
+        <setup usecase="sturen_laboratoriumresultaten" directory-id="slr">
+            <copy-data target-subdir="ada_instance_repo" source-subdir="ada_instance_repo" directory-id="slr-ada-instance-repo">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_test" source-subdir="ada_instance" directory-id="slr-ada-instance-test">
+                <include glob="*TEST*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_kwal" source-subdir="ada_instance" directory-id="slr-ada-instance-kwal">
+                <include glob="*KWAL*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="slr-wiki-instance"/>
+        </setup>
+
+        <setup usecase="sturen_laboratoriumresultaat_op_aanvraag" directory-id="loa">
+            <copy-data target-subdir="ada_instance_repo" source-subdir="ada_instance_repo" directory-id="loa-ada-instance-repo">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_test" source-subdir="ada_instance" directory-id="loa-ada-instance-test">
+                <include glob="*TEST*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_kwal" source-subdir="ada_instance" directory-id="loa-ada-instance-kwal">
+                <include glob="*KWAL*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="loa-wiki-instance"/>
+        </setup>
+
+        <setup usecase="beschikbaarstellen_laboratoriumresultaten" directory-id="blr">
+            <copy-data target-subdir="ada_instance_repo" source-subdir="ada_instance_repo" directory-id="blr-ada-instance-repo">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_test" source-subdir="ada_instance" directory-id="blr-ada-instance-test">
+                <include glob="*TEST*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_kwal" source-subdir="ada_instance" directory-id="blr-ada-instance-kwal">
+                <include glob="*KWAL*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="blr-wiki-instance"/>
+        </setup>
+
+        <build>
+            <stylesheet href="../xsl/lab/3.0.0/sturen_laboratoriumresultaten/ADA2test-wiki-table-lab-sl-repo.xsl"/>
+            <ada-working-set directory="@slr-ada-instance-repo"/>
+            <output directory="@slr-wiki-instance" name="lab-repo.txt"/>
+        </build>
+
+        <build>
+            <stylesheet href="../xsl/lab/3.0.0/sturen_laboratoriumresultaten/ADA2test-wiki-table-lab-sl-instances.xsl"/>
+            <ada-working-set directory="@slr-ada-instance-test"/>
+            <output directory="@slr-wiki-instance" name="lab-testinstances.txt"/>
+        </build>
+
+        <build>
+            <stylesheet href="../xsl/lab/3.0.0/sturen_laboratoriumresultaten/ADA2test-wiki-table-lab-sl-instances.xsl"/>
+            <ada-working-set directory="@slr-ada-instance-kwal"/>
+            <output directory="@slr-wiki-instance" name="lab-kwalinstances.txt"/>
+        </build>
+
+        <build>
+            <stylesheet href="../xsl/lab/3.0.0/sturen_laboratoriumresultaten/ADA2test-wiki-table-lab-sl-repo.xsl"/>
+            <ada-working-set directory="@blr-ada-instance-repo"/>
+            <output directory="@blr-wiki-instance" name="lab-repo.txt"/>
+        </build>
+
+        <build>
+            <stylesheet href="../xsl/lab/3.0.0/sturen_laboratoriumresultaten/ADA2test-wiki-table-lab-sl-instances.xsl"/>
+            <ada-working-set directory="@blr-ada-instance-test"/>
+            <output directory="@blr-wiki-instance" name="lab-testinstances.txt"/>
+        </build>
+
+        <build>
+            <stylesheet href="../xsl/lab/3.0.0/sturen_laboratoriumresultaten/ADA2test-wiki-table-lab-sl-instances.xsl"/>
+            <ada-working-set directory="@blr-ada-instance-kwal"/>
+            <output directory="@blr-wiki-instance" name="lab-kwalinstances.txt"/>
+        </build>
+
+        <build>
+            <stylesheet href="../xsl/lab/3.0.0/sturen_laboratoriumresultaten/ADA2test-wiki-table-lab-sl-repo.xsl"/>
+            <ada-working-set directory="@loa-ada-instance-repo"/>
+            <output directory="@loa-wiki-instance" name="lab-repo.txt"/>
+        </build>
+
+        <build>
+            <stylesheet href="../xsl/lab/3.0.0/sturen_laboratoriumresultaten/ADA2test-wiki-table-lab-sl-instances.xsl"/>
+            <ada-working-set directory="@loa-ada-instance-test"/>
+            <output directory="@loa-wiki-instance" name="lab-testinstances.txt"/>
+        </build>
+
+        <build>
+            <stylesheet href="../xsl/lab/3.0.0/sturen_laboratoriumresultaten/ADA2test-wiki-table-lab-sl-instances.xsl"/>
+            <ada-working-set directory="@loa-ada-instance-kwal"/>
+            <output directory="@loa-wiki-instance" name="lab-kwalinstances.txt"/>
+        </build>
+
+    </application>-->
+    
+    
+    <!-- lab 3.0.0-->
+    <application name="lab" version="3.0.0" source-adarefs2ada="true" source-project-name="lab">
+
+        <setup usecase="sturen_laboratoriumresultaten" directory-id="slr">
+            <!--<copy-data target-subdir="ada_instance_repo" source-subdir="ada_instance_repo" directory-id="slr-ada-instance-repo">
+                <include glob="*.xml"/>
+            </copy-data>-->
+            <copy-data target-subdir="ada_instance_test" source-subdir="ada_instance" directory-id="slr-ada-instance-test">
+                <include glob="*TEST*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_kwal" source-subdir="ada_instance" directory-id="slr-ada-instance-kwal">
+                <include glob="*KWAL*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="slr-wiki-instance"/>
+        </setup>
+
+        <setup usecase="sturen_laboratoriumresultaat_op_aanvraag" directory-id="loa">
+            <!--<copy-data target-subdir="ada_instance_repo" source-subdir="ada_instance_repo" directory-id="loa-ada-instance-repo">
+                <include glob="*.xml"/>
+            </copy-data>-->
+            <copy-data target-subdir="ada_instance_test" source-subdir="ada_instance" directory-id="loa-ada-instance-test">
+                <include glob="*TEST*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_kwal" source-subdir="ada_instance" directory-id="loa-ada-instance-kwal">
+                <include glob="*KWAL*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="loa-wiki-instance"/>
+        </setup>
+
+        <setup usecase="beschikbaarstellen_laboratoriumresultaten" directory-id="blr">
+            <!--<copy-data target-subdir="ada_instance_repo" source-subdir="ada_instance_repo" directory-id="blr-ada-instance-repo">
+                <include glob="*.xml"/>
+            </copy-data>-->
+            <copy-data target-subdir="ada_instance_test" source-subdir="ada_instance" directory-id="blr-ada-instance-test">
+                <include glob="*TEST*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_kwal" source-subdir="ada_instance" directory-id="blr-ada-instance-kwal">
+                <include glob="*KWAL*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="blr-wiki-instance"/>
+        </setup>
+
+        <!--<build>
+            <stylesheet href="../xsl/lab/3.0.0/sturen_laboratoriumresultaten/ADA2test-wiki-table-lab-sl-repo.xsl"/>
+            <ada-working-set directory="@slr-ada-instance-repo"/>
+            <output directory="@slr-wiki-instance" name="lab-repo.txt"/>
+        </build>-->
+
+        <build>
+            <stylesheet href="../xsl/lab/3.0.0/sturen_laboratoriumresultaten/ADA2test-wiki-table-lab-sl-instances.xsl"/>
+            <ada-working-set directory="@slr-ada-instance-test"/>
+            <output directory="@slr-wiki-instance" name="lab-testinstances.txt"/>
+        </build>
+        
+        <build>
+            <stylesheet href="../xsl/lab/3.0.0/sturen_laboratoriumresultaten/ADA2test-wiki-table-lab-sl-instances.xsl"/>
+            <ada-working-set directory="@slr-ada-instance-kwal"/>
+            <output directory="@slr-wiki-instance" name="lab-kwalinstances.txt"/>
+        </build>
+
+        <!--<build>
+            <stylesheet href="../xsl/lab/3.0.0/sturen_laboratoriumresultaten/ADA2test-wiki-table-lab-sl-repo.xsl"/>
+            <ada-working-set directory="@blr-ada-instance-repo"/>
+            <output directory="@blr-wiki-instance" name="lab-repo.txt"/>
+        </build>-->
+
+        <build>
+            <stylesheet href="../xsl/lab/3.0.0/sturen_laboratoriumresultaten/ADA2test-wiki-table-lab-sl-instances.xsl"/>
+            <ada-working-set directory="@blr-ada-instance-test"/>
+            <output directory="@blr-wiki-instance" name="lab-testinstances.txt"/>
+        </build>
+
+        <build>
+            <stylesheet href="../xsl/lab/3.0.0/sturen_laboratoriumresultaten/ADA2test-wiki-table-lab-sl-instances.xsl"/>
+            <ada-working-set directory="@blr-ada-instance-kwal"/>
+            <output directory="@blr-wiki-instance" name="lab-kwalinstances.txt"/>
+        </build>
+
+        <!--<build>
+            <stylesheet href="../xsl/lab/3.0.0/sturen_laboratoriumresultaten/ADA2test-wiki-table-lab-sl-repo.xsl"/>
+            <ada-working-set directory="@loa-ada-instance-repo"/>
+            <output directory="@loa-wiki-instance" name="lab-repo.txt"/>
+        </build>-->
+
+        <build>
+            <stylesheet href="../xsl/lab/3.0.0/sturen_laboratoriumresultaten/ADA2test-wiki-table-lab-sl-instances.xsl"/>
+            <ada-working-set directory="@loa-ada-instance-test"/>
+            <output directory="@loa-wiki-instance" name="lab-testinstances.txt"/>
+        </build>
+        
+        <build>
+            <stylesheet href="../xsl/lab/3.0.0/sturen_laboratoriumresultaten/ADA2test-wiki-table-lab-sl-instances.xsl"/>
+            <ada-working-set directory="@loa-ada-instance-kwal"/>
+            <output directory="@loa-wiki-instance" name="lab-kwalinstances.txt"/>
+        </build>
+
+    </application>
+
+    <!-- ======================================================================= -->
+    <!-- Langdurigezorg -->
+
+    <application name="langdurigezorg" version="1.0.0" source-adarefs2ada="false">
+
+        <message>WARNING: NO PRODUCTION INSTANCES AVAILABLE, ALL BUILDS WILL FAIL!</message>
+
+        <setup usecase="beschikbaarstellen_basisgegevens_langdurige_zorg" directory-id="bglz">
+            <copy-data target-subdir="ada_instance">
+                <include glob="MM-2.*.xml"/>
+                <include glob="MM-1.0-LZB-1.3-v1.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+        </setup>
+
+        <!-- No builds implemented, since there seems to be no data... -->
+
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="langdurigezorg" version="1.1.0" source-adarefs2ada="false">
+
+        <setup usecase="beschikbaarstellen_basisgegevens_langdurige_zorg" directory-id="bglz">
+            <copy-data directory-id="bglz-instance">
+                <include glob="BgLZ-3.0-*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="bglz-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="bglz-wiki-instance"/>
+        </setup>
+
+        <build>
+            <stylesheet href="../xsl/langdurigezorg/1.1.0/beschikbaarstellen_basisgegevens_langdurige_zorg/ADA2test-wiki-table-lz-bs-bglz.xsl"/>
+            <ada-working-set directory="@bglz-instance"/>
+            <output directory="@bglz-wiki-instance" name="bglz.txt"/>
+            <parameter name="adaReleaseFilename" value="langdurigezorg-ada-release.xml"/>
+            <parameter name="docAdaNewFilename" directory="^bglz-project-schemas/../new" value="beschikbaarstellen_basisgegevens_langdurige_zorg.xml"/>
+        </build>
+
+    </application>
+
+    <!-- ======================================================================= -->
+    <!-- Medicatieproces (mp) -->
+
+    <application name="mp" version="6.12.8">
+        <message>WARNING: ORIGINAL CODE CONTAINED NO ANT SETUP/BUILD SCRIPTS. NOT IMPLEMENTED!</message>
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="mp" version="6.12.10">
+        <message>WARNING: ORIGINAL CODE CONTAINED NO ANT SETUP/BUILD SCRIPTS. NOT IMPLEMENTED!</message>
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="mp" version="9.0.6">
+        <message>WARNING: ORIGINAL CODE CONTAINED NO ANT SETUP/BUILD SCRIPTS. NOT IMPLEMENTED!</message>
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="mp" version="9.0.7" source-adarefs2ada="true" source-project-name="mp-mp907">
+
+        <setup usecase="beschikbaarstellen_medicatiegegevens" directory-id="mg">
+            <copy-data target-subdir="ada_instance_MA" directory-id="mg-instance-MA">
+                <include glob="*MA*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_VV" directory-id="mg-instance-VV">
+                <include glob="*VV*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_TA" directory-id="mg-instance-TA">
+                <include glob="*TA*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MVE" directory-id="mg-instance-MVE">
+                <include glob="*MVE*.xml"/>
+            </copy-data>
+            <!-- Testsets: -->
+            <copy-data source-subdir="ada_instance_TestSet" target-subdir="ada_instance_TestSet_MA" directory-id="mg-instance-testset-MA">
+                <include glob="*ma*.xml"/>
+            </copy-data>
+            <copy-data source-subdir="ada_instance_TestSet" target-subdir="ada_instance_TestSet_VV" directory-id="mg-instance-testset-VV">
+                <include glob="*vv*.xml"/>
+            </copy-data>
+            <!-- medmij instances: -->
+            <copy-data directory-id="mg-instance">
+                <include glob="XXX_*.xml"/>
+                <exclude glob="*MO*.xml"/>
+                <exclude glob="*Jangi*.xml"/>
+                <exclude glob="*_v2.xml"/>
+            </copy-data>
+            <!-- For HTML for kwalificatieteam: -->
+            <empty-directory target-subdir="wiki_instance_kwal" directory-id="mg-instance-kwal"/>
+            <empty-directory target-subdir="html_instance_kwal" directory-id="mg-instance-html-kwal"/>
+            <empty-directory target-subdir="wiki_instance" directory-id="mg-wiki-instance"/>
+            <!-- Schemas: -->
+            <copy-project-schemas directory-id="mg-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+
+            <!-- HTML assets copy: -->
+            <copy-directory target-subdir="html_instance_kwal/assets" directory="#mp/9.0.7/beschikbaarstellen_medicatiegegevens/html_instance_kwal/assets"/>
+
+        </setup>
+
+        <!-- beschikbaarstellen_medicatieoverzicht -->
+        <setup usecase="beschikbaarstellen_medicatieoverzicht" directory-id="mo">
+            <copy-data target-subdir="ada_instance_mp" directory-id="mo-instance-mp">
+                <include glob="*invoer*.xml"/>
+            </copy-data>
+            <!-- Testset: -->
+            <copy-data source-subdir="ada_instance_TestSet" target-subdir="ada_instance_TestSet" directory-id="mo-instance-testset">
+                <include glob="*invoer*.xml"/>
+            </copy-data>
+            <!-- medmij instances -->
+            <copy-data directory-id="mo-instance">
+                <include glob="*MO*.xml"/>
+                <include glob="*Jangi*.xml"/>
+                <exclude glob="*_v2.xml"/>
+            </copy-data>
+            <!-- Schemas: -->
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="mo-wiki-instance"/>
+        </setup>
+
+        <!-- beschikbaarstellen_verstrekkingenvertaling, medmij instances -->
+        <setup usecase="raadplegen_verstrekkingenvertaling" directory-id="rp.vv">
+            <copy-data source-subdir="../beschikbaarstellen_verstrekkingenvertaling/ada_instance" directory-id="rp.vv-instance">
+                <!-- WATCH OUT: Source comes from a different usecase! -->
+                <include glob="*.xml"/>
+            </copy-data>
+            <!-- Schemas: -->
+            <copy-project-schemas>
+                <include glob="*beschikbaarstellen_verstrekkingenvertaling.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="rp.vv-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_medicatievoorschrift -->
+        <setup usecase="sturen_medicatievoorschrift" directory-id="mv">
+            <copy-data target-subdir="ada_instance_mp" directory-id="mv-instance-mp">
+                <include glob="*.xml"/>
+            </copy-data>
+            <!-- Testset: -->
+            <copy-data source-subdir="ada_instance_TestSet" target-subdir="ada_instance_TestSet" directory-id="mv-instance-testset">
+                <include glob="*.xml"/>
+            </copy-data>
+            <!-- Schemas: -->
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="mv-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_afhandeling_medicatievoorschrift -->
+        <setup usecase="sturen_afhandeling_medicatievoorschrift" directory-id="av">
+            <copy-data directory-id="av-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <!-- Schemas: -->
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="av-wiki-instance"/>
+        </setup>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <!-- beschikbaarstellen_medicatiegegevens -->
+        <build name="build-beschikbaarstellen_medicatiegegevens-MA">
+            <stylesheet href="../xsl/mp/9.0.7/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-MA"/>
+            <output directory="@mg-wiki-instance" name="mg-mgr-ma-kwalificatie.txt"/>
+            <parameter name="testGoal" value="Kwalificatie"/>
+            <parameter name="abbreviation" value="MA"/>
+            <parameter name="elementNameId" value="medicatieafspraak"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-VV">
+            <stylesheet href="../xsl/mp/9.0.7/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-VV"/>
+            <output directory="@mg-wiki-instance" name="mg-mgr-vv-kwalificatie.txt"/>
+            <parameter name="testGoal" value="Kwalificatie"/>
+            <parameter name="abbreviation" value="VV"/>
+            <parameter name="elementNameId" value="verstrekkingsverzoek"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-TA">
+            <stylesheet href="../xsl/mp/9.0.7/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-TA"/>
+            <output directory="@mg-wiki-instance" name="mg-mgr-ta-kwalificatie.txt"/>
+            <parameter name="testGoal" value="Kwalificatie"/>
+            <parameter name="abbreviation" value="TA"/>
+            <parameter name="elementNameId" value="toedieningsafspraak"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-MVE">
+            <stylesheet href="../xsl/mp/9.0.7/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-MVE"/>
+            <output directory="@mg-wiki-instance" name="mg-mgr-mve-kwalificatie.txt"/>
+            <parameter name="testGoal" value="Kwalificatie"/>
+            <parameter name="abbreviation" value="MVE"/>
+            <parameter name="elementNameId" value="verstrekking"/>
+        </build>
+        <!-- MedMij stuff -->
+        <build name="build-beschikbaarstellen_medicatiegegevens-MedMij">
+            <stylesheet href="../xsl/mp/9.0.7/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-mg.xsl"/>
+            <ada-working-set directory="@mg-instance"/>
+            <output directory="@mg-wiki-instance" name="result-XXX_Amaya-907.txt"/>
+            <parameter name="order-by-mbh" value="false"/>
+        </build>
+        <!-- TestSet -->
+        <build name="build-beschikbaarstellen_medicatiegegevens-testset-MA">
+            <stylesheet href="../xsl/mp/9.0.7/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-testset-MA"/>
+            <output directory="@mg-wiki-instance" name="TestSet-ma.txt"/>
+            <parameter name="testGoal" value="Kwalificatie"/>
+            <parameter name="abbreviation" value="MA"/>
+            <parameter name="elementNameId" value="medicatieafspraak"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-testset-VV">
+            <stylesheet href="../xsl/mp/9.0.7/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-testset-VV"/>
+            <output directory="@mg-wiki-instance" name="TestSet-vv.txt"/>
+            <parameter name="testGoal" value="Kwalificatie"/>
+            <parameter name="abbreviation" value="VV"/>
+            <parameter name="elementNameId" value="verstrekkingsverzoek"/>
+        </build>
+        <!-- HTML for kwalificatieteam -->
+        <build name="build-beschikbaarstellen_medicatiegegevens-html-for-kwalificatieteam">
+            <stylesheet href="../xsl/mp/9.0.7/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-mg-kwal.xsl"/>
+            <input-document directory="@mg-instance-MA" name="mg-mgr-mg-MA-Scenarioset0-0-1.xml"/>
+            <ada-working-set directory="@mg-instance"/>
+            <output directory="@mg-instance-kwal" name="MedMijKwal.txt"/>
+            <parameter name="testGoal" value="Kwalificatieteam"/>
+            <parameter name="htmlOutputDirectory" directory="@mg-instance-html-kwal"/>
+        </build>
+        <!-- renew the import for the main html -->
+        <build name="build-beschikbaarstellen_medicatiegegevens-renew-import-main-html">
+            <stylesheet href="../xsl/mp/9.0.7/beschikbaarstellen_medicatiegegevens/html_kwal/html_import_data.xsl"/>
+            <input-document directory="#mp/9.0.7/beschikbaarstellen_medicatiegegevens/html_kwal" name="mp-907-bsmg-dvp-kwal.html"/>
+            <output directory="@mg-instance-html-kwal" name="mp-907-bsmg-dvp-kwal.html" compare-as-text="false"/>
+        </build>
+
+        <!-- beschikbaarstellen_medicatieoverzicht -->
+        <build name="build-beschikbaarstellen_medicatieoverzicht">
+            <stylesheet href="../xsl/mp/9.0.7/beschikbaarstellen_medicatieoverzicht/ADA2test-wiki-table-mp-bs-mo-new.xsl"/>
+            <ada-working-set directory="@mo-instance-mp"/>
+            <output directory="@mo-wiki-instance" name="Kwalificatie-mobeperkt.txt"/>
+            <parameter name="testGoal" value="Kwalificatie"/>
+        </build>
+        <!-- MedMij stuff -->
+        <build name="build-beschikbaarstellen_medicatieoverzicht-MedMij">
+            <stylesheet href="../xsl/mp/9.0.7/beschikbaarstellen_medicatieoverzicht/ADA2test-wiki-table-mp-bs-mo.xsl"/>
+            <input-document directory="@mo-instance" name="XXX_Jangi-907.xml"/>
+            <ada-working-set directory="@mo-instance"/>
+            <output directory="@mo-wiki-instance" name="medmij-kwalificatie.txt"/>
+        </build>
+        <!-- TestSet -->
+        <build name="build-beschikbaarstellen_medicatieoverzicht-TestSet">
+            <stylesheet href="../xsl/mp/9.0.7/beschikbaarstellen_medicatieoverzicht/ADA2test-wiki-table-mp-bs-mo-new.xsl"/>
+            <ada-working-set directory="@mo-instance-testset"/>
+            <output directory="@mo-wiki-instance" name="TestSet-mobeperkt.txt"/>
+            <parameter name="testGoal" value="Kwalificatie"/>
+        </build>
+
+        <!-- beschikbaarstellen_verstrekkingenvertaling, only MedMij -->
+        <build name="build-beschikbaarstellen_verstrekkingenvertaling-MedMij">
+            <stylesheet href="../xsl/mp/9.0.7/raadplegen_verstrekkingenvertaling/ADA2test-wiki-table-mp-rp-vv.xsl"/>
+            <ada-working-set directory="@rp.vv-instance"/>
+            <output directory="@rp.vv-wiki-instance" name="result-QURX_EX990113NL_MVS_3_filtering.txt"/>
+            <parameter name="testGoal" value="Kwalificatie"/>
+        </build>
+
+        <!-- sturen_medicatievoorschrift  -->
+        <build name="build-sturen_medicatievoorschrift">
+            <stylesheet href="../xsl/mp/9.0.7/sturen_medicatievoorschrift/ADA2test-wiki-table-mp-st-voorschrift-new.xsl"/>
+            <ada-working-set directory="@mv-instance-mp"/>
+            <output directory="@mv-wiki-instance" name="mv-mvr-Kwalificatie.txt"/>
+            <parameter name="testGoal" value="Kwalificatie"/>
+        </build>
+        <!-- TestSet -->
+        <build name="build-sturen_medicatievoorschrift-TestSet">
+            <stylesheet href="../xsl/mp/9.0.7/sturen_medicatievoorschrift/ADA2test-wiki-table-mp-st-voorschrift-new.xsl"/>
+            <ada-working-set directory="@mv-instance-testset"/>
+            <output directory="@mv-wiki-instance" name="mvr-TestSet.txt"/>
+            <parameter name="testGoal" value="TestSet"/>
+        </build>
+
+        <!-- sturen_afhandeling_medicatievoorschrift  -->
+        <build name="build-sturen_afhandeling_medicatievoorschrift">
+            <stylesheet href="../xsl/mp/9.0.7/sturen_afhandeling_medicatievoorschrift/ADA2test-wiki-table-mp-st-afh-voorschrift.xsl"/>
+            <ada-working-set directory="@av-instance"/>
+            <output directory="@av-wiki-instance" name="va-var-Kwalificatie.txt"/>
+            <parameter name="testGoal" value="Kwalificatie"/>
+        </build>
+
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="mp" version="9.1.0" source-adarefs2ada="true" source-project-name="mp-mp910">
+
+        <setup usecase="beschikbaarstellen_medicatiegegevens" directory-id="mg">
+            <copy-data target-subdir="ada_instance_MA" directory-id="mg-instance-ma">
+                <include glob="*MA*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_VV" directory-id="mg-instance-vv">
+                <include glob="*VV*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE*.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="mg-wiki-instance"/>
+        </setup>
+
+        <setup usecase="beschikbaarstellen_medicatieoverzicht" directory-id="mo">
+            <copy-data directory-id="mo-instance">
+                <include glob="*invoer*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE*.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="mo-wiki-instance"/>
+        </setup>
+
+        <setup usecase="sturen_medicatievoorschrift" directory-id="mv">
+            <copy-data directory-id="mv-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE*.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="mv-wiki-instance"/>
+        </setup>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <build name="build-beschikbaarstellen_medicatiegegevens-MA">
+            <stylesheet href="../xsl/mp/9.1.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-MA.xsl"/>
+            <ada-working-set directory="@mg-instance-ma"/>
+            <output directory="@mg-wiki-instance" name="mg-mgr-mg-MA-Scenarioset0-0-1.txt"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-VV">
+            <stylesheet href="../xsl/mp/9.1.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-VV.xsl"/>
+            <ada-working-set directory="@mg-instance-vv"/>
+            <output directory="@mg-wiki-instance" name="mg-mgr-mg-VV-Scenarioset0-0-1.txt"/>
+        </build>
+
+        <build name="build-beschikbaarstellen_medicatieoverzicht">
+            <stylesheet href="../xsl/mp/9.1.0/beschikbaarstellen_medicatieoverzicht/ADA2test-wiki-table-mp-bs-mo.xsl"/>
+            <ada-working-set directory="@mo-instance"/>
+            <output directory="@mo-wiki-instance" name="mo-mor-ma-Scenario0-0-a-invoer.txt"/>
+            <!-- Remark: The original Ant based code uses an ADA release file called projects/mp-mp910/mp-mp910-ada-release-old.xml. 
+                 This document does not exist (anymore). I suppose this an oversight introduced during development (or whatever), 
+                 but to get comparable results we turn off the use of the ADA release file here... -->
+            <parameter name="useAdaReleaseFile" value="false"/>
+        </build>
+
+        <build name="build-sturen_medicatievoorschrift">
+            <stylesheet href="../xsl/mp/9.1.0/sturen_medicatievoorschrift/ADA2test-wiki-table-mp-st-voorschrift.xsl"/>
+            <ada-working-set directory="@mv-instance"/>
+            <output directory="@mv-wiki-instance" name="mv-mvr-Scenarioset1-MBH_910_chronisch-3.txt"/>
+            <!-- Remark: See build above about the ADA release file. -->
+            <parameter name="useAdaReleaseFile" value="false"/>
+        </build>
+
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="mp" version="9.2.0beta" source-adarefs2ada="true" source-project-name="mp-mp920">
+
+        <!-- beschikbaarstellen_medicatiegegevens -->
+        <setup usecase="beschikbaarstellen_medicatiegegevens" directory-id="mg">
+            <copy-data target-subdir="ada_instance_repo" source-subdir="ada_instance_repo" directory-id="mg-instance-repo">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MA" directory-id="mg-instance-MA">
+                <include glob="*MA*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_VV" directory-id="mg-instance-VV">
+                <include glob="*VV*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_TA" directory-id="mg-instance-TA">
+                <include glob="*TA*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MVE" directory-id="mg-instance-MVE">
+                <include glob="*MVE*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MGB" directory-id="mg-instance-MGB">
+                <include glob="*MGB*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MTD" directory-id="mg-instance-MTD">
+                <include glob="*MTD*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_WDS" directory-id="mg-instance-WDS">
+                <include glob="*WDS*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="mg-wiki-instance"/>
+        </setup>
+
+        <!-- beschikbaarstellen_medicatieoverzicht -->
+        <setup usecase="beschikbaarstellen_medicatieoverzicht" directory-id="mo">
+            <copy-data directory-id="mo-instance">
+                <include glob="*mp-mo-*.xml"/>
+                <!-- MedMij instances: -->
+                <include glob="XXX*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="mo-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_medicatievoorschrift -->
+        <setup usecase="sturen_medicatievoorschrift" directory-id="mv">
+            <copy-data directory-id="mv-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="mv-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_afhandeling_medicatievoorschrift -->
+        <setup usecase="sturen_afhandeling_medicatievoorschrift" directory-id="av">
+            <copy-data directory-id="av-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="av-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_voorstel_medicatieafspraak -->
+        <setup usecase="sturen_voorstel_medicatieafspraak" directory-id="vma">
+            <copy-data directory-id="vma-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="vma-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_voorstel_verstrekkingsverzoek -->
+        <setup usecase="sturen_voorstel_verstrekkingsverzoek" directory-id="vvv">
+            <copy-data directory-id="vvv-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="vvv-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_antwoord_voorstel_verstrekkingsverzoek -->
+        <setup usecase="sturen_antwoord_voorstel_verstrekkingsverzoek" directory-id="avvv">
+            <copy-data directory-id="avvv-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="avvv-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_medicatiegebruik -->
+        <setup usecase="sturen_medicatiegebruik" directory-id="mgb">
+            <copy-data directory-id="mgb-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas>
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="mgb-wiki-instance"/>
+        </setup>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <!-- beschikbaarstellen_medicatiegegevens -->
+        <build name="build-beschikbaarstellen_medicatiegegevens">
+            <stylesheet href="../xsl/mp/9.2.0beta/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-mg.xsl"/>
+            <ada-working-set directory="@mg-instance-repo"/>
+            <output directory="@mg-wiki-instance" name="mg-repo.txt"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-MA">
+            <stylesheet href="../xsl/mp/9.2.0beta/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-MA"/>
+            <output directory="@mg-wiki-instance" name="mg-MA.txt"/>
+            <parameter name="abbreviation" value="MA"/>
+            <parameter name="elementNameId" value="medicatieafspraak"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-VV">
+            <stylesheet href="../xsl/mp/9.2.0beta/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-VV"/>
+            <output directory="@mg-wiki-instance" name="mg-VV.txt"/>
+            <parameter name="abbreviation" value="VV"/>
+            <parameter name="elementNameId" value="verstrekkingsverzoek"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-TA">
+            <stylesheet href="../xsl/mp/9.2.0beta/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-TA"/>
+            <output directory="@mg-wiki-instance" name="mg-TA.txt"/>
+            <parameter name="abbreviation" value="TA"/>
+            <parameter name="elementNameId" value="toedieningsafspraak"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-MVE">
+            <stylesheet href="../xsl/mp/9.2.0beta/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-MVE"/>
+            <output directory="@mg-wiki-instance" name="mg-MVE.txt"/>
+            <parameter name="abbreviation" value="MVE"/>
+            <parameter name="elementNameId" value="medicatieverstrekking|verstrekking"/>
+            <parameter name="generateInstructionText" value="false"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-MGB">
+            <stylesheet href="../xsl/mp/9.2.0beta/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-MGB"/>
+            <output directory="@mg-wiki-instance" name="mg-MGB.txt"/>
+            <parameter name="abbreviation" value="MGB"/>
+            <parameter name="elementNameId" value="medicatiegebruik"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-MTD">
+            <stylesheet href="../xsl/mp/9.2.0beta/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-MTD"/>
+            <output directory="@mg-wiki-instance" name="mg-MTD.txt"/>
+            <parameter name="abbreviation" value="MTD"/>
+            <parameter name="elementNameId" value="medicatietoediening"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-WDS">
+            <stylesheet href="../xsl/mp/9.2.0beta/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-WDS"/>
+            <output directory="@mg-wiki-instance" name="mg-WDS.txt"/>
+            <parameter name="abbreviation" value="WDS"/>
+            <parameter name="elementNameId" value="wisselend_doseerschema"/>
+        </build>
+
+        <!-- beschikbaarstellen_medicatieoverzicht -->
+        <build name="build-beschikbaarstellen_medicatieoverzicht">
+            <stylesheet href="../xsl/mp/9.2.0beta/beschikbaarstellen_medicatieoverzicht/ADA2test-wiki-table-mp-bs-mo.xsl"/>
+            <ada-working-set directory="@mo-instance"/>
+            <output directory="@mo-wiki-instance" name="medicatieoverzicht.txt"/>
+        </build>
+
+        <!-- sturen_medicatievoorschrift -->
+        <build name="build-sturen_medicatievoorschrift">
+            <stylesheet href="../xsl/mp/9.2.0beta/sturen_medicatievoorschrift/ADA2test-wiki-table-mp-st-voorschrift.xsl"/>
+            <ada-working-set directory="@mv-instance"/>
+            <output directory="@mv-wiki-instance" name="sturen-medicatievoorschrift.txt"/>
+        </build>
+
+        <build name="build-sturen_afhandeling_medicatievoorschrift">
+            <stylesheet href="../xsl/mp/9.2.0beta/sturen_afhandeling_medicatievoorschrift/ADA2test-wiki-table-mp-st-afhandeling-voorschrift.xsl"/>
+            <ada-working-set directory="@av-instance"/>
+            <output directory="@av-wiki-instance" name="afhandeling-medicatievoorschrift.txt"/>
+        </build>
+
+        <!-- sturen_voorstel_medicatieafspraak -->
+        <build name="build-sturen_voorstel_medicatieafspraak">
+            <stylesheet href="../xsl/mp/9.2.0beta/sturen_voorstel_medicatieafspraak/ADA2test-wiki-table-mp-st-vma.xsl"/>
+            <ada-working-set directory="@vma-instance"/>
+            <output directory="@vma-wiki-instance" name="voorstel-ma.txt"/>
+        </build>
+
+        <!-- sturen_voorstel_verstrekkingsverzoek -->
+        <build name="build-sturen_voorstel_verstrekkingsverzoek">
+            <stylesheet href="../xsl/mp/9.2.0beta/sturen_voorstel_verstrekkingsverzoek/ADA2test-wiki-table-mp-st-vvv.xsl"/>
+            <ada-working-set directory="@vvv-instance"/>
+            <output directory="@vvv-wiki-instance" name="voorstel-vv.txt"/>
+        </build>
+
+        <!-- sturen_antwoord_voorstel_verstrekkingsverzoek -->
+        <build name="build-sturen_antwoord_voorstel_verstrekkingsverzoek">
+            <stylesheet href="../xsl/mp/9.2.0beta/sturen_antwoord_voorstel_verstrekkingsverzoek/ADA2test-wiki-table-mp-st-antwoord-vvv.xsl"/>
+            <ada-working-set directory="@avvv-instance"/>
+            <output directory="@avvv-wiki-instance" name="antwoord-vvv.txt"/>
+        </build>
+
+        <!-- sturen_medicatiegebruik -->
+        <build name="build-sturen_medicatiegebruik">
+            <stylesheet href="../xsl/mp/9.2.0beta/sturen_medicatiegebruik/ADA2test-wiki-table-mp-st-mgb.xsl"/>
+            <ada-working-set directory="@mgb-instance"/>
+            <output directory="@mgb-wiki-instance" name="sturen-medicatiegebruik.txt"/>
+        </build>
+
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="mp" version="9.2.0" source-adarefs2ada="true" source-project-name="mp-mp92">
+
+        <!-- beschikbaarstellen_medicatiegegevens -->
+        <setup usecase="beschikbaarstellen_medicatiegegevens" directory-id="mg">
+            <copy-data target-subdir="ada_instance_repo" source-subdir="ada_instance_repo" directory-id="mg-instance-repo">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MA" directory-id="mg-instance-MA">
+                <include glob="*MA*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_VV" directory-id="mg-instance-VV">
+                <include glob="*VV*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_TA" directory-id="mg-instance-TA">
+                <include glob="*TA*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MVE" directory-id="mg-instance-MVE">
+                <include glob="*MVE*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MGB" directory-id="mg-instance-MGB">
+                <include glob="*MGB*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MTD" directory-id="mg-instance-MTD">
+                <include glob="*MTD*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_WDS" directory-id="mg-instance-WDS">
+                <include glob="*WDS*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="mg-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="mg-wiki-instance"/>
+        </setup>
+
+        <!-- raadplegen_medicatiegegevens -->
+        <setup usecase="raadplegen_medicatiegegevens" directory-id="mgr">
+            <copy-data source-subdir="ada_instance_response" target-subdir="ada_instance_MA" directory-id="mgr-instance-MA">
+                <include glob="*MA*.xml"/>
+            </copy-data>
+            <copy-data source-subdir="ada_instance_response" target-subdir="ada_instance_VV" directory-id="mgr-instance-VV">
+                <include glob="*VV*.xml"/>
+            </copy-data>
+            <copy-data source-subdir="ada_instance_response" target-subdir="ada_instance_TA" directory-id="mgr-instance-TA">
+                <include glob="*TA*.xml"/>
+            </copy-data>
+            <copy-data source-subdir="ada_instance_response" target-subdir="ada_instance_MVE" directory-id="mgr-instance-MVE">
+                <include glob="*MVE*.xml"/>
+            </copy-data>
+            <copy-data source-subdir="ada_instance_response" target-subdir="ada_instance_MGB" directory-id="mgr-instance-MGB">
+                <include glob="*MGB*.xml"/>
+            </copy-data>
+            <copy-data source-subdir="ada_instance_response" target-subdir="ada_instance_MTD" directory-id="mgr-instance-MTD">
+                <include glob="*MTD*.xml"/>
+            </copy-data>
+            <copy-data source-subdir="ada_instance_response" target-subdir="ada_instance_WDS" directory-id="mgr-instance-WDS">
+                <include glob="*WDS*.xml"/>
+            </copy-data>
+            <!-- No schema copies -->
+            <empty-directory target-subdir="wiki_instance" directory-id="mgr-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_medicatiegegevens -->
+        <setup usecase="sturen_medicatiegegevens" directory-id="mgsr">
+            <copy-data target-subdir="ada_instance_MA" directory-id="mgsr-instance-MA">
+                <include glob="*MA*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_VV" directory-id="mgsr-instance-VV">
+                <include glob="*VV*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_TA" directory-id="mgsr-instance-TA">
+                <include glob="*TA*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MVE" directory-id="mgsr-instance-MVE">
+                <include glob="*MVE*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MGB" directory-id="mgsr-instance-MGB">
+                <include glob="*MGB*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MTD" directory-id="mgsr-instance-MTD">
+                <include glob="*MTD*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_WDS" directory-id="mgsr-instance-WDS">
+                <include glob="*WDS*.xml"/>
+            </copy-data>
+            <!-- No schema copies -->
+            <empty-directory target-subdir="wiki_instance" directory-id="mgsr-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_medicatievoorschrift -->
+        <setup usecase="sturen_medicatievoorschrift" directory-id="mv">
+            <copy-data directory-id="mv-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="mv-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="mv-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_afhandeling_medicatievoorschrift -->
+        <setup usecase="sturen_afhandeling_medicatievoorschrift" directory-id="av">
+            <copy-data directory-id="av-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="av-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="av-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_voorstel_medicatieafspraak -->
+        <setup usecase="sturen_voorstel_medicatieafspraak" directory-id="vma">
+            <copy-data directory-id="vma-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="vma-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="vma-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_antwoord_voorstel_medicatieafspraak -->
+        <setup usecase="sturen_antwoord_voorstel_medicatieafspraak" directory-id="avma">
+            <copy-data directory-id="avma-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="avma-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="avma-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_voorstel_verstrekkingsverzoek -->
+        <setup usecase="sturen_voorstel_verstrekkingsverzoek" directory-id="vvv">
+            <copy-data directory-id="vvv-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="vvv-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="vvv-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_antwoord_voorstel_verstrekkingsverzoek -->
+        <setup usecase="sturen_antwoord_voorstel_verstrekkingsverzoek" directory-id="avvv">
+            <copy-data directory-id="avvv-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="avvv-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="avvv-wiki-instance"/>
+        </setup>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <!-- beschikbaarstellen_medicatiegegevens -->
+        <!-- repo -->
+        <build name="build-beschikbaarstellen_medicatiegegevens-repo">
+            <stylesheet href="../xsl/mp/9.2.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-mg.xsl"/>
+            <ada-working-set directory="@mg-instance-repo"/>
+            <output directory="@mg-wiki-instance" name="mg-repo.txt"/>
+        </build>
+        <!-- beschikbaarstellen_medicatiegegevens per bouwsteen -->
+        <build name="build-beschikbaarstellen_medicatiegegevens-MA">
+            <stylesheet href="../xsl/mp/9.2.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-MA"/>
+            <output directory="@mg-wiki-instance" name="mg-MA.txt"/>
+            <parameter name="abbreviation" value="MA"/>
+            <parameter name="elementNameId" value="medicatieafspraak"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-VV">
+            <stylesheet href="../xsl/mp/9.2.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-VV"/>
+            <output directory="@mg-wiki-instance" name="mg-VV.txt"/>
+            <parameter name="abbreviation" value="VV"/>
+            <parameter name="elementNameId" value="verstrekkingsverzoek"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-TA">
+            <stylesheet href="../xsl/mp/9.2.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-TA"/>
+            <output directory="@mg-wiki-instance" name="mg-TA.txt"/>
+            <parameter name="abbreviation" value="TA"/>
+            <parameter name="elementNameId" value="toedieningsafspraak"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-MVE">
+            <stylesheet href="../xsl/mp/9.2.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-MVE"/>
+            <output directory="@mg-wiki-instance" name="mg-MVE.txt"/>
+            <parameter name="abbreviation" value="MVE"/>
+            <parameter name="elementNameId" value="medicatieverstrekking|verstrekking"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-MGB">
+            <stylesheet href="../xsl/mp/9.2.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-MGB"/>
+            <output directory="@mg-wiki-instance" name="mg-MGB.txt"/>
+            <parameter name="abbreviation" value="MGB"/>
+            <parameter name="elementNameId" value="medicatiegebruik"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-MTD">
+            <stylesheet href="../xsl/mp/9.2.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-MTD"/>
+            <output directory="@mg-wiki-instance" name="mg-MTD.txt"/>
+            <parameter name="abbreviation" value="MTD"/>
+            <parameter name="elementNameId" value="medicatietoediening"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-WDS">
+            <stylesheet href="../xsl/mp/9.2.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-WDS"/>
+            <output directory="@mg-wiki-instance" name="mg-WDS.txt"/>
+            <parameter name="abbreviation" value="WDS"/>
+            <parameter name="elementNameId" value="wisselend_doseerschema"/>
+            <parameter name="alternativeDisplayTitle" value="Beschikbaarstellen en sturen MP9 2.0 - WDS: addendum inhoudelijke gegevens "/>
+        </build>
+
+        <!-- raadplegen_medicatiegegevens per bouwsteen -->
+        <build name="build-raadplegen_medicatiegegevens-MA">
+            <stylesheet href="../xsl/mp/9.2.0/raadplegen_medicatiegegevens/ADA2test-wiki-table-mp-rp-medgegs-all.xsl"/>
+            <ada-working-set directory="@mgr-instance-MA"/>
+            <output directory="@mgr-wiki-instance" name="mg-MA.txt"/>
+            <parameter name="abbreviation" value="MA"/>
+            <parameter name="elementNameId" value="medicatieafspraak"/>
+        </build>
+        <build name="build-raadplegen_medicatiegegevens-VV">
+            <stylesheet href="../xsl/mp/9.2.0/raadplegen_medicatiegegevens/ADA2test-wiki-table-mp-rp-medgegs-all.xsl"/>
+            <ada-working-set directory="@mgr-instance-VV"/>
+            <output directory="@mgr-wiki-instance" name="mg-VV.txt"/>
+            <parameter name="abbreviation" value="VV"/>
+            <parameter name="elementNameId" value="verstrekkingsverzoek"/>
+        </build>
+        <build name="build-raadplegen_medicatiegegevens-TA">
+            <stylesheet href="../xsl/mp/9.2.0/raadplegen_medicatiegegevens/ADA2test-wiki-table-mp-rp-medgegs-all.xsl"/>
+            <ada-working-set directory="@mgr-instance-TA"/>
+            <output directory="@mgr-wiki-instance" name="mg-TA.txt"/>
+            <parameter name="abbreviation" value="TA"/>
+            <parameter name="elementNameId" value="toedieningsafspraak"/>
+        </build>
+        <build name="build-raadplegen_medicatiegegevens-MVE">
+            <stylesheet href="../xsl/mp/9.2.0/raadplegen_medicatiegegevens/ADA2test-wiki-table-mp-rp-medgegs-all.xsl"/>
+            <ada-working-set directory="@mgr-instance-MVE"/>
+            <output directory="@mgr-wiki-instance" name="mg-MVE.txt"/>
+            <parameter name="abbreviation" value="MVE"/>
+            <parameter name="elementNameId" value="medicatieverstrekking|verstrekking"/>
+        </build>
+        <build name="build-raadplegen_medicatiegegevens-MGB">
+            <stylesheet href="../xsl/mp/9.2.0/raadplegen_medicatiegegevens/ADA2test-wiki-table-mp-rp-medgegs-all.xsl"/>
+            <ada-working-set directory="@mgr-instance-MGB"/>
+            <output directory="@mgr-wiki-instance" name="mg-MGB.txt"/>
+            <parameter name="abbreviation" value="MGB"/>
+            <parameter name="elementNameId" value="medicatiegebruik"/>
+        </build>
+        <build name="build-raadplegen_medicatiegegevens-MTD">
+            <stylesheet href="../xsl/mp/9.2.0/raadplegen_medicatiegegevens/ADA2test-wiki-table-mp-rp-medgegs-all.xsl"/>
+            <ada-working-set directory="@mgr-instance-MTD"/>
+            <output directory="@mgr-wiki-instance" name="mg-MTD.txt"/>
+            <parameter name="abbreviation" value="MTD"/>
+            <parameter name="elementNameId" value="medicatietoediening"/>
+        </build>
+        <build name="build-raadplegen_medicatiegegevens-WDS">
+            <stylesheet href="../xsl/mp/9.2.0/raadplegen_medicatiegegevens/ADA2test-wiki-table-mp-rp-medgegs-all.xsl"/>
+            <ada-working-set directory="@mgr-instance-WDS"/>
+            <output directory="@mgr-wiki-instance" name="mg-WDS.txt"/>
+            <parameter name="abbreviation" value="WDS"/>
+            <parameter name="elementNameId" value="wisselend_doseerschema"/>
+            <parameter name="alternativeDisplayTitle" value="Beschikbaarstellen en sturen MP9 2.0 - WDS: addendum inhoudelijke gegevens "/>
+        </build>
+
+        <!-- sturen_medicatiegegevens per bouwsteen -->
+        <build name="build-sturen_medicatiegegevens-MA">
+            <stylesheet href="../xsl/mp/9.2.0/sturen_medicatiegegevens/ADA2test-wiki-table-mp-st-medgegs-MA.xsl"/>
+            <ada-working-set directory="@mgsr-instance-MA"/>
+            <output directory="@mgsr-wiki-instance" name="mgs-MA.txt"/>
+        </build>
+        <build name="build-sturen_medicatiegegevens-VV">
+            <stylesheet href="../xsl/mp/9.2.0/sturen_medicatiegegevens/ADA2test-wiki-table-mp-st-medgegs-VV.xsl"/>
+            <ada-working-set directory="@mgsr-instance-VV"/>
+            <output directory="@mgsr-wiki-instance" name="mgs-VV.txt"/>
+        </build>
+        <build name="build-sturen_medicatiegegevens-TA">
+            <stylesheet href="../xsl/mp/9.2.0/sturen_medicatiegegevens/ADA2test-wiki-table-mp-st-medgegs-TA.xsl"/>
+            <ada-working-set directory="@mgsr-instance-TA"/>
+            <output directory="@mgsr-wiki-instance" name="mgs-TA.txt"/>
+        </build>
+        <build name="build-sturen_medicatiegegevens-MVE">
+            <stylesheet href="../xsl/mp/9.2.0/sturen_medicatiegegevens/ADA2test-wiki-table-mp-st-medgegs-MVE.xsl"/>
+            <ada-working-set directory="@mgsr-instance-MVE"/>
+            <output directory="@mgsr-wiki-instance" name="mgs-MVE.txt"/>
+        </build>
+        <build name="build-sturen_medicatiegegevens-MGB">
+            <stylesheet href="../xsl/mp/9.2.0/sturen_medicatiegegevens/ADA2test-wiki-table-mp-st-medgegs-MGB.xsl"/>
+            <ada-working-set directory="@mgsr-instance-MGB"/>
+            <output directory="@mgsr-wiki-instance" name="mgs-MGB.txt"/>
+        </build>
+        <build name="build-sturen_medicatiegegevens-MTD">
+            <stylesheet href="../xsl/mp/9.2.0/sturen_medicatiegegevens/ADA2test-wiki-table-mp-st-medgegs-MTD.xsl"/>
+            <ada-working-set directory="@mgsr-instance-MTD"/>
+            <output directory="@mgsr-wiki-instance" name="mgs-MTD.txt"/>
+        </build>
+        <build name="build-sturen_medicatiegegevens-WDS">
+            <stylesheet href="../xsl/mp/9.2.0/sturen_medicatiegegevens/ADA2test-wiki-table-mp-st-medgegs-WDS.xsl"/>
+            <ada-working-set directory="@mgsr-instance-WDS"/>
+            <output directory="@mgsr-wiki-instance" name="mgs-WDS.txt"/>
+        </build>
+
+        <!-- sturen_medicatievoorschrift -->
+        <build name="build-sturen_medicatievoorschrift">
+            <stylesheet href="../xsl/mp/9.2.0/sturen_medicatievoorschrift/ADA2test-wiki-table-mp-st-voorschrift.xsl"/>
+            <ada-working-set directory="@mv-instance"/>
+            <output directory="@mv-wiki-instance" name="sturen-medicatievoorschrift.txt"/>
+        </build>
+
+        <!-- sturen_afhandeling_medicatievoorschrift -->
+        <build name="build-sturen_afhandeling_medicatievoorschrift">
+            <stylesheet href="../xsl/mp/9.2.0/sturen_afhandeling_medicatievoorschrift/ADA2test-wiki-table-mp-st-afhandeling-voorschrift.xsl"/>
+            <ada-working-set directory="@av-instance"/>
+            <output directory="@av-wiki-instance" name="afhandeling-medicatievoorschrift.txt"/>
+        </build>
+
+        <!-- sturen_voorstel_medicatieafspraak -->
+        <build name="build-sturen_voorstel_medicatieafspraak">
+            <stylesheet href="../xsl/mp/9.2.0/sturen_voorstel_medicatieafspraak/ADA2test-wiki-table-mp-st-vma.xsl"/>
+            <ada-working-set directory="@vma-instance"/>
+            <output directory="@vma-wiki-instance" name="voorstel-ma.txt"/>
+        </build>
+
+        <!-- sturen_antwoord_voorstel_medicatieafspraak -->
+        <build name="build-sturen_antwoord_voorstel_medicatieafspraak">
+            <stylesheet href="../xsl/mp/9.2.0/sturen_antwoord_voorstel_medicatieafspraak/ADA2test-wiki-table-mp-st-antwoord-vma.xsl"/>
+            <ada-working-set directory="@avma-instance"/>
+            <output directory="@avma-wiki-instance" name="antwoord-vma.txt"/>
+        </build>
+
+        <!-- sturen_voorstel_verstrekkingsverzoek -->
+        <build name="build-sturen_voorstel_verstrekkingsverzoek">
+            <stylesheet href="../xsl/mp/9.2.0/sturen_voorstel_verstrekkingsverzoek/ADA2test-wiki-table-mp-st-vvv.xsl"/>
+            <ada-working-set directory="@vvv-instance"/>
+            <output directory="@vvv-wiki-instance" name="voorstel-vv.txt"/>
+        </build>
+
+        <!-- sturen_antwoord_voorstel_verstrekkingsverzoek -->
+        <build name="build-sturen_antwoord_voorstel_verstrekkingsverzoek">
+            <stylesheet href="../xsl/mp/9.2.0/sturen_antwoord_voorstel_verstrekkingsverzoek/ADA2test-wiki-table-mp-st-antwoord-vvv.xsl"/>
+            <ada-working-set directory="@avvv-instance"/>
+            <output directory="@avvv-wiki-instance" name="antwoord-vvv.txt"/>
+        </build>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- dekkingsgraad wiki's -->
+
+        <!-- beschikbaarstellen_medicatiegegevens -->
+        <build name="build-dekkingsgraad-beschikbaarstellen_medicatiegegevens">
+            <stylesheet href="../xsl/mp/9.2.0/ADA2testdekkingsgraad-wiki-table-mp-920.xsl"/>
+            <ada-working-set directory="@mg-instance-repo"/>
+            <output directory="@mg-wiki-instance" name="mp-repo-testdekkingsgraad.txt"/>
+            <parameter name="transactionShortname" value="beschikbaarstellen_medicatiegegevens"/>
+            <parameter name="docAdaNewDirectory" directory="^mg-project-schemas/../new"/>
+        </build>
+
+        <!-- sturen_medicatievoorschrift -->
+        <build name="build-dekkingsgraad-sturen_medicatievoorschrift">
+            <stylesheet href="../xsl/mp/9.2.0/ADA2testdekkingsgraad-wiki-table-mp-920.xsl"/>
+            <ada-working-set directory="@mv-instance"/>
+            <output directory="@mv-wiki-instance" name="mp-testdekkingsgraad.txt"/>
+            <parameter name="transactionShortname" value="sturen_medicatievoorschrift"/>
+            <parameter name="docAdaNewDirectory" directory="^mv-project-schemas/../new"/>
+        </build>
+
+        <!-- sturen_afhandeling_medicatievoorschrift -->
+        <build name="build-dekkingsgraad-sturen_afhandeling_medicatievoorschrift">
+            <stylesheet href="../xsl/mp/9.2.0/ADA2testdekkingsgraad-wiki-table-mp-920.xsl"/>
+            <ada-working-set directory="@av-instance"/>
+            <output directory="@av-wiki-instance" name="mp-testdekkingsgraad.txt"/>
+            <parameter name="transactionShortname" value="sturen_afhandeling_medicatievoorschrift"/>
+            <parameter name="docAdaNewDirectory" directory="^av-project-schemas/../new"/>
+        </build>
+
+        <!-- sturen_voorstel_medicatieafspraak -->
+        <build name="build-dekkingsgraad-">
+            <stylesheet href="../xsl/mp/9.2.0/ADA2testdekkingsgraad-wiki-table-mp-920.xsl"/>
+            <ada-working-set directory="@vma-instance"/>
+            <output directory="@vma-wiki-instance" name="mp-testdekkingsgraad.txt"/>
+            <parameter name="transactionShortname" value="sturen_voorstel_medicatieafspraak"/>
+            <parameter name="docAdaNewDirectory" directory="^vma-project-schemas/../new"/>
+        </build>
+
+        <!-- sturen_antwoord_voorstel_medicatieafspraak -->
+        <build name="build-dekkingsgraad-">
+            <stylesheet href="../xsl/mp/9.2.0/ADA2testdekkingsgraad-wiki-table-mp-920.xsl"/>
+            <ada-working-set directory="@avma-instance"/>
+            <output directory="@avma-wiki-instance" name="mp-testdekkingsgraad.txt"/>
+            <parameter name="transactionShortname" value="sturen_antwoord_voorstel_medicatieafspraak"/>
+            <parameter name="docAdaNewDirectory" directory="^avma-project-schemas/../new"/>
+        </build>
+
+        <!-- sturen_voorstel_verstrekkingsverzoek -->
+        <build name="build-dekkingsgraad-">
+            <stylesheet href="../xsl/mp/9.2.0/ADA2testdekkingsgraad-wiki-table-mp-920.xsl"/>
+            <ada-working-set directory="@vvv-instance"/>
+            <output directory="@vvv-wiki-instance" name="mp-testdekkingsgraad.txt"/>
+            <parameter name="transactionShortname" value="sturen_voorstel_verstrekkingsverzoek"/>
+            <parameter name="docAdaNewDirectory" directory="^vvv-project-schemas/../new"/>
+        </build>
+
+        <!--  -->
+        <build name="build-dekkingsgraad-sturen_antwoord_voorstel_verstrekkingsverzoek">
+            <stylesheet href="../xsl/mp/9.2.0/ADA2testdekkingsgraad-wiki-table-mp-920.xsl"/>
+            <ada-working-set directory="@avvv-instance"/>
+            <output directory="@avvv-wiki-instance" name="mp-testdekkingsgraad.txt"/>
+            <parameter name="transactionShortname" value="sturen_antwoord_voorstel_verstrekkingsverzoek"/>
+            <parameter name="docAdaNewDirectory" directory="^avvv-project-schemas/../new"/>
+        </build>
+
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="mp" version="9.3.0" source-adarefs2ada="true" source-project-name="mp-mp93">
+
+        <setup usecase="beschikbaarstellen_medicatiegegevens" directory-id="mg">
+            <copy-data target-subdir="ada_instance_repo" source-subdir="ada_instance_repo" directory-id="mg-instance-repo">
+                <include glob="*TEST*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MA" directory-id="mg-instance-MA">
+                <include glob="*tst*MA*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_VV" directory-id="mg-instance-VV">
+                <include glob="*tst*VV*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_TA" directory-id="mg-instance-TA">
+                <include glob="*tst*TA*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MVE" directory-id="mg-instance-MVE">
+                <include glob="*tst*MVE*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MGB" directory-id="mg-instance-MGB">
+                <include glob="*tst*MGB*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MTD" directory-id="mg-instance-MTD">
+                <include glob="*tst*MTD*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_WDS" directory-id="mg-instance-WDS">
+                <include glob="*tst*WDS*.xml"/>
+            </copy-data>
+            <!-- kwalificatie test goal instances -->
+            <copy-data target-subdir="ada_instance_repo_kwal" source-subdir="ada_instance_repo" directory-id="mg-instance-repo-kwal">
+                <include glob="*KWAL*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MA_kwal" directory-id="mg-instance-MA-kwal">
+                <include glob="*kwal*MA*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_VV_kwal" directory-id="mg-instance-VV-kwal">
+                <include glob="*kwal*VV*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_TA_kwal" directory-id="mg-instance-TA-kwal">
+                <include glob="*kwal*TA*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MVE_kwal" directory-id="mg-instance-MVE-kwal">
+                <include glob="*kwal*MVE*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MGB_kwal" directory-id="mg-instance-MGB-kwal">
+                <include glob="*kwal*MGB*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MTD_kwal" directory-id="mg-instance-MTD-kwal">
+                <include glob="*kwal*MTD*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_WDS_kwal" directory-id="mg-instance-WDS-kwal">
+                <include glob="*kwal*WDS*.xml"/>
+            </copy-data>
+            <!-- consolidatie test goal instances -->
+            <copy-data target-subdir="ada_instance_CONS" directory-id="mg-instance-CONS">
+                <!-- only the non-splitted consolidatie instance -->
+                <include glob="*CONS-Scen*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_repo_cons" source-subdir="ada_instance_repo" directory-id="mg-instance-repo-cons">
+                <include glob="*CONS*.xml"/>
+            </copy-data>
+            <!-- hybride test goal instances -->
+            <copy-data target-subdir="ada_instance_repo_hyb" source-subdir="ada_instance_repo" directory-id="mg-instance-repo-hyb">
+                <include glob="*HYB*.xml"/>
+            </copy-data>
+
+            <copy-project-schemas directory-id="mg-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="mg-wiki-instance"/>
+        </setup>
+
+        <!-- raadplegen_medicatiegegevens -->
+        <setup usecase="raadplegen_medicatiegegevens" directory-id="mgr">
+            <copy-data source-subdir="ada_instance" target-subdir="ada_instance" directory-id="rmg-instance-tst">
+                <include glob="*tst*.xml"/>
+            </copy-data>
+            <copy-data source-subdir="ada_instance" target-subdir="ada_instance_kwal" directory-id="rmg-instance-kwal">
+                <include glob="*kwal*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="rmg-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <!-- No schema copies -->
+            <empty-directory target-subdir="wiki_instance" directory-id="mgr-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_medicatiegegevens -->
+        <setup usecase="sturen_medicatiegegevens" directory-id="mgsr">
+            <copy-data target-subdir="ada_instance_MA" directory-id="mgsr-instance-MA">
+                <include glob="*tst*MA*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_VV" directory-id="mgsr-instance-VV">
+                <include glob="*tst*VV*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_TA" directory-id="mgsr-instance-TA">
+                <include glob="*tst*TA*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MVE" directory-id="mgsr-instance-MVE">
+                <include glob="*tst*MVE*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MGB" directory-id="mgsr-instance-MGB">
+                <include glob="*tst*MGB*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MTD" directory-id="mgsr-instance-MTD">
+                <include glob="*tst*MTD*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_WDS" directory-id="mgsr-instance-WDS">
+                <include glob="*tst*WDS*.xml"/>
+            </copy-data>
+            <!-- kwalificatie test goal instances -->
+            <copy-data target-subdir="ada_instance_MA_kwal" directory-id="mgsr-instance-MA-kwal">
+                <include glob="*kwal*MA*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_VV_kwal" directory-id="mgsr-instance-VV-kwal">
+                <include glob="*kwal*VV*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_TA_kwal" directory-id="mgsr-instance-TA-kwal">
+                <include glob="*kwal*TA*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MVE_kwal" directory-id="mgsr-instance-MVE-kwal">
+                <include glob="*kwal*MVE*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MGB_kwal" directory-id="mgsr-instance-MGB-kwal">
+                <include glob="*kwal*MGB*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_MTD_kwal" directory-id="mgsr-instance-MTD-kwal">
+                <include glob="*kwal*MTD*.xml"/>
+            </copy-data>
+            <copy-data target-subdir="ada_instance_WDS_kwal" directory-id="mgsr-instance-WDS-kwal">
+                <include glob="*kwal*WDS*.xml"/>
+            </copy-data>
+            <!-- No schema copies -->
+            <empty-directory target-subdir="wiki_instance" directory-id="mgsr-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_medicatievoorschrift -->
+        <setup usecase="sturen_medicatievoorschrift" directory-id="mv">
+            <copy-data directory-id="mv-instance">
+                <include glob="*tst*.xml"/>
+            </copy-data>
+            <!-- kwalificatie test goal instances -->
+            <copy-data target-subdir="ada_instance_kwal" directory-id="mv-instance-kwal">
+                <include glob="*kwal*.xml"/>
+            </copy-data>
+
+            <copy-project-schemas directory-id="mv-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="mv-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_afhandeling_medicatievoorschrift -->
+        <setup usecase="sturen_afhandeling_medicatievoorschrift" directory-id="av">
+            <copy-data directory-id="av-instance">
+                <include glob="*tst*.xml"/>
+            </copy-data>
+            <!-- kwalificatie test goal instances -->
+            <copy-data target-subdir="ada_instance_kwal" directory-id="av-instance-kwal">
+                <include glob="*kwal*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="av-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="av-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_voorstel_medicatieafspraak -->
+        <setup usecase="sturen_voorstel_medicatieafspraak" directory-id="vma">
+            <copy-data directory-id="vma-instance">
+                <include glob="*tst*.xml"/>
+            </copy-data>
+            <!-- kwalificatie test goal instances -->
+            <copy-data target-subdir="ada_instance_kwal" directory-id="vma-instance-kwal">
+                <include glob="*kwal*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="vma-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="vma-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_antwoord_voorstel_medicatieafspraak -->
+        <setup usecase="sturen_antwoord_voorstel_medicatieafspraak" directory-id="avma">
+            <copy-data directory-id="avma-instance">
+                <include glob="*tst*.xml"/>
+            </copy-data>
+            <!-- kwalificatie test goal instances -->
+            <copy-data target-subdir="ada_instance_kwal" directory-id="avma-instance-kwal">
+                <include glob="*kwal*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="avma-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="avma-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_voorstel_verstrekkingsverzoek -->
+        <setup usecase="sturen_voorstel_verstrekkingsverzoek" directory-id="vvv">
+            <copy-data directory-id="vvv-instance">
+                <include glob="*tst*.xml"/>
+            </copy-data>
+            <!-- kwalificatie test goal instances -->
+            <copy-data target-subdir="ada_instance_kwal" directory-id="vvv-instance-kwal">
+                <include glob="*kwal*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="vvv-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="vvv-wiki-instance"/>
+        </setup>
+
+        <!-- sturen_antwoord_voorstel_verstrekkingsverzoek -->
+        <setup usecase="sturen_antwoord_voorstel_verstrekkingsverzoek" directory-id="avvv">
+            <copy-data directory-id="avvv-instance">
+                <include glob="*tst*.xml"/>
+            </copy-data>
+            <!-- kwalificatie test goal instances -->
+            <copy-data target-subdir="ada_instance_kwal" directory-id="avvv-instance-kwal">
+                <include glob="*kwal*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="avvv-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="avvv-wiki-instance"/>
+        </setup>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <!-- beschikbaarstellen_medicatiegegevens test-->
+        <!-- repo -->
+        <build name="build-beschikbaarstellen_medicatiegegevens-repo">
+            <stylesheet href="../xsl/mp/9.3.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-mg.xsl"/>
+            <ada-working-set directory="@mg-instance-repo"/>
+            <output directory="@mg-wiki-instance" name="mg-repo-test.txt"/>
+            <parameter name="testGoal" value="test"/>
+        </build>
+        <!-- beschikbaarstellen_medicatiegegevens per bouwsteen -->
+        <build name="build-beschikbaarstellen_medicatiegegevens-MA">
+            <stylesheet href="../xsl/mp/9.3.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-MA"/>
+            <output directory="@mg-wiki-instance" name="mg-MA-test.txt"/>
+            <parameter name="abbreviation" value="MA"/>
+            <parameter name="elementNameId" value="medicatieafspraak"/>
+            <parameter name="testGoal" value="test"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-VV">
+            <stylesheet href="../xsl/mp/9.3.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-VV"/>
+            <output directory="@mg-wiki-instance" name="mg-VV-test.txt"/>
+            <parameter name="abbreviation" value="VV"/>
+            <parameter name="elementNameId" value="verstrekkingsverzoek"/>
+            <parameter name="testGoal" value="test"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-TA">
+            <stylesheet href="../xsl/mp/9.3.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-TA"/>
+            <output directory="@mg-wiki-instance" name="mg-TA-test.txt"/>
+            <parameter name="abbreviation" value="TA"/>
+            <parameter name="elementNameId" value="toedieningsafspraak"/>
+            <parameter name="testGoal" value="test"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-MVE">
+            <stylesheet href="../xsl/mp/9.3.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-MVE"/>
+            <output directory="@mg-wiki-instance" name="mg-MVE-test.txt"/>
+            <parameter name="abbreviation" value="MVE"/>
+            <parameter name="elementNameId" value="medicatieverstrekking|verstrekking"/>
+            <parameter name="testGoal" value="test"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-MGB">
+            <stylesheet href="../xsl/mp/9.3.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-MGB"/>
+            <output directory="@mg-wiki-instance" name="mg-MGB-test.txt"/>
+            <parameter name="abbreviation" value="MGB"/>
+            <parameter name="elementNameId" value="medicatiegebruik"/>
+            <parameter name="testGoal" value="test"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-MTD">
+            <stylesheet href="../xsl/mp/9.3.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-MTD"/>
+            <output directory="@mg-wiki-instance" name="mg-MTD-test.txt"/>
+            <parameter name="abbreviation" value="MTD"/>
+            <parameter name="elementNameId" value="medicatietoediening"/>
+            <parameter name="testGoal" value="test"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-WDS">
+            <stylesheet href="../xsl/mp/9.3.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-WDS"/>
+            <output directory="@mg-wiki-instance" name="mg-WDS-test.txt"/>
+            <parameter name="abbreviation" value="WDS"/>
+            <parameter name="elementNameId" value="wisselend_doseerschema"/>
+            <parameter name="alternativeDisplayTitle" value="Beschikbaarstellen en sturen MP9 3.0 - WDS: addendum inhoudelijke gegevens "/>
+            <parameter name="testGoal" value="test"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-CONS">
+            <stylesheet href="../xsl/mp/9.3.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-mg.xsl"/>
+            <ada-working-set directory="@mg-instance-CONS"/>
+            <output directory="@mg-wiki-instance" name="mg-CONS-test.txt"/>
+            <parameter name="alternativeDisplayTitle" value="Beschikbaarstellen en sturen MP9 3.0 - Consolidatie: addendum inhoudelijke gegevens "/>
+            <parameter name="testGoal" value="test"/>
+        </build>
+
+        <!-- beschikbaarstellen_medicatiegegevens kwalificatie -->
+        <!-- repo -->
+        <build name="build-beschikbaarstellen_medicatiegegevens-repo-kwal">
+            <stylesheet href="../xsl/mp/9.3.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-mg.xsl"/>
+            <ada-working-set directory="@mg-instance-repo-kwal"/>
+            <output directory="@mg-wiki-instance" name="mg-repo-kwal.txt"/>
+            <parameter name="testGoal" value="kwalificatie"/>
+        </build>
+        <!-- beschikbaarstellen_medicatiegegevens per bouwsteen -->
+        <build name="build-beschikbaarstellen_medicatiegegevens-MA">
+            <stylesheet href="../xsl/mp/9.3.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-MA-kwal"/>
+            <output directory="@mg-wiki-instance" name="mg-MA-kwal.txt"/>
+            <parameter name="abbreviation" value="MA"/>
+            <parameter name="elementNameId" value="medicatieafspraak"/>
+            <parameter name="testGoal" value="kwalificatie"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-VV">
+            <stylesheet href="../xsl/mp/9.3.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-VV-kwal"/>
+            <output directory="@mg-wiki-instance" name="mg-VV-kwal.txt"/>
+            <parameter name="abbreviation" value="VV"/>
+            <parameter name="elementNameId" value="verstrekkingsverzoek"/>
+            <parameter name="testGoal" value="kwalificatie"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-TA">
+            <stylesheet href="../xsl/mp/9.3.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-TA-kwal"/>
+            <output directory="@mg-wiki-instance" name="mg-TA-kwal.txt"/>
+            <parameter name="abbreviation" value="TA"/>
+            <parameter name="elementNameId" value="toedieningsafspraak"/>
+            <parameter name="testGoal" value="kwalificatie"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-MVE">
+            <stylesheet href="../xsl/mp/9.3.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-MVE-kwal"/>
+            <output directory="@mg-wiki-instance" name="mg-MVE-kwal.txt"/>
+            <parameter name="abbreviation" value="MVE"/>
+            <parameter name="elementNameId" value="medicatieverstrekking|verstrekking"/>
+            <parameter name="testGoal" value="kwalificatie"/>
+        </build>
+        <build name="build-beschikbaarstellen_medicatiegegevens-MGB">
+            <stylesheet href="../xsl/mp/9.3.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-MGB-kwal"/>
+            <output directory="@mg-wiki-instance" name="mg-MGB-kwal.txt"/>
+            <parameter name="abbreviation" value="MGB"/>
+            <parameter name="elementNameId" value="medicatiegebruik"/>
+            <parameter name="testGoal" value="kwalificatie"/>
+        </build>
+        <!-- no kwalificatie cases yet for MTD -->
+        <!-- <build name="build-beschikbaarstellen_medicatiegegevens-MTD">
+            <stylesheet href="../xsl/mp/9.3.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-MTD-kwal"/>
+            <output directory="@mg-wiki-instance" name="mg-MTD.txt"/>
+            <parameter name="abbreviation" value="MTD"/>
+            <parameter name="elementNameId" value="medicatietoediening"/>
+            <parameter name="testGoal" value="kwalificatie"/>
+        </build>-->
+        <build name="build-beschikbaarstellen_medicatiegegevens-WDS">
+            <stylesheet href="../xsl/mp/9.3.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-medgegs-all.xsl"/>
+            <ada-working-set directory="@mg-instance-WDS-kwal"/>
+            <output directory="@mg-wiki-instance" name="mg-WDS-kwal.txt"/>
+            <parameter name="abbreviation" value="WDS"/>
+            <parameter name="elementNameId" value="wisselend_doseerschema"/>
+            <parameter name="alternativeDisplayTitle" value="Beschikbaarstellen en sturen MP9 3.0 - WDS: addendum inhoudelijke gegevens "/>
+            <parameter name="testGoal" value="kwalificatie"/>
+        </build>
+        <!-- no kwalificatie cases yet for CONS -->
+        <!-- <build name="build-beschikbaarstellen_medicatiegegevens-CONS">
+            <stylesheet href="../xsl/mp/9.3.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-mg.xsl"/>
+            <ada-working-set directory="@mg-instance-CONS"/>
+            <output directory="@mg-wiki-instance" name="mg-CONS.txt"/>
+            <parameter name="alternativeDisplayTitle" value="Beschikbaarstellen en sturen MP9 3.0 - Consolidatie: addendum inhoudelijke gegevens "/>
+            <parameter name="testGoal" value="kwalificatie"/>
+         </build>-->
+        <!-- beschikbaarstellen_medicatiegegevens consolidatie -->
+        <!-- repo -->
+        <build name="build-beschikbaarstellen_medicatiegegevens-repo-cons">
+            <stylesheet href="../xsl/mp/9.3.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-mg.xsl"/>
+            <ada-working-set directory="@mg-instance-repo-cons"/>
+            <output directory="@mg-wiki-instance" name="mg-repo-cons.txt"/>
+            <parameter name="testGoal" value="hybride"/>
+        </build>
+        <!-- beschikbaarstellen_medicatiegegevens hybride -->
+        <!-- repo -->
+        <build name="build-beschikbaarstellen_medicatiegegevens-repo-hyb">
+            <stylesheet href="../xsl/mp/9.3.0/beschikbaarstellen_medicatiegegevens/ADA2test-wiki-table-mp-bs-mg.xsl"/>
+            <ada-working-set directory="@mg-instance-repo-hyb"/>
+            <output directory="@mg-wiki-instance" name="mg-repo-hyb.txt"/>
+            <parameter name="testGoal" value="hybride"/>
+        </build>
+
+        <!-- raadplegen_medicatiegegevens per bouwsteen test -->
+        <build name="build-raadplegen_medicatiegegevens-tst">
+            <stylesheet href="../xsl/mp/9.3.0/raadplegen_medicatiegegevens/ADA2test-wiki-table-mp-rp-medgegs.xsl"/>
+            <ada-working-set directory="@rmg-instance-tst"/>
+            <output directory="@mgr-wiki-instance" name="mgr-filter-tst.txt"/>
+             <parameter name="testGoal" value="test"/>
+        </build>
+        <build name="build-raadplegen_medicatiegegevens-kwal">
+            <stylesheet href="../xsl/mp/9.3.0/raadplegen_medicatiegegevens/ADA2test-wiki-table-mp-rp-medgegs.xsl"/>
+            <ada-working-set directory="@rmg-instance-kwal"/>
+            <output directory="@mgr-wiki-instance" name="mgr-filter-kwal.txt"/>
+            <parameter name="testGoal" value="kwalificatie"/>
+        </build>
+      
+        <!-- sturen_medicatiegegevens per bouwsteen test -->
+        <build name="build-sturen_medicatiegegevens-MA">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_medicatiegegevens/ADA2test-wiki-table-mp-st-medgegs-all.xsl"/>
+            <ada-working-set directory="@mgsr-instance-MA"/>
+            <output directory="@mgsr-wiki-instance" name="mgs-MA-tst.txt"/>
+            <parameter name="abbreviation" value="MA"/>
+            <parameter name="elementNameId" value="medicatieafspraak"/>
+            <parameter name="testGoal" value="test"/>
+        </build>
+        <build name="build-sturen_medicatiegegevens-VV">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_medicatiegegevens/ADA2test-wiki-table-mp-st-medgegs-all.xsl"/>
+            <ada-working-set directory="@mgsr-instance-VV"/>
+            <output directory="@mgsr-wiki-instance" name="mgs-VV-tst.txt"/>
+            <parameter name="abbreviation" value="VV"/>
+            <parameter name="elementNameId" value="verstrekkingsverzoek"/>
+            <parameter name="testGoal" value="test"/>
+        </build>
+        <build name="build-sturen_medicatiegegevens-TA">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_medicatiegegevens/ADA2test-wiki-table-mp-st-medgegs-all.xsl"/>
+            <ada-working-set directory="@mgsr-instance-TA"/>
+            <output directory="@mgsr-wiki-instance" name="mgs-TA-tst.txt"/>
+            <parameter name="abbreviation" value="TA"/>
+            <parameter name="elementNameId" value="toedieningsafspraak"/>
+            <parameter name="testGoal" value="test"/>
+        </build>
+        <build name="build-sturen_medicatiegegevens-MVE">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_medicatiegegevens/ADA2test-wiki-table-mp-st-medgegs-all.xsl"/>
+            <ada-working-set directory="@mgsr-instance-MVE"/>
+            <output directory="@mgsr-wiki-instance" name="mgs-MVE-tst.txt"/>
+            <parameter name="abbreviation" value="MVE"/>
+            <parameter name="elementNameId" value="medicatieverstrekking|verstrekking"/>
+            <parameter name="testGoal" value="test"/>
+        </build>
+        <build name="build-sturen_medicatiegegevens-MGB">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_medicatiegegevens/ADA2test-wiki-table-mp-st-medgegs-all.xsl"/>
+            <ada-working-set directory="@mgsr-instance-MGB"/>
+            <output directory="@mgsr-wiki-instance" name="mgs-MGB-tst.txt"/>
+            <parameter name="abbreviation" value="MGB"/>
+            <parameter name="elementNameId" value="medicatiegebruik"/>
+            <parameter name="testGoal" value="test"/>
+        </build>
+        <build name="build-sturen_medicatiegegevens-MTD">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_medicatiegegevens/ADA2test-wiki-table-mp-st-medgegs-all.xsl"/>
+            <ada-working-set directory="@mgsr-instance-MTD"/>
+            <output directory="@mgsr-wiki-instance" name="mgs-MTD-tst.txt"/>
+            <parameter name="abbreviation" value="MTD"/>
+            <parameter name="elementNameId" value="medicatietoediening"/>
+            <parameter name="testGoal" value="test"/>
+        </build>
+        <build name="build-sturen_medicatiegegevens-WDS">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_medicatiegegevens/ADA2test-wiki-table-mp-st-medgegs-all.xsl"/>
+            <ada-working-set directory="@mgsr-instance-WDS"/>
+            <output directory="@mgsr-wiki-instance" name="mgs-WDS-tst.txt"/>
+            <parameter name="abbreviation" value="WDS"/>
+            <parameter name="elementNameId" value="wisselend_doseerschema"/>
+            <parameter name="testGoal" value="test"/>
+        </build>
+
+        <!-- sturen_medicatiegegevens per bouwsteen kwalificatie -->
+        <build name="build-sturen_medicatiegegevens-MA-kwal">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_medicatiegegevens/ADA2test-wiki-table-mp-st-medgegs-all.xsl"/>
+            <ada-working-set directory="@mgsr-instance-MA-kwal"/>
+            <output directory="@mgsr-wiki-instance" name="mgs-MA-kwal.txt"/>
+            <parameter name="abbreviation" value="MA"/>
+            <parameter name="elementNameId" value="medicatieafspraak"/>
+            <parameter name="testGoal" value="kwalificatie"/>
+        </build>
+        <build name="build-sturen_medicatiegegevens-VV-kwal">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_medicatiegegevens/ADA2test-wiki-table-mp-st-medgegs-all.xsl"/>
+            <ada-working-set directory="@mgsr-instance-VV-kwal"/>
+            <output directory="@mgsr-wiki-instance" name="mgs-VV-kwal.txt"/>
+            <parameter name="abbreviation" value="VV"/>
+            <parameter name="elementNameId" value="verstrekkingsverzoek"/>
+            <parameter name="testGoal" value="kwalificatie"/>
+        </build>
+        <build name="build-sturen_medicatiegegevens-TA-kwal">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_medicatiegegevens/ADA2test-wiki-table-mp-st-medgegs-all.xsl"/>
+            <ada-working-set directory="@mgsr-instance-TA-kwal"/>
+            <output directory="@mgsr-wiki-instance" name="mgs-TA-kwal.txt"/>
+            <parameter name="abbreviation" value="TA"/>
+            <parameter name="elementNameId" value="toedieningsafspraak"/>
+            <parameter name="testGoal" value="kwalificatie"/>
+        </build>
+        <build name="build-sturen_medicatiegegevens-MVE-kwal">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_medicatiegegevens/ADA2test-wiki-table-mp-st-medgegs-all.xsl"/>
+            <ada-working-set directory="@mgsr-instance-MVE-kwal"/>
+            <output directory="@mgsr-wiki-instance" name="mgs-MVE-kwal.txt"/>
+            <parameter name="abbreviation" value="MVE"/>
+            <parameter name="elementNameId" value="medicatieverstrekking|verstrekking"/>
+            <parameter name="testGoal" value="kwalificatie"/>
+        </build>
+        <build name="build-sturen_medicatiegegevens-MGB-kwal">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_medicatiegegevens/ADA2test-wiki-table-mp-st-medgegs-all.xsl"/>
+            <ada-working-set directory="@mgsr-instance-MGB-kwal"/>
+            <output directory="@mgsr-wiki-instance" name="mgs-MGB-kwal.txt"/>
+            <parameter name="abbreviation" value="MGB"/>
+            <parameter name="elementNameId" value="medicatiegebruik"/>
+            <parameter name="testGoal" value="kwalificatie"/>
+        </build>
+        <!-- no kwalificatie cases yet for MTD -->
+        <!--<build name="build-sturen_medicatiegegevens-MTD-kwal">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_medicatiegegevens/ADA2test-wiki-table-mp-st-medgegs-all.xsl"/>
+            <ada-working-set directory="@mgsr-instance-MTD-kwal"/>
+            <output directory="@mgsr-wiki-instance" name="mgs-MTD-kwal.txt"/>
+            <parameter name="abbreviation" value="MTD"/>
+            <parameter name="elementNameId" value="medicatietoediening"/>
+            <parameter name="testGoal" value="kwalificatie"/>
+        </build>-->
+        <build name="build-sturen_medicatiegegevens-WDS-kwal">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_medicatiegegevens/ADA2test-wiki-table-mp-st-medgegs-all.xsl"/>
+            <ada-working-set directory="@mgsr-instance-WDS-kwal"/>
+            <output directory="@mgsr-wiki-instance" name="mgs-WDS-kwal.txt"/>
+            <parameter name="abbreviation" value="WDS"/>
+            <parameter name="elementNameId" value="wisselend_doseerschema"/>
+            <parameter name="testGoal" value="kwalificatie"/>
+        </build>
+
+        <!-- sturen_medicatievoorschrift test -->
+        <build name="build-sturen_medicatievoorschrift">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_medicatievoorschrift/ADA2test-wiki-table-mp-st-voorschrift.xsl"/>
+            <ada-working-set directory="@mv-instance"/>
+            <output directory="@mv-wiki-instance" name="sturen-medicatievoorschrift-tst.txt"/>
+        </build>
+
+        <!-- sturen_medicatievoorschrift kwalificatie -->
+        <build name="build-sturen_medicatievoorschrift">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_medicatievoorschrift/ADA2test-wiki-table-mp-st-voorschrift.xsl"/>
+            <ada-working-set directory="@mv-instance-kwal"/>
+            <output directory="@mv-wiki-instance" name="sturen-medicatievoorschrift-kwal.txt"/>
+            <parameter name="testGoal" value="kwalificatie"/>
+        </build>
+
+        <!-- sturen_afhandeling_medicatievoorschrift test -->
+        <build name="build-sturen_afhandeling_medicatievoorschrift">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_afhandeling_medicatievoorschrift/ADA2test-wiki-table-mp-st-afhandeling-voorschrift.xsl"/>
+            <ada-working-set directory="@av-instance"/>
+            <output directory="@av-wiki-instance" name="afhandeling-medicatievoorschrift-tst.txt"/>
+        </build>
+
+        <!-- sturen_afhandeling_medicatievoorschrift kwalificatie -->
+        <build name="build-sturen_afhandeling_medicatievoorschrift">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_afhandeling_medicatievoorschrift/ADA2test-wiki-table-mp-st-afhandeling-voorschrift.xsl"/>
+            <ada-working-set directory="@av-instance-kwal"/>
+            <output directory="@av-wiki-instance" name="afhandeling-medicatievoorschrift-kwal.txt"/>
+            <parameter name="testGoal" value="kwalificatie"/>
+        </build>
+
+        <!-- AWE 29/8/23: voorstel transacties nog geen kwalificatie instances -->
+        <!-- sturen_voorstel_medicatieafspraak -->
+        <build name="build-sturen_voorstel_medicatieafspraak">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_voorstel_medicatieafspraak/ADA2test-wiki-table-mp-st-vma.xsl"/>
+            <ada-working-set directory="@vma-instance"/>
+            <output directory="@vma-wiki-instance" name="voorstel-ma-tst.txt"/>
+        </build>
+
+        <!-- sturen_antwoord_voorstel_medicatieafspraak -->
+        <build name="build-sturen_antwoord_voorstel_medicatieafspraak">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_antwoord_voorstel_medicatieafspraak/ADA2test-wiki-table-mp-st-antwoord-vma.xsl"/>
+            <ada-working-set directory="@avma-instance"/>
+            <output directory="@avma-wiki-instance" name="antwoord-vma-tst.txt"/>
+        </build>
+
+        <!-- sturen_voorstel_verstrekkingsverzoek -->
+        <build name="build-sturen_voorstel_verstrekkingsverzoek">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_voorstel_verstrekkingsverzoek/ADA2test-wiki-table-mp-st-vvv.xsl"/>
+            <ada-working-set directory="@vvv-instance"/>
+            <output directory="@vvv-wiki-instance" name="voorstel-vv-tst.txt"/>
+        </build>
+
+        <!-- sturen_antwoord_voorstel_verstrekkingsverzoek -->
+        <build name="build-sturen_antwoord_voorstel_verstrekkingsverzoek">
+            <stylesheet href="../xsl/mp/9.3.0/sturen_antwoord_voorstel_verstrekkingsverzoek/ADA2test-wiki-table-mp-st-antwoord-vvv.xsl"/>
+            <ada-working-set directory="@avvv-instance"/>
+            <output directory="@avvv-wiki-instance" name="antwoord-vvv-tst.txt"/>
+        </build>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- dekkingsgraad wiki's -->
+
+        <!-- test -->
+        <!-- beschikbaarstellen_medicatiegegevens -->
+        <build name="build-dekkingsgraad-beschikbaarstellen_medicatiegegevens">
+            <stylesheet href="../xsl/mp/9.3.0/ADA2testdekkingsgraad-wiki-table-mp-930.xsl"/>
+            <ada-working-set directory="@mg-instance-repo"/>
+            <output directory="@mg-wiki-instance" name="mp-repo-testdekkingsgraad-tst.txt"/>
+            <parameter name="transactionShortname" value="beschikbaarstellen_medicatiegegevens"/>
+            <parameter name="docAdaNewDirectory" directory="^mg-project-schemas/../new"/>
+        </build>
+
+        <!-- sturen_medicatievoorschrift -->
+        <build name="build-dekkingsgraad-sturen_medicatievoorschrift">
+            <stylesheet href="../xsl/mp/9.3.0/ADA2testdekkingsgraad-wiki-table-mp-930.xsl"/>
+            <ada-working-set directory="@mv-instance"/>
+            <output directory="@mv-wiki-instance" name="mp-testdekkingsgraad-tst.txt"/>
+            <parameter name="transactionShortname" value="sturen_medicatievoorschrift"/>
+            <parameter name="docAdaNewDirectory" directory="^mv-project-schemas/../new"/>
+        </build>
+
+        <!-- sturen_afhandeling_medicatievoorschrift -->
+        <build name="build-dekkingsgraad-sturen_afhandeling_medicatievoorschrift">
+            <stylesheet href="../xsl/mp/9.3.0/ADA2testdekkingsgraad-wiki-table-mp-930.xsl"/>
+            <ada-working-set directory="@av-instance"/>
+            <output directory="@av-wiki-instance" name="mp-testdekkingsgraad.txt"/>
+            <parameter name="transactionShortname" value="sturen_afhandeling_medicatievoorschrift"/>
+            <parameter name="docAdaNewDirectory" directory="^av-project-schemas/../new"/>
+        </build>
+
+        <!-- sturen_voorstel_medicatieafspraak -->
+        <build name="build-dekkingsgraad-">
+            <stylesheet href="../xsl/mp/9.3.0/ADA2testdekkingsgraad-wiki-table-mp-930.xsl"/>
+            <ada-working-set directory="@vma-instance"/>
+            <output directory="@vma-wiki-instance" name="mp-testdekkingsgraad.txt"/>
+            <parameter name="transactionShortname" value="sturen_voorstel_medicatieafspraak"/>
+            <parameter name="docAdaNewDirectory" directory="^vma-project-schemas/../new"/>
+        </build>
+
+        <!-- sturen_antwoord_voorstel_medicatieafspraak -->
+        <build name="build-dekkingsgraad-">
+            <stylesheet href="../xsl/mp/9.3.0/ADA2testdekkingsgraad-wiki-table-mp-930.xsl"/>
+            <ada-working-set directory="@avma-instance"/>
+            <output directory="@avma-wiki-instance" name="mp-testdekkingsgraad.txt"/>
+            <parameter name="transactionShortname" value="sturen_antwoord_voorstel_medicatieafspraak"/>
+            <parameter name="docAdaNewDirectory" directory="^avma-project-schemas/../new"/>
+        </build>
+
+        <!-- sturen_voorstel_verstrekkingsverzoek -->
+        <build name="build-dekkingsgraad-">
+            <stylesheet href="../xsl/mp/9.3.0/ADA2testdekkingsgraad-wiki-table-mp-930.xsl"/>
+            <ada-working-set directory="@vvv-instance"/>
+            <output directory="@vvv-wiki-instance" name="mp-testdekkingsgraad.txt"/>
+            <parameter name="transactionShortname" value="sturen_voorstel_verstrekkingsverzoek"/>
+            <parameter name="docAdaNewDirectory" directory="^vvv-project-schemas/../new"/>
+        </build>
+
+        <!-- sturen_antwoord_voorstel_verstrekkingsverzoek -->
+        <build name="build-dekkingsgraad-sturen_antwoord_voorstel_verstrekkingsverzoek">
+            <stylesheet href="../xsl/mp/9.3.0/ADA2testdekkingsgraad-wiki-table-mp-930.xsl"/>
+            <ada-working-set directory="@avvv-instance"/>
+            <output directory="@avvv-wiki-instance" name="mp-testdekkingsgraad.txt"/>
+            <parameter name="transactionShortname" value="sturen_antwoord_voorstel_verstrekkingsverzoek"/>
+            <parameter name="docAdaNewDirectory" directory="^avvv-project-schemas/../new"/>
+        </build>
+
+        <!-- kwalificatie -->
+        <!-- beschikbaarstellen_medicatiegegevens -->
+        <build name="build-dekkingsgraad-beschikbaarstellen_medicatiegegevens">
+            <stylesheet href="../xsl/mp/9.3.0/ADA2testdekkingsgraad-wiki-table-mp-930.xsl"/>
+            <ada-working-set directory="@mg-instance-repo-kwal"/>
+            <output directory="@mg-wiki-instance" name="mp-repo-testdekkingsgraad-kwal.txt"/>
+            <parameter name="transactionShortname" value="beschikbaarstellen_medicatiegegevens"/>
+            <parameter name="docAdaNewDirectory" directory="^mg-project-schemas/../new"/>
+        </build>
+
+        <!-- sturen_medicatievoorschrift -->
+        <build name="build-dekkingsgraad-sturen_medicatievoorschrift">
+            <stylesheet href="../xsl/mp/9.3.0/ADA2testdekkingsgraad-wiki-table-mp-930.xsl"/>
+            <ada-working-set directory="@mv-instance-kwal"/>
+            <output directory="@mv-wiki-instance" name="mp-testdekkingsgraad-kwal.txt"/>
+            <parameter name="transactionShortname" value="sturen_medicatievoorschrift"/>
+            <parameter name="docAdaNewDirectory" directory="^mv-project-schemas/../new"/>
+        </build>
+
+        <!-- sturen_afhandeling_medicatievoorschrift -->
+        <build name="build-dekkingsgraad-sturen_afhandeling_medicatievoorschrift">
+            <stylesheet href="../xsl/mp/9.3.0/ADA2testdekkingsgraad-wiki-table-mp-930.xsl"/>
+            <ada-working-set directory="@av-instance-kwal"/>
+            <output directory="@av-wiki-instance" name="mp-testdekkingsgraad-kwal.txt"/>
+            <parameter name="transactionShortname" value="sturen_afhandeling_medicatievoorschrift"/>
+            <parameter name="docAdaNewDirectory" directory="^av-project-schemas/../new"/>
+        </build>
+
+        <!-- AWE 29/8/23: voorstel transacties nog geen kwalificatie instances -->
+        <!-- sturen_voorstel_medicatieafspraak -->
+        <!--<build name="build-dekkingsgraad-">
+            <stylesheet href="../xsl/mp/9.3.0/ADA2testdekkingsgraad-wiki-table-mp-930.xsl"/>
+            <ada-working-set directory="@vma-instance-kwal"/>
+            <output directory="@vma-wiki-instance" name="mp-testdekkingsgraad-kwal.txt"/>
+            <parameter name="transactionShortname" value="sturen_voorstel_medicatieafspraak"/>
+            <parameter name="docAdaNewDirectory" directory="^vma-project-schemas/../new"/>
+        </build>-->
+
+        <!-- sturen_antwoord_voorstel_medicatieafspraak -->
+        <!--<build name="build-dekkingsgraad-">
+            <stylesheet href="../xsl/mp/9.3.0/ADA2testdekkingsgraad-wiki-table-mp-930.xsl"/>
+            <ada-working-set directory="@avma-instance-kwal"/>
+            <output directory="@avma-wiki-instance" name="mp-testdekkingsgraad-kwal.txt"/>
+            <parameter name="transactionShortname" value="sturen_antwoord_voorstel_medicatieafspraak"/>
+            <parameter name="docAdaNewDirectory" directory="^avma-project-schemas/../new"/>
+        </build>-->
+
+        <!-- sturen_voorstel_verstrekkingsverzoek -->
+        <!--<build name="build-dekkingsgraad-">
+            <stylesheet href="../xsl/mp/9.3.0/ADA2testdekkingsgraad-wiki-table-mp-930.xsl"/>
+            <ada-working-set directory="@vvv-instance-kwal"/>
+            <output directory="@vvv-wiki-instance" name="mp-testdekkingsgraad-kwal.txt"/>
+            <parameter name="transactionShortname" value="sturen_voorstel_verstrekkingsverzoek"/>
+            <parameter name="docAdaNewDirectory" directory="^vvv-project-schemas/../new"/>
+        </build>-->
+
+        <!-- sturen_antwoord_voorstel_verstrekkingsverzoek -->
+        <!--<build name="build-dekkingsgraad-sturen_antwoord_voorstel_verstrekkingsverzoek">
+            <stylesheet href="../xsl/mp/9.3.0/ADA2testdekkingsgraad-wiki-table-mp-930.xsl"/>
+            <ada-working-set directory="@avvv-instance-kwal"/>
+            <output directory="@avvv-wiki-instance" name="mp-testdekkingsgraad-kwal.txt"/>
+            <parameter name="transactionShortname" value="sturen_antwoord_voorstel_verstrekkingsverzoek"/>
+            <parameter name="docAdaNewDirectory" directory="^avvv-project-schemas/../new"/>
+        </build>-->
+
+
+    </application>
+
+    <!-- ======================================================================= -->
+    <!-- peri -->
+
+    <application name="peri" version="2.2.10">
+        <message>WARNING: ORIGINAL CODE CONTAINED NO ANT SETUP/BUILD SCRIPTS. NOT IMPLEMENTED!</message>
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="peri" version="2.3.3">
+        <message>WARNING: ORIGINAL CODE CONTAINED NO ANT SETUP/BUILD SCRIPTS. NOT IMPLEMENTED!</message>
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="peri" version="2.3.5" source-adarefs2ada="true" source-project-name="perinatologie-235">
+
+        <setup usecase="kernset_geboortezorg" directory-id="ks">
+            <copy-data directory-id="ks-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="ks-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="ks-wiki-instance"/>
+        </setup>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <build name="build-kernset_geboortezorg">
+            <stylesheet href="../xsl/peri/2.3.5/kernset_geboortezorg/ADA2test-wiki-table-peri-st-ks235.xsl"/>
+            <ada-working-set directory="@ks-instance"/>
+            <output directory="@ks-wiki-instance" name="wiki-table-peri-235.txt"/>
+            <parameter name="adaReleaseFilename" value="perinatologie-ada-release.xml"/>
+            <parameter name="docAdaNewFilename" directory="^ks-project-schemas/../new/kernset_geboortezorg_235.xml"/>
+        </build>
+
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="peri" version="2.3.6" source-adarefs2ada="true" source-project-name="perinatologie-236">
+
+        <setup usecase="kernset_geboortezorg" directory-id="ks">
+            <copy-data directory-id="ks-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="ks-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="ks-wiki-instance"/>
+        </setup>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <build name="build-kernset_geboortezorg">
+            <stylesheet href="../xsl/peri/2.3.6/kernset_geboortezorg/ADA2test-wiki-table-peri-st-ks236.xsl"/>
+            <ada-working-set directory="@ks-instance"/>
+            <output directory="@ks-wiki-instance" name="wiki-table-peri-236.txt"/>
+            <parameter name="adaReleaseFilename" value="perinatologie-ada-release.xml"/>
+            <parameter name="docAdaNewFilename" directory="^ks-project-schemas/../new/kernset_geboortezorg_236.xml"/>
+        </build>
+
+        <build name="build-dekkingsgraad-kerneset_geboortezorg">
+            <stylesheet href="../xsl/peri/2.3.6/kernset_geboortezorg/ADA2testdekkingsgraad-wiki-table-peri-st-ks236.xsl"/>
+            <ada-working-set directory="@ks-instance"/>
+            <output directory="@ks-wiki-instance" name="dg-ksgebz236.txt"/>
+            <parameter name="adaReleaseFilename" value="perinatologie-ada-release.xml"/>
+            <parameter name="docAdaNewFilename" directory="^ks-project-schemas/../new/kernset_geboortezorg_236.xml"/>
+        </build>
+
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="peri" version="3.0" source-adarefs2ada="false" source-project-name="perinatologie">
+
+        <setup usecase="kernset_neonatologie" directory-id="ksneo">
+            <copy-data directory-id="ksneo-instance">
+                <include glob="ksneo*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="ksneo-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="ksneo-wiki-instance"/>
+        </setup>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <build name="build-kernset_neonatologie">
+            <stylesheet href="../xsl/peri/3.0/kernset_neonatologie/ADA2test-wiki-table-peri-ksneo30.xsl"/>
+            <ada-working-set directory="@ksneo-instance"/>
+            <output directory="@ksneo-wiki-instance" name="ksneo.txt"/>
+            <parameter name="adaReleaseFilename" value="perinatologie-ada-release.xml"/>
+            <parameter name="docAdaNewFilename" directory="^ksneo-project-schemas/../new/kernset_neonatologie_30.xml"/>
+        </build>
+
+        <!-- REMARK: The stylesheet for creating the dekkingsgraad WIKI text document is there (and works).
+             However, the original code does not generate this, so we don't generate it here to prevent comparison failures…
+        -->
+        <!--<build name="build-dekkingsgraad-kernset_neonatologie">
+            <stylesheet href="../xsl/peri/3.0/kernset_neonatologie/ADA2testdekkingsgraad-wiki-table-peri-ksneo30.xsl"/>
+            <ada-working-set directory="@ksneo-instance"/>
+            <output directory="@ksneo-wiki-instance" name="ksneo-dg.txt"/>
+            <parameter name="adaReleaseFilename" value="perinatologie-ada-release.xml"/>
+            <parameter name="docAdaNewFilename" directory="^ksneo-project-schemas/../new/kernset_neonatologie_30.xml"/>
+        </build>-->
+
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="peri" version="3.2" source-adarefs2ada="true" source-project-name="perinatologie-32">
+
+        <setup usecase="med_mij_01_beschikbaarstellen_integrale_zwangerschapskaart" directory-id="izk">
+            <copy-data directory-id="izk-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="izk-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="izk-wiki-instance"/>
+        </setup>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <build name="build-med_mij_01_beschikbaarstellen_integrale_zwangerschapskaart">
+            <!-- REMARK 202304: This build produces warnings -->
+            <stylesheet href="../xsl/peri/3.2/med_mij_01_beschikbaarstellen_integrale_zwangerschapskaart/ADA2test-wiki-table-peri-bs-izk32.xsl"/>
+            <ada-working-set directory="@izk-instance"/>
+            <output directory="@izk-wiki-instance" name="wiki-table-peri-32.txt"/>
+            <parameter name="docAdaNewFilename" directory="^izk-project-schemas/../new/kernset_neonatologie_30.xml"/>
+        </build>
+
+        <!-- REMARK: The stylesheet for creating the dekkingsgraad WIKI text document is there (and works).
+             However, the original code does not generate this, so we don't generate it here to prevent comparison failures…
+        -->
+        <!-- <build name="build-dekkingsgraad-med_mij_01_beschikbaarstellen_integrale_zwangerschapskaart">
+            <stylesheet href="../xsl/peri/3.2/med_mij_01_beschikbaarstellen_integrale_zwangerschapskaart/ADA2testdekkingsgraad-wiki-table-peri-bs-izk32.xsl"/>
+            <ada-working-set directory="@izk-instance"/>
+            <output directory="@izk-wiki-instance" name="wiki-table-peri-32-dg.txt"/>
+            <parameter name="docAdaNewFilename" directory="^izk-project-schemas/../new/med_mij_01_beschikbaarstellen_integrale_zwangerschapskaart.xml"/>
+        </build>-->
+
+    </application>
+    
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    
+    <application name="peri" version="3.2.6" source-adarefs2ada="true" source-project-name="perinatologie-326">
+        
+        <setup usecase="med_mij_01_beschikbaarstellen_integrale_zwangerschapskaart" directory-id="izk">
+            <copy-data directory-id="izk-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="izk-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="izk-wiki-instance"/>
+        </setup>
+        
+        <setup usecase="med_mij_kraam_beschikbaarstellen" directory-id="izk-kraam">
+            <copy-data directory-id="izk-kraam-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="izk-kraam-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_kraam_instance" directory-id="izk-kraam-wiki-instance"/>
+        </setup>
+        
+        <setup usecase="med_mij_echo_beschikbaarstellen" directory-id="izk-echo">
+            <copy-data directory-id="izk-echo-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="izk-echo-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_echo_instance" directory-id="izk-echo-wiki-instance"/>
+        </setup>
+        
+        <setup usecase="med_mij_uitbreiding_verloskunde_beschikbaarstellen" directory-id="izk-uitbreiding-verloskunde">
+            <copy-data directory-id="izk-uitbreiding-verloskunde-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="izk-uitbreiding-verloskunde-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_uitbreiding_verloskunde_instance" directory-id="izk-uitbreiding-verloskunde-wiki-instance"/>
+        </setup>
+        
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        
+        <build name="build-med_mij_01_beschikbaarstellen_integrale_zwangerschapskaart">
+            <!-- REMARK 202304: This build produces warnings -->
+            <stylesheet href="../xsl/peri/3.2/med_mij_01_beschikbaarstellen_integrale_zwangerschapskaart/ADA2test-wiki-table-peri-bs-izk32.xsl"/>
+            <ada-working-set directory="@izk-instance"/>
+            <output directory="@izk-wiki-instance" name="wiki-table-peri-32.txt"/>
+            <parameter name="docAdaNewFilename" directory="^izk-project-schemas/../new/kernset_neonatologie_30.xml"/>
+        </build>
+        
+        <build name="build-med_mij_kraam_beschikbaarstellen">
+            <!-- REMARK 202304: This build produces warnings -->
+            <stylesheet href="../xsl/peri/3.2/med_mij_01_beschikbaarstellen_integrale_zwangerschapskaart/ADA2test-wiki-table-peri-bs-izk32.xsl"/>
+            <ada-working-set directory="@izk-kraam-instance"/>
+            <output directory="@izk-kraam-wiki-instance" name="wiki-table-peri-32.txt"/>
+            <parameter name="docAdaNewFilename" directory="^izk-kraam-project-schemas/../new/kernset_neonatologie_30.xml"/>
+        </build>
+        
+        <build name="build-med_mij_echo_beschikbaarstellen">
+            <!-- REMARK 202304: This build produces warnings -->
+            <stylesheet href="../xsl/peri/3.2/med_mij_01_beschikbaarstellen_integrale_zwangerschapskaart/ADA2test-wiki-table-peri-bs-izk32.xsl"/>
+            <ada-working-set directory="@izk-echo-instance"/>
+            <output directory="@izk-echo-wiki-instance" name="wiki-table-peri-32.txt"/>
+            <parameter name="docAdaNewFilename" directory="^izk-echo-project-schemas/../new/kernset_neonatologie_30.xml"/>
+        </build>
+        
+        <build name="build-med_mij_uitbreiding_verloskunde_beschikbaarstellen">
+            <!-- REMARK 202304: This build produces warnings -->
+            <stylesheet href="../xsl/peri/3.2/med_mij_01_beschikbaarstellen_integrale_zwangerschapskaart/ADA2test-wiki-table-peri-bs-izk32.xsl"/>
+            <ada-working-set directory="@izk-uitbreiding-verloskunde-instance"/>
+            <output directory="@izk-uitbreiding-verloskunde-wiki-instance" name="wiki-table-peri-32.txt"/>
+            <parameter name="docAdaNewFilename" directory="^izk-uitbreiding-verloskunde-project-schemas/../new/kernset_neonatologie_30.xml"/>
+        </build>
+        
+        <!-- REMARK: The stylesheet for creating the dekkingsgraad WIKI text document is there (and works).
+             However, the original code does not generate this, so we don't generate it here to prevent comparison failures…
+        -->
+        <!-- <build name="build-dekkingsgraad-med_mij_01_beschikbaarstellen_integrale_zwangerschapskaart">
+            <stylesheet href="../xsl/peri/3.2/med_mij_01_beschikbaarstellen_integrale_zwangerschapskaart/ADA2testdekkingsgraad-wiki-table-peri-bs-izk32.xsl"/>
+            <ada-working-set directory="@izk-instance"/>
+            <output directory="@izk-wiki-instance" name="wiki-table-peri-32-dg.txt"/>
+            <parameter name="docAdaNewFilename" directory="^izk-project-schemas/../new/med_mij_01_beschikbaarstellen_integrale_zwangerschapskaart.xml"/>
+        </build>-->
+        
+    </application>
+
+    <!-- ======================================================================= -->
+    <!-- snictiz -->
+
+    <application name="snictiz" version="Jacob" source-adarefs2ada="false" source-project-name="snictiz">
+
+        <setup usecase="sturen_naamgegevens" directory-id="naamgegevens">
+            <copy-data directory-id="naamgegevens-instance">
+                <include glob="*.xml"/>
+            </copy-data>
+            <copy-project-schemas directory-id="naamgegevens-project-schemas">
+                <include glob="*$USECASE.xsd"/>
+            </copy-project-schemas>
+            <empty-directory target-subdir="wiki_instance" directory-id="naamgegevens-wiki-instance"/>
+        </setup>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <build name="sturen_naamgegevens">
+            <stylesheet href="../xsl/snictiz/Jacob/sturen_naamgegevens/ADA2test-wiki-table-snictiz-jacob.xsl"/>
+            <ada-working-set directory="@naamgegevens-instance"/>
+            <output directory="@naamgegevens-wiki-instance" name="wiki-table-snictiz-jacob.txt"/>
+        </build>
+
+    </application>
+
+    <!-- ======================================================================= -->
+    <!-- vragenlijsten -->
+
+    <application name="vragenlijsten" version="1.0.0">
+        <message>WARNING: ORIGINAL CODE CONTAINED NO ANT SETUP/BUILD SCRIPTS. NOT IMPLEMENTED!</message>
+    </application>
+
+</ada-2-wiki-data>

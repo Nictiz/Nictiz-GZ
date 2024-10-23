@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application-ada-retrieval-data xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../xsd/application-ada-retrieval-data.xsd">
+    <!-- ================================================================== -->
+    <!--
+        Application ADA retrieval file for testing some of the functionality of the
+        ADA retrieval process. 
+        See README.md for more information.
+    -->
+    <!-- ================================================================== -->
+    <!-- Using peri/2.3 for test -->
+
+    <retrieval-set-definition id="peri-generic-nested">
+        <retrieval transaction="kernset_geboortezorg" contains="scenario"/>
+    </retrieval-set-definition>
+
+    <retrieval-set-definition id="peri-generic"> 
+        <!-- Explicitly used a nested retrieval-set (to test recursive sets). -->
+        <retrieval-set idref="peri-generic-nested"/>
+    </retrieval-set-definition>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <!-- Include the application definition to test the XINclude functionality and the resolving of
+         postprocessing-stylesheet href-s from a document that is not the main document: -->
+    <xi:include href="include/include-for-test-application-ada-retrieval-data.xml"/>
+
+</application-ada-retrieval-data>

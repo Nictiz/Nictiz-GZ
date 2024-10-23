@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<text-document xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../../../../YATC-shared/xsd/text-document.xsd" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!-- ======================================================================= -->
+    <!-- 
+        Documentation for the distributions system
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <title><anchor name="distributions-description"/>Distributions</title>
+
+    <section>
+        <title>Overview</title>
+
+        <para>The <code>YATC-internal/distribute</code> component allows you to merge results and/or scripts into what is called a <emph>distribution</emph>.</para>
+
+        <para>A distribution is a collection of directory/file copies to some location. The idea is that a distribution gathers all necessary files for some additional  application/purpose/user/customer. For instance, the stylesheets an external customer needs, or parts of the output documents produced. </para>
+
+        <para>A distribution has the following features:</para>
+        <unorderedlist>
+            <entry>
+                <para>A distribution has a <emph>name</emph>, by which it can be identified/started.</para>
+            </entry>
+            <entry>
+                <para>A distribution consists of:</para>
+                <unorderedlist>
+                    <entry>
+                        <para>Directory copies. You can filter the documents copied by name patterns. The target directory may have a different name than the source.</para>
+                    </entry>
+                    <entry>
+                        <para>Single file copies. The target file may have a different name than the source.</para>
+                    </entry>
+                    <entry>
+                        <para>Copies of additional text documents, for instance readme files or license texts. Within these files, simple macro substitutions (see <link href="data-format-reference.md#distribution-macros">distribution macros</link>) can be done, for instance to insert dates or version numbers. You can also <emph>combine</emph> multiple text files into one.</para>
+                    </entry>
+                    <entry>
+                        <para>Flattened sets of XSLT stylesheets, XML Schemas or Schematron Schemas. Flattening means that these documents are copied first. Subsequently, all files included/imported (recursively) are copied as well, into a single sub-directory. All include/import elements are adapted to the new, flattened, layout.</para>
+                    </entry>
+                </unorderedlist>
+            </entry>
+            <entry>
+                <para>The name definitions of all directories and filenames can contain simple macros (see <link href="data-format-reference.md#distribution-macros">distribution macros</link>), so you can, for instance, create a distribution directory with the date and/or time in its name.</para>
+            </entry>
+            <entry>
+                <para>If needed, the result of the distribution can be gathered in a zip file.</para>
+            </entry>
+            <entry>
+                <para>When creating a distribution, you have the option to provide a so-called <emph>distribution-version</emph>. This is a string that distinguishes this specific distribution from others, such as <code>3.1</code> or <code>0.4beta</code>. It is not necessary to do this, as the date and time of creation may be sufficient for identification. However, if you choose to provide a distribution-version, you can utilize it in macro substitutions for target directory/file names and additional text documents.</para>
+            </entry>
+        </unorderedlist>
+
+    </section>
+  
+    <!-- ======================================================================= -->
+
+    <section>
+        <title>Examples</title>
+
+        <section>
+            <title>Distributing XSLT stylesheets with a readme</title>
+
+            <para>Let's assume that the following distribution is defined:</para>
+
+            <codeblock><![CDATA[<distribute-data>
+        
+    <distribution name="dist1" target-directory="TMP-$DISTRIBUTIONVERSION-$DATECOMPACT"  
+            base-dir-in-zip="false" 
+            href-zip="../ZIP-$DISTRIBUTIONVERSION-$DATECOMPACT.zip" distribution-version-required="true" 
+            allow-overwrite="false" keep-files="false">
+        
+        <flatten-stylesheets source-directory="ada-2-fhir/env/ketenzorg/3.0.2/beschikbaarstellen/payload/" 
+                target-directory="stylesheets"/>
+        
+        <combine-additional-text-documents href-target="README.txt" 
+                separator="$NL$NL*******************************************************$NL$NL">
+            <text-document href-source="ada-2-fhir/env/ketenzorg/3.0.2/beschikbaarstellen/README-1.txt"/>
+            <text-document href-source="ada-2-fhir/env/ketenzorg/3.0.2/beschikbaarstellen/README-2.txt"/>
+        </combine-additional-text-documents>
+        
+    </distribution>
+
+</distribute-data>]]></codeblock>
+        </section>
+
+        <para>Assume we call it on November 14th 2023, using the command: <code>yatc distribute dist1 -version:1.16.7</code>.</para>
+
+        <para>What it will do is:</para>
+        <unorderedlist>
+            
+            <entry>
+                <para>The distribution named <code>test1</code> writes its results to a subdirectory of the main distributions directory, using some macros.</para>
+                <unorderedlist>
+                    <entry>
+                        <para>Writes its results to a subdirectory of the main distributions directory using some macros. In the example this will become <code>TMP-1.16.7-20231114</code>.</para>
+                    </entry>
+                    <entry>
+                        <para>Setting <code>@distribution-version-required</code> to <code>true</code> means that you <emph>must</emph> specify the <code>-version:…</code> flag on the command line when creating this distribution. It cannot run without a specific distribution version set.</para>
+                    </entry>
+                    <entry>
+                        <para>Since the <code>@allow-overwrite</code> is set to <code>false</code>, neither the target directory nor the zip file must exist before the distribution's actions takes place.</para>
+                    </entry>
+                    <entry>
+                        <para>The <code>@href-zip</code> attribute defines the name of the zip file that contains the distribution results. The name of this zip file will become <code>ZIP-1.16.7-20231114.zip</code> and it will be stored in the main distribution directory.<br/>Setting <code>@base-dir-in-zip</code> to <code>false</code> defines that we don't want the name of the temporary directory where we write the distribution to (<code>TMP-1.16.7-20231114</code>) to be part of the zip's contents. Only the files/sub-directories <emph>in</emph> that directory become part of the zip file.</para>
+                    </entry>
+                    <entry>
+                        <para>Since <code>@keep-files</code> is set to <code>false</code>, the temporary distribution directory (<code>TMP-1.16.7-20231114</code>) will be deleted after the zip file is created.</para>
+                    </entry>
+                </unorderedlist>
+            </entry>
+            <entry>
+                <para>The first part of the distribution is a flattened collection of stylesheets from the code base of <code>YATC-internal/ada-2-fhir</code>. These files will be placed in a sub-directory <code>stylesheets</code>. There will also be a sub-directory <code>stylesheets/include</code>, where all the includes/imports live.</para>
+            </entry>
+            <entry>
+                <para>Finally a <code>README.txt</code> file is created, combining two separate (imaginary) readme files. A line with stars is used as separator.</para>
+            </entry>
+        </unorderedlist>
+
+        <para>The result of this distribution will be a zip file <code>ZIP-1.16.7-20231114.zip</code>. At root level it contains a sub-directory <code>stylesheets</code> and a <code>README.txt</code> document.</para>
+
+    </section>
+
+</text-document>

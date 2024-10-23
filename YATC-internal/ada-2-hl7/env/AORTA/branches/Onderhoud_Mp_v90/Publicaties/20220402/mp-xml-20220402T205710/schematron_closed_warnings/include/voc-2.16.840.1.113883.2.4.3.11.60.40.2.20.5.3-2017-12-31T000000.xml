@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             id="2.16.840.1.113883.2.4.3.11.60.40.2.20.5.3"
+             name="AdresSoortCodelijst"
+             displayName="AdresSoortCodelijst"
+             effectiveDate="2017-12-31T00:00:00"
+             statusCode="final">
+      <sourceCodeSystem id="2.16.840.1.113883.5.1119"
+                        identifierName="Address Use"
+                        canonicalUri="http://terminology.hl7.org/CodeSystem/v3-AddressUse"
+                        canonicalUriDSTU2="http://hl7.org/fhir/v3/AddressUse"
+                        canonicalUriSTU3="http://hl7.org/fhir/v3/AddressUse"
+                        canonicalUriR4="http://terminology.hl7.org/CodeSystem/v3-AddressUse"
+                        context="external/hl7"/>
+      <publishingAuthority name="Registratie aan de bron" inherited="project">
+         <addrLine type="uri">https://www.registratieaandebron.nl</addrLine>
+         <addrLine type="uri">https://zibs.nl</addrLine>
+      </publishingAuthority>
+      <conceptList>
+         <concept code="PST"
+                  codeSystem="2.16.840.1.113883.5.1119"
+                  displayName="Postal Addres"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Postadres"/>
+         </concept>
+         <concept code="HP"
+                  codeSystem="2.16.840.1.113883.5.1119"
+                  displayName="Primary Home"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Officieel adres"/>
+         </concept>
+         <concept code="PHYS"
+                  codeSystem="2.16.840.1.113883.5.1119"
+                  displayName="Visit Address"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Woon-/verblijfadres"/>
+         </concept>
+         <concept code="TMP"
+                  codeSystem="2.16.840.1.113883.5.1119"
+                  displayName="Tempory Address"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Tijdelijk adres"/>
+         </concept>
+         <concept code="WP"
+                  codeSystem="2.16.840.1.113883.5.1119"
+                  displayName="Work Place"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Werkadres"/>
+         </concept>
+         <concept code="HV"
+                  codeSystem="2.16.840.1.113883.5.1119"
+                  displayName="Vacation Home"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Vakantie adres"/>
+         </concept>
+      </conceptList>
+   </valueSet>
+</valueSets>

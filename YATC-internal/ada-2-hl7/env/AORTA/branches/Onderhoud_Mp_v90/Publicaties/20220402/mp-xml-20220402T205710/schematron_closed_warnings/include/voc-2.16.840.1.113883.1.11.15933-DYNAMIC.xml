@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             id="2.16.840.1.113883.1.11.15933"
+             name="ActStatus"
+             displayName="ActStatus"
+             effectiveDate="2014-03-26T00:00:00"
+             statusCode="final"
+             versionLabel="DEFN=UV=VO=1360-20160323"
+             ident="ad2bbr-"
+             url="http://art-decor.org/decor/services/"
+             referencedFrom="zib2017bbr-">
+      <desc language="en-US">
+                <p>
+            <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p>
+         <b>description: </b>
+                <p>Contains the names (codes) for each of the states in the state-machine of the RIM Act class.</p>
+            </desc>
+      <sourceCodeSystem id="2.16.840.1.113883.5.14"
+                        identifierName="ActStatus"
+                        canonicalUri="http://terminology.hl7.org/CodeSystem/v3-ActStatus"
+                        canonicalUriDSTU2="http://hl7.org/fhir/v3/ActStatus"
+                        canonicalUriSTU3="http://hl7.org/fhir/v3/ActStatus"
+                        canonicalUriR4="http://terminology.hl7.org/CodeSystem/v3-ActStatus"
+                        context="external/hl7"/>
+      <publishingAuthority name="Registratie aan de bron" inherited="project">
+         <addrLine type="uri">https://www.registratieaandebron.nl</addrLine>
+         <addrLine type="uri">https://zibs.nl</addrLine>
+      </publishingAuthority>
+      <conceptList>
+         <concept code="normal"
+                  codeSystem="2.16.840.1.113883.5.14"
+                  displayName="normal"
+                  level="0"
+                  type="S"/>
+         <concept code="aborted"
+                  codeSystem="2.16.840.1.113883.5.14"
+                  displayName="aborted"
+                  level="1"
+                  type="L"/>
+         <concept code="active"
+                  codeSystem="2.16.840.1.113883.5.14"
+                  displayName="active"
+                  level="1"
+                  type="L"/>
+         <concept code="cancelled"
+                  codeSystem="2.16.840.1.113883.5.14"
+                  displayName="cancelled"
+                  level="1"
+                  type="L"/>
+         <concept code="completed"
+                  codeSystem="2.16.840.1.113883.5.14"
+                  displayName="completed"
+                  level="1"
+                  type="L"/>
+         <concept code="held"
+                  codeSystem="2.16.840.1.113883.5.14"
+                  displayName="held"
+                  level="1"
+                  type="L"/>
+         <concept code="new"
+                  codeSystem="2.16.840.1.113883.5.14"
+                  displayName="new"
+                  level="1"
+                  type="L"/>
+         <concept code="suspended"
+                  codeSystem="2.16.840.1.113883.5.14"
+                  displayName="suspended"
+                  level="1"
+                  type="L"/>
+         <concept code="nullified"
+                  codeSystem="2.16.840.1.113883.5.14"
+                  displayName="nullified"
+                  level="0"
+                  type="L"/>
+         <concept code="obsolete"
+                  codeSystem="2.16.840.1.113883.5.14"
+                  displayName="obsolete"
+                  level="0"
+                  type="L"/>
+      </conceptList>
+   </valueSet>
+</valueSets>

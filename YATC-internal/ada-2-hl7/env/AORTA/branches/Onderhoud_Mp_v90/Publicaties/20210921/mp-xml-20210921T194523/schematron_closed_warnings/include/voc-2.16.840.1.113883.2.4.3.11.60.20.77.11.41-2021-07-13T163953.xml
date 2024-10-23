@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             id="2.16.840.1.113883.2.4.3.11.60.20.77.11.41"
+             name="MedicatieToedieningRedenVanAfwijkenCodelijst9.2"
+             displayName="MedicatieToedieningRedenVanAfwijkenCodelijst"
+             statusCode="pending"
+             effectiveDate="2021-07-13T16:39:53">
+      <sourceCodeSystem id="2.16.840.1.113883.6.96"
+                        identifierName="SNOMED Clinical Terms"
+                        canonicalUri="http://snomed.info/sct"
+                        canonicalUriDSTU2="http://snomed.info/sct"
+                        canonicalUriSTU3="http://snomed.info/sct"
+                        canonicalUriR4="http://snomed.info/sct"/>
+      <sourceCodeSystem id="2.16.840.1.113883.5.8"
+                        identifierName="Act Reason"
+                        canonicalUri="http://terminology.hl7.org/CodeSystem/v3-ActReason"
+                        canonicalUriDSTU2="http://hl7.org/fhir/v3/ActReason"
+                        canonicalUriSTU3="http://hl7.org/fhir/v3/ActReason"
+                        canonicalUriR4="http://terminology.hl7.org/CodeSystem/v3-ActReason"/>
+      <sourceCodeSystem id="2.16.840.1.113883.2.4.3.11.60.40.4"
+                        identifierName=""
+                        canonicalUri="urn:oid:2.16.840.1.113883.2.4.3.11.60.40.4"
+                        canonicalUriDSTU2="urn:oid:2.16.840.1.113883.2.4.3.11.60.40.4"
+                        canonicalUriSTU3="urn:oid:2.16.840.1.113883.2.4.3.11.60.40.4"
+                        canonicalUriR4="urn:oid:2.16.840.1.113883.2.4.3.11.60.40.4"/>
+      <sourceCodeSystem id="2.16.840.1.113883.5.1008"
+                        identifierName="Null Flavor"
+                        canonicalUri="http://terminology.hl7.org/CodeSystem/v3-NullFlavor"
+                        canonicalUriDSTU2="http://hl7.org/fhir/v3/NullFlavor"
+                        canonicalUriSTU3="http://hl7.org/fhir/v3/NullFlavor"
+                        canonicalUriR4="http://terminology.hl7.org/CodeSystem/v3-NullFlavor"/>
+      <publishingAuthority name="Nictiz">
+         <addrLine>Oude Middenweg 55</addrLine>
+         <addrLine>2491 AC Den Haag</addrLine>
+         <addrLine>T 070 317 3450</addrLine>
+      </publishingAuthority>
+      <copyright language="en-US">This artefact includes content from SNOMED Clinical Terms® (SNOMED CT®) which is copyright of the International Health Terminology Standards Development Organisation (IHTSDO). Implementers of these artefacts must have the appropriate SNOMED CT Affiliate license - for more information contact http://www.snomed.org/snomed-ct/getsnomed-ct or info@snomed.org.</copyright>
+      <conceptList>
+         <concept code="705046008"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Leveringstekort van medicatie (bevinding)"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Leveringstekort van medicatie"/>
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Deficit of medication supply"/>
+         </concept>
+         <concept code="274512008"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Behandeling met geneesmiddel stopgezet (situatie)"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Behandeling met geneesmiddel stopgezet"/>
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Drug therapy discontinued"/>
+         </concept>
+         <concept code="152741000146103"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Medicatie uitgespuugd door patiënt (situatie)"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Medicatie uitgespuugd door patiënt"/>
+         </concept>
+         <concept code="153221000146105"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Zorgverlener is niet beschikbaar om medicatie toe te dienen (bevinding)"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Zorgverlener is niet beschikbaar om medicatie toe te dienen"/>
+         </concept>
+         <concept code="153211000146100"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Zorgverlener is vergeten medicatie toe te dienen (bevinding)"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Zorgverlener is vergeten medicatie toe te dienen"/>
+         </concept>
+         <concept code="408366001"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Niet in staat om medicatie te gebruiken (bevinding)"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Niet in staat om medicatie te gebruiken"/>
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Unable to use medication"/>
+         </concept>
+         <concept code="406149000"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Toediening van medicatie geweigerd (situatie)"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Toediening van medicatie geweigerd"/>
+            <designation language="en-US" type="preferred" displayName="Medication refused"/>
+         </concept>
+         <concept code="153241000146104"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="Zorgafnemer is niet beschikbaar om medicatie in ontvangst te nemen (bevinding)"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Zorgafnemer is niet beschikbaar om medicatie in ontvangst te nemen"/>
+         </concept>
+         <concept code="DISCONT"
+                  codeSystem="2.16.840.1.113883.5.8"
+                  displayName="Product niet meer leverbaar"
+                  level="0"
+                  type="D">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Product discontinued"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Product niet meer leverbaar"/>
+         </concept>
+         <concept code="NON-AVAIL"
+                  codeSystem="2.16.840.1.113883.5.8"
+                  displayName="Patient not available"
+                  level="0"
+                  type="D">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Patient not available"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Patiënt niet beschikbaar"/>
+         </concept>
+         <concept code="PREFUS"
+                  codeSystem="2.16.840.1.113883.5.8"
+                  displayName="Patient refuse"
+                  level="0"
+                  type="D">
+            <designation language="en-US" type="preferred" displayName="Patient refuse"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Patiënt heeft geweigerd"/>
+         </concept>
+         <concept code="UNABLE"
+                  codeSystem="2.16.840.1.113883.5.8"
+                  displayName="Unable to use"
+                  level="0"
+                  type="D">
+            <designation language="en-US" type="preferred" displayName="Unable to use"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Toediening volgens voorschrift niet mogelijk"/>
+         </concept>
+         <concept code="FOABORT"
+                  codeSystem="2.16.840.1.113883.5.8"
+                  displayName="Order aborted"
+                  level="0"
+                  type="D">
+            <designation language="en-US" type="preferred" displayName="Order aborted"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Medicatieafspraak is gestopt"/>
+         </concept>
+         <concept code="FORGOT"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.40.4"
+                  displayName="Forgotten to administer"
+                  level="0"
+                  type="D">
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Vergeten toe te dienen"/>
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Forgotten to administer"/>
+         </concept>
+         <concept code="APNA"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.40.4"
+                  displayName="Administration performer not available"
+                  level="0"
+                  type="D">
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Toediener niet aanwezig"/>
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Administration performer not available"/>
+         </concept>
+         <exception code="NI"
+                    codeSystem="2.16.840.1.113883.5.1008"
+                    displayName="No information"
+                    level="0"
+                    type="L">
+            <designation language="en-US" type="preferred" displayName="No information"/>
+            <designation language="nl-NL" type="preferred" displayName="Geen informatie"/>
+         </exception>
+      </conceptList>
+   </valueSet>
+</valueSets>

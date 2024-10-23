@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<text-document xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../../../../YATC-shared/xsd/text-document.xsd" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!-- ======================================================================= -->
+    <!-- 
+        Description of the commands for this component.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <macro name="DATAFILENAME" value="{$yatcComponentName}-data.xml"/>
+    <macro name="PARBASESTORAGE" value="{$yatcComponentNameShortened}BaseStorageDirectory"/>
+    <macro name="PARDATADOCUMENT" value="{$yatcComponentNameShortened}DataDocument"/>
+
+    <title><code>{$yatcRepositoryName}/{$yatcComponentName}</code> available commands</title>
+
+    <xi:include href="../../../../YATC-shared/srcmod/commands-common-opening.xml"/>
+
+    <section>
+        <macro name="COMMAND" value="{$yatcComponentName}"/>
+
+        <title>Command: <code>yatc $COMMAND</code></title>
+
+        <include-command-help-text href="../../xpl/$COMMAND-cw.xpl"/>
+
+        <emptyline/>
+        <para>Command line examples:</para>
+        <unorderedlist>
+            <entry>
+                <para><code>yatc $COMMAND -list</code><br/>Lists the available application/version combinations.</para>
+            </entry>
+            <entry>
+                <para><code>yatc $COMMAND -process bgz_mm 1.2</code><br/>Performs the ADA to FHIR conversion(s) for application <code>bgz_mm</code>, version <code>1.2</code>.</para>
+            </entry>
+            <entry>
+                <para><code>yatc $COMMAND bgz_mm 1.2</code><br/>Same as above (the <code>-process</code> flag is optional).</para>
+            </entry>
+            <entry>
+                <para><code>yatc $COMMAND -process #all #all</code><br/>Performs the ADA to FHIR conversion(s) for all applications/versions known.</para>
+            </entry>
+        </unorderedlist>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title>YATC parameter usage</title>
+
+            <xi:include href="../../../../YATC-shared/srcmod/commands-base-parameters-usage.xml"/>
+        </section>
+
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <macro name="COMMAND" value="compare-{$yatcComponentName}"/>
+
+        <title>Command: <code>yatc $COMMAND</code></title>
+
+        <include-command-help-text href="../../xpl/$COMMAND.xpl"/>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title>How to use</title>
+
+            <xi:include href="../../../../YATC-shared/srcmod/commands-compare-description.xml"/>
+        </section>
+
+    </section>
+
+</text-document>

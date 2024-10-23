@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             id="2.16.840.1.113883.2.4.3.11.60.40.2.9.6.1"
+             name="MedicatieafspraakStopTypeCodelijst"
+             displayName="MedicatieafspraakStopTypeCodelijst"
+             effectiveDate="2020-09-01T00:00:00"
+             statusCode="final"
+             ident="zib2020bbr-"
+             url="http://decor.nictiz.nl/decor/services/"
+             referencedFrom="mp-">
+      <desc language="nl-NL">2021-04-09: Zie <a href="https://bits.nictiz.nl/browse/ZIB-1261">ZIB-1261</a>. <div>Niet bestaande SNOMED CT 112171000146100 | Drug therapy temporarily stopped (finding) | vervangen door SNOMED CT 113381000146106 | tijdelijk gestopt met medicatie (situatie) | en</div>
+         <div>niet bestaande SNOMED CT 112161000146106 | Drug therapy definitively stopped (finding) | vervangen door 113371000146109 | definitief gestopt met medicatie (situatie) |</div>
+      </desc>
+      <desc language="en-US">2021-04-09: See <a href="https://bits.nictiz.nl/browse/ZIB-1261">ZIB-1261</a>. <div>Non-existent SNOMED CT 112171000146100 | Drug therapy temporarily stopped (finding) | replaced with SNOMED CT 113381000146106 | Drug therapy temporarily stopped (situation) | and</div>
+         <div>non-existent SNOMED CT 112161000146106 | Drug therapy temporarily stopped (finding) | replaced with 113371000146109 | Drug therapy definitively stopped (situation) |</div>
+      </desc>
+      <sourceCodeSystem id="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.1"
+                        identifierName="StopType"
+                        canonicalUri="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.1"
+                        canonicalUriDSTU2="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.1"
+                        canonicalUriSTU3="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.1"
+                        canonicalUriR4="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.1"/>
+      <sourceCodeSystem id="2.16.840.1.113883.6.96"
+                        identifierName="SNOMED Clinical Terms"
+                        canonicalUri="http://snomed.info/sct"
+                        canonicalUriDSTU2="http://snomed.info/sct"
+                        canonicalUriSTU3="http://snomed.info/sct"
+                        canonicalUriR4="http://snomed.info/sct"/>
+      <publishingAuthority name="Nictiz">
+         <addrLine>Oude Middenweg 55</addrLine>
+         <addrLine>2491 AC Den Haag</addrLine>
+         <addrLine>T 070 317 3450</addrLine>
+      </publishingAuthority>
+      <copyright language="en-US">This artefact includes content from SNOMED Clinical Terms® (SNOMED CT®) which is copyright of the International Health Terminology Standards Development Organisation (IHTSDO). Implementers of these artefacts must have the appropriate SNOMED CT Affiliate license - for more information contact http://www.snomed.org/snomed-ct/getsnomed-ct or info@snomed.org.</copyright>
+      <conceptList>
+         <concept code="1"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.1"
+                  displayName="Tijdelijk"
+                  level="0"
+                  type="D">
+            <desc language="nl-NL">Tijdelijke onderbreking van medicamenteuze behandeling (bijvoorbeeld tijdelijk stoppen gebruik vanwege operatie). (DEPRECATED)</desc>
+         </concept>
+         <concept code="113381000146106"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="tijdelijk gestopt met medicatie (situatie)"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Drug therapy temporarily stopped"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="tijdelijk gestopt met medicatie"/>
+            <desc language="nl-NL">Tijdelijke onderbreking van medicamenteuze behandeling (bijvoorbeeld tijdelijk stoppen gebruik vanwege operatie).</desc>
+         </concept>
+         <concept code="2"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.1"
+                  displayName="Definitief"
+                  level="0"
+                  type="D">
+            <desc language="nl-NL">Het staken van een bestaande medicamenteuze behandeling. (DEPRECATED)</desc>
+         </concept>
+         <concept code="113371000146109"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="definitief gestopt met medicatie (situatie)"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="preferred"
+                         displayName="Drug therapy definitely stopped"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="definitief gestopt met medicatie"/>
+            <desc language="nl-NL">Het staken van een bestaande medicamenteuze behandeling.</desc>
+         </concept>
+      </conceptList>
+   </valueSet>
+</valueSets>

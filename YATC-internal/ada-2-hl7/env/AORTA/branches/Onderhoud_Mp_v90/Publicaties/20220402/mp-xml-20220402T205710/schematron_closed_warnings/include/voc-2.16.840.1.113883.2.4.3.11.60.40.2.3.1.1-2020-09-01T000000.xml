@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             id="2.16.840.1.113883.2.4.3.11.60.40.2.3.1.1"
+             name="RelatieCodelijst"
+             displayName="RelatieCodelijst"
+             effectiveDate="2020-09-01T00:00:00"
+             statusCode="final">
+      <sourceCodeSystem id="2.16.840.1.113883.5.111"
+                        identifierName="Role Code"
+                        canonicalUri="http://terminology.hl7.org/CodeSystem/v3-RoleCode"
+                        canonicalUriDSTU2="http://hl7.org/fhir/v3/RoleCode"
+                        canonicalUriSTU3="http://hl7.org/fhir/v3/RoleCode"
+                        canonicalUriR4="http://terminology.hl7.org/CodeSystem/v3-RoleCode"
+                        context="external/hl7"/>
+      <sourceCodeSystem id="2.16.840.1.113883.5.1008"
+                        identifierName="Null Flavor"
+                        canonicalUri="http://terminology.hl7.org/CodeSystem/v3-NullFlavor"
+                        canonicalUriDSTU2="http://hl7.org/fhir/v3/NullFlavor"
+                        canonicalUriSTU3="http://hl7.org/fhir/v3/NullFlavor"
+                        canonicalUriR4="http://terminology.hl7.org/CodeSystem/v3-NullFlavor"
+                        context="external/hl7"/>
+      <publishingAuthority name="Registratie aan de bron" inherited="project">
+         <addrLine type="uri">https://www.registratieaandebron.nl</addrLine>
+         <addrLine type="uri">https://www.zibs.nl</addrLine>
+      </publishingAuthority>
+      <conceptList>
+         <concept code="ADOPTF"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Adoptive father"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Adoptive father"/>
+            <designation language="nl-NL" type="preferred" displayName="Adoptievader"/>
+         </concept>
+         <concept code="ADOPTM"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Adoptive mother"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Adoptive mother"/>
+            <designation language="nl-NL" type="preferred" displayName="Adoptiemoeder"/>
+         </concept>
+         <concept code="AUNT"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Aunt"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Aunt"/>
+            <designation language="nl-NL" type="preferred" displayName="Tante"/>
+         </concept>
+         <concept code="BRO"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Brother"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Brother"/>
+            <designation language="nl-NL" type="preferred" displayName="Broer"/>
+         </concept>
+         <concept code="BROINLAW"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Brother-in-law"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Brother-in-law"/>
+            <designation language="nl-NL" type="preferred" displayName="Zwager"/>
+         </concept>
+         <concept code="COUSN"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Cousin"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Cousin"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Neef/nicht, zoon/dochter van oom/tante"/>
+         </concept>
+         <concept code="DAUC"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Daughter"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Daughter"/>
+            <designation language="nl-NL" type="preferred" displayName="Dochter"/>
+         </concept>
+         <concept code="DAUINLAW"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Daughter in-law"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Daughter in-law"/>
+            <designation language="nl-NL" type="preferred" displayName="Schoondochter"/>
+         </concept>
+         <concept code="DOMPART"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Domestic partner"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Domestic partner"/>
+            <designation language="nl-NL" type="preferred" displayName="Partner"/>
+         </concept>
+         <concept code="FTH"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Father"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Father"/>
+            <designation language="nl-NL" type="preferred" displayName="Vader"/>
+         </concept>
+         <concept code="FTHINLAW"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Father-in-law"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Father-in-law"/>
+            <designation language="nl-NL" type="preferred" displayName="Schoonvader"/>
+         </concept>
+         <concept code="DAUFOST"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Foster daughter"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Foster daughter"/>
+            <designation language="nl-NL" type="preferred" displayName="Pleegdochter"/>
+         </concept>
+         <concept code="FTHFOST"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Foster father"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Foster father"/>
+            <designation language="nl-NL" type="preferred" displayName="Pleegvader"/>
+         </concept>
+         <concept code="MTHFOST"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Foster mother"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Foster mother"/>
+            <designation language="nl-NL" type="preferred" displayName="Pleegmoeder"/>
+         </concept>
+         <concept code="SONFOST"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Foster son"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Foster son"/>
+            <designation language="nl-NL" type="preferred" displayName="Pleegzoon"/>
+         </concept>
+         <concept code="GRNDDAU"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Granddaughter"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Granddaughter"/>
+            <designation language="nl-NL" type="preferred" displayName="Kleindochter"/>
+         </concept>
+         <concept code="GRFTH"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Grandfather"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Grandfather"/>
+            <designation language="nl-NL" type="preferred" displayName="Opa"/>
+         </concept>
+         <concept code="GRMTH"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Grandmother"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Grandmother"/>
+            <designation language="nl-NL" type="preferred" displayName="Oma"/>
+         </concept>
+         <concept code="GRNDSON"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Grandson"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Grandson"/>
+            <designation language="nl-NL" type="preferred" displayName="Kleinzoon"/>
+         </concept>
+         <concept code="GGRFTH"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Great grandfather"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Great grandfather"/>
+            <designation language="nl-NL" type="preferred" displayName="Overgrootvader"/>
+         </concept>
+         <concept code="GGRMTH"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Great grandmother"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Great grandmother"/>
+            <designation language="nl-NL" type="preferred" displayName="Overgrootmoeder"/>
+         </concept>
+         <concept code="HUSB"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Husband"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Husband"/>
+            <designation language="nl-NL" type="preferred" displayName="Echtgenoot"/>
+         </concept>
+         <concept code="MTH"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Mother"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Mother"/>
+            <designation language="nl-NL" type="preferred" displayName="Moeder"/>
+         </concept>
+         <concept code="MTHINLAW"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Mother-in-law"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Mother-in-law"/>
+            <designation language="nl-NL" type="preferred" displayName="Schoonmoeder"/>
+         </concept>
+         <concept code="NEPHEW"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Nephew"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Nephew"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Neef, zoon van broer/zus"/>
+         </concept>
+         <concept code="NIECE"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Niece"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Niece"/>
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Nicht, dochter van broer/zus"/>
+         </concept>
+         <concept code="SIS"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Sister"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Sister"/>
+            <designation language="nl-NL" type="preferred" displayName="Zuster"/>
+         </concept>
+         <concept code="SISINLAW"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Sister-in-law"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Sister-in-law"/>
+            <designation language="nl-NL" type="preferred" displayName="Schoonzuster"/>
+         </concept>
+         <concept code="SONC"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Son"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Son"/>
+            <designation language="nl-NL" type="preferred" displayName="Zoon"/>
+         </concept>
+         <concept code="SONINLAW"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Son in-law"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Son in-law"/>
+            <designation language="nl-NL" type="preferred" displayName="Schoonzoon"/>
+         </concept>
+         <concept code="STPFTH"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Stepfather"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Stepfather"/>
+            <designation language="nl-NL" type="preferred" displayName="Stiefvader"/>
+         </concept>
+         <concept code="STPMTH"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Stepmother"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Stepmother"/>
+            <designation language="nl-NL" type="preferred" displayName="Stiefmoeder"/>
+         </concept>
+         <concept code="UNCLE"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Uncle"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Uncle"/>
+            <designation language="nl-NL" type="preferred" displayName="Oom"/>
+         </concept>
+         <concept code="WIFE"
+                  codeSystem="2.16.840.1.113883.5.111"
+                  displayName="Wife"
+                  level="0"
+                  type="L">
+            <designation language="en-US" type="preferred" displayName="Wife"/>
+            <designation language="nl-NL" type="preferred" displayName="Echtgenote"/>
+         </concept>
+         <exception code="OTH"
+                    codeSystem="2.16.840.1.113883.5.1008"
+                    displayName="Other"
+                    level="0"
+                    type="L">
+            <designation language="en-US" type="preferred" displayName="Other"/>
+            <designation language="nl-NL" type="preferred" displayName="Anders"/>
+         </exception>
+      </conceptList>
+   </valueSet>
+</valueSets>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             id="2.16.840.1.113883.2.4.3.11.60.40.2.8.2.10"
+             name="SpecifiekeStofSNKCodelijst"
+             displayName="SpecifiekeStofSNKCodelijst"
+             effectiveDate="2015-04-01T00:00:00"
+             statusCode="final"
+             ident="zib2015bbr-"
+             url="http://decor.nictiz.nl/decor/services/"
+             referencedFrom="mp-">
+      <desc language="nl-NL">G-standaard Stofnaamcode (SNK) (2.16.840.1.113883.2.4.4.1.750): Alle waarden</desc>
+      <sourceCodeSystem id="2.16.840.1.113883.2.4.4.1.750"
+                        identifierName="G-Standaard generieke namen (Bestand 750)"
+                        canonicalUri="urn:oid:2.16.840.1.113883.2.4.4.1.750"
+                        canonicalUriDSTU2="urn:oid:2.16.840.1.113883.2.4.4.1.750"
+                        canonicalUriSTU3="urn:oid:2.16.840.1.113883.2.4.4.1.750"
+                        canonicalUriR4="urn:oid:2.16.840.1.113883.2.4.4.1.750"/>
+      <publishingAuthority name="Nictiz" inherited="project">
+         <addrLine>Oude Middenweg 55</addrLine>
+         <addrLine>2491 AC Den Haag</addrLine>
+         <addrLine>T 070 317 3450</addrLine>
+      </publishingAuthority>
+      <completeCodeSystem codeSystem="2.16.840.1.113883.2.4.4.1.750"
+                          codeSystemName="G-Standaard generieke namen (Bestand 750)"/>
+   </valueSet>
+</valueSets>

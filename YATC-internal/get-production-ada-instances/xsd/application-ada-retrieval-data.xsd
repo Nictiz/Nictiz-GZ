@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="https://nictiz.nl/ns/YATC-internal" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:yatci="https://nictiz.nl/ns/YATC-internal">
+    <!-- ======================================================================= -->
+    <!--
+    Copyright © Nictiz
+
+    This program is free software; you can redistribute it and/or modify it under the terms of the
+    GNU Lesser General Public License as published by the Free Software Foundation; either version
+    2.1 of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+    without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU Lesser General Public License for more details.
+    
+    The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <xs:annotation>
+        <xs:documentation>Schema for the production ADA retrieval document. This document defines what to do to get production ADA instances for an application/version combination.</xs:documentation>
+    </xs:annotation>
+    <xs:import namespace="http://www.w3.org/2001/XInclude" schemaLocation="../../../YATC-shared/xsdmod/xinclude.mod.xsd"/>
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="../../../YATC-shared/xsdmod/xml.mod.xsd"/>
+    <xs:include schemaLocation="../../../YATC-shared/xsdmod/general.mod.xsd"/>
+    <xs:include schemaLocation="../../../YATC-shared/xsdmod/application-data-file.mod.xsd"/>
+    <xs:element name="application-ada-retrieval-data">
+        <xs:complexType>
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>A list of applications, either directly defined or by XInclude.</xs:documentation>
+                </xs:annotation>
+                <xs:element ref="xi:include"/>
+                <xs:element ref="yatci:application"/>
+                <xs:element ref="yatci:retrieval-set-definition"/>
+            </xs:choice>
+            <xs:attribute ref="xml:base"/>
+        </xs:complexType>
+        <xs:key name="key-retrieval-set">
+            <xs:selector xpath=".//yatci:retrieval-set-definition"/>
+            <xs:field xpath="@id"/>
+        </xs:key>
+        <xs:keyref name="keyref-retrieval-set" refer="yatci:key-retrieval-set">
+            <xs:selector xpath=".//yatci:retrieval-set"/>
+            <xs:field xpath="@idref"/>
+        </xs:keyref>
+    </xs:element>
+    <xs:element name="application">
+        <xs:annotation>
+            <xs:documentation>The ADA retrieval definitions for an application/version combination.
+Can also be used as root element for XIncluded documents.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:group maxOccurs="unbounded" minOccurs="0" ref="yatci:g-message"/>
+                <xs:group ref="yatci:g-retrievals"/>
+                <xs:element minOccurs="0" name="postprocessing-stylesheet">
+                    <xs:annotation>
+                        <xs:documentation>An optional XSLT stylesheet that is passed over all retrieved files for this application.</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:attributeGroup ref="yatci:ag-href"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:group minOccurs="0" ref="yatci:g-adarafes2ada"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="yatci:ag-application-name-version"/>
+            <xs:attribute name="ada-application-name" type="yatci:t-non-zero-length-string">
+                <xs:annotation>
+                    <xs:documentation>Some applications require using a different application name for retrieving the data from ART-DECOR. If this is empty or absent, @application is used.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute ref="xml:base"/>
+            <xs:attribute name="version-directory-production-ada-instances" type="yatci:t-non-zero-length-string">
+                <xs:annotation>
+                    <xs:documentation>Sometimes the production-ada-instances part of the processing uses a different directory name (instead of @version).</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="retrieval-set-definition">
+        <xs:annotation>
+            <xs:documentation>A set of retrieval elements for re-use.
+Can also be used as root element for XIncluded documents.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:group ref="yatci:g-retrievals"/>
+            <xs:attribute name="id" type="yatci:t-identifier" use="required">
+                <xs:annotation>
+                    <xs:documentation>The identifier of this retrieval set.</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute ref="xml:base"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:group name="g-retrievals">
+        <xs:annotation>
+            <xs:documentation>A set of ADA file retrieval instructions.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element name="retrieval">
+                    <xs:annotation>
+                        <xs:documentation>A single ADA retrieval definition.</xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:attribute name="transaction" type="yatci:t-non-zero-length-string" use="required">
+                            <xs:annotation>
+                                <xs:documentation>The name of the transaction to retrieve the data for.
+</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                        <xs:attribute default="" name="contains" type="xs:string">
+                            <xs:annotation>
+                                <xs:documentation>A string that must be part of the identifier of the retrieved document.</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="retrieval-set">
+                    <xs:complexType>
+                        <xs:attribute name="idref" type="yatci:t-identifier" use="required">
+                            <xs:annotation>
+                                <xs:documentation>The identifier of the retrieval set to include here.</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="g-adarafes2ada">
+        <xs:annotation>
+            <xs:documentation>The adarefs2ada specification.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="adarefs2ada">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:group ref="yatci:g-setup" maxOccurs="unbounded" minOccurs="0"/>
+                        <xs:choice maxOccurs="unbounded" minOccurs="0">
+                            <xs:element name="build">
+                                <xs:annotation>
+                                    <xs:documentation>Specifies a build process for adarefs2ada. A stylesheet will be run over a specified input set of documents. </xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="stylesheet">
+                                            <xs:annotation>
+                                                <xs:documentation>The stylesheet to use for this build. The parameters passed to this stylesheet are defined in xslmod/adarefs2ada-standard-build-parameters.mod.xsl.
+</xs:documentation>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:attributeGroup ref="yatci:ag-href"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:choice>
+                                            <xs:element name="input-documents">
+                                                <xs:annotation>
+                                                    <xs:documentation>Specification of the input documents for this build. The stylesheet will be run once for each of these documents.</xs:documentation>
+                                                </xs:annotation>
+                                                <xs:complexType>
+                                                    <xs:complexContent>
+                                                        <xs:extension base="yatci:ct-copy-patterns">
+                                                            <xs:attributeGroup ref="yatci:ag-directory"/>
+                                                        </xs:extension>
+                                                    </xs:complexContent>
+                                                </xs:complexType>
+                                            </xs:element>
+                                            <xs:element name="no-input" type="yatci:ct-empty">
+                                                <xs:annotation>
+                                                    <xs:documentation>The stylesheet doesn't need an input (a short dummy document is provided).</xs:documentation>
+                                                </xs:annotation>
+                                            </xs:element>
+                                        </xs:choice>
+                                        <xs:element name="ada-working-set" minOccurs="0">
+                                            <xs:annotation>
+                                                <xs:documentation>Specification (optional) of the working set directory with ADA documents for this build. This directory name will be passed to the stylesheet as parameter $adaWorkingSetDirectory.</xs:documentation>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:attributeGroup ref="yatci:ag-directory"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="output">
+                                            <xs:annotation>
+                                                <xs:documentation>Specifies the output directory for this build process.</xs:documentation>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:attributeGroup ref="yatci:ag-directory"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0" name="parameter">
+                                            <xs:annotation>
+                                                <xs:documentation>Optional additional parameter to be passed to the build stylesheet. @value has precedence over @directory has precedence over @href.</xs:documentation>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:attribute name="name" type="xs:NCName" use="required">
+                                                    <xs:annotation>
+                                                        <xs:documentation>The name of the parameter. Names must be unique. The names 'baseDirectory', 'outputDirectory', 'application' and 'version' can not be used. </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:attribute>
+                                                <xs:attribute name="value" type="xs:string">
+                                                    <xs:annotation>
+                                                        <xs:documentation>Straight string value for the parameter. If both @value and @directory are present, @value is used as the name of a file and appended to @directory.</xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:attribute>
+                                                <xs:attributeGroup ref="yatci:ag-href-optional"/>
+                                                <xs:attributeGroup ref="yatci:ag-directory-optional"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="name" type="xs:string">
+                                        <xs:annotation>
+                                            <xs:documentation>Name for this build (only for reporting/documentation purposes)</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                    <xs:attribute default="false" name="fast" type="xs:boolean">
+                                        <xs:annotation>
+                                            <xs:documentation>Whether the transformation should run in fast mode.</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="build-copy">
+                                <xs:annotation>
+                                    <xs:documentation>Specifies a a straight file copy process for adarefs2ada. </xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="input-documents">
+                                            <xs:annotation>
+                                                <xs:documentation>Specification of the input documents for ththe copy.</xs:documentation>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:complexContent>
+                                                    <xs:extension base="yatci:ct-copy-patterns">
+                                                        <xs:attributeGroup ref="yatci:ag-directory"/>
+                                                    </xs:extension>
+                                                </xs:complexContent>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="output">
+                                            <xs:annotation>
+                                                <xs:documentation>Specifies the output directory for this copy process.</xs:documentation>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:attributeGroup ref="yatci:ag-directory"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="name" type="xs:string">
+                                        <xs:annotation>
+                                            <xs:documentation>Name for this copy (only for reporting/documentation purposes)</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="build-overwrite">
+                                <xs:annotation>
+                                    <xs:documentation>Specifies a build process for adarefs2ada where the result of the stylesheet overwrites the input file. </xs:documentation>
+                                </xs:annotation>
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="stylesheet">
+                                            <xs:annotation>
+                                                <xs:documentation>The stylesheet to use for this build. The parameters passed to this stylesheet are defined in xslmod/adarefs2ada-standard-build-parameters.mod.xsl.
+</xs:documentation>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:attributeGroup ref="yatci:ag-href"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="input-documents">
+                                            <xs:annotation>
+                                                <xs:documentation>Specification of the input documents for this build. The stylesheet will be run once for each of these documents.</xs:documentation>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:complexContent>
+                                                    <xs:extension base="yatci:ct-copy-patterns">
+                                                        <xs:attributeGroup ref="yatci:ag-directory"/>
+                                                    </xs:extension>
+                                                </xs:complexContent>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0" name="parameter">
+                                            <xs:annotation>
+                                                <xs:documentation>Optional additional parameter to be passed to the build stylesheet. @value has precedence over @directory has precedence over @href.</xs:documentation>
+                                            </xs:annotation>
+                                            <xs:complexType>
+                                                <xs:attribute name="name" type="xs:NCName" use="required">
+                                                    <xs:annotation>
+                                                        <xs:documentation>The name of the parameter. Names must be unique. The names 'baseDirectory', 'outputDirectory', 'application' and 'version' can not be used. </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:attribute>
+                                                <xs:attribute name="value" type="xs:string">
+                                                    <xs:annotation>
+                                                        <xs:documentation>Straight string value for the parameter. If both @value and @directory are present, @value is used as the name of a file and appended to @directory.</xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:attribute>
+                                                <xs:attributeGroup ref="yatci:ag-href-optional"/>
+                                                <xs:attributeGroup ref="yatci:ag-directory-optional"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="name" type="xs:string">
+                                        <xs:annotation>
+                                            <xs:documentation>Name for this build (only for reporting/documentation purposes)</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                    <xs:attribute default="false" name="fast" type="xs:boolean">
+                                        <xs:annotation>
+                                            <xs:documentation>Whether the transformation should run in fast mode.</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:choice>
+                    </xs:sequence>
+                    <xs:attributeGroup ref="yatci:ag-source-project-name"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+</xs:schema>

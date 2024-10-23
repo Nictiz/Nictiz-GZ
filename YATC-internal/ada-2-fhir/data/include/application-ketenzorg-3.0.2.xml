@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../sch/ada-2-fhir-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<application name="ketenzorg" version="3.0.2" xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../../xsd/ada-2-fhir-data.xsd">
+    <!-- ======================================================================= -->
+    <!-- 
+        ada-2-fhir application data for ketenzorg 3.0.2
+        
+        This is an include file for ../ada-2-fhir-data.xml
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <message>WARNING: The ADA data is copied from hl7-2-ada ketenzorg 3.0.2 (${publicBaseStorageDirectory}/hl7_2_ada/ketenzorg/3.0.2/beschikbaarstellen/ada_instance/)</message>
+    <message>WARNING: This conversion uses *static* ADA schemas (source: YATC-internal/ada-2-fhir/env/ketenzorg/3.0.2/beschikbaarstellen/ada_schemas/)</message>
+
+    <setup usecase="beschikbaarstellen" directory-id="bs">
+        <copy-directory directory="${publicBaseStorageDirectory}/hl7_2_ada/$APPLICATION/$VERSION/beschikbaarstellen/ada_instance/" target-subdir="ada_instance" directory-id="bs-ada-instance"/>
+        <copy-directory directory="#../../env/$BASEPATH/ada_schemas/" target-subdir="ada_schemas"/>
+        <empty-directory target-subdir="fhir_instance" directory-id="bs-fhir-instance"/>
+    </setup>
+
+    <build name="build-alerts">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen/payload/beschikbaarstellen_alerts_2_fhir.xsl"/>
+        <input-documents directory="@bs-ada-instance">
+            <include glob="alerts*.xml"/>
+        </input-documents>
+        <output-documents directory="@bs-fhir-instance"/>
+        <parameter name="outputDirectory" directory="@bs-fhir-instance"/>
+        <parameter name="bundleSelfLink" value="https://example.org/fhir/Bundle"/>
+    </build>
+
+    <build name="build-generalmeasurements">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen/payload/beschikbaarstellen_algemene_bepalingen_2_fhir.xsl"/>
+        <input-documents directory="@bs-ada-instance">
+            <include glob="algemene_bepalingen*.xml"/>
+        </input-documents>
+        <output-documents directory="@bs-fhir-instance"/>
+        <parameter name="outputDirectory" directory="@bs-fhir-instance"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+    </build>
+
+    <build name="build-allergyintolerance">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen/payload/beschikbaarstellen_allergieintoleranties_2_fhir.xsl"/>
+        <input-documents directory="@bs-ada-instance">
+            <include glob="allergieintoleranties*.xml"/>
+        </input-documents>
+        <output-documents directory="@bs-fhir-instance"/>
+        <parameter name="outputDirectory" directory="@bs-fhir-instance"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+    </build>
+
+    <build name="build-encounter">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen/payload/beschikbaarstellen_contactmomenten_2_fhir.xsl"/>
+        <input-documents directory="@bs-ada-instance">
+            <include glob="contactmomenten*.xml"/>
+        </input-documents>
+        <output-documents directory="@bs-fhir-instance"/>
+        <parameter name="outputDirectory" directory="@bs-fhir-instance"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+    </build>
+
+    <build name="build-encounterreport">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen/payload/beschikbaarstellen_contactverslagen_2_fhir.xsl"/>
+        <input-documents directory="@bs-ada-instance">
+            <include glob="contactverslag*.xml"/>
+        </input-documents>
+        <output-documents directory="@bs-fhir-instance"/>
+        <parameter name="outputDirectory" directory="@bs-fhir-instance"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+    </build>
+
+    <build name="build-diagnosticresult">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen/payload/beschikbaarstellen_diagnostische_bepalingen_2_fhir.xsl"/>
+        <input-documents directory="@bs-ada-instance">
+            <include glob="diagnostische_bepalingen*.xml"/>
+        </input-documents>
+        <output-documents directory="@bs-fhir-instance"/>
+        <parameter name="outputDirectory" directory="@bs-fhir-instance"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+    </build>
+
+    <build name="build-episode">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen/payload/beschikbaarstellen_episodes_2_fhir.xsl"/>
+        <input-documents directory="@bs-ada-instance">
+            <include glob="episodes*.xml"/>
+        </input-documents>
+        <output-documents directory="@bs-fhir-instance"/>
+        <parameter name="outputDirectory" directory="@bs-fhir-instance"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+    </build>
+
+    <build name="build-labresults">
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen/payload/beschikbaarstellen_labbepalingen_2_fhir.xsl"/>
+        <input-documents directory="@bs-ada-instance">
+            <include glob="labbepalingen*.xml"/>
+        </input-documents>
+        <output-documents directory="@bs-fhir-instance"/>
+        <parameter name="outputDirectory" directory="@bs-fhir-instance"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+    </build>
+
+    <build name="build-m">
+        <!-- Remark: This stylesheet depends on mp/2_fhir_mp90_include.xsl -->
+        <stylesheet href="../../env/$BASEPATH/beschikbaarstellen/payload/beschikbaarstellen_medicatieafspraken907_2_fhir.xsl"/>
+        <input-documents directory="@bs-ada-instance">
+            <include glob="medicatieafspraken*.xml"/>
+        </input-documents>
+        <output-documents directory="@bs-fhir-instance"/>
+        <parameter name="outputDirectory" directory="@bs-fhir-instance"/>
+        <parameter name="bundleSelfLink" value="http://dummy.nictiz.nl/dummyquery"/>
+    </build>
+    
+</application>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             id="2.16.840.1.113883.2.4.3.11.60.40.2.9.5.20"
+             name="VoorschriftProductATCCodelijst"
+             displayName="VoorschriftProductATCCodelijst"
+             effectiveDate="2015-04-01T00:00:00"
+             statusCode="final"
+             ident="zib2015bbr-"
+             url="http://decor.nictiz.nl/decor/services/"
+             referencedFrom="mp-">
+      <desc language="nl-NL">Anatomic Therapeutic Classification (ATC) (2.16.840.1.113883.6.73): Alle waarden</desc>
+      <sourceCodeSystem id="2.16.840.1.113883.6.73"
+                        identifierName="ATC codes (Anatomical, Therapeutical and Chemical classification)"
+                        canonicalUri="http://www.whocc.no/atc"
+                        canonicalUriDSTU2="http://www.whocc.no/atc"
+                        canonicalUriSTU3="http://www.whocc.no/atc"
+                        canonicalUriR4="http://www.whocc.no/atc"/>
+      <publishingAuthority name="Nictiz" inherited="project">
+         <addrLine>Oude Middenweg 55</addrLine>
+         <addrLine>2491 AC Den Haag</addrLine>
+         <addrLine>T 070 317 3450</addrLine>
+      </publishingAuthority>
+      <completeCodeSystem codeSystem="2.16.840.1.113883.6.73"
+                          codeSystemName="ATC codes (Anatomical, Therapeutical and Chemical classification)"/>
+   </valueSet>
+</valueSets>

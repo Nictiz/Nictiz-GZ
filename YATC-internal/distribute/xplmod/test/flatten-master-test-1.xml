@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flatten-master type="stylesheet" target-directory="file:///C:/Data/Erik/work/Nictiz/new/YATC-public/flatten-master-test-1" href-include="file:///C:/Data/Erik/work/Nictiz/new/YATC-public/flatten-master-test-1/ada-2-fhir/includeXXX" clear-target="true">
+    <!-- ======================================================================= -->
+    <!-- 
+        flatten-master-test-1.xml
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+    <master-document href-source="file:///C:/Data/Erik/work/Nictiz/new/YATC-internal/ada-2-fhir/env/zibs2017/payload/package-1.3.10.xsl" href-target="file:///C:/Data/Erik/work/Nictiz/new/YATC-public/flatten-master-test-1/ada-2-fhir/payload-dest/package-1.3.10.xsl" required="true"/>
+    <master-document href-source="file:///C:/Data/Erik/work/Nictiz/new/YATC-internal/ada-2-fhir/env/zibs2017/payload/package-2.0.5.xsl" href-target="file:///C:/Data/Erik/work/Nictiz/new/YATC-public/flatten-master-test-1/ada-2-fhir/payload-dest/package-2.0.5.xsl" required="true"/>
+    <master-document href-source="file:///C:/Data/Erik/work/Nictiz/new/YATC-internal/ada-2-fhir/env/zibs2017/payload/package-2.2.x.xsl" href-target="file:///C:/Data/Erik/work/Nictiz/new/YATC-public/flatten-master-test-1/ada-2-fhir/payload-dest/package-2.2.x.xsl" required="true"/>
+    <master-document href-source="file:///C:/Data/Erik/work/Nictiz/new/YATC-internal/ada-2-fhir/env/bgz_mm/3.1/beschikbaarstellen/payload/beschikbaarstellen_2_fhir.xsl" href-target="file:///C:/Data/Erik/work/Nictiz/new/YATC-public/flatten-master-test-1/ada-2-fhir/beschikbaarstellen_2_fhir.xsl" required="true"/>
+    <master-document href-source="file:///C:/Data/Erik/work/Nictiz/new/YATC-internal/ada-2-fhir/env/bgz_mm/3.1/beschikbaarstellen/payload/beschikbaarstellen_2_fhir.xsl" href-target="file:///C:/Data/Erik/work/Nictiz/new/YATC-public/flatten-master-test-1/ada-2-fhir/xxx/beschikbaarstellen_2_fhir.xsl" required="true"/>
+</flatten-master>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<text-document xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../../../../YATC-shared/xsd/text-document.xsd" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!-- ======================================================================= -->
+    <!-- 
+        Description of the commands for this component.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <macro name="DATAFILENAME" value="application-ada-retrieval-data.xml"/>
+
+    <title><code>{$yatcRepositoryName}/{$yatcComponentName}</code> available commands</title>
+
+    <xi:include href="../../../../YATC-shared/srcmod/commands-common-opening.xml"/>
+
+    <section>
+        <macro name="COMMAND" value="{$yatcComponentName}"/>
+
+        <title>Command: <code>yatc $COMMAND</code></title>
+
+        <include-command-help-text href="../../xpl/$COMMAND-cw.xpl"/>
+
+        <emptyline/>
+        <para>Command line examples:</para>
+        <unorderedlist>
+            <entry>
+                <para><code>yatc $COMMAND -list</code><br/>Lists the available application/version combinations.</para>
+            </entry>
+            <entry>
+                <para><code>yatc $COMMAND -get lab 3.0.0</code><br/>Gets the ADA production data for the given application/version.</para>
+            </entry>
+            <entry>
+                <para><code>yatc $COMMAND lab 3.0.0</code><br/>Same as above (the <code>-process</code> flag is optional).</para>
+            </entry>
+            <entry>
+                <para><code>yatc $COMMAND -get #all #all</code><br/>Gets all ADA production data.</para>
+            </entry>
+        </unorderedlist>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title>YATC parameter usage</title>
+
+            <table>
+                <header>
+                    <entry>
+                        <para>Parameter</para>
+                    </entry>
+                    <entry>
+                        <para>Base definition location</para>
+                    </entry>
+                    <entry>
+                        <para>Data type</para>
+                    </entry>
+                    <entry>
+                        <para>Usage</para>
+                    </entry>
+                </header>
+                <row>
+                    <entry>
+                        <para><code>adarefs2adaBaseStorageDirectory</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>YATC-shared/data/parameters.xml</code></para>
+                    </entry>
+                    <entry>
+                        <para>URI</para>
+                    </entry>
+                    <entry>
+                        <para>The base location for storing the results of any <code>adarefs2ada</code> processing.</para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>applicationAdaRetrievalDataDocument</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>{$yatcRepositoryName}/{$yatcComponentName}/data/parameters.xml</code></para>
+                    </entry>
+                    <entry>
+                        <para>URI</para>
+                    </entry>
+                    <entry>
+                        <para>The document with the information what needs to be done for a certain application/version. Usually points to <code>{$yatcRepositoryName}/{$yatcComponentName}/data/$DATAFILENAME</code>.</para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>getDataRestCallUri</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>{$yatcRepositoryName}/{$yatcComponentName}/data/parameters.xml</code></para>
+                    </entry>
+                    <entry>
+                        <para>URL</para>
+                    </entry>
+                    <entry>
+                        <para>The REST call for retrieving ADA documents from ART-DECOR.</para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>productionAdaInstancesBaseStorageDirectory</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>YATC-shared/data/parameters.xml</code></para>
+                    </entry>
+                    <entry>
+                        <para>URI</para>
+                    </entry>
+                    <entry>
+                        <para>The base location for storing the ADA instances retrieved from ART-DECOR.</para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>projectsBaseStorageDirectory</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>YATC-shared/data/parameters.xml</code></para>
+                    </entry>
+                    <entry>
+                        <para>URI</para>
+                    </entry>
+                    <entry>
+                        <para>The base location where project information is stored. Used for copying schemas.</para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>storeAdaIndexFiles</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>{$yatcRepositoryName}/{$yatcComponentName}/data/parameters.xml</code></para>
+                    </entry>
+                    <entry>
+                        <para>Boolean</para>
+                    </entry>
+                    <entry>
+                        <para>Whether or not to store/keep the ART-DECOR ADA index file or not.</para>
+                    </entry>
+                </row>
+            </table>
+        </section>
+
+    </section>
+
+    <!-- ======================================================================= -->
+
+    <section>
+        <macro name="COMMAND" value="compare-production-ada-instances"/>
+
+        <title>Command: <code>yatc $COMMAND</code></title>
+
+        <include-command-help-text href="../../xpl/$COMMAND.xpl"/>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title>How to use</title>
+
+            <xi:include href="../../../../YATC-shared/srcmod/commands-compare-description.xml"/>
+        </section>
+
+    </section>
+
+</text-document>

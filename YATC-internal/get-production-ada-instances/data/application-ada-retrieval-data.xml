@@ -1,0 +1,1986 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../sch/application-ada-retrieval-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<application-ada-retrieval-data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../xsd/application-ada-retrieval-data.xsd" xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!-- ================================================================== -->
+    <!--
+        This is the production data for retrieving ADA documents from ART-DECOR using the 
+        application-ada-retrieval-data YATC-internal component.
+        
+        Information about the format of this document in:
+        * Its schema ../xsd/application-ada-retrieval-data.xsd
+        * Its reference documentation in ../doc/data-format-reference.md
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+    <!-- bgz_msz -->
+
+    <application name="bgz_msz" version="1.2" ada-application-name="zib2017">
+        <retrieval transaction="ability_to_dress_oneself_registration" contains="bgz-msz-"/>
+        <retrieval transaction="ability_to_drink_registration" contains="bgz-msz-"/>
+        <retrieval transaction="ability_to_eat_registration" contains="bgz-msz-"/>
+        <retrieval transaction="ability_to_groome_registration" contains="bgz-msz-"/>
+        <retrieval transaction="ability_to_manage_medication_registration" contains="bgz-msz-"/>
+        <retrieval transaction="ability_to_perform_mouthcare_activities_registration" contains="bgz-msz-"/>
+        <retrieval transaction="ability_to_perform_nursing_activities_registration" contains="bgz-msz-"/>
+        <retrieval transaction="ability_to_use_toilet_registration" contains="bgz-msz-"/>
+        <retrieval transaction="ability_to_wash_oneself_registration" contains="bgz-msz-"/>
+        <retrieval transaction="address_information_registration" contains="bgz-msz-"/>
+        <retrieval transaction="administration_agreement_registration" contains="bgz-msz-"/>
+        <retrieval transaction="advance_directive_registration" contains="bgz-msz-"/>
+        <retrieval transaction="alcohol_use_registration" contains="bgz-msz-"/>
+        <retrieval transaction="alert_registration" contains="bgz-msz-"/>
+        <retrieval transaction="allergy_intolerance_registration" contains="bgz-msz-"/>
+        <retrieval transaction="apgar_score_registration" contains="bgz-msz-"/>
+        <retrieval transaction="barthel_adlindex_registration" contains="bgz-msz-"/>
+        <retrieval transaction="basic_elements_registration" contains="bgz-msz-"/>
+        <retrieval transaction="bladder_function_registration" contains="bgz-msz-"/>
+        <retrieval transaction="blood_pressure_registration" contains="bgz-msz-"/>
+        <retrieval transaction="body_height_registration" contains="bgz-msz-"/>
+        <retrieval transaction="body_temperature_registration" contains="bgz-msz-"/>
+        <retrieval transaction="body_weight_registration" contains="bgz-msz-"/>
+        <retrieval transaction="bowel_function_registration" contains="bgz-msz-"/>
+        <retrieval transaction="burnwound_registration" contains="bgz-msz-"/>
+        <retrieval transaction="checklist_pain_behavior_registration" contains="bgz-msz-"/>
+        <retrieval transaction="comfort_scale_registration" contains="bgz-msz-"/>
+        <retrieval transaction="contact_information_registration" contains="bgz-msz-"/>
+        <retrieval transaction="contact_person_registration" contains="bgz-msz-"/>
+        <retrieval transaction="development_child_registration" contains="bgz-msz-"/>
+        <retrieval transaction="dispense_request_registration" contains="bgz-msz-"/>
+        <retrieval transaction="dosscore_registration" contains="bgz-msz-"/>
+        <retrieval transaction="drug_use_registration" contains="bgz-msz-"/>
+        <retrieval transaction="education_registration" contains="bgz-msz-"/>
+        <retrieval transaction="encounter_registration" contains="bgz-msz-"/>
+        <retrieval transaction="family_history_registration" contains="bgz-msz-"/>
+        <retrieval transaction="family_situation_registration" contains="bgz-msz-"/>
+        <retrieval transaction="family_situation_child_registration" contains="bgz-msz-"/>
+        <retrieval transaction="feeding_pattern_infant_registration" contains="bgz-msz-"/>
+        <retrieval transaction="feeding_tube_system_registration" contains="bgz-msz-"/>
+        <retrieval transaction="flaccpain_scale_registration" contains="bgz-msz-"/>
+        <retrieval transaction="fluid_balance_registration" contains="bgz-msz-"/>
+        <retrieval transaction="freedom_restricting_measures_registration" contains="bgz-msz-"/>
+        <retrieval transaction="functional_or_mental_status_registration" contains="bgz-msz-"/>
+        <retrieval transaction="general_measurement_registration" contains="bgz-msz-"/>
+        <retrieval transaction="glasgow_coma_scale_registration" contains="bgz-msz-"/>
+        <retrieval transaction="head_circumference_registration" contains="bgz-msz-"/>
+        <retrieval transaction="health_professional_registration" contains="bgz-msz-"/>
+        <retrieval transaction="healthcare_provider_registration" contains="bgz-msz-"/>
+        <retrieval transaction="hearing_function_registration" contains="bgz-msz-"/>
+        <retrieval transaction="heart_rate_registration" contains="bgz-msz-"/>
+        <retrieval transaction="help_from_others_registration" contains="bgz-msz-"/>
+        <retrieval transaction="illness_perception_registration" contains="bgz-msz-"/>
+        <retrieval transaction="infusion_registration" contains="bgz-msz-"/>
+        <retrieval transaction="instructions_for_use_registration" contains="bgz-msz-"/>
+        <retrieval transaction="laboratory_test_result_registration" contains="bgz-msz-"/>
+        <retrieval transaction="language_proficiency_registration" contains="bgz-msz-"/>
+        <retrieval transaction="life_stance_registration" contains="bgz-msz-"/>
+        <retrieval transaction="living_situation_registration" contains="bgz-msz-"/>
+        <retrieval transaction="marital_status_registration" contains="bgz-msz-"/>
+        <retrieval transaction="medical_device_registration" contains="bgz-msz-"/>
+        <retrieval transaction="medication_administration2_registration" contains="bgz-msz-"/>
+        <retrieval transaction="medication_agreement_registration" contains="bgz-msz-"/>
+        <retrieval transaction="medication_dispense_registration" contains="bgz-msz-"/>
+        <retrieval transaction="medication_use2_registration" contains="bgz-msz-"/>
+        <retrieval transaction="mobility_registration" contains="bgz-msz-"/>
+        <retrieval transaction="mustscore_registration" contains="bgz-msz-"/>
+        <retrieval transaction="name_information_registration" contains="bgz-msz-"/>
+        <retrieval transaction="nationality_registration" contains="bgz-msz-"/>
+        <retrieval transaction="nursing_intervention_registration" contains="bgz-msz-"/>
+        <retrieval transaction="nutrition_advice_registration" contains="bgz-msz-"/>
+        <retrieval transaction="o2saturation_registration" contains="bgz-msz-"/>
+        <retrieval transaction="outcome_of_care_registration" contains="bgz-msz-"/>
+        <retrieval transaction="pain_score_registration" contains="bgz-msz-"/>
+        <retrieval transaction="participation_in_society_registration" contains="bgz-msz-"/>
+        <retrieval transaction="patient_registration" contains="bgz-msz-"/>
+        <retrieval transaction="payer_registration" contains="bgz-msz-"/>
+        <retrieval transaction="pharmaceutical_product_registration" contains="bgz-msz-"/>
+        <retrieval transaction="planned_care_activity_for_transfer_registration" contains="bgz-msz-"/>
+        <retrieval transaction="pregnancy_registration" contains="bgz-msz-"/>
+        <retrieval transaction="pressure_ulcer_registration" contains="bgz-msz-"/>
+        <retrieval transaction="problem_registration" contains="bgz-msz-"/>
+        <retrieval transaction="procedure_registration" contains="bgz-msz-"/>
+        <retrieval transaction="pulse_rate_registration" contains="bgz-msz-"/>
+        <retrieval transaction="range_registration" contains="bgz-msz-"/>
+        <retrieval transaction="respiration_registration" contains="bgz-msz-"/>
+        <retrieval transaction="skin_disorder_registration" contains="bgz-msz-"/>
+        <retrieval transaction="snaq65score_registration" contains="bgz-msz-"/>
+        <retrieval transaction="snaqrc_score_registration" contains="bgz-msz-"/>
+        <retrieval transaction="snaqscore_registration" contains="bgz-msz-"/>
+        <retrieval transaction="stoma_registration" contains="bgz-msz-"/>
+        <retrieval transaction="strong_kids_score_registration" contains="bgz-msz-"/>
+        <retrieval transaction="text_result_registration" contains="bgz-msz-"/>
+        <retrieval transaction="time_interval_registration" contains="bgz-msz-"/>
+        <retrieval transaction="tobacco_use_registration" contains="bgz-msz-"/>
+        <retrieval transaction="treatment_directive_registration" contains="bgz-msz-"/>
+        <retrieval transaction="treatment_objective_registration" contains="bgz-msz-"/>
+        <retrieval transaction="vaccination_registration" contains="bgz-msz-"/>
+        <retrieval transaction="visual_function_registration" contains="bgz-msz-"/>
+        <retrieval transaction="wound_registration" contains="bgz-msz-"/>
+
+        <adarefs2ada source-project-name="zib2017">
+            <setup usecase="beschikbaarstellen" directory-id="bs-bgz-msz">
+                <copy-data target-subdir="ada_instance_repo" directory-id="bs-bgz-msz-instance">
+                    <include pattern="bgz-msz-pat.*\.xml$"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="$USECASE.*\.xsd$"/>
+                </copy-project-schemas>
+                <empty-directory target-subdir="ada_instance"/>
+            </setup>
+
+            <build name="beschikbaarstellen_met_references">
+                <stylesheet href="../xsl/bgz_msz/1.2/beschikbaarstellen/bgz_msz1.2-zibs-adarefs2ada.xsl"/>
+                <input-documents directory="@bs-bgz-msz-instance"/>
+                <ada-working-set directory="@bs-bgz-msz-instance"/>
+                <output directory="@bs-bgz-msz/ada_instance"/>
+            </build>
+        </adarefs2ada>
+    </application>
+
+    <!-- ================================================================== -->
+    <!-- cio -->
+
+    <application name="cio" version="1.0.0">
+        <retrieval transaction="beschikbaarstellen_allergie_intolerantie" contains="bs"/>
+        <retrieval transaction="beschikbaarstellen_allergie_intolerantie_vertaling" contains="CIO-"/>
+        <retrieval transaction="beschikbaarstellen_allergie_intolerantie_vertaling" contains="example"/>
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="cio" version="2.0.0" ada-application-name="cio-2.0">
+        <retrieval transaction="beschikbaarstellen_medicatie_contra_indicaties" contains="cio-bmci-"/>
+        <retrieval transaction="beschikbaarstellen_geneesmiddelovergevoeligheden" contains="cio-bgmo-"/>
+        <retrieval transaction="sturen_voorstel_contra_indicatie" contains="cio-svci-"/>
+        <retrieval transaction="sturen_antwoord_voorstel_contra_indicatie" contains="cio-savc-"/>
+    </application>
+
+    <!-- ======================================================================= -->
+    <!-- e-overdracht -->
+
+    <application name="e-overdracht" version="4.0" ada-application-name="e-overdracht-4.0">
+        <retrieval transaction="sturen_overdrachtsbericht_volwassenen"/>
+        <retrieval transaction="sturen_overdrachtsbericht_kinderen_01_jaar"/>
+        <retrieval transaction="sturen_overdrachtsbericht_kinderen_118_jaar"/>
+        <retrieval transaction="sturen_aanmeldbericht"/>
+        <retrieval transaction="sturen_antwoordbericht"/>
+        <retrieval transaction="sturen_bevestiging_of_annulering_aanmelding"/>
+    </application>
+
+    <!-- ======================================================================= -->
+    <!-- ggz -->
+
+    <application name="ggz" version="1.0.0">
+        <retrieval transaction="behandelplan_ggz_vastleggen"/>
+        <retrieval transaction="beschikbaarstellen_signaleringsplan"/>
+    </application>
+
+    <!-- ======================================================================= -->
+    <!-- hg -  EersteLijnsZorg -->
+
+    <application name="hg" version="0.2.0-beta.1" ada-application-name="hg-0.2.0-beta.1">
+        <retrieval transaction="sturen_verwijzing_of_update_huisarts_naar_paramedicus"/>
+    </application>
+
+    <!-- ======================================================================= -->
+    <!-- imm -->
+
+    <application name="imm" version="0.1.0" ada-application-name="imm-0.1.0">
+        <retrieval transaction="beschikbaarstellen_immunisatiegegevens" contains="Beschikbaarstellen_immunisatiegegevens"/>
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="imm" version="1.0.0" ada-application-name="imm-1.0.0">
+        <retrieval transaction="beschikbaarstellen_immunisatiegegevens" contains="Beschikbaarstellen_immunisatiegegevens"/>
+
+        <adarefs2ada source-project-name="imm-1.0.0">
+            <setup usecase="raadplegenbeschikbaarstellen_immunisatiegegevens">
+                <copy-data>
+                    <include pattern="Beschikbaarstellen.*\.xml$"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="$USECASE.*\.xsd$"/>
+                </copy-project-schemas>
+            </setup>
+        </adarefs2ada>
+
+    </application>
+
+    <application name="imm" version="2.0" ada-application-name="imm-2.0.0-alpha.3">
+        <retrieval transaction="beschikbaarstellen_immunisatiegegevens" contains="imm-"/>
+        
+        <adarefs2ada source-project-name="imm-2.0">
+            <setup usecase="raadplegenbeschikbaarstellen_immunisatiegegevens" directory-id="rbs-imm">
+                <copy-data target-subdir="ada_instance_kwa_repo" directory-id="rbs-imm-kwa-repo-instance">
+                    <include pattern="imm-va[br]-kwa-\d+\.\d+.*\.xml$"/>
+                </copy-data>
+                <copy-data target-subdir="ada_instance_test_repo" directory-id="rbs-imm-test-repo-instance">
+                    <include pattern="imm-va[br]-test-\d+\.\d+.*\.xml$"/>
+                </copy-data>
+                <copy-data target-subdir="ada_instance_example_repo" directory-id="rbs-imm-ex-repo-instance">
+                    <include pattern="imm-zibs2020.*voorbeeldbericht.*\.xml$"/>
+                </copy-data>
+                
+                <copy-project-schemas>
+                    <include pattern="$USECASE.*\.xsd$"/>
+                </copy-project-schemas>
+                <empty-directory target-subdir="ada_instance_kwa" directory-id="rbs-imm-kwa-instance"/>
+                <empty-directory target-subdir="ada_instance_test" directory-id="rbs-imm-test-instance"/>
+                <empty-directory target-subdir="ada_instance_example" directory-id="rbs-imm-ex-instance"/>
+            </setup>
+            
+            <build name="beschikbaarstellen_immunisatiegegevens_kwa">
+                <stylesheet href="../xsl/imm/2.0/beschikbaarstellen/imm-2.0-bundle-adarefs2ada.xsl"/>
+                <input-documents directory="@rbs-imm-kwa-repo-instance"/>
+                <ada-working-set directory="@rbs-imm-kwa-repo-instance"/>
+                <output directory="@rbs-imm/ada_instance_kwa"/>
+            </build>
+            <build name="beschikbaarstellen_immunisatiegegevens_test">
+                <stylesheet href="../xsl/imm/2.0/beschikbaarstellen/imm-2.0-bundle-adarefs2ada.xsl"/>
+                <input-documents directory="@rbs-imm-test-repo-instance"/>
+                <ada-working-set directory="@rbs-imm-test-repo-instance"/>
+                <output directory="@rbs-imm/ada_instance_test"/>
+            </build>
+            <build name="beschikbaarstellen_immunisatiegegevens_example">
+                <stylesheet href="../xsl/imm/2.0/beschikbaarstellen/imm-2.0-bundle-adarefs2ada.xsl"/>
+                <input-documents directory="@rbs-imm-ex-repo-instance"/>
+                <ada-working-set directory="@rbs-imm-ex-repo-instance"/>
+                <output directory="@rbs-imm/ada_instance_example"/>
+            </build>
+            
+        </adarefs2ada>
+    </application>
+    
+
+    <!-- ======================================================================= -->
+    <!-- jeugdgezondheidszorg -->
+
+<!--    <application name="jgz" version="6.12.9.5" ada-application-name="jgz-7.0.0">
+        <!-\- Remark 20230118 ES: This retrieves nothing... -\->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v02" contains="DOB-Fase-1.1"/>
+
+        <adarefs2ada source-project-name="jgz-7.0.0">
+            <setup usecase="dossieroverdracht">
+                <copy-data>
+                    <include pattern="DOB-Fase-1\.1.*\.xml$"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="$USECASE.*\.xsd$"/>
+                </copy-project-schemas>
+            </setup>
+        </adarefs2ada>
+
+    </application>-->
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <!--<application name="jgz" version="6.12.9.6" ada-application-name="jgz-6.12.9.6">
+        <!-\- Remark 20230118 ES: Retrieving this returns an invalid index file with an eXist error message in it.
+             It also seems to me that the values for the @contain attributes are incorrect?
+        -\->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v02" contains="*.xml"/>
+        <retrieval transaction="versturen_vaccinatie" contains="*.xml"/>
+    </application>-->
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="jgz" version="7.0" ada-application-name="jgz-7.0">
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v03" contains="DOB-3.0.0-qual"/>
+
+        <adarefs2ada source-project-name="jgz-7.0">
+            <setup usecase="dossieroverdracht">
+                <copy-data>
+                    <include pattern="DOB-3\.0\.0.*\.xml$"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="$USECASE.*\.xsd$"/>
+                </copy-project-schemas>
+            </setup>
+        </adarefs2ada>
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    
+    <application name="jgz" version="7.1" ada-application-name="jgz-7.1">
+        <!-- placeholder R009> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v03" contains="R009"/>
+        <!-- placeholder R010> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_V03" contains="R010"/>
+        <!-- placeholder R012> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v03" contains="R012"/>
+        <!-- placeholder R018> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v03" contains="R018"/>
+        <!-- placeholder R019> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v03" contains="R019"/>
+        <!-- placeholder R020> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v03" contains="R020"/>
+        <!-- placeholder R021> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v03" contains="R021"/>
+        <!-- placeholder R023> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v03" contains="R023"/>
+        <!-- placeholder R025> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v03" contains="R025"/>
+        <!-- placeholder R026> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v03" contains="R026"/>
+        <!-- placeholder R030> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v03" contains="R030"/>
+        <!-- placeholder R031> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v03" contains="R031"/>
+        <!-- placeholder R034> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v03" contains="R034"/>
+        <!-- placeholder R038> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v03" contains="R038"/>
+        <!-- placeholder R039> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v03" contains="R039"/>
+        <!-- placeholder R041> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v03" contains="R041"/>
+        <!-- placeholder R042> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v03" contains="R042"/>
+        <!-- placeholder R047> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v03" contains="R047"/>
+        <!-- placeholder R054> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v03" contains="R054"/>
+        
+        <adarefs2ada source-project-name="jgz-7.1">
+            <setup usecase="dossieroverdracht">
+                <copy-data>
+                    <include pattern="DOB-3\.1\.0-"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="$USECASE.*\.xsd$"/>
+                </copy-project-schemas>
+            </setup>
+            
+            <setup usecase="dossieroverdracht_unhappyflow">
+                <copy-data>
+                    <include pattern="DOB-4\.0\.0-R0"/>
+                </copy-data>
+            </setup>
+        </adarefs2ada>
+    </application>
+    
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    
+    <application name="jgz" version="8.0" ada-application-name="jgz-8.0">
+        <!-- placeholder R009> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v04" contains="R009"/>
+        <!-- placeholder R010> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v04" contains="R010"/>
+        <!-- placeholder R012> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v04" contains="R012"/>
+        <!-- placeholder R018> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v04" contains="R018"/>
+        <!-- placeholder R019> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v04" contains="R019"/>
+        <!-- placeholder R020> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v04" contains="R020"/>
+        <!-- placeholder R021> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v04" contains="R021"/>
+        <!-- placeholder R023> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v04" contains="R023"/>
+        <!-- placeholder R025> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v04" contains="R025"/>
+        <!-- placeholder R026> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v04" contains="R026"/>
+        <!-- placeholder R030> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v04" contains="R030"/>
+        <!-- placeholder R031> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v04" contains="R031"/>
+        <!-- placeholder R034> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v04" contains="R034"/>
+        <!-- placeholder R038> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v04" contains="R038"/>
+        <!-- placeholder R039> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v04" contains="R039"/>
+        <!-- placeholder R041> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v04" contains="R041"/>
+        <!-- placeholder R042> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v04" contains="R042"/>
+        <!-- placeholder R047> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v04" contains="R047"/>
+        <!-- placeholder R054> -->
+        <retrieval transaction="versturen_jgzdossieroverdrachtverzoek_v04" contains="R054"/>
+        
+        <adarefs2ada source-project-name="jgz-8.0">
+            <setup usecase="dossieroverdracht">
+                <copy-data>
+                    <include pattern="\.xml$"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="$USECASE.*\.xsd$"/>
+                </copy-project-schemas>
+            </setup>
+        </adarefs2ada>
+    </application>
+    
+    <!-- ======================================================================= -->
+
+    <!-- lab -->
+
+    <application name="lab" version="3.0.0" ada-application-name="lab">
+        <retrieval transaction="sturen_laboratoriumresultaten"/>
+        <retrieval transaction="sturen_laboratoriumresultaat_op_aanvraag"/>
+        <retrieval transaction="beschikbaarstellen_laboratoriumresultaten"/>
+        <retrieval transaction="raadplegen_laboratoriumresultaten"/>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <adarefs2ada>
+
+            <setup usecase="beschikbaarstellen_laboratoriumresultaten" directory-id="blr">
+                <empty-directory target-subdir="ada_instance" directory-id="blr-instance"/>                
+                <copy-data target-subdir="ada_instance_repo" directory-id="blr-instance-repo">
+                    <include pattern="^blr-"/>
+                    <include pattern="^sl-"/>
+                    <exclude pattern="example"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="$USECASE\.xsd$"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_laboratoriumresultaten" directory-id="slr">
+                <empty-directory target-subdir="ada_instance" directory-id="slr-instance"/>
+                <copy-data target-subdir="ada_instance_repo" directory-id="slr-instance-repo">
+                    <include pattern="^sl-"/>
+                    <exclude pattern="example"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="$USECASE\.xsd$"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_laboratoriumresultaat_op_aanvraag" directory-id="loa">
+                <empty-directory target-subdir="ada_instance" directory-id="loa-instance"/>
+                <copy-data target-subdir="ada_instance_repo" directory-id="loa-instance-repo">
+                    <include pattern="^loa-"/>
+                    <exclude pattern="example"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="$USECASE\.xsd$"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="laboratoriumresultaten_met_references">
+                <copy-data directory-id="lrmr-instance">
+                    <include pattern="^slr-"/>
+                    <include pattern="^blr-"/>
+                    <include pattern="^loa-"/>
+                    <exclude pattern="example"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="raadplegen_laboratoriumresultaten\.xsd$"/>
+                </copy-project-schemas>
+            </setup>
+
+            <build name="laboratoriumresultaten_met_references-1">
+                <stylesheet href="../xsl/lab/3.0.0/laboratoriumresultaten_met_references/lab300-labresults-adarefs2ada.xsl"/>
+                <input-documents directory="@lrmr-instance">
+                    <include pattern="^blr.*\.xml$"/>
+                </input-documents>
+                <ada-working-set directory="@blr-instance-repo"/>
+                <output directory="@blr/ada_instance"/>
+            </build>
+
+            <build name="laboratoriumresultaten_met_references-2">
+                <stylesheet href="../xsl/lab/3.0.0/laboratoriumresultaten_met_references/lab300-labresults-adarefs2ada.xsl"/>
+                <input-documents directory="@lrmr-instance">
+                    <include pattern="^slr.*\.xml$"/>
+                </input-documents>
+                <ada-working-set directory="@slr-instance-repo"/>
+                <output directory="@slr/ada_instance"/>
+            </build>
+
+            <build name="laboratoriumresultaten_met_references-3">
+                <stylesheet href="../xsl/lab/3.0.0/laboratoriumresultaten_met_references/lab300-labresults-adarefs2ada.xsl"/>
+                <input-documents directory="@lrmr-instance">
+                    <include pattern="^loa.*\.xml$"/>
+                </input-documents>
+                <ada-working-set directory="@loa-instance-repo"/>
+                <output directory="@loa/ada_instance"/>
+            </build>
+
+        </adarefs2ada>
+
+    </application>
+
+    <!-- lab-3.0 -->
+
+    <!--<application name="lab" version="3.0.0" ada-application-name="lab-3.0">
+        <retrieval transaction="sturen_laboratoriumresultaten"/>
+        <retrieval transaction="sturen_laboratoriumresultaat_op_aanvraag"/>
+        <retrieval transaction="beschikbaarstellen_laboratoriumresultaten"/>
+        <retrieval transaction="raadplegen_laboratoriumresultaten"/>
+
+        <!-\- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\->
+
+        <adarefs2ada>
+
+            <setup usecase="beschikbaarstellen_laboratoriumresultaten" directory-id="blr">
+                <empty-directory target-subdir="ada_instance" directory-id="blr-instance"/>                
+                <copy-data target-subdir="ada_instance_repo" directory-id="blr-instance-repo">
+                    <include pattern="^blr-"/>
+                    <include pattern="^sl-"/>
+                    <exclude pattern="example"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="$USECASE\.xsd$"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_laboratoriumresultaten" directory-id="slr">
+                <empty-directory target-subdir="ada_instance" directory-id="slr-instance"/>
+                <copy-data target-subdir="ada_instance_repo" directory-id="slr-instance-repo">
+                    <include pattern="^sl-"/>
+                    <exclude pattern="example"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="$USECASE\.xsd$"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_laboratoriumresultaat_op_aanvraag" directory-id="loa">
+                <empty-directory target-subdir="ada_instance" directory-id="loa-instance"/>
+                <copy-data target-subdir="ada_instance_repo" directory-id="loa-instance-repo">
+                    <include pattern="^loa-"/>
+                    <exclude pattern="example"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="$USECASE\.xsd$"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="laboratoriumresultaten_met_references">
+                <copy-data directory-id="lrmr-instance">
+                    <include pattern="^slr-"/>
+                    <include pattern="^blr-"/>
+                    <include pattern="^loa-"/>
+                    <exclude pattern="example"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="raadplegen_laboratoriumresultaten\.xsd$"/>
+                </copy-project-schemas>
+            </setup>
+
+            <build name="laboratoriumresultaten_met_references-1">
+                <stylesheet href="../xsl/lab/3.0.0/laboratoriumresultaten_met_references/lab300-labresults-adarefs2ada.xsl"/>
+                <input-documents directory="@lrmr-instance">
+                    <include pattern="^blr.*\.xml$"/>
+                </input-documents>
+                <ada-working-set directory="@blr-instance-repo"/>
+                <output directory="@blr/ada_instance"/>
+            </build>
+
+            <build name="laboratoriumresultaten_met_references-2">
+                <stylesheet href="../xsl/lab/3.0.0/laboratoriumresultaten_met_references/lab300-labresults-adarefs2ada.xsl"/>
+                <input-documents directory="@lrmr-instance">
+                    <include pattern="^slr.*\.xml$"/>
+                </input-documents>
+                <ada-working-set directory="@slr-instance-repo"/>
+                <output directory="@slr/ada_instance"/>
+            </build>
+
+            <build name="laboratoriumresultaten_met_references-3">
+                <stylesheet href="../xsl/lab/3.0.0/laboratoriumresultaten_met_references/lab300-labresults-adarefs2ada.xsl"/>
+                <input-documents directory="@lrmr-instance">
+                    <include pattern="^loa.*\.xml$"/>
+                </input-documents>
+                <ada-working-set directory="@loa-instance-repo"/>
+                <output directory="@loa/ada_instance"/>
+            </build>
+
+        </adarefs2ada>
+
+    </application>-->
+
+    <!-- ======================================================================= -->
+    <!-- langdurigezorg -->
+
+    <application name="langdurigezorg" version="1.0.0">
+        <!-- Remark 20230118 ES: This retrieves nothing... -->
+        <retrieval transaction="beschikbaarstellen_basisgegevens_langdurige_zorg" contains="MM-"/>
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="langdurigezorg" version="1.1.0">
+        <retrieval transaction="beschikbaarstellen_basisgegevens_langdurige_zorg" contains="BgLZ-3.0-"/>
+    </application>
+
+    <!-- ======================================================================= -->
+    <!-- mp (medicatieproces) -->
+
+    <!--  
+        Used abbreviations for mp usecases (used here in directory-ids, coming from the old Ant scripts):
+        
+        av      sturen_afhandeling_medicatievoorschrift
+        avma    sturen_antwoord_voorstel_medicatieafspraak
+        avvv    sturen_antwoord_voorstel_verstrekkingsverzoek
+        mg      beschikbaarstellen_medicatiegegevens
+        mg.rp   raadplegen_medicatiegegevens
+        mg.st   sturen_medicatiegegevens
+        mo      beschikbaarstellen_medicatieoverzicht
+        mo.rp   raadplegen_medicatieoverzicht
+        mv      sturen_medicatievoorschrift
+        sg      sturen_medicatiegebruik
+        vma     sturen_voorstel_medicatieafspraak
+        vv      beschikbaarstellen_verstrekkingenvertaling
+        vvv     sturen_voorstel_verstrekkingsverzoek
+        
+        References usecases:
+        mgr     medicatiegegevens_met_references
+        mgsr    medicatiegegevens_met_references_PUSH
+        mor     medicatieoverzicht_met_references
+        mvr     medicatievoorschrift_met_references
+        sgr     sturen_gebruik_met_references
+        var     afhandelen_medicatievoorschrift_met_references
+    -->
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <retrieval-set-definition id="mp-generic">
+        <!-- This generic set for mp comes from the Ant script
+             art_decor/production-ada-instances/mp/_ant-buildfiles/ant-publish/build-prd-ada-mp-include.xml
+             in the original code.
+        -->
+
+        <!-- beschikbaarstellen_medicatiegegevens, dit zijn de repo gegevens -->
+        <retrieval transaction="beschikbaarstellen_medicatiegegevens" contains="mg-"/>
+
+        <!-- beschikbaarstellen_medicatiegegevens medicatiegegevens met references -->
+        <retrieval transaction="sturen_medicatiegegevens" contains="mgr-mg"/>
+
+        <!-- sturen_medicatiegegevens medicatiegegevens met references -->
+        <retrieval transaction="push_medicatiegegevens" contains="mgsr-mg"/>
+
+        <!-- the data for free testing -->
+        <retrieval transaction="sturen_medicatiegegevens" contains="mgr-ma"/>
+        <retrieval transaction="sturen_medicatiegegevens" contains="mgr-vv"/>
+
+        <!-- sturen_medicatieoverzicht medicatieoverzicht met references -->
+        <retrieval transaction="sturen_medicatieoverzicht" contains="mor-ma-Scen"/>
+        <!-- the data for free testing -->
+        <retrieval transaction="sturen_medicatieoverzicht" contains="mor-ma-Test"/>
+
+        <!-- verzoek_uitvoeren_voorschrift medicatievoorschrift met references -->
+        <retrieval transaction="verzoek_uitvoeren_voorschrift" contains="mvr-S"/>
+        <!-- the data for free testing -->
+        <retrieval transaction="verzoek_uitvoeren_voorschrift" contains="mvr-Test"/>
+
+        <!-- afhandelen_medicatievoorschrift_met_references -->
+        <retrieval transaction="sturen_toediengegevens" contains="var-"/>
+
+        <!-- xml examples -->
+        <retrieval transaction="sturen_medicatievoorschrift" contains="-example-"/>
+        <retrieval transaction="beschikbaarstellen_medicatiegegevens" contains="-example-"/>
+        <retrieval transaction="beschikbaarstellen_medicatieoverzicht" contains="-example-"/>
+        <retrieval transaction="sturen_afhandeling_medicatievoorschrift" contains="-example-"/>
+        <retrieval transaction="sturen_medicatiegebruik" contains="-example-"/>
+
+        <!-- verstrekkingenvertaling -->
+        <retrieval transaction="beschikbaarstellen_verstrekkingenvertaling" contains="-example-"/>
+
+        <!-- voorstel -->
+        <retrieval transaction="sturen_voorstel_medicatieafspraak" contains="-example-"/>
+        <retrieval transaction="sturen_voorstel_verstrekkingsverzoek" contains="-example-"/>
+        <retrieval transaction="sturen_antwoord_voorstel_verstrekkingsverzoek" contains="-example-"/>
+
+    </retrieval-set-definition>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="mp" version="9.0.7" ada-application-name="mp-mp907">
+
+        <retrieval-set idref="mp-generic"/>
+        <!-- the 907 stuff -->
+        <!-- medmij kwalificatiegegevens -->
+        <retrieval transaction="beschikbaarstellen_medicatiegegevens" contains="XXX_"/>
+        <retrieval transaction="beschikbaarstellen_medicatieoverzicht" contains="XXX_"/>
+        <retrieval transaction="beschikbaarstellen_verstrekkingenvertaling" contains="QURX"/>
+        <postprocessing-stylesheet href="../xsl/mp/preprocess_4_MP.xsl"/>
+
+        <adarefs2ada source-project-name="mp-mp907">
+
+            <setup usecase="beschikbaarstellen_medicatiegegevens" directory-id="mg">
+                <copy-data target-subdir="ada_instance_repo" directory-id="mg-instance-repo">
+                    <include pattern="^mg-Patient"/>
+                    <include pattern="^mg-Scenarioset"/>
+                    <include pattern="^mg-Test"/>
+                    <!-- exclude the temporary generated stuff for copying MA into TA and VV into MVE -->
+                    <exclude pattern="TA-MVE\.xml$"/>
+                </copy-data>
+                <copy-project-schemas source-project-name="mp-mp907">
+                    <include pattern="beschikbaarstellen_medicatiegegevens\.xsd$"/>
+                </copy-project-schemas>
+                <!-- Also refresh the MedMij ada instances and examples, so that the adarefs2ada serves as repo for everything: -->
+                <copy-data directory-id="mg-instance">
+                    <include glob="XXX_*.xml"/>
+                    <exclude glob="XXX_*v2.xml"/>
+                    <exclude glob="*MO*.xml"/>
+                    <exclude glob="*Jangi*.xml"/>
+                </copy-data>
+                <empty-directory target-subdir="ada_instance_TestSet" directory-id="mg-testset"/>
+            </setup>
+            
+            <setup usecase="beschikbaarstellen_medicatieoverzicht" directory-id="mo">
+                <copy-data directory-id="mo-instance">
+                    <include glob="XXX_*.xml"/>
+                    <exclude glob="XXX_*v2.xml"/>
+                    <exclude glob="*MO*.xml"/>
+                    <exclude glob="*Jangi*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="beschikbaarstellen_medicatieoverzicht\.xsd$"/>
+                </copy-project-schemas>
+                <!-- Also refresh the MedMij ada instances and examples, so that the adarefs2ada serves as repo for everything: -->
+                <copy-data>
+                    <include glob="*MO*.xml"/>
+                    <include glob="*Jangi*.xml"/>
+                    <exclude glob="*v2.xml"/>
+                </copy-data>
+                <empty-directory target-subdir="ada_instance_TestSet" directory-id="mo-testset"/>
+            </setup>
+
+            <setup usecase="sturen_medicatievoorschrift" directory-id="mv">
+                <copy-project-schemas>
+                    <include pattern="sturen_medicatievoorschrift\.xsd$"/>
+                </copy-project-schemas>
+                <empty-directory target-subdir="ada_instance" directory-id="mv-instance"/>
+                <empty-directory target-subdir="ada_instance_TestSet" directory-id="mv-testset"/>
+            </setup>
+
+            <setup usecase="sturen_afhandeling_medicatievoorschrift" directory-id="av">
+                <copy-project-schemas>
+                    <include pattern="sturen_afhandeling_medicatievoorschrift\.xsd$"/>
+                </copy-project-schemas>
+                <empty-directory target-subdir="ada_instance" directory-id="av-instance"/>
+            </setup>
+
+            <setup usecase="beschikbaarstellen_verstrekkingenvertaling">
+                <copy-project-schemas>
+                    <include pattern="beschikbaarstellen_verstrekkingenvertaling\.xsd$"/>
+                </copy-project-schemas>
+                <!-- Also refresh the MedMij ada instances and examples, so that the adarefs2ada serves as repo for everything: -->
+                <copy-data>
+                    <include glob="QURX*.xml"/>
+                </copy-data>
+            </setup>
+            <!-- Need empty dir otherwise ada-2-wiki relative path this will fail -->
+            <setup usecase="raadplegen_verstrekkingenvertaling">
+                <empty-directory target-subdir="ada_instance"/>
+            </setup>
+            
+            <!-- now the references stuff, the reference ada instances from which to create the full ada instances 
+                 using the repo ada instances -->
+            <setup usecase="medicatiegegevens_met_references" directory-id="mgr">
+                <copy-data directory-id="mgr-instance">
+                    <include pattern="^mgr-mg.*Scenarioset.*\.xml$"/>
+                </copy-data>
+                <!-- Testset instances copy for medicatiegegevens_met_references -->
+                <copy-data target-subdir="ada_instance_TestSet" directory-id="mgr-testset">
+                    <include pattern="^mgr-ma-Test.*\.xml"/>
+                    <include pattern="^mgr-vv-Test.*\.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*sturen_medicatiegegevens.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <!-- afhandelen_medicatievoorschrift_met_references -->
+            <setup usecase="afhandelen_medicatievoorschrift_met_references" directory-id="var">
+                <copy-data directory-id="var-instance">
+                    <include glob="var-*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*sturen_toediengegevens.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <!-- medicatieoverzicht_met_references -->
+            <setup usecase="medicatieoverzicht_met_references" directory-id="mor">
+                <copy-data directory-id="mor-instance">
+                    <include glob="mor-*Scenario*.xml"/>
+                </copy-data>
+                <copy-data target-subdir="ada_instance_TestSet" directory-id="mor-testset">
+                    <include glob="mor-ma-Test*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*sturen_medicatieoverzicht.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <!-- medicatievoorschrift_met_references -->
+            <setup usecase="medicatievoorschrift_met_references" directory-id="mvr">
+                <copy-data directory-id="mvr-instance">
+                    <include glob="mvr-Scenarioset*.xml"/>
+                </copy-data>
+                <copy-data target-subdir="ada_instance_TestSet" directory-id="mvr-testset">
+                    <include glob="mvr-Test*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*verzoek_uitvoeren_voorschrift.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <!-- Examples -->
+            <setup usecase="xml-voorbeelden">
+                <copy-data>
+                    <include glob="*example*.xml"/>
+                </copy-data>
+            </setup>
+
+            <setup usecase="raadplegen_medicatiegegevens" directory-id="rmg">
+                <empty-directory target-subdir="ada_instance_response" directory-id="rmg-instance-response"/>
+            </setup>
+
+            <setup usecase="raadplegen_medicatieoverzicht" directory-id="mo.rp">
+                <empty-directory target-subdir="ada_instance_response" directory-id="mo.rp-instance-response"/>
+            </setup>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <build name="build-medicatiegegevens_met_references">
+                <stylesheet href="../xsl/mp/9.0.7/medicatiegegevens_met_references/mp907-medgegs-adarefs2ada.xsl"/>
+                <input-documents directory="@mgr-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mg-instance"/>
+                <parameter name="outputDirectoryRaadplegen" directory="@rmg-instance-response"/>
+            </build>
+
+            <build name="build-raadplegen_medicatiegegevens-1">
+                <!-- raadplegen_medicatiegegevens, the combined data, all building blocks in one ada file per patient -->
+                <stylesheet href="../xsl/mp/9.0.7/medicatiegegevens_met_references/mp907-medgegs-combine-adarefs2ada.xsl"/>
+                <input-documents directory="@mgr-instance">
+                    <include glob="mgr-mg-MA-Scenarioset0.xml"/>
+                </input-documents>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mg-instance"/>
+                <parameter name="outputDirectoryRaadplegen" directory="@rmg-instance-response"/>
+                <parameter name="referenceAdaFilesDirectory" directory="@mgr-instance"/>
+            </build>
+
+            <build name="build-testset-medicatiegegevens_met_references">
+                <stylesheet href="../xsl/mp/9.0.7/medicatiegegevens_met_references/mp907-medgegs-adarefs2ada.xsl"/>
+                <input-documents directory="@mgr-testset"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mg-testset"/>
+                <parameter name="outputDirectoryRaadplegen" directory="@rmg-instance-response"/>
+            </build>
+
+            <build name="build-raadplegen_medicatiegegevens-2">
+                <!-- raadplegen_medicatiegegevens, the combined data, all building blocks in one ada file per patient, 
+                     for TestSet stuff -->
+                <stylesheet href="../xsl/mp/9.0.7/medicatiegegevens_met_references/mp907-medgegs-combine-adarefs2ada.xsl"/>
+                <input-documents directory="@mgr-instance">
+                    <include glob="mgr-mg-MA-Scenarioset0.xml"/>
+                </input-documents>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mg-instance"/>
+                <parameter name="outputDirectoryRaadplegen" directory="@rmg-instance-response"/>
+                <parameter name="referenceAdaFilesDirectory" directory="@mgr-testset"/>
+            </build>
+
+            <build name="build-beschikbaarstellen_medicatieoverzicht">
+                <stylesheet href="../xsl/mp/9.0.7/medicatieoverzicht_met_references/mp907-mo-adarefs2ada.xsl"/>
+                <input-documents directory="@mor-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mo-instance"/>
+            </build>
+
+            <build name="build-testset-beschikbaarstellen_medicatieoverzicht">
+                <stylesheet href="../xsl/mp/9.0.7/medicatieoverzicht_met_references/mp907-mo-adarefs2ada.xsl"/>
+                <input-documents directory="@mor-testset"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mo-testset"/>
+            </build>
+
+            <build name="build-sturen_medicatievoorschrift">
+                <stylesheet href="../xsl/mp/9.0.7/medicatievoorschrift_met_references/mp907-mv-adarefs2ada.xsl"/>
+                <input-documents directory="@mvr-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mv-instance"/>
+            </build>
+
+            <build name="build-testset-sturen_medicatievoorschrift">
+                <stylesheet href="../xsl/mp/9.0.7/medicatievoorschrift_met_references/mp907-mv-adarefs2ada.xsl"/>
+                <input-documents directory="@mvr-testset"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mv-testset"/>
+            </build>
+
+            <build name="build-afhandelen_medicatievoorschrift">
+                <stylesheet href="../xsl/mp/9.0.7/afhandelen_medicatievoorschrift_met_references/mp907-av-adarefs2ada.xsl"/>
+                <input-documents directory="@var-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@av-instance"/>
+            </build>
+
+            <!-- raadplegen_medicatieoverzicht, simply copy all *output* instances from beschikbaarstellen_medicatieoverzicht -->
+            <build-copy name="copy-raadplegen_medicatieoverzicht-1">
+                <input-documents directory="@mo-instance">
+                    <include glob="*output*.xml"/>
+                </input-documents>
+                <output directory="@mo.rp-instance-response"/>
+            </build-copy>
+
+            <build-copy name="copy-raadplegen_medicatieoverzicht-2">
+                <input-documents directory="@mo-testset">
+                    <include glob="*output*.xml"/>
+                </input-documents>
+                <output directory="@mo.rp-instance-response"/>
+            </build-copy>
+
+        </adarefs2ada>
+
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="mp" version="9.1.0" ada-application-name="mp-mp910">
+
+        <retrieval-set idref="mp-generic"/>
+
+        <adarefs2ada source-project-name="mp-mp910">
+
+            <setup usecase="beschikbaarstellen_medicatiegegevens" directory-id="mg">
+                <empty-directory target-subdir="ada_instance" directory-id="mg-instance"/>
+                <copy-data target-subdir="ada_instance_repo" directory-id="mg-instance-repo">
+                    <include glob="mg-Patient*"/>
+                    <include glob="mg-Scenarioset*"/>
+                    <include glob="mg-Testset*"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*$USECASE*.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="beschikbaarstellen_medicatieoverzicht" directory-id="mo">
+                <empty-directory target-subdir="ada_instance" directory-id="mo-instance"/>
+                <copy-project-schemas>
+                    <include glob="*$USECASE*.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_medicatievoorschrift" directory-id="mv">
+                <empty-directory target-subdir="ada_instance" directory-id="mv-instance"/>
+                <copy-project-schemas>
+                    <include glob="*$USECASE*.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="medicatiegegevens_met_references" directory-id="mgr">
+                <copy-data directory-id="mgr-instance">
+                    <include glob="mgr-mg*Scenarioset*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*sturen_medicatiegegevens*.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="medicatieoverzicht_met_references" directory-id="mor">
+                <copy-data directory-id="mor-instance">
+                    <include glob="mor-*Scenario*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*sturen_medicatieoverzicht*.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="medicatievoorschrift_met_references" directory-id="mvr">
+                <copy-data directory-id="mvr-instance">
+                    <include glob="mvr-Scenarioset*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*verzoek_uitvoeren_voorschrift*.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="xml-voorbeelden" directory-id="xmlv">
+                <copy-data directory-id="xmlv-instance">
+                    <include glob="*example*.xml"/>
+                </copy-data>
+            </setup>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <build>
+                <stylesheet href="../xsl/mp/9.1.0/medicatiegegevens_met_references/mp9-medgegs-adarefs2ada.xsl"/>
+                <input-documents directory="@mgr-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mg-instance"/>
+            </build>
+
+            <build>
+                <stylesheet href="../xsl/mp/9.1.0/medicatieoverzicht_met_references/mp9-mo-adarefs2ada.xsl"/>
+                <input-documents directory="@mor-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mo-instance"/>
+            </build>
+
+            <build>
+                <stylesheet href="../xsl/mp/9.1.0/medicatievoorschrift_met_references/mp9-voorschrift-adarefs2ada.xsl"/>
+                <input-documents directory="@mvr-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mv-instance"/>
+            </build>
+
+        </adarefs2ada>
+
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="mp" version="9.2.0beta" ada-application-name="mp-mp920">
+
+        <!-- beschikbaarstellen_medicatiegegevens -->
+        <retrieval transaction="beschikbaarstellen_medicatiegegevens"/>
+        <!-- mg met references -->
+        <retrieval transaction="sturen_medicatiegegevens"/>
+        <!-- sturen_medicatievoorschrift, alleen arianne's testgevallen, normaal doen we dit via references -->
+        <retrieval transaction="sturen_medicatievoorschrift"/>
+        <!-- verzoek_uitvoeren_voorschrift medicatievoorschrift met references -->
+        <retrieval transaction="verzoek_uitvoeren_voorschrift"/>
+        <!-- beschikbaarstellen_medicatieoverzicht -->
+        <retrieval transaction="beschikbaarstellen_medicatieoverzicht"/>
+        <!-- beschikbaarstellen_medicatieoverzicht met references -->
+        <retrieval transaction="sturen_medicatieoverzicht"/>
+        <!-- afhandelen_medicatievoorschrift, alleen arianne's testgevallen, normaal doen we dit via references -->
+        <retrieval transaction="sturen_afhandeling_medicatievoorschrift"/>
+        <!-- afhandelen_medicatievoorschrift_met_references -->
+        <retrieval transaction="opvragen_potentiele_contraindicaties"/>
+        <!-- sturen_gebruik_met_references -->
+        <retrieval transaction="meld_medicatieverstrekking"/>
+        <!-- sturen_medicatiegebruik -->
+        <retrieval transaction="sturen_medicatiegebruik"/>
+        <!-- sturen_voorstel_medicatieafspraak -->
+        <retrieval transaction="sturen_voorstel_medicatieafspraak"/>
+        <!-- sturen_voorstel_verstrekkingsverzoek -->
+        <retrieval transaction="sturen_voorstel_verstrekkingsverzoek"/>
+        <!-- sturen_antwoord_voorstel_verstrekkingsverzoek -->
+        <retrieval transaction="sturen_antwoord_voorstel_verstrekkingsverzoek"/>
+
+        <adarefs2ada source-project-name="mp-mp920">
+
+            <setup usecase="beschikbaarstellen_medicatiegegevens" directory-id="mg">
+                <empty-directory target-subdir="ada_instance" directory-id="mg-instance"/>
+                <copy-data target-subdir="ada_instance_repo" directory-id="mg-instance-repo">
+                    <include glob="mg-*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_medicatievoorschrift" directory-id="mv">
+                <copy-data directory-id="mv-instance">
+                    <include glob="mv-*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="beschikbaarstellen_medicatieoverzicht" directory-id="mo">
+                <empty-directory target-subdir="ada_instance" directory-id="mo-instance"/>
+                <copy-project-schemas>
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_afhandeling_medicatievoorschrift" directory-id="av">
+                <empty-directory target-subdir="ada_instance" directory-id="av-instance"/>
+                <copy-project-schemas>
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_medicatiegebruik" directory-id="sg">
+                <copy-data directory-id="sg-instance">
+                    <include glob="sg-*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <!-- voorstel transacties, we don't have corresponding reference transactions (yet) -->
+            <setup usecase="sturen_voorstel_medicatieafspraak" directory-id="vma">
+                <copy-data directory-id="vma-instance">
+                    <include glob="mp-vm*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_voorstel_verstrekkingsverzoek" directory-id="vvv">
+                <copy-data directory-id="vvv-instance">
+                    <include glob="mp-vv*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_antwoord_voorstel_verstrekkingsverzoek" directory-id="avvv">
+                <copy-data directory-id="avvv-instance">
+                    <include glob="mp-av*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <!-- now the references stuff, the reference ada instances from which to create the full ada instances 
+                 using the repo ada instances -->
+            <setup usecase="medicatiegegevens_met_references" directory-id="mgr">
+                <copy-data directory-id="mgr-instance">
+                    <include glob="mp-mg*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*sturen_medicatiegegevens.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="medicatievoorschrift_met_references" directory-id="mvr">
+                <copy-data directory-id="mvr-instance">
+                    <include glob="mp-vo*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*verzoek_uitvoeren_voorschrift.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="medicatieoverzicht_met_references" directory-id="mor">
+                <copy-data directory-id="mor-instance">
+                    <include glob="mp-mo*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*sturen_medicatieoverzicht.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="afhandelen_medicatievoorschrift_met_references" directory-id="var">
+                <copy-data directory-id="var-instance">
+                    <include glob="mp-va*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*opvragen_potentiele_contraindicaties.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_gebruik_met_references" directory-id="sgr">
+                <copy-data directory-id="sgr-instance">
+                    <include glob="mp-gb*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*meld_medicatieverstrekking.xsd"/>
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="xml-voorbeelden" directory-id="xmlv">
+                <copy-data directory-id="xmlv-instance">
+                    <include glob="*example*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*sturen_medicatievoorschrift.xsd"/>
+                    <include glob="*beschikbaarstellen_medicatiegegevens.xsd"/>
+                    <include glob="*beschikbaarstellen_medicatieoverzicht.xsd"/>
+                    <!-- <include glob="*${usecase.mgb}.xsd"/>
+                         Typo in Ant original code (property usecase.mgb does not exist). What was meant?   
+                    -->
+                    <include glob="*sturen_afhandeling_medicatievoorschrift.xsd"/>
+                    <include glob="*sturen_voorstel_medicatieafspraak.xsd"/>
+                    <include glob="*sturen_voorstel_verstrekkingsverzoek.xsd"/>
+                    <include glob="*sturen_antwoord_voorstel_verstrekkingsverzoek.xsd"/>
+                </copy-project-schemas>
+
+            </setup>
+
+            <setup usecase="raadplegen_medicatiegegevens" directory-id="mg.rp">
+                <empty-directory target-subdir="ada_instance_response" directory-id="mg.rp-instance-response"/>
+            </setup>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <build name="build-beschikbaarstellen_medicatiegegevens">
+                <stylesheet href="../xsl/mp/9.2.0beta/medicatiegegevens_met_references/mp920-medgegs-adarefs2ada.xsl"/>
+                <input-documents directory="@mgr-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mg-instance"/>
+                <parameter name="outputDirectoryRaadplegen" directory="@mg.rp-instance-response"/>
+            </build>
+
+            <!-- raadplegen_medicatiegegevens, the combined data, all building blocks in one ada file per patient -->
+            <build name="build-combine-raadplegen_medicatiegegevens">
+                <stylesheet href="../xsl/mp/9.2.0beta/medicatiegegevens_met_references/mp920-medgegs-combine-adarefs2ada.xsl"/>
+                <no-input/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mg.rp-instance-response"/>
+                <parameter name="inputDirectory" directory="@mgr-instance"/>
+            </build>
+
+            <build name="build-beschikbaarstellen_medicatieoverzicht">
+                <stylesheet href="../xsl/mp/9.2.0beta/medicatieoverzicht_met_references/mp920-mo-adarefs2ada.xsl"/>
+                <input-documents directory="@mor-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mo-instance"/>
+            </build>
+
+            <build name="build-sturen_medicatievoorschrift">
+                <stylesheet href="../xsl/mp/9.2.0beta/medicatievoorschrift_met_references/mp920-mv-adarefs2ada.xsl"/>
+                <input-documents directory="@mvr-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mv-instance"/>
+            </build>
+
+            <build name="build-afhandelen_medicatievoorschrift">
+                <stylesheet href="../xsl/mp/9.2.0beta/afhandelen_medicatievoorschrift_met_references/mp920-av-adarefs2ada.xsl"/>
+                <input-documents directory="@var-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@av-instance"/>
+            </build>
+
+            <build name="build-sturen_medicatiegebruik">
+                <stylesheet href="../xsl/mp/9.2.0beta/sturen_gebruik_met_references/mp920-sg-adarefs2ada.xsl"/>
+                <input-documents directory="@sgr-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@sg-instance"/>
+            </build>
+
+        </adarefs2ada>
+
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="mp" version="9.2.0" ada-application-name="mp-mp92" version-directory-production-ada-instances="9.2">
+
+        <!-- beschikbaarstellen_medicatiegegevens -->
+        <retrieval transaction="beschikbaarstellen_medicatiegegevens"/>
+        <!-- mg pull met references -->
+        <retrieval transaction="opleveren_potentiele_contraindicaties"/>
+        <!-- mg push/sturen met references -->
+        <retrieval transaction="raadplegen_medicatieoverzicht"/>
+        <!-- sturen_medicatievoorschrift, alleen arianne's testgevallen, normaal doen we dit via references -->
+        <retrieval transaction="sturen_medicatievoorschrift"/>
+        <!-- verzoek_uitvoeren_voorschrift medicatievoorschrift met references -->
+        <retrieval transaction="verzoek_uitvoeren_voorschrift"/>
+        <!-- beschikbaarstellen_medicatieoverzicht -->
+        <retrieval transaction="beschikbaarstellen_medicatieoverzicht"/>
+        <!-- beschikbaarstellen_medicatieoverzicht met references -->
+        <retrieval transaction="sturen_medicatieoverzicht"/>
+        <!-- afhandelen_medicatievoorschrift, alleen arianne's testgevallen, normaal doen we dit via references -->
+        <retrieval transaction="sturen_afhandeling_medicatievoorschrift"/>
+        <!-- afhandelen_medicatievoorschrift_met_references -->
+        <retrieval transaction="opvragen_potentiele_contraindicaties"/>
+        <!-- sturen_voorstel_medicatieafspraak -->
+        <retrieval transaction="sturen_voorstel_medicatieafspraak"/>
+        <!-- sturen_antwoord_voorstel_medicatieafspraak -->
+        <retrieval transaction="sturen_antwoord_voorstel_medicatieafspraak"/>
+        <!-- sturen_voorstel_verstrekkingsverzoek -->
+        <retrieval transaction="sturen_voorstel_verstrekkingsverzoek"/>
+        <!-- sturen_antwoord_voorstel_verstrekkingsverzoek -->
+        <retrieval transaction="sturen_antwoord_voorstel_verstrekkingsverzoek"/>
+
+        <adarefs2ada source-project-name="mp-mp92">
+
+            <setup usecase="beschikbaarstellen_medicatiegegevens" directory-id="mg">
+                <empty-directory target-subdir="ada_instance" directory-id="mg-instance"/>
+                <copy-data target-subdir="ada_instance_repo" directory-id="mg-instance-repo">
+                    <include glob="mg-*"/>
+                    <exclude glob="*example*"/>
+                </copy-data>
+                <copy-project-schemas directory-id="mg-schemas">
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_medicatievoorschrift" directory-id="mv">
+                <empty-directory target-subdir="ada_instance" directory-id="mv-instance"/>
+                <!-- No schema copy in original code… -->
+                <!--<copy-project-schemas directory-id="mv-schemas">
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>-->
+            </setup>
+
+            <setup usecase="sturen_medicatiegegevens" directory-id="mg.st">
+                <empty-directory target-subdir="ada_instance" directory-id="mg.st-instance"/>
+                <copy-project-schemas directory-id="mg.st-schemas">
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_afhandeling_medicatievoorschrift" directory-id="av">
+                <empty-directory target-subdir="ada_instance" directory-id="av-instance"/>
+                <copy-project-schemas>
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <!-- voorstel transacties, we don't have corresponding reference transactions (yet) -->
+            <setup usecase="sturen_voorstel_medicatieafspraak" directory-id="vma">
+                <copy-data directory-id="vma-instance">
+                    <include glob="mp-vm*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_antwoord_voorstel_medicatieafspraak" directory-id="avma">
+                <copy-data directory-id="avma-instance">
+                    <include glob="mp-am*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_voorstel_verstrekkingsverzoek" directory-id="vvv">
+                <copy-data directory-id="vvv-instance">
+                    <include glob="mp-vv*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_antwoord_voorstel_verstrekkingsverzoek" directory-id="avvv">
+                <copy-data directory-id="avvv-instance">
+                    <include glob="mp-av*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <!-- now the references stuff, the reference ada instances from which to create the full ada instances 
+                 using the repo ada instances -->
+            <setup usecase="medicatiegegevens_met_references" directory-id="mgr">
+                <copy-data directory-id="mgr-instance">
+                    <include glob="mp-mg*.xml"/>
+                </copy-data>
+                <copy-project-schemas directory-id="mgr-schemas">
+                    <include glob="*opleveren_potentiele_contraindicaties.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="medicatiegegevens_met_references_PUSH" directory-id="mgsr">
+                <copy-data directory-id="mgsr-instance">
+                    <include glob="mp-smg*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*raadplegen_medicatieoverzicht.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="medicatievoorschrift_met_references" directory-id="mvr">
+                <copy-data directory-id="mvr-instance">
+                    <include glob="mp-vo*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*verzoek_uitvoeren_voorschrift.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="afhandelen_medicatievoorschrift_met_references" directory-id="var">
+                <copy-data directory-id="var-instance">
+                    <include glob="mp-va*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*opvragen_potentiele_contraindicaties.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="raadplegen_medicatiegegevens" directory-id="mg.rp">
+                <empty-directory target-subdir="ada_instance_response" directory-id="mg.rp-instance-response"/>
+            </setup>
+
+            <!-- Examples: -->
+            <setup usecase="xml-voorbeelden" directory-id="xmlv">
+                <copy-data directory-id="xmlv-instance">
+                    <include glob="*example*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*sturen_medicatievoorschrift.xsd"/>
+                    <include glob="*beschikbaarstellen_medicatiegegevens.xsd"/>
+                    <include glob="*sturen_afhandeling_medicatievoorschrift.xsd"/>
+                    <include glob="*sturen_voorstel_medicatieafspraak.xsd"/>
+                    <include glob="*sturen_antwoord_voorstel_medicatieafspraak.xsd"/>
+                    <include glob="*sturen_voorstel_verstrekkingsverzoek.xsd"/>
+                    <include glob="*sturen_antwoord_voorstel_verstrekkingsverzoek.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <build name="build-medicatiegegevens_met_references">
+                <stylesheet href="../xsl/mp/9.2.0/medicatiegegevens_met_references/mp920-medgegs-adarefs2ada.xsl"/>
+                <input-documents directory="@mgr-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mg-instance"/>
+                <parameter name="outputDirectoryRaadplegen" directory="@mg.rp-instance-response"/>
+            </build>
+
+            <!-- add concept id's -->
+            <build-overwrite name="add-concept-ids-beschikbaarstellen_medicatiegegevens" fast="true">
+                <stylesheet href="../../../YATC-shared/xsl/ada/AddConceptIds.xsl"/>
+                <input-documents directory="@mg-instance"/>
+                <parameter name="schemaFileString" directory="@mg-schemas" value="beschikbaarstellen_medicatiegegevens.xsd"/>
+            </build-overwrite>
+            <build-overwrite name="add-concept-ids-raadplegen_medicatiegegevens" fast="true">
+                <stylesheet href="../../../YATC-shared/xsl/ada/AddConceptIds.xsl"/>
+                <input-documents directory="@mg.rp-instance-response"/>
+                <parameter name="schemaFileString" directory="@mg-schemas" value="beschikbaarstellen_medicatiegegevens.xsd"/>
+            </build-overwrite>
+
+            <!-- sturen_medicatiegegevens -->
+
+            <!-- resolve the refs -->
+            <build name="build-medicatiegegevens_met_references_PUSH">
+                <stylesheet href="../xsl/mp/9.2.0/medicatiegegevens_met_references_PUSH/mp920-medgegs-push-adarefs2ada.xsl"/>
+                <input-documents directory="@mgsr-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mg.st-instance"/>
+            </build>
+
+            <build name="build-sets-medicatiegegevens_met_references_PUSH">
+                <stylesheet href="../xsl/mp/9.2.0/medicatiegegevens_met_references_PUSH/mp920-medgegs-push-sets-adarefs2ada.xsl"/>
+                <input-documents directory="@mgsr-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mg.st-instance"/>
+            </build>
+
+            <!-- add concept id's -->
+            <build-overwrite name="add-concept-ids-sturen_medicatiegegevens" fast="true">
+                <stylesheet href="../../../YATC-shared/xsl/ada/AddConceptIds.xsl"/>
+                <input-documents directory="@mg.st-instance"/>
+                <!-- REMARK: The original code got its schema from HL7-mappings/ada_2_fhir-r4 through github (as we do below). 
+                     But that schema seems outdated... To get comparable results we have to use it anyway, unfortunately, and not
+                     the schema we copied in ourselves. 
+                -->
+                <!--<parameter name="schemaFileString" directory="@mg.st-schemas" value="sturen_medicatiegegevens.xsd"/>-->
+                <parameter name="schemaFileString" directory="https://raw.githubusercontent.com/Nictiz/HL7-mappings/master/ada_2_fhir-r4/mp/9.2.0/sturen_medicatiegegevens/ada_schemas" value="sturen_medicatiegegevens.xsd"/>
+            </build-overwrite>
+
+            <!-- raadplegen_medicatiegegevens, the combined data, all building blocks in one ada file per patient -->
+            <build name="build-raadplegen_medicatiegegevens" fast="true">
+                <stylesheet href="../xsl/mp/9.2.0/medicatiegegevens_met_references/mp920-medgegs-combine-adarefs2ada.xsl"/>
+                <no-input/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mg.rp-instance-response"/>
+                <parameter name="inputDirectory" directory="@mgr-instance"/>
+            </build>
+
+            <!-- add concept id's -->
+            <!-- REMARK: This was in the original code, but it will never do anything because the referenced schema does
+                 not exist...
+            -->
+            <!--<build-overwrite name="add-concept-ids-raadplegen_medicatiegegevens">
+                <stylesheet href="../../../YATC-shared/xsl/ada/AddConceptIds.xsl"/>
+                <input-documents directory="@mg.rp-instance-response"/>
+                <parameter name="schemaFileString" directory="@mgr-schemas" value="medicatiegegevens_met_references.xsd"/>
+            </build-overwrite>-->
+
+            <!-- sturen_medicatievoorschrift -->
+            <build name="build-sturen_medicatievoorschrift">
+                <stylesheet href="../xsl/mp/9.2.0/medicatievoorschrift_met_references/mp920-mv-adarefs2ada.xsl"/>
+                <input-documents directory="@mvr-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mv-instance"/>
+            </build>
+
+            <!-- afhandelen_medicatievoorschrift -->
+            <build name="build-afhandelen_medicatievoorschrift">
+                <stylesheet href="../xsl/mp/9.2.0/afhandelen_medicatievoorschrift_met_references/mp920-av-adarefs2ada.xsl"/>
+                <input-documents directory="@var-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@av-instance"/>
+            </build>
+
+        </adarefs2ada>
+
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="mp" version="9.3.0" ada-application-name="mp-mp93" version-directory-production-ada-instances="9.3">
+
+        <!-- beschikbaarstellen_medicatiegegevens  (mg) -->
+        <retrieval transaction="beschikbaarstellen_medicatiegegevens"/>
+        <!-- raadplegen_medicatiegegevens  (rmg) -->
+        <retrieval transaction="raadplegen_medicatiegegevens"/>
+        <!-- mg pull met references -->
+        <retrieval transaction="opleveren_potentiele_contraindicaties"/>
+        <!-- mg push/sturen met references -->
+        <retrieval transaction="raadplegen_medicatieoverzicht"/>
+        <!-- sturen_medicatievoorschrift, alleen arianne's testgevallen, normaal doen we dit via references -->
+        <retrieval transaction="sturen_medicatievoorschrift"/>
+        <!-- verzoek_uitvoeren_voorschrift medicatievoorschrift met references -->
+        <retrieval transaction="verzoek_uitvoeren_voorschrift"/>
+        <!-- beschikbaarstellen_medicatieoverzicht met references -->
+        <retrieval transaction="sturen_medicatieoverzicht"/>
+        <!-- afhandelen_medicatievoorschrift, alleen arianne's testgevallen, normaal doen we dit via references -->
+        <retrieval transaction="sturen_afhandeling_medicatievoorschrift"/>
+        <!-- afhandelen_medicatievoorschrift_met_references -->
+        <retrieval transaction="opvragen_potentiele_contraindicaties"/>
+        <!-- sturen_voorstel_medicatieafspraak -->
+        <retrieval transaction="sturen_voorstel_medicatieafspraak"/>
+        <!-- sturen_antwoord_voorstel_medicatieafspraak -->
+        <retrieval transaction="sturen_antwoord_voorstel_medicatieafspraak"/>
+        <!-- sturen_voorstel_verstrekkingsverzoek -->
+        <retrieval transaction="sturen_voorstel_verstrekkingsverzoek"/>
+        <!-- sturen_antwoord_voorstel_verstrekkingsverzoek -->
+        <retrieval transaction="sturen_antwoord_voorstel_verstrekkingsverzoek"/>
+
+        <adarefs2ada source-project-name="mp-mp93">
+
+            <setup usecase="beschikbaarstellen_medicatiegegevens" directory-id="mg">
+                <empty-directory target-subdir="ada_instance" directory-id="mg-instance"/>
+                <copy-data target-subdir="ada_instance_repo" directory-id="mg-instance-repo">
+                    <include glob="mg-*"/>
+                    <exclude glob="*example*"/>
+                </copy-data>
+                <copy-project-schemas directory-id="mg-schemas">
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="raadplegen_medicatiegegevens" directory-id="rmg">
+                <copy-data target-subdir="ada_instance" directory-id="rmg-instance">
+                    <include glob="mp-rmg-*"/>
+                </copy-data>
+                <copy-project-schemas directory-id="rmg-schemas">
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_medicatiegegevens" directory-id="mg.st">
+                <empty-directory target-subdir="ada_instance" directory-id="mg.st-instance"/>
+                <copy-project-schemas directory-id="mg.st-schemas">
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_medicatievoorschrift" directory-id="mv">
+                <empty-directory target-subdir="ada_instance" directory-id="mv-instance"/>
+                <copy-project-schemas directory-id="mv-schemas">
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_afhandeling_medicatievoorschrift" directory-id="av">
+                <empty-directory target-subdir="ada_instance" directory-id="av-instance"/>
+                <copy-project-schemas directory-id="av-schemas">
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <!-- voorstel transacties, we don't have corresponding reference transactions (yet) -->
+            <setup usecase="sturen_voorstel_medicatieafspraak" directory-id="vma">
+                <copy-data directory-id="vma-instance">
+                    <include glob="mp-vm*.xml"/>
+                </copy-data>
+                <copy-project-schemas directory-id="vma-schemas">
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_antwoord_voorstel_medicatieafspraak" directory-id="avma">
+                <copy-data directory-id="avma-instance">
+                    <include glob="mp-am*.xml"/>
+                </copy-data>
+                <copy-project-schemas directory-id="avma-schemas">
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_voorstel_verstrekkingsverzoek" directory-id="vvv">
+                <copy-data directory-id="vvv-instance">
+                    <include glob="mp-vv*.xml"/>
+                </copy-data>
+                <copy-project-schemas directory-id="vvv-schemas">
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="sturen_antwoord_voorstel_verstrekkingsverzoek" directory-id="avvv">
+                <copy-data directory-id="avvv-instance">
+                    <include glob="mp-av*.xml"/>
+                </copy-data>
+                <copy-project-schemas directory-id="avvv-schemas">
+                    <include glob="*$USECASE.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <!-- now the references stuff, the reference ada instances from which to create the full ada instances 
+                 using the repo ada instances -->
+            <setup usecase="medicatiegegevens_met_references" directory-id="mgr">
+                <copy-data directory-id="mgr-instance">
+                    <include glob="mp-mg*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*opleveren_potentiele_contraindicaties.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <setup usecase="medicatiegegevens_met_references_PUSH" directory-id="mgsr">
+                <copy-data directory-id="mgsr-instance">
+                    <include glob="mp-smg*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*raadplegen_medicatieoverzicht.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <!-- medicatievoorschrift_met_references -->
+            <setup usecase="medicatievoorschrift_met_references" directory-id="mvr">
+                <copy-data directory-id="mvr-instance">
+                    <include glob="mp-vo*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*verzoek_uitvoeren_voorschrift.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <!-- afhandelen_medicatievoorschrift_met_references -->
+            <setup usecase="afhandelen_medicatievoorschrift_met_references" directory-id="var">
+                <copy-data directory-id="var-instance">
+                    <include glob="mp-va*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*opvragen_potentiele_contraindicaties.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <!-- Finally, examples -->
+            <setup usecase="xml-voorbeelden" directory-id="xmlv">
+                <copy-data directory-id="xmlv-instance">
+                    <include glob="*example*.xml"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include glob="*sturen_medicatievoorschrift.xsd"/>
+                    <include glob="*beschikbaarstellen_medicatiegegevens.xsd"/>
+                    <include glob="*sturen_afhandeling_medicatievoorschrift.xsd"/>
+                    <include glob="*sturen_voorstel_medicatieafspraak.xsd"/>
+                    <include glob="*sturen_antwoord_voorstel_medicatieafspraak.xsd"/>
+                    <include glob="*sturen_voorstel_verstrekkingsverzoek.xsd"/>
+                    <include glob="*sturen_antwoord_voorstel_verstrekkingsverzoek.xsd"/>
+                </copy-project-schemas>
+            </setup>
+
+            <!-- Some others: -->
+            <setup usecase="raadplegen_medicatiegegevens" directory-id="mg.rp">
+                <empty-directory target-subdir="ada_instance_response" directory-id="mg.rp-instance-response"/>
+            </setup>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+            <!-- The following builds (all adding concept ids) were, in the original code, part of the setup process: -->
+
+            <build-overwrite name="add-concept-ids-sturen_voorstel_medicatieafspraak" fast="true">
+                <stylesheet href="../../../YATC-shared/xsl/ada/AddConceptIds.xsl"/>
+                <input-documents directory="@vma-instance"/>
+                <parameter name="schemaFileString" directory="@vma-schemas" value="sturen_voorstel_medicatieafspraak.xsd"/>
+            </build-overwrite>
+
+            <build-overwrite name="add-concept-ids-sturen_antwoord_voorstel_medicatieafspraak" fast="true">
+                <stylesheet href="../../../YATC-shared/xsl/ada/AddConceptIds.xsl"/>
+                <input-documents directory="@avma-instance"/>
+                <parameter name="schemaFileString" directory="@avma-schemas" value="sturen_antwoord_voorstel_medicatieafspraak.xsd"/>
+            </build-overwrite>
+
+            <build-overwrite name="add-concept-ids-sturen_antwoord_voorstel_verstrekkingsverzoek" fast="true">
+                <stylesheet href="../../../YATC-shared/xsl/ada/AddConceptIds.xsl"/>
+                <input-documents directory="@vvv-instance"/>
+                <parameter name="schemaFileString" directory="@vvv-schemas" value="sturen_voorstel_verstrekkingsverzoek.xsd"/>
+            </build-overwrite>
+
+            <build-overwrite name="add-concept-ids-sturen_antwoord_voorstel_verstrekkingsverzoek" fast="true">
+                <stylesheet href="../../../YATC-shared/xsl/ada/AddConceptIds.xsl"/>
+                <input-documents directory="@avvv-instance"/>
+                <parameter name="schemaFileString" directory="@avvv-schemas" value="sturen_antwoord_voorstel_verstrekkingsverzoek.xsd"/>
+            </build-overwrite>
+
+            <!-- resolve external ada references in repo instances -->
+            <build-overwrite name="resolve-external-ada-references-in-repo" fast="true">
+                <stylesheet href="../xsl/mp/ResolveExtAdaRefs_MP.xsl"/>
+                <input-documents directory="@mg-instance-repo"/>
+                <parameter name="repoSetDir" directory="@mg-instance-repo"/>
+            </build-overwrite>
+
+            <!-- resolve external ada references in voorstel instances -->
+            <build-overwrite name="resolve-external-ada-references-in-repo" fast="true">
+                <stylesheet href="../xsl/mp/ResolveExtAdaRefs_MP.xsl"/>
+                <input-documents directory="@vma-instance"/>
+                <parameter name="repoSetDir" directory="@mg-instance-repo"/>
+            </build-overwrite>
+            <build-overwrite name="resolve-external-ada-references-in-repo" fast="true">
+                <stylesheet href="../xsl/mp/ResolveExtAdaRefs_MP.xsl"/>
+                <input-documents directory="@avma-instance"/>
+                <parameter name="repoSetDir" directory="@mg-instance-repo"/>
+            </build-overwrite>
+            <build-overwrite name="resolve-external-ada-references-in-repo" fast="true">
+                <stylesheet href="../xsl/mp/ResolveExtAdaRefs_MP.xsl"/>
+                <input-documents directory="@vvv-instance"/>
+                <parameter name="repoSetDir" directory="@mg-instance-repo"/>
+            </build-overwrite>
+            <build-overwrite name="resolve-external-ada-references-in-repo" fast="true">
+                <stylesheet href="../xsl/mp/ResolveExtAdaRefs_MP.xsl"/>
+                <input-documents directory="@avvv-instance"/>
+                <parameter name="repoSetDir" directory="@mg-instance-repo"/>
+            </build-overwrite>
+            
+            <!-- resolve external ada references in example instances -->
+            <build-overwrite name="resolve-external-ada-references-in-repo" fast="true">
+                <stylesheet href="../xsl/mp/ResolveExtAdaRefs_MP.xsl"/>
+                <input-documents directory="@xmlv-instance"/>
+                <parameter name="repoSetDir" directory="@mg-instance-repo"/>
+            </build-overwrite>
+            
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+            <!-- Other build stuff: -->
+
+            <!-- beschikbaarstellen_medicatiegegevens, raadplegen_medicatiegegevens -->
+            <build name="build-beschikbaarstellen_medicatiegegevens">
+                <stylesheet href="../xsl/mp/9.3.0/medicatiegegevens_met_references/mp930-medgegs-adarefs2ada.xsl"/>
+                <input-documents directory="@mgr-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mg-instance"/>
+                <parameter name="outputDirectoryRaadplegen" directory="@mg.rp-instance-response"/>
+            </build>
+
+            <!-- add concept id's -->
+            <build-overwrite name="add-concept-ids-beschikbaarstellen_medicatiegegevens" fast="true">
+                <stylesheet href="../../../YATC-shared/xsl/ada/AddConceptIds.xsl"/>
+                <input-documents directory="@mg-instance"/>
+                <parameter name="schemaFileString" directory="@mg-schemas" value="beschikbaarstellen_medicatiegegevens.xsd"/>
+            </build-overwrite>
+
+            <build-overwrite name="add-concept-ids-raadplegen_medicatiegegevens" fast="true">
+                <stylesheet href="../../../YATC-shared/xsl/ada/AddConceptIds.xsl"/>
+                <input-documents directory="@mg.rp-instance-response"/>
+                <parameter name="schemaFileString" directory="@mg-schemas" value="beschikbaarstellen_medicatiegegevens.xsd"/>
+            </build-overwrite>
+
+            <!-- sturen_medicatiegegevens -->
+            <build name="build-sturen_medicatiegegevens">
+                <stylesheet href="../xsl/mp/9.3.0/medicatiegegevens_met_references_PUSH/mp930-medgegs-push-adarefs2ada.xsl"/>
+                <input-documents directory="@mgsr-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mg.st-instance"/>
+            </build>
+
+            <build name="build-sturen_medicatiegegevens-sets">
+                <stylesheet href="../xsl/mp/9.3.0/medicatiegegevens_met_references_PUSH/mp930-medgegs-push-sets-adarefs2ada.xsl"/>
+                <input-documents directory="@mgsr-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mg.st-instance"/>
+            </build>
+
+            <build-overwrite name="add-concept-ids-sturen_medicatiegegevens" fast="true">
+                <stylesheet href="../../../YATC-shared/xsl/ada/AddConceptIds.xsl"/>
+                <input-documents directory="@mg.st-instance"/>
+                <parameter name="schemaFileString" directory="@mg.st-schemas" value="sturen_medicatiegegevens.xsd"/>
+            </build-overwrite>
+
+            <!-- raadplegen_medicatiegegevens, the combined data, all building blocks in one ada file per patient -->
+            <build name="build-medicatiegegevens_met_references" fast="true">
+                <stylesheet href="../xsl/mp/9.3.0/medicatiegegevens_met_references/mp930-medgegs-combine-adarefs2ada.xsl"/>
+                <no-input/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mg.rp-instance-response"/>
+                <parameter name="inputDirectory" directory="@mgr-instance"/>
+            </build>
+
+            <build-overwrite name="add-concept-ids-sturen_medicatiegegevens" fast="true">
+                <stylesheet href="../../../YATC-shared/xsl/ada/AddConceptIds.xsl"/>
+                <input-documents directory="@mg.rp-instance-response"/>
+                <parameter name="schemaFileString" directory="@mg-schemas" value="beschikbaarstellen_medicatiegegevens.xsd"/>
+            </build-overwrite>
+
+            <!-- sturen_medicatievoorschrift -->
+            <build name="build-sturen_medicatievoorschrift">
+                <stylesheet href="../xsl/mp/9.3.0/medicatievoorschrift_met_references/mp930-mv-adarefs2ada.xsl"/>
+                <input-documents directory="@mvr-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@mv-instance"/>
+            </build>
+
+            <build-overwrite name="add-concept-ids-sturen_medicatievoorschrift" fast="true">
+                <stylesheet href="../../../YATC-shared/xsl/ada/AddConceptIds.xsl"/>
+                <input-documents directory="@mv-instance"/>
+                <parameter name="schemaFileString" directory="@mv-schemas" value="sturen_medicatievoorschrift.xsd"/>
+            </build-overwrite>
+
+            <!-- afhandelen_medicatievoorschrift -->
+            <build name="build-sturen_afhandeling_medicatievoorschrift">
+                <stylesheet href="../xsl/mp/9.3.0/afhandelen_medicatievoorschrift_met_references/mp930-av-adarefs2ada.xsl"/>
+                <input-documents directory="@var-instance"/>
+                <ada-working-set directory="@mg-instance-repo"/>
+                <output directory="@av-instance"/>
+            </build>
+
+            <build-overwrite name="add-concept-ids-sturen_afhandeling_medicatievoorschrift" fast="true">
+                <stylesheet href="../../../YATC-shared/xsl/ada/AddConceptIds.xsl"/>
+                <input-documents directory="@av-instance"/>
+                <parameter name="schemaFileString" directory="@av-schemas" value="sturen_afhandeling_medicatievoorschrift.xsd"/>
+            </build-overwrite>
+
+        </adarefs2ada>
+    </application>
+
+    <!-- ======================================================================= -->
+    <!-- peri -->
+
+    <retrieval-set-definition id="peri-generic">
+        <retrieval transaction="kernset_geboortezorg" contains="scenario"/>
+    </retrieval-set-definition>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="peri" version="2.3" ada-application-name="perinatologie-234">
+        <retrieval-set idref="peri-generic"/>
+
+        <adarefs2ada source-project-name="perinatologie-234">
+            <setup usecase="kernset_geboortezorg">
+                <copy-data>
+                    <include pattern="^scenario.*23.*\.xml$"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="$USECASE\.xsd$"/>
+                </copy-project-schemas>
+            </setup>
+        </adarefs2ada>
+
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="peri" version="2.3.5" ada-application-name="perinatologie-235">
+        <retrieval-set idref="peri-generic"/>
+
+        <adarefs2ada source-project-name="perinatologie-235">
+            <setup usecase="kernset_geboortezorg">
+                <copy-data>
+                    <include pattern="^scenario.*23.*\.xml$"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="$USECASE\.xsd$"/>
+                </copy-project-schemas>
+            </setup>
+        </adarefs2ada>
+
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="peri" version="2.3.6" ada-application-name="perinatologie-236">
+        <retrieval transaction="kernset_geboortezorg"/>
+
+        <adarefs2ada source-project-name="perinatologie-236">
+            <setup usecase="kernset_geboortezorg">
+                <copy-data>
+                    <include pattern="^scenario.*23.*\.xml$"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="$USECASE\.xsd$"/>
+                </copy-project-schemas>
+            </setup>
+        </adarefs2ada>
+
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="peri" version="3.0" ada-application-name="perinatologie">
+        <retrieval transaction="kernset_neonatologie" contains="ksneo"/>
+    </application>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <application name="peri" version="3.2" ada-application-name="perinatologie-32">
+        <retrieval transaction="med_mij_01_beschikbaarstellen_integrale_zwangerschapskaart"/>
+
+        <adarefs2ada source-project-name="perinatologie-32">
+            <setup usecase="med_mij_01_beschikbaarstellen_integrale_zwangerschapskaart">
+                <copy-data>
+                    <include pattern="^gz-izb.*\.xml$"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="$USECASE\.xsd$"/>
+                </copy-project-schemas>
+            </setup>
+        </adarefs2ada>
+
+    </application>
+    
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    
+    <application name="peri" version="3.2.6" ada-application-name="perinatologie-326">
+        <retrieval transaction="med_mij_01_beschikbaarstellen_integrale_zwangerschapskaart"/>
+        <retrieval transaction="med_mij_kraam_beschikbaarstellen"/>
+        <retrieval transaction="med_mij_echo_beschikbaarstellen"/>
+        <retrieval transaction="med_mij_uitbreiding_verloskunde_beschikbaarstellen"/>
+        
+        <adarefs2ada source-project-name="perinatologie-326">
+            <setup usecase="med_mij_01_beschikbaarstellen_integrale_zwangerschapskaart">
+                <copy-data>
+                    <include pattern="^gz-izb.*\.xml$"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="$USECASE\.xsd$"/>
+                </copy-project-schemas>
+            </setup>
+            <setup usecase="med_mij_kraam_beschikbaarstellen">
+                <copy-data>
+                    <include pattern="^gz-izk.*\.xml$"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="$USECASE\.xsd$"/>
+                </copy-project-schemas>
+            </setup>
+            <setup usecase="med_mij_echo_beschikbaarstellen">
+                <copy-data>
+                    <include pattern="^gz-ize.*\.xml$"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="$USECASE\.xsd$"/>
+                </copy-project-schemas>
+            </setup>
+            <setup usecase="med_mij_uitbreiding_verloskunde_beschikbaarstellen">
+                <copy-data>
+                    <include pattern="^gz-izv.*\.xml$"/>
+                </copy-data>
+                <copy-project-schemas>
+                    <include pattern="$USECASE\.xsd$"/>
+                </copy-project-schemas>
+            </setup>
+        </adarefs2ada>
+        
+    </application>
+
+    <!-- ======================================================================= -->
+    <!-- snictiz -->
+
+    <application name="snictiz" version="Jacob">
+        <!-- Is this a valid entry anyway, given the version name...??? -->
+        <retrieval transaction="sturen_naamgegevens"/>
+    </application>
+
+</application-ada-retrieval-data>

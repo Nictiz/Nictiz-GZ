@@ -1,0 +1,867 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../../../YATC-shared/general-engine/sch/general-engine-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<application xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../../xsd/ada-2-hl7-data.xsd" name="mp" version="9.2.0" source-adarefs2ada="true" source-project-name="mp-mp92">
+    <!-- ======================================================================= -->
+    <!-- 
+        ada-2-hl7 application data for mp/9.2.0
+        
+        This is an include file for ../ada-2-hl7-data.xml
+        
+        IMPORTANT:
+        Schematron validation takes a lot of resources due to the size of the schemas/documents.
+        This means that the process often crashes halfway :(
+        Therefore the whole Schematron validation action is split in three parts.
+        To perform a full Schematron validation over all documents, you have to perform all three as
+        separate commands. Or use (at your own risk) schematron-validate-all.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+    <!-- AORTA REMARKS:
+        
+         This application uses Schemas and Schematrons that are stored in AORTA.
+         These schemas are imported and copied into the application's environment by 
+         the import-aorta-documents support tool.
+         
+         If anything needs to change:
+         
+         * Make sure you have AORTA checked out somewhere on your disk
+         * It turned out that sometimes the relevant files in AORTA are in a zip. Unzip these.
+         * Make sure the location of your AORTA checkout is registered as a YATC parameter (in {basedirectory}/data/parameters.xml):
+                <parameter name="AORTADirectory">
+                    <value>file:/C:/somewhere/AORTA</value>
+                </parameter>
+         * Edit the import specification in YATC-internal/ada-2-hl7/data/import-aorta-documents.xml
+           This is a fairly simple format and there's a schema for it in
+           YATC-shared/support/import-aorta-documents.xsd
+         * Open a command window in YATC-internal/ada-2-hl7/data/ and give the command:
+           yatc import-aorta-documents import-aorta-documents.xml
+         * This will analyze the documents to import and makes sure these files and all files 
+           it is dependent on (through includes/imports) are copied to YATC-internal/ada-2-hl7/env/AORTA/
+           The original AORTA directory structure is retained.
+    -->
+    <!-- ======================================================================= -->
+    <!-- Abbreviations used in mp (medicatieproces):
+        
+         mg     = beschikbaarstellen_medicatiegegevens
+         mg.st  = sturen_medicatiegegevens
+         mg.rp  = raadplegen_medicatiegegevens
+         mo     = beschikbaarstellen_medicatieoverzicht
+         mv     = sturen_medicatievoorschrift
+         mgb    = sturen_medicatiegebruik
+         av     = sturen_afhandeling_medicatievoorschrift
+         vma    = sturen_voorstel_medicatieafspraak
+         avma   = sturen_antwoord_voorstel_medicatieafspraak
+         vvv    = sturen_voorstel_verstrekkingsverzoek
+         avvv   = sturen_antwoord_voorstel_verstrekkingsverzoek
+         xmlv   = xml-voorbeelden
+         nt     = nictiz_test
+    -->
+    <!-- ======================================================================= -->
+
+    <macros>
+        <!-- Date used for conversions to HL7: -->
+        <macro name="DATET" value="2022-01-01"/>
+        <macro name="AORTABASEDIR" value="../../env/AORTA/branches/Onderhoud_Mp_v90/Publicaties/20220402/mp-xml-20220402T205710"/>
+        <macro name="SCHEMASDIR" value="$AORTABASEDIR/schemas_codeGen_flat"/>
+        <macro name="SCHEMATRONDIR" value="$AORTABASEDIR/schematron_closed_warnings"/>
+    </macros>
+
+    <!-- ======================================================================= -->
+    <!-- SETUP: -->
+
+    <message>=========================== {$yatcComponentName}/$BASEPATH</message>
+
+    <setup usecase="nictiz_test" directory-id="nt">
+        <copy-project-schemas>
+            <include glob="*sturen_medicatievoorschrift.xsd"/>
+        </copy-project-schemas>
+        <!-- Currently schemas only ?!? -->
+    </setup>
+
+    <setup usecase="beschikbaarstellen_medicatiegegevens" directory-id="mg">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+
+        <copy-data target-subdir="ada_instance_MA" directory-id="mg-ada-instance-ma">
+            <include glob="mg-*MA*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_MA" directory-id="mg-hl7-instance-ma"/>
+
+        <copy-data target-subdir="ada_instance_VV" directory-id="mg-ada-instance-vv">
+            <include glob="mg-*VV*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_VV" directory-id="mg-hl7-instance-vv"/>
+
+        <copy-data target-subdir="ada_instance_TA" directory-id="mg-ada-instance-ta">
+            <include glob="mg-*TA*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_TA" directory-id="mg-hl7-instance-ta"/>
+
+        <copy-data target-subdir="ada_instance_MVE" directory-id="mg-ada-instance-mve">
+            <include glob="mg-*MVE*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_MVE" directory-id="mg-hl7-instance-mve"/>
+
+        <copy-data target-subdir="ada_instance_MGB" directory-id="mg-ada-instance-mgb">
+            <include glob="mg-*MGB*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_MGB" directory-id="mg-hl7-instance-mgb"/>
+
+        <copy-data target-subdir="ada_instance_MTD" directory-id="mg-ada-instance-mtd">
+            <include glob="mg-*MTD*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_MTD" directory-id="mg-hl7-instance-mtd"/>
+
+        <copy-data target-subdir="ada_instance_WDS" directory-id="mg-ada-instance-wds">
+            <include glob="mg-*WDS*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_WDS" directory-id="mg-hl7-instance-wds"/>
+
+        <copy-data directory-id="mg-ada-instance">
+            <include glob="*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="mg-hl7-instance"/>
+
+        <copy-data target-subdir="ada_instance_repo" source-subdir="ada_instance_repo" directory-id="mg-ada-instance-repo">
+            <include glob="*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_repo" directory-id="mg-hl7-instance-repo"/>
+
+        <empty-directory target-subdir="validate_hl7_instance" directory-id="mg-reports" compare="false"/>
+    </setup>
+
+    <setup usecase="sturen_medicatievoorschrift" directory-id="mv">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="mv-ada-instance">
+            <include glob="*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="mv-hl7-instance"/>
+        <empty-directory target-subdir="cda_instance" directory-id="mv-cda-instance"/>
+        <empty-directory target-subdir="validate_hl7_instance" directory-id="mv-reports" compare="false"/>
+    </setup>
+
+    <setup usecase="sturen_afhandeling_medicatievoorschrift" directory-id="av">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="av-ada-instance">
+            <include glob="*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="av-hl7-instance"/>
+        <empty-directory target-subdir="validate_hl7_instance" directory-id="av-reports" compare="false"/>
+    </setup>
+
+    <setup usecase="sturen_voorstel_medicatieafspraak" directory-id="vma">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="vma-ada-instance">
+            <include glob="*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="vma-hl7-instance"/>
+        <empty-directory target-subdir="validate_hl7_instance" directory-id="vma-reports" compare="false"/>
+    </setup>
+
+    <setup usecase="sturen_antwoord_voorstel_medicatieafspraak" directory-id="avma">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="avma-ada-instance">
+            <include glob="*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="avma-hl7-instance"/>
+        <empty-directory target-subdir="validate_hl7_instance" directory-id="avma-reports" compare="false"/>
+    </setup>
+
+    <setup usecase="sturen_voorstel_verstrekkingsverzoek" directory-id="vvv">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="vvv-ada-instance">
+            <include glob="*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="vvv-hl7-instance"/>
+        <empty-directory target-subdir="validate_hl7_instance" directory-id="vvv-reports" compare="false"/>
+    </setup>
+
+    <setup usecase="sturen_antwoord_voorstel_verstrekkingsverzoek" directory-id="avvv">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="avvv-ada-instance">
+            <include glob="*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="avvv-hl7-instance"/>
+        <empty-directory target-subdir="validate_hl7_instance" directory-id="avvv-reports" compare="false"/>
+    </setup>
+
+    <setup usecase="beschikbaarstellen_medicatieoverzicht" directory-id="mo">
+        <!-- There seems to be something wrong with beschikbaarstellen_medicatieoverzicht in mp/9.2.0: 
+              * The original Ant setup script in ada_2_hl7/mp/9.2.0 uses documents from adarefs2ada 
+                mp/9.2.0/beschikbaarstellen_medicatieoverzicht/ada_instances
+              * However, the processing in adarefs2ada/mp/9.2.0 does not produce these documents (not in the 
+                original Ant code and therefore also not in the YATC implementation). 
+              This could never have worked, no idea what's going on. Because of all of this, the <copy-data> below is 
+              commented-out. If somebody ever fixes the adarefs2ada mp/9.2.0/beschikbaarstellen_medicatieoverzicht/ada_instances,
+              you can simply uncomment it. The build step (called "convert-beschikbaarstellen_medicatieoverzicht-ada-2-hl7")
+              is there (but doesn't do anything of course).
+        -->
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <!-- See comment above!
+        <copy-data directory-id="mo-ada-instance">
+            <include glob="*.xml"/>
+        </copy-data>
+        -->
+        <empty-directory target-subdir="hl7_instance" directory-id="mo-hl7-instance" compare="false"/>
+        <empty-directory target-subdir="validate_hl7_instance" directory-id="mo-reports" compare="false"/>
+    </setup>
+
+    <setup usecase="xml-voorbeelden" directory-id="xmlv">
+        <copy-project-schemas>
+            <include glob="*sturen_medicatievoorschrift.xsd"/>
+            <include glob="*beschikbaarstellen_medicatiegegevens.xsd"/>
+            <include glob="*beschikbaarstellen_medicatieoverzicht.xsd"/>
+            <include glob="*sturen_afhandeling_medicatievoorschrift.xsd"/>
+            <include glob="*sturen_voorstel_medicatieafspraak.xsd"/>
+            <include glob="*sturen_voorstel_verstrekkingsverzoek.xsd"/>
+            <include glob="*sturen_antwoord_voorstel_verstrekkingsverzoek.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="xmlv-ada-instance">
+            <include glob="*example*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="xmlv-hl7-instance"/>
+        <empty-directory target-subdir="cda_instance" directory-id="xmlv-cda-instance"/>
+        <empty-directory target-subdir="validate_hl7_instance" directory-id="xmlv-reports" compare="false"/>
+    </setup>
+
+    <empty-root-directory target-subdir="validate" compare="false" directory-id="validation-results"/>
+
+    <!-- ======================================================================= -->
+    <!-- BUILD: -->
+
+    <action name="build" description="Build the ada-2-hl7 documents" default="true">
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- beschikbaarstellen_medicatiegegevens -->
+
+        <build fast="true" name="convert-beschikbaarstellen_medicatiegegevens-ada-2-hl7-ma">
+            <stylesheet href="../../env/mp/9.2.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_org.xsl"/>
+            <input-documents directory="@mg-ada-instance-ma"/>
+            <output-documents directory="@mg-hl7-instance-ma"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+        <build fast="true" name="convert-beschikbaarstellen_medicatiegegevens-ada-2-hl7-vv">
+            <stylesheet href="../../env/mp/9.2.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_org.xsl"/>
+            <input-documents directory="@mg-ada-instance-vv"/>
+            <output-documents directory="@mg-hl7-instance-vv"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+        <build fast="true" name="convert-beschikbaarstellen_medicatiegegevens-ada-2-hl7-ta">
+            <stylesheet href="../../env/mp/9.2.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_org.xsl"/>
+            <input-documents directory="@mg-ada-instance-ta"/>
+            <output-documents directory="@mg-hl7-instance-ta"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+        <build fast="true" name="convert-beschikbaarstellen_medicatiegegevens-ada-2-hl7-mve">
+            <stylesheet href="../../env/mp/9.2.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_org.xsl"/>
+            <input-documents directory="@mg-ada-instance-mve"/>
+            <output-documents directory="@mg-hl7-instance-mve"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+        <build fast="true" name="convert-beschikbaarstellen_medicatiegegevens-ada-2-hl7-mgb">
+            <stylesheet href="../../env/mp/9.2.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_org.xsl"/>
+            <input-documents directory="@mg-ada-instance-mgb"/>
+            <output-documents directory="@mg-hl7-instance-mgb"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+        <build fast="true" name="convert-beschikbaarstellen_medicatiegegevens-ada-2-hl7-mtd">
+            <stylesheet href="../../env/mp/9.2.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_org.xsl"/>
+            <input-documents directory="@mg-ada-instance-mtd"/>
+            <output-documents directory="@mg-hl7-instance-mtd"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+        <build fast="true" name="convert-beschikbaarstellen_medicatiegegevens-ada-2-hl7-wds">
+            <stylesheet href="../../env/mp/9.2.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_org.xsl"/>
+            <input-documents directory="@mg-ada-instance-wds"/>
+            <output-documents directory="@mg-hl7-instance-wds"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+        <build fast="true" name="convert-beschikbaarstellen_medicatiegegevens-ada-2-hl7">
+            <stylesheet href="../../env/mp/9.2.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_org.xsl"/>
+            <input-documents directory="@mg-ada-instance"/>
+            <output-documents directory="@mg-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+        <build fast="true" name="convert-beschikbaarstellen_medicatiegegevens-ada-2-hl7-repo">
+            <stylesheet href="../../env/mp/9.2.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_org.xsl"/>
+            <input-documents directory="@mg-ada-instance-repo"/>
+            <output-documents directory="@mg-hl7-instance-repo"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- sturen_medicatievoorschrift -->
+
+        <build fast="true" name="convert-sturen_medicatievoorschrift-ada-2-hl7">
+            <stylesheet href="../../env/mp/9.2.0/sturen_medicatievoorschrift/payload/sturen_medicatievoorschrift_org.xsl"/>
+            <input-documents directory="@mv-ada-instance"/>
+            <output-documents directory="@mv-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+        <build fast="true" name="convert-sturen_medicatievoorschrift-ada-2-hl7-cda">
+            <stylesheet href="../../env/mp/MP9_Transform_Organizer2CDA.xsl"/>
+            <input-documents directory="@mv-hl7-instance"/>
+            <output-documents directory="@mv-cda-instance"/>
+        </build>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- sturen_afhandeling_medicatievoorschrift -->
+
+        <build fast="true" name="convert-sturen_afhandeling_medicatievoorschrift-ada-2-hl7">
+            <stylesheet href="../../env/mp/9.2.0/sturen_afhandeling_medicatievoorschrift/payload/sturen_afhandeling_medicatievoorschrift_org.xsl"/>
+            <input-documents directory="@av-ada-instance"/>
+            <output-documents directory="@av-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- beschikbaarstellen_medicatieoverzicht -->
+
+        <!-- See comment for the setup of beschikbaarstellen_medicatieoverzicht above. -->
+        <!--<build fast="true" name="convert-beschikbaarstellen_medicatieoverzicht-ada-2-hl7">
+            <stylesheet href="../../env/mp/9.2.0/beschikbaarstellen_medicatieoverzicht/payload/beschikbaarstellen_medicatieoverzicht_org.xsl"/>
+            <input-documents directory="@mo-ada-instance"/>
+            <output-documents directory="@mo-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>-->
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- sturen_voorstel_medicatieafspraak -->
+
+        <build fast="true" name="convert-sturen_voorstel_medicatieafspraak-ada-2-hl7">
+            <stylesheet href="../../env/mp/9.2.0/sturen_voorstel_medicatieafspraak/payload/sturen_voorstel_medicatieafspraak_org.xsl"/>
+            <input-documents directory="@vma-ada-instance"/>
+            <output-documents directory="@vma-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- sturen_antwoord_voorstel_medicatieafspraak -->
+
+        <build fast="true" name="convert-sturen_antwoord_voorstel_medicatieafspraak-ada-2-hl7">
+            <stylesheet href="../../env/mp/9.2.0/sturen_antwoord_voorstel_medicatieafspraak/payload/sturen_antwoord_voorstel_medicatieafspraak_org.xsl"/>
+            <input-documents directory="@avma-ada-instance"/>
+            <output-documents directory="@avma-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- sturen_voorstel_verstrekkingsverzoek -->
+
+        <build fast="true" name="convert-sturen_voorstel_verstrekkingsverzoek-ada-2-hl7">
+            <stylesheet href="../../env/mp/9.2.0/sturen_voorstel_verstrekkingsverzoek/payload/sturen_voorstel_verstrekkingsverzoek_org.xsl"/>
+            <input-documents directory="@vvv-ada-instance"/>
+            <output-documents directory="@vvv-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- sturen_antwoord_voorstel_verstrekkingsverzoek -->
+
+        <build fast="true" name="convert-sturen_antwoord_voorstel_verstrekkingsverzoek-ada-2-hl7">
+            <stylesheet href="../../env/mp/9.2.0/sturen_antwoord_voorstel_verstrekkingsverzoek/payload/sturen_antwoord_voorstel_verstrekkingsverzoek_org.xsl"/>
+            <input-documents directory="@avvv-ada-instance"/>
+            <output-documents directory="@avvv-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- xml-voorbeelden -->
+
+        <build fast="true" name="convert-xml-voorbeelden-ada-2-hl7-mv">
+            <stylesheet href="../../env/mp/9.2.0/sturen_medicatievoorschrift/payload/sturen_medicatievoorschrift_org.xsl"/>
+            <input-documents directory="@xmlv-ada-instance">
+                <include glob="mv*.xml"/>
+            </input-documents>
+            <output-documents directory="@xmlv-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+        <!-- The build for xml-voorbeelden/beschikbaarstellen_medicatiegegevens was commented out in the Ant original script.  -->
+        <!--<build fast="true" name="convert-xml-voorbeelden-ada-2-hl7-mg">
+            <stylesheet href="../../env/mp/9.2.0/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_org.xsl"/>
+            <input-documents directory="@xmlv-ada-instance">
+                <include glob="mg-*.xml"/>
+            </input-documents>
+            <output-documents directory="@xmlv-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>-->
+        <build fast="true" name="convert-xml-voorbeelden-ada-2-hl7-av">
+            <stylesheet href="../../env/mp/9.2.0/sturen_afhandeling_medicatievoorschrift/payload/sturen_afhandeling_medicatievoorschrift_org.xsl"/>
+            <input-documents directory="@xmlv-ada-instance">
+                <include glob="av*.xml"/>
+            </input-documents>
+            <output-documents directory="@xmlv-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+        <build fast="true" name="convert-xml-voorbeelden-ada-2-hl7-vma">
+            <stylesheet href="../../env/mp/9.2.0/sturen_voorstel_medicatieafspraak/payload/sturen_voorstel_medicatieafspraak_org.xsl"/>
+            <input-documents directory="@xmlv-ada-instance">
+                <include glob="vma*.xml"/>
+            </input-documents>
+            <output-documents directory="@xmlv-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+        <build fast="true" name="convert-xml-voorbeelden-ada-2-hl7-avma">
+            <stylesheet href="../../env/mp/9.2.0/sturen_antwoord_voorstel_medicatieafspraak/payload/sturen_antwoord_voorstel_medicatieafspraak_org.xsl"/>
+            <input-documents directory="@xmlv-ada-instance">
+                <include glob="avma*.xml"/>
+            </input-documents>
+            <output-documents directory="@xmlv-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+        <build fast="true" name="convert-xml-voorbeelden-ada-2-hl7-vvv">
+            <stylesheet href="../../env/mp/9.2.0/sturen_voorstel_verstrekkingsverzoek/payload/sturen_voorstel_verstrekkingsverzoek_org.xsl"/>
+            <input-documents directory="@xmlv-ada-instance">
+                <include glob="vvv*.xml"/>
+            </input-documents>
+            <output-documents directory="@xmlv-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+        <build fast="true" name="convert-xml-voorbeelden-ada-2-hl7-avvv">
+            <stylesheet href="../../env/mp/9.2.0/sturen_antwoord_voorstel_verstrekkingsverzoek/payload/sturen_antwoord_voorstel_verstrekkingsverzoek_org.xsl"/>
+            <input-documents directory="@xmlv-ada-instance">
+                <include glob="avvv*.xml"/>
+            </input-documents>
+            <output-documents directory="@xmlv-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+        </build>
+
+        <!-- To CDA: -->
+        <build fast="true" name="convert-xml-voorbeelden-ada-2-hl7-cda">
+            <stylesheet href="../../env/mp/MP9_Transform_Organizer2CDA.xsl"/>
+            <input-documents directory="@xmlv-hl7-instance"/>
+            <output-documents directory="@xmlv-cda-instance"/>
+        </build>
+
+        <!-- Add bouwstenen: -->
+        <!-- Remark: This was intentionally done *after* the CDA conversion, because we don't want the bouwstenen converted to CDA. -->
+        <build fast="true" name="convert-xml-voorbeelden-ada-2-hl7-bouwstenen">
+            <stylesheet href="../../env/mp/9.2.0/xml-voorbeelden/bouwstenen_transacties/bouwstenen_transacties_org.xsl"/>
+            <no-input/>
+            <discard-output/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="inputAdaFilesDir" directory="@xmlv-ada-instance"/>
+            <parameter name="outputDir" directory="@xmlv-hl7-instance"/>
+        </build>
+
+    </action>
+
+    <!-- ======================================================================= -->
+    <!-- SCHEMA VALIDATE: -->
+
+    <action name="schema-validate" description="Schema-validate (some of the) the HL7 results" setup="false">
+
+        <macros>
+            <macro name="HL7SCHEMA" value="$SCHEMASDIR/organizer.xsd"/>
+            <macro name="CDASCHEMA" value="$SCHEMASDIR/CDANL_extended.xsd"/>
+        </macros>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- HL7 instances: -->
+
+        <validate-with-schema name="schema-validate-hl7-beschikbaarstellen_medicatiegegevens">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@mg-hl7-instance"/>
+            <output-report directory="@mg-reports" name="schema-report-hl7-validate.xml"/>
+        </validate-with-schema>
+        <validate-with-schema name="schema-validate-hl7-beschikbaarstellen_medicatiegegevens">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@mg-hl7-instance-repo"/>
+            <output-report directory="@mg-reports" name="schema-report-hl7-repo-validate.xml"/>
+        </validate-with-schema>
+
+        <validate-with-schema name="schema-validate-hl7-sturen_medicatievoorschrift">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@mv-hl7-instance"/>
+            <output-report directory="@mv-reports" name="schema-report-hl7-validate.xml"/>
+        </validate-with-schema>
+
+        <validate-with-schema name="schema-validate-hl7-sturen_afhandeling_medicatievoorschrift">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@av-hl7-instance"/>
+            <output-report directory="@av-reports" name="schema-report-hl7-validate.xml"/>
+        </validate-with-schema>
+
+        <validate-with-schema name="schema-validate-hl7-sturen_voorstel_medicatieafspraak">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@vma-hl7-instance"/>
+            <output-report directory="@vma-reports" name="schema-report-hl7-validate.xml"/>
+        </validate-with-schema>
+
+        <validate-with-schema name="schema-validate-hl7-sturen_antwoord_voorstel_medicatieafspraak">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@avma-hl7-instance"/>
+            <output-report directory="@avma-reports" name="schema-report-hl7-validate.xml"/>
+        </validate-with-schema>
+
+        <validate-with-schema name="schema-validate-hl7-sturen_voorstel_verstrekkingsverzoekk">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@vvv-hl7-instance"/>
+            <output-report directory="@vvv-reports" name="schema-report-hl7-validate.xml"/>
+        </validate-with-schema>
+
+        <validate-with-schema name="schema-validate-hl7-sturen_antwoord_voorstel_verstrekkingsverzoekk">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@avvv-hl7-instance"/>
+            <output-report directory="@avvv-reports" name="schema-report-hl7-validate.xml"/>
+        </validate-with-schema>
+
+        <!--<validate-with-schema name="schema-validate-hl7-beschikbaarstellen_medicatieoverzicht">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@mo-hl7-instance"/>
+            <output-report directory="@mo-reports" name="schema-report-hl7-validate.xml"/>
+        </validate-with-schema>-->
+
+        <validate-with-schema name="schema-validate-hl7-xml-voorbeelden">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@xmlv-hl7-instance"/>
+            <output-report directory="@xmlv-reports" name="schema-report-hl7-validate.xml"/>
+        </validate-with-schema>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- CDA instances: -->
+
+        <validate-with-schema name="schema-validate-cda-sturen_medicatievoorschrift">
+            <schema href="$CDASCHEMA"/>
+            <input-documents directory="@mv-cda-instance"/>
+            <output-report directory="@mv-reports" name="schema-report-cda-validate.xml"/>
+        </validate-with-schema>
+        <validate-with-schema name="schema-validate-cda-xml-voorbeelden">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@xmlv-cda-instance"/>
+            <output-report directory="@xmlv-reports" name="schema-report-cda-validate.xml"/>
+        </validate-with-schema>
+
+    </action>
+
+    <!-- ======================================================================= -->
+    <!-- SCHEMATRON-VALIDATE: -->
+
+    <action name="schematron-validate" description="Schematron-validate the HL7 results" setup="false">
+
+        <validate-with-schematron name="schematron-validate-hl7-beschikbaarstellen_medicatiegegevens">
+            <schema href="$SCHEMATRONDIR/mp-mp92_mgb.sch"/>
+            <input-documents directory="@mg-hl7-instance-repo"/>
+            <output-report directory="@mg-reports" name="schematron-report-hl7-validate.xml"/>
+        </validate-with-schematron>
+
+        <!--<validate-with-schematron name="schematron-validate-hl7-beschikbaarstellen_medicatieoverzicht">
+            <schema href="$SCHEMATRONDIR/mp-mp92_mov.sch"/>
+            <input-documents directory="@mo-hl7-instance-repo"/>
+            <output-report directory="@mo-reports" name="schematron-report-hl7-validate.xml"/>
+        </validate-with-schematron>-->
+
+        <validate-with-schematron name="schematron-validate-hl7-sturen_afhandeling_medicatievoorschrift">
+            <schema href="$SCHEMATRONDIR/mp-mp92_av.sch"/>
+            <input-documents directory="@av-hl7-instance"/>
+            <output-report directory="@av-reports" name="schematron-report-hl7-validate.xml"/>
+        </validate-with-schematron>
+
+        <validate-with-schematron name="schematron-validate-hl7-sturen_antwoord_voorstel_verstrekkingsverzoek">
+            <schema href="$SCHEMATRONDIR/mp-mp92_avvv.sch"/>
+            <input-documents directory="@avvv-hl7-instance"/>
+            <output-report directory="@avvv-reports" name="schematron-report-hl7-validate.xml"/>
+        </validate-with-schematron>
+
+        <validate-with-schematron name="schematron-validate-hl7-sturen_medicatievoorschrift">
+            <schema href="$SCHEMATRONDIR/mp-mp92_vos.sch"/>
+            <input-documents directory="@mv-hl7-instance"/>
+            <output-report directory="@mv-reports" name="schematron-report-hl7-validate.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-cda-sturen_medicatievoorschrift">
+            <schema href="$SCHEMATRONDIR/mp-mp92_vos.sch"/>
+            <input-documents directory="@mv-cda-instance"/>
+            <output-report directory="@mv-reports" name="schematron-report-cda-validate.xml"/>
+        </validate-with-schematron>
+        
+        <validate-with-schematron name="schematron-validate-hl7-sturen_voorstel_medicatieafspraak">
+            <schema href="$SCHEMATRONDIR/mp-mp92_vma.sch"/>
+            <input-documents directory="@vma-hl7-instance"/>
+            <output-report directory="@vma-reports" name="schematron-report-hl7-validate.xml"/>
+        </validate-with-schematron>
+        
+        <validate-with-schematron name="schematron-validate-hl7-sturen_antwoord_voorstel_medicatieafspraak">
+            <schema href="$SCHEMATRONDIR/mp-mp92_avma.sch"/>
+            <input-documents directory="@avma-hl7-instance"/>
+            <output-report directory="@avma-reports" name="schematron-report-hl7-validate.xml"/>
+        </validate-with-schematron>
+        
+        <!--<validate-with-schematron name="schematron-validate-hl7-beschikbaarstellen_medicatieoverzicht">
+            <schema href="$SCHEMATRONDIR/mp-mp92_mob.sch"/>
+            <input-documents directory="@mo-hl7-instance"/>
+            <output-report directory="@mo-reports" name="schematron-report-hl7-validate.xml"/>
+        </validate-with-schematron>-->
+        
+        <validate-with-schematron name="schematron-validate-hl7-sturen_afhandeling_medicatievoorschrift">
+            <schema href="$SCHEMATRONDIR/mp-mp92_av.sch"/>
+            <input-documents directory="@av-hl7-instance"/>
+            <output-report directory="@av-reports" name="schematron-report-hl7-validate.xml"/>
+        </validate-with-schematron>
+        
+        <validate-with-schematron name="schematron-validate-hl7-sturen_medicatievoorschrift">
+            <schema href="$SCHEMATRONDIR/mp-mp92_vvv.sch"/>
+            <input-documents directory="@vvv-hl7-instance"/>
+            <output-report directory="@vvv-reports" name="schematron-report-hl7-validate.xml"/>
+        </validate-with-schematron>
+        
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- XML voorbeelden: -->
+        
+        <!-- HL7 -->
+        <validate-with-schematron name="schematron-validate-hl7-xml-voorbeelden-beschikbaarstellen_medicatiegegevens">
+            <schema href="$SCHEMATRONDIR/mp-mp92_mgb.sch"/>
+            <input-documents directory="@xmlv-hl7-instance" accept-empty="true">
+                <include glob="mg-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-hl7-validate-mg.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-hl7-xml-voorbeelden-sturen_afhandeling_medicatievoorschrift">
+            <schema href="$SCHEMATRONDIR/mp-mp92_av.sch"/>
+            <input-documents directory="@xmlv-hl7-instance">
+                <include glob="av-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-hl7-validate-av.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-hl7-xml-voorbeelden-sturen_antwoord_voorstel_verstrekkingsverzoek">
+            <schema href="$SCHEMATRONDIR/mp-mp92_avvv.sch"/>
+            <input-documents directory="@xmlv-hl7-instance">
+                <include glob="avvv-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-hl7-validate-avvv.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-hl7-xml-voorbeelden-sturen_medicatievoorschrift">
+            <schema href="$SCHEMATRONDIR/mp-mp92_vos.sch"/>
+            <input-documents directory="@xmlv-hl7-instance">
+                <include glob="mv-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-hl7-validate-mv.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-hl7-xml-voorbeelden-sturen_voorstel_medicatieafspraak">
+            <schema href="$SCHEMATRONDIR/mp-mp92_vma.sch"/>
+            <input-documents directory="@xmlv-hl7-instance">
+                <include glob="vma-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-hl7-validate-vma.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-hl7-xml-voorbeelden-sturen_antwoord_voorstel_medicatieafspraak">
+            <schema href="$SCHEMATRONDIR/mp-mp92_avma.sch"/>
+            <input-documents directory="@xmlv-hl7-instance">
+                <include glob="avma-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-hl7-validate-avma.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-hl7-xml-voorbeelden-sturen_voorstel_verstrekkingsverzoek">
+            <schema href="$SCHEMATRONDIR/mp-mp92_vvv.sch"/>
+            <input-documents directory="@xmlv-hl7-instance">
+                <include glob="vvv-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-hl7-validate-vvv.xml"/>
+        </validate-with-schematron>
+        
+        <!-- CDA -->
+        <!--<validate-with-schematron name="schematron-validate-cda-xml-voorbeelden-beschikbaarstellen_medicatiegegevens">
+            <schema href="$SCHEMATRONDIR/mp-mp92_mgb.sch"/>
+            <input-documents directory="@xmlv-cda-instance">
+                <include glob="mg-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-cda-validate-mg.xml"/>
+        </validate-with-schematron>-->
+        <validate-with-schematron name="schematron-validate-cda-xml-voorbeelden-sturen_afhandeling_medicatievoorschrift">
+            <schema href="$SCHEMATRONDIR/mp-mp92_av.sch"/>
+            <input-documents directory="@xmlv-cda-instance">
+                <include glob="av-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-cda-validate-av.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-cda-xml-voorbeelden-sturen_antwoord_voorstel_verstrekkingsverzoek">
+            <schema href="$SCHEMATRONDIR/mp-mp92_avvv.sch"/>
+            <input-documents directory="@xmlv-cda-instance">
+                <include glob="avvv-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-cda-validate-avvv.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-cda-xml-voorbeelden-sturen_medicatievoorschrift">
+            <schema href="$SCHEMATRONDIR/mp-mp92_vos.sch"/>
+            <input-documents directory="@xmlv-cda-instance">
+                <include glob="mv-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-cda-validate-mv.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-cda-xml-voorbeelden-sturen_voorstel_medicatieafspraak">
+            <schema href="$SCHEMATRONDIR/mp-mp92_vma.sch"/>
+            <input-documents directory="@xmlv-cda-instance">
+                <include glob="vma-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-cda-validate-avma.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-cda-xml-voorbeelden-sturen_antwoord_voorstel_medicatieafspraak">
+            <schema href="$SCHEMATRONDIR/mp-mp92_avma.sch"/>
+            <input-documents directory="@xmlv-cda-instance">
+                <include glob="avma-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-cda-validate-avma.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-cda-xml-voorbeelden-sturen_voorstel_verstrekkingsverzoek">
+            <schema href="$SCHEMATRONDIR/mp-mp92_vvv.sch"/>
+            <input-documents directory="@xmlv-cda-instance">
+                <include glob="vvv-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-cda-validate-vvv.xml"/>
+        </validate-with-schematron>
+
+    </action>
+
+    <!-- ======================================================================= -->
+
+    <action name="gather-validation-results" setup="false" description="Gathers all validation results in XML reports">
+
+        <build fast="true" name="schematron-report-hl7-beschikbaarstellen_medicatiegegevens">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="hl7_beschikbaarstellen_medicatiegegevens.xml"/>
+            <parameter name="hrefReportDir" directory="@mg-reports"/>
+            <parameter name="filenamePattern" value="schema*hl7*.xml"/>
+        </build>
+
+        <build fast="true" name="schematron-report-hl7-sturen_medicatievoorschrift">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="hl7_sturen_medicatievoorschrift.xml"/>
+            <parameter name="hrefReportDir" directory="@mv-reports"/>
+            <parameter name="filenamePattern" value="schema*hl7*.xml"/>
+        </build>
+        <build fast="true" name="schematron-report-cda-sturen_medicatievoorschrift">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="cda_sturen_medicatievoorschrift.xml"/>
+            <parameter name="hrefReportDir" directory="@mv-reports"/>
+            <parameter name="filenamePattern" value="schema*cda*.xml"/>
+        </build>
+
+        <build fast="true" name="schematron-report-hl7-sturen_afhandeling_medicatievoorschrift">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="hl7_sturen_afhandeling_medicatievoorschrift.xml"/>
+            <parameter name="hrefReportDir" directory="@av-reports"/>
+            <parameter name="filenamePattern" value="schema*hl7*.xml"/>
+        </build>
+
+        <build fast="true" name="schematron-report-hl7-sturen_voorstel_medicatieafspraak">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="hl7_sturen_voorstel_medicatieafspraak.xml"/>
+            <parameter name="hrefReportDir" directory="@vma-reports"/>
+            <parameter name="filenamePattern" value="schema*hl7*.xml"/>
+        </build>
+
+        <build fast="true" name="schematron-report-hl7-sturen_antwoord_voorstel_medicatieafspraak">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="hl7_sturen_antwoord_voorstel_medicatieafspraak.xml"/>
+            <parameter name="hrefReportDir" directory="@avma-reports"/>
+            <parameter name="filenamePattern" value="schema*hl7*.xml"/>
+        </build>
+
+        <build fast="true" name="schematron-report-hl7-sturen_voorstel_verstrekkingsverzoek">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="hl7_sturen_voorstel_verstrekkingsverzoek.xml"/>
+            <parameter name="hrefReportDir" directory="@vvv-reports"/>
+            <parameter name="filenamePattern" value="schema*hl7*.xml"/>
+        </build>
+
+        <build fast="true" name="schematron-report-hl7-sturen_antwoord_voorstel_verstrekkingsverzoek">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="hl7_sturen_antwoord_voorstel_verstrekkingsverzoek.xml"/>
+            <parameter name="hrefReportDir" directory="@avvv-reports"/>
+            <parameter name="filenamePattern" value="schema*hl7*.xml"/>
+        </build>
+
+        <!--<build fast="true" name="schematron-report-hl7-beschikbaarstellen_medicatieoverzicht">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="hl7_beschikbaarstellen_medicatieoverzicht.xml"/>
+            <parameter name="hrefReportDir" directory="@mo-reports"/>
+            <parameter name="filenamePattern" value="schema*hl7*.xml"/>
+        </build>-->
+
+        <build fast="true" name="schematron-report-hl7-xml-voorbeelden">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="hl7_xml-voorbeelden.xml"/>
+            <parameter name="hrefReportDir" directory="@xmlv-reports"/>
+            <parameter name="filenamePattern" value="schema*hl7*.xml"/>
+        </build>
+        <build fast="true" name="schematron-report-cda-xml-voorbeelden">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="cda_xml-voorbeelden.xml"/>
+            <parameter name="hrefReportDir" directory="@xmlv-reports"/>
+            <parameter name="filenamePattern" value="schema*cda*.xml"/>
+        </build>
+
+    </action>
+    
+    <!-- ======================================================================= -->
+    
+    <action name="validate" description="Perform all validations and gather results" depends-on="schema-validate schematron-validate gather-validation-results" setup="false"/>
+    
+    <!-- ======================================================================= -->
+    
+    <action name="all" description="Performs all builds and validations" depends-on="build schema-validate schematron-validate gather-validation-results" setup="true"/>
+    
+
+</application>

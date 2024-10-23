@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             id="2.16.840.1.113883.2.4.3.11.60.40.2.7.9.1"
+             name="BurgerlijkeStaatCodelijst"
+             displayName="BurgerlijkeStaatCodelijst"
+             effectiveDate="2017-12-31T00:00:00"
+             statusCode="final">
+      <sourceCodeSystem id="2.16.840.1.113883.5.2"
+                        identifierName="MaritalStatus"
+                        canonicalUri="http://terminology.hl7.org/CodeSystem/v3-MaritalStatus"
+                        canonicalUriDSTU2="http://hl7.org/fhir/v3/MaritalStatus"
+                        canonicalUriSTU3="http://hl7.org/fhir/v3/MaritalStatus"
+                        canonicalUriR4="http://terminology.hl7.org/CodeSystem/v3-MaritalStatus"/>
+      <publishingAuthority name="Registratie aan de bron">
+         <addrLine type="uri">https://www.registratieaandebron.nl</addrLine>
+         <addrLine type="uri">https://zibs.nl</addrLine>
+      </publishingAuthority>
+      <conceptList>
+         <concept code="D"
+                  codeSystem="2.16.840.1.113883.5.2"
+                  displayName="Divorced"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Gescheiden"/>
+            <desc language="nl-NL">Gescheiden (huwelijk/geregistreerd partnerschap ontbonden)</desc>
+         </concept>
+         <concept code="M"
+                  codeSystem="2.16.840.1.113883.5.2"
+                  displayName="Married"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Gehuwd"/>
+         </concept>
+         <concept code="S"
+                  codeSystem="2.16.840.1.113883.5.2"
+                  displayName="Never Married"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Nooit gehuwd geweest/ geregistreerd partnerschap gehad"/>
+         </concept>
+         <concept code="T"
+                  codeSystem="2.16.840.1.113883.5.2"
+                  displayName="Domestic partner"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL"
+                         type="preferred"
+                         displayName="Geregistreerd partnerschap"/>
+         </concept>
+         <concept code="W"
+                  codeSystem="2.16.840.1.113883.5.2"
+                  displayName="Widowed"
+                  level="0"
+                  type="L">
+            <designation language="nl-NL" type="preferred" displayName="Weduwe/weduwnaar"/>
+         </concept>
+      </conceptList>
+   </valueSet>
+</valueSets>

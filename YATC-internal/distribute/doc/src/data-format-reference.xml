@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<text-document xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../../../../YATC-shared/xsd/text-document.xsd" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!-- ======================================================================= -->
+    <!-- 
+        Reference text document for the distribute component data format.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <macro name="DATAFILENAME" value="{$yatcComponentName}-data"/>
+
+    <title>Component <code>{$yatcRepositoryName}/{$yatcComponentName}</code> data format reference</title>
+
+    <xi:include href="../../../../YATC-shared/srcmod/common-data-format-opening-text.xml"/>
+
+    <!-- ======================================================================= -->
+
+    <section xmlns="https://nictiz.nl/ns/YATC-shared/text-document" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-shared/text-document ../xsd/text-document.xsd">
+        <title><anchor name="general-remarks"/>General remarks</title>
+
+        <unorderedlist>
+            <entry>
+                <para>This document must be in the <code>https://nictiz.nl/ns/YATC-internal</code> namespace.</para>
+            </entry>
+            <entry>
+                <para>There are two schemas for this document. For full validation both should be applied:</para>
+                <unorderedlist>
+                    <entry>
+                        <para><code>{$yatcRepositoryName}/{$yatcComponentName}/xsd/ada-2-fhir-data.xsd</code></para>
+                    </entry>
+                    <entry>
+                        <para><code>{$yatcRepositoryName}/{$yatcComponentName}/sch/ada-2-fhir-data.sch</code></para>
+                    </entry>
+                </unorderedlist>
+            </entry>
+            <entry>
+                <para>All elements <emph>must</emph> be in the <code>https://nictiz.nl/ns/{$yatcRepositoryName}</code> namespace.</para>
+            </entry>
+            <entry>
+                <para><elm>distribution</elm> elements can be in separate documents, using <elm>xi:include</elm> elements in the master document. The resulting document (after all XIncludes are dereferenced) must be valid.</para>
+            </entry>
+            <entry>
+                <para>If the value of any <code>@source-directory</code> or <code>@href-source</code> is prefixed with a hash (<code>#</code>), it is resolved against the location of the document it is specified in. This is useful for referencing documents in the component itself, for instance standard README files.</para>
+            </entry>
+        </unorderedlist>
+
+        <para>There are also several macro substitutions you can use in constructing directory and document names:</para>
+        <unorderedlist>
+            <entry>
+                <para>References to <link href="../../../YATC-shared/doc/parameters-system.md">YATC parameters</link> in text or attribute values (using either <code>${{parname}</code> or <code>{{$parname}</code>) will expand. A referenced YATC parameter must exist.</para>
+            </entry>
+            <entry>
+                <para>All attributes can contain references to simple macros (see <link href="#distribution-macros">simple macro expansion</link>). This allows you to, for instance, tailor file and directory names to things like version, date, time, etc.</para>
+            </entry>
+            <entry>
+                <para>Sometimes, the relative path to the target is the same as the relative path to the source. Therefore, in most cases,  you can use the special value <code>$SOURCE</code> as the value of  <code>@target-directory</code> and <code>@href-target</code> attributes. This makes their value equal to that of <code>@source-directory</code> or <code>@href-source</code>.</para>
+            </entry>
+            <entry>
+                <para>Sometimes the filename of the target document is the same as that of the source document, only their paths differ. For these situations, you can use the special value <code>$SOURCENAME</code> in <code>@href-target</code> attributes. This will be replaced with the filename from <code>@href-source</code>.</para>
+            </entry>
+
+        </unorderedlist>
+
+    </section>
+    <!-- ======================================================================= -->
+
+    <section>
+        <title><anchor name="distributions"/>Root <elm>distribute-data</elm> element</title>
+
+        <element name="distribute-data">
+            <attributes>
+                <attribute name="source-directory" type="xs:anyURI" default="{{$yatcInternalDirectory}" required="false">
+                    <para>The default source directory for all distributions.<br/>The default value comes from the <link href="../../../../YATC-shared/doc/parameters-system.md">YATC parameter</link> <code>yatcInternalDirectory</code> (defined in <code>YATC-shared/data/parameters.xml</code>).</para>
+                </attribute>
+                <attribute name="target-directory" type="xs:anyURI" default="{{$publicBaseDistributionDirectory}" required="false">
+                    <para>The default target directory for all distributions.<br/>The default value comes from the <link href="../../../../YATC-shared/doc/parameters-system.md">YATC parameter</link> <code>publicBaseDistributionDirectory</code> (defined in <code>YATC-shared/data/parameters.xml</code>).</para>
+                </attribute>
+            </attributes>
+            <children>
+                <element name="macros" occurrences="?">
+                    <para>Define simple macros for use in attributes and text. See <link href="#distribution-macros">simple macro expansion</link>.</para>
+                </element>
+                <element name="distribution" occurrences="*" attributes-indicator="true">
+                    <para>Defines a distribution. See <link href="#distribution">distribution element</link></para>
+                </element>
+            </children>
+        </element>
+
+        <emptyline/>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title><anchor name="distribution"/>The <elm>distribution</elm> element</title>
+
+            <para>The <elm>distribution</elm> element defines a distribution.</para>
+
+            <element name="distribution">
+                <attributes>
+                    <attribute name="name" type="xs:string" required="true">
+                        <para>The name/identification for this distribution.</para>
+                    </attribute>
+                    <attribute name="description" type="xs:string">
+                        <para>A short description for this distribution.</para>
+                    </attribute>
+
+                    <attribute name="source-directory" type="xs:anyURI">
+                        <para>The default source directory for this distribution.<br/>A relative path will be resolved against the source directory setting of the parent element.</para>
+                    </attribute>
+                    <attribute name="target-directory" type="xs:anyURI">
+                        <para>The default target directory for this distribution.<br/>A relative path will be resolved against the target directory setting of the parent element.</para>
+                    </attribute>
+
+                    <attribute name="href-zip" type="xs:anyURI">
+                        <para>If this attribute is present, a zip file with this distribution is created.<br/>A relative path will be resolved against the target directory setting of the parent element.</para>
+                    </attribute>
+                    <attribute name="base-dir-in-zip" type="xs:boolean" default="true">
+                        <para>Whether the distribution's base directory will be included as root directory in the zip or not.</para>
+                    </attribute>
+
+                    <attribute name="keep-files" type="xs:boolean" default="true">
+                        <para>Whether to keep the output files produced by the distribution.<br/>The reason for this attribute is that you might want a zip file only. In that case, set this attribute to <code>false</code> and only the zip file will remain (but don't make the mistake storing the zip file inside the directory tree that is deleted…).<br/>If you do not create a zip file and set this to <code>false</code>, nothing will remain, which is not very useful…</para>
+                    </attribute>
+                    <attribute name="allow-overwrite" type="xs:boolean" default="false">
+                        <para>Whether a distribution (either a directory, a zip file, or both) is allowed to overwrite an already existing one (in the same target directory). This feature was introduced for safety reasons: usually you don't want to accidentally overwrite a distribution that is already out there in the world. If you need to, you have to remove the old distribution explicitly.</para>
+                    </attribute>
+                    <attribute name="distribution-version-required" type="xs:boolean" default="false">
+                        <para>Whether an explicit distribution-version is required. A distribution-version is defined when creating the distribution (using the distribution command line <code>-version:…</code> flag).</para>
+                    </attribute>
+                </attributes>
+                <children>
+                    <element name="macros" occurrences="?">
+                        <para>Define simple macros for use in attributes and text. See <link href="#distribution-macros">simple macro expansion</link>.</para>
+                    </element>
+                    <choice occurrences="*">
+                        <element name="message">
+                            <para>Message which will be output on the console during processing for this distribution.</para>
+                        </element>
+                        <element name="directory" attributes-indicator="true">
+                            <para>Specifies a copy action for a full directory. See <link href="#distribution-directory">directory element</link>.</para>
+                        </element>
+                        <element name="file" attributes-indicator="true">
+                            <para>Specifies a copy action for a single file. See <link href="#distribution-file">file element</link>.</para>
+                        </element>
+                        <element name="additional-text-document" attributes-indicator="true">
+                            <para>Specifies a copy and <link href="#distribution-macros">simple macro substitutions</link> for an additional text document (for instance a readme file). See <link href="#distribution-additional-text-document">additional-text-document element</link>.</para>
+                        </element>
+                        <element name="combine-additional-text-documents" attributes-indicator="true">
+                            <para>Takes one or more text files, performs <link href="#distribution-macros">simple macro substitutions</link>, and concatenates all processed files into a single target file. See <link href="#distribution-combine-additional-text-documents">combine-additional-text-documents element</link>.</para>
+                        </element>
+                        <element name="additional-xml-document" attributes-indicator="true">
+                            <para>Specifies a copy and <link href="#distribution-macros">simple macro substitutions</link> for an additional XML document (for instance an XMLdocument with processable version and date/time information). See <link href="#distribution-additional-xml-document">additional-xml-document element</link>.</para>
+                        </element>
+                        <element name="flatten-stylesheets" attributes-indicator="true">
+                            <para>Specifies a flatten stylesheets operation. See <link href="#distribution-flatten">flatten-* elements</link>.</para>
+                        </element>
+                        <element name="flatten-schemas" attributes-indicator="true">
+                            <para>Specifies a flatten XML Schemas operation. See <link href="#distribution-flatten">flatten-* elements</link>.</para>
+                        </element>
+                        <element name="flatten-schematrons" attributes-indicator="true">
+                            <para>Specifies a flatten Schematron Schemas operation. See <link href="#distribution-flatten">flatten-* elements</link>.</para>
+                        </element>
+                        <element name="group" pseudo-attributes="source-directory target-directory">
+                            <para>Use <elm>group</elm> to group sets of actions that have base directories in common. Specify a specific source and/or target base directory using <code>@source-directory</code> and <code>@target-directry</code> attributes.<br/>The child elements allowed are the same as those of a <elm>distribution</elm> element.</para>
+                        </element>
+                    </choice>
+                </children>
+            </element>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <section>
+                <title><anchor name="distribution-directory"/>The <elm>directory</elm> element</title>
+
+                <para>The distribution's <elm>directory</elm> element defines a copy operation for a directory.</para>
+
+                <element name="directory">
+                    <attributes>
+                        <attribute name="source-directory" type="xs:anyURI">
+                            <para>The source directory for this operation.<br/>A relative path will be resolved against the source directory setting of the parent element.</para>
+                        </attribute>
+                        <attribute name="target-directory" type="xs:anyURI">
+                            <para>The default target directory for this operation.<br/>A relative path will be resolved against the target directory setting of the parent element.</para>
+                        </attribute>
+
+                        <attribute name="allow-empty" type="xs:boolean" default="false">
+                            <para>Whether it is allowed that the copy operation copies no files. Otherwise an error is raised.</para>
+                        </attribute>
+                        <attribute name="recurse" type="xs:boolean" default="true">
+                            <para>Whether sub-directories (recursive) will be copied also.</para>
+                        </attribute>
+                        <attribute name="clear-target" type="xs:boolean" default="true">
+                            <para>Whether to clear the target directory before copying. Turning this off can be useful when you want to copy from multiple source directories into a single target directory.</para>
+                        </attribute>
+                    </attributes>
+                </element>
+
+                <para>The element can have child <elm>include</elm> and/or <elm>exclude</elm> elements (see <link href="#include-exclude">include/exclude elements</link>) to further narrow down the set of files to copy.</para>
+            </section>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <section>
+                <title><anchor name="distribution-file"/>The <elm>file</elm> element</title>
+
+                <para>The distribution's <elm>file</elm> element defines a copy operation for a single file.</para>
+
+                <element name="file">
+                    <attributes>
+                        <attribute name="href-source" type="xs:anyURI" required="true">
+                            <para>The source href for this operation.<br/>A relative path will be resolved against the source directory setting of the parent element.</para>
+                        </attribute>
+                        <attribute name="href-target" type="xs:anyURI" required="true">
+                            <para>The target href for this operation.<br/>A relative path will be resolved against the target directory setting of the parent element.</para>
+                        </attribute>
+
+                        <attribute name="must-exist" type="xs:boolean" default="true">
+                            <para>Whether the file to copy must exist. Otherwise an error is raised.</para>
+                        </attribute>
+                    </attributes>
+                </element>
+            </section>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <section>
+                <title><anchor name="distribution-additional-text-document"/>The <elm>additional-text-document</elm> element</title>
+
+                <para>The distribution's <elm>additional-text-document</elm> element defines a copy operation for an additional text document, for instance a readme file. Distribution macro substitution (see <link href="#distribution-macros">distribution macros</link>) will take place on the file's contents. </para>
+
+                <element name="additional-text-document">
+                    <attributes>
+                        <attribute name="href-source" type="xs:anyURI" required="true">
+                            <para>The source href for this operation.<br/>A relative path will be resolved against the source directory setting of the parent element.</para>
+                        </attribute>
+                        <attribute name="href-target" type="xs:anyURI" required="true">
+                            <para>The target href for this operation.<br/>A relative path will be resolved against the target directory setting of the parent element.</para>
+                        </attribute>
+                    </attributes>
+                </element>
+            </section>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <section>
+                <title><anchor name="distribution-combine-additional-text-documents"/>The <elm>combine-additional-text-documents</elm> element</title>
+
+                <para>The distribution's <elm>combine-additional-text-documents</elm> element concatenates one or more additional text documents, for instance readme files. Distribution macro substitution (see <link href="#distribution-macros">distribution macros</link>) will take place on the contents of all files. </para>
+
+                <element name="combine-additional-text-documents">
+                    <attributes>
+                        <attribute name="href-target" type="xs:anyURI" required="true">
+                            <para>The target href for this operation.<br/>A relative path will be resolved against the target directory setting of the parent element.</para>
+                        </attribute>
+                        <attribute name="separator" type="xs:string" default="$NL$NL$NL">
+                            <para>The separator string in-between the files.<br/>Any substring <code>$NL</code> will be changed into a newline.</para>
+                        </attribute>
+                    </attributes>
+                    <children>
+                        <element name="text-document" pseudo-attributes="href" occurrences="+">
+                            <para>Reference to the text document to combine.<br/>Use the required <code>@href-source</code> attribute to specify the href of the document to use. A relative path will be resolved against the target directory setting of the parent element.</para>
+                        </element>
+                    </children>
+                </element>
+
+            </section>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <section>
+                <title><anchor name="distribution-additional-xml-document"/>The <elm>additional-xml-document</elm> element</title>
+
+                <para>The distribution's <elm>additional-xml-document</elm> element defines a copy operation for an additional XML document, for instance a document with some processable information about the version and date/time of the distribution. Distribution macro substitution (see <link href="#distribution-macros">distribution macros</link>) will take place on the document's attributes and text nodes. </para>
+
+                <element name="additional-xml-document">
+                    <attributes>
+                        <attribute name="href-source" type="xs:anyURI" required="false">
+                            <para>The source href for this operation.<br/>A relative path will be resolved against the source directory setting of the parent element.</para>
+                        </attribute>
+                        <attribute name="href-target" type="xs:anyURI" required="true">
+                            <para>The target href for this operation.<br/>A relative path will be resolved against the target directory setting of the parent element.</para>
+                        </attribute>
+                    </attributes>
+                    <children>
+                        <element name="*">
+                            <para>Optional inline XML document, to use as the XML document to process.</para>
+                        </element>
+                    </children>
+                </element>
+
+                <para>The <elm>additional-xml-document</elm> can have either an <code>@href-source</code> attribute or XML contents, not both.</para>
+            </section>
+
+            <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+            <section>
+                <title><anchor name="distribution-flatten"/>The <elm>flatten-*</elm> elements</title>
+
+                <para>The distribution's <elm>flatten-*</elm> elements defines a flattening (and copy) operation for either XSLT stylesheets (<elm>flatten-stylesheets</elm>), XML Schemas (<elm>flatten-schemas</elm>), or Schematron schemas (<elm>flatten-schematrons</elm>).</para>
+
+                <para>Flattening means:</para>
+                <unorderedlist>
+                    <entry>
+                        <para>All main documents (the ones in the designated source directory) are copied to a target directory.</para>
+                    </entry>
+                    <entry>
+                        <para>The set of included/imported stylesheets from the main documents are identified (recursively), and copied to a sub-directory of the main target directory.</para>
+                    </entry>
+                    <entry>
+                        <para>Name clashes (stylesheets with the same name from different directories) are resolved.</para>
+                    </entry>
+                    <entry>
+                        <para>All include/import elements are changed to reflect the new structure.</para>
+                    </entry>
+                </unorderedlist>
+
+                <element name="flatten-*">
+                    <attributes>
+                        <attribute name="source-directory" type="xs:anyURI">
+                            <para>The source directory for this operation.<br/>A relative path will be resolved against the source directory setting of the parent element.</para>
+                        </attribute>
+                        <attribute name="target-directory" type="xs:anyURI">
+                            <para>The default target directory for this operation.<br/>A relative path will be resolved against the target directory setting of the parent element.</para>
+                        </attribute>
+                        <attribute name="href-include" type="xs:anyURI" default="include">
+                            <para>The name (or path to) the directory where all the included documents (that are not master documents) will be copied to. <br/>A relative path will be resolved against the target directory.</para>
+                        </attribute>
+                        <attribute name="clear-target" type="xs:boolean" default="true">
+                            <para>Whether to clear the target directory before flattening.</para>
+                        </attribute>
+                        <attribute name="add-addional-info" type="(list of values)">
+                            <para>Whether to add additional information to all the documents adapted by this flattening process. See <link href="#additional-info">adding additional information</link>.</para>
+                        </attribute>
+                    </attributes>
+                    <children>
+                        <element name="macros" occurrences="?">
+                            <para>Define simple macros for use in attributes and text. See <link href="#distribution-macros">simple macro expansion</link>.</para>
+                        </element>
+                        <element name="master-document" attributes-indicator="true">
+                            <para>Specifies a single master document for flattening. See <link href="#flatten-master-document">master-document</link>.</para>
+                        </element>
+                        <element name="master-document-directory" attributes-indicator="true">
+                            <para>Specifies a directory containing master documents for flattening. See <link href="#flatten-master-document-directory">master-document-directory element</link>.</para>
+                        </element>
+                        <element name="group" pseudo-attributes="source-directory target-directory">
+                            <para>Specifies a specific source and/or target base directory.<br/>The contents of this element is the same as that of a <elm>flatten-*</elm> element. Use <elm>group</elm> to group sets of documents that have source and/or target directories in common.</para>
+                        </element>
+                    </children>
+                </element>
+
+                <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+                <section>
+                    <title><anchor name="additional-info"/>Adding additional information during flattening</title>
+
+                    <para>Flattening can write additional information in all the documents it processes (the master and the included/imported documents). All information is added at the top of the processed document (before the root element). You can specify this with the <code>@add-additional-info</code> attribute. Its value is a whitespace-separated list of values:</para>
+
+                    <table>
+                        <header>
+                            <entry>
+                                <para>Value</para>
+                            </entry>
+                            <entry>
+                                <para>Description</para>
+                            </entry>
+                        </header>
+                        <row>
+                            <entry>
+                                <para><code>provenance-comment</code></para>
+                            </entry>
+                            <entry>
+                                <para>Add a comment about the provenance of this file (the path to the source document on the machine the distribution was created on).</para>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <para><code>provenance-pi</code></para>
+                            </entry>
+                            <entry>
+                                <para>Add a processing-instruction about the provenance of this file (the path to the source document on the machine the distribution was created on): <code>&lt;?yatc-distribution-provenance href="…"?></code>.</para>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <para><code>distribution-comment</code></para>
+                            </entry>
+                            <entry>
+                                <para>Add a comment containing the name, version and timestamp of the distribution.</para>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <para><code>distribution-pi</code></para>
+                            </entry>
+                            <entry>
+                                <para>Add a processing-instruction containing the name, version and timestamp of the distribution: <code>&lt;?yatc-distribution-info name="…" timestamp="…" version="…"?></code> (the order of the processing-instruction's pseudo attributes may vary).</para>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                                <para><code>#all</code></para>
+                            </entry>
+                            <entry>
+                                <para>Add all available additional information, as comments and processing-instructions.</para>
+                            </entry>
+                        </row>
+                    </table>
+                </section>
+
+                <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+                <section>
+                    <title><anchor name="flatten-master-document"/>The flatten <elm>master-document</elm> element</title>
+
+                    <para>The <elm>master-document</elm> specifies a single master document for flattening.</para>
+
+                    <element name="master-document">
+                        <attributes>
+                            <attribute name="href-source" type="xs:anyURI" required="true">
+                                <para>The source href of this master document.<br/>A relative path will be resolved against the source directory setting of the parent element.</para>
+                            </attribute>
+                            <attribute name="href-target" type="xs:anyURI" required="false" default="(filename of @href-source)">
+                                <para>The target href for the flattened version.<br/>A relative path will be resolved against the target directory setting of the parent element.</para>
+                            </attribute>
+                            <attribute name="must-exist" type="xs:boolean" required="false" default="true">
+                                <para>Whether this source file must exist. If not, an error will be raised.</para>
+                            </attribute>
+                        </attributes>
+                    </element>
+                </section>
+
+                <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+                <section>
+                    <title><anchor name="flatten-master-document-directory"/>The flatten <elm>master-document-directory</elm> element</title>
+
+                    <para>The <elm>master-document-directory</elm> specifies a directory with master documents for flattening. All flattened documents get the same filename as their source.</para>
+
+                    <element name="master-document-directory">
+                        <attributes>
+                            <attribute name="source-directory" type="xs:anyURI">
+                                <para>The source directory with the master documents to flatten.<br/>A relative path will be resolved against the source directory setting of the parent element.</para>
+                            </attribute>
+                            <attribute name="target-directory" type="xs:anyURI">
+                                <para>The target directory for the flattened documents.<br/>A relative path will be resolved against the target directory setting of the parent element.</para>
+                            </attribute>
+                            <attribute name="allow-empty" type="xs:boolean" default="false">
+                                <para>Whether it is allowed that no master documents (after include/exclude filtering) are specified. Otherwise an error is raised.</para>
+                            </attribute>
+                            <attribute name="recurse" type="xs:boolean" default="true">
+                                <para>Whether sub-directories (recursive) will be handled also.</para>
+                            </attribute>
+                        </attributes>
+                    </element>
+
+                    <para>The element can have child <elm>include</elm> and/or <elm>exclude</elm> elements (see <link href="#include-exclude">include/exclude elements</link>) to further narrow down the set of files to copy.</para>
+                </section>
+
+            </section>
+
+        </section>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <section>
+            <title><anchor name="distribution-macros"/>Simple macro expansion</title>
+
+            <para>Target file names and additional text documents can contain simple macros. All macros start with a <code>$</code>. These macros will be replaced by the appropriate values during processing. To stop a macro from expanding, double the <code>$</code> sign (for instance, <code>$$DATEFULL</code> will become <code>$DATEFULL</code>).</para>
+
+            <para>The following macros are predefined. When expanding these predefined macros in file/directory name attributes, all characters unsafe for this (for instance <code>/</code> or <code>:</code>) will be replaced by an underscore (<code>_</code>).</para>
+
+            <table>
+                <header>
+                    <entry>
+                        <para>Macro</para>
+                    </entry>
+                    <entry>
+                        <para>Description</para>
+                    </entry>
+                    <entry>
+                        <para>Value example</para>
+                    </entry>
+                </header>
+                <row>
+                    <entry>
+                        <para><code>$DISTRIBUTIONNAME</code></para>
+                    </entry>
+                    <entry>
+                        <para>The name of this distribution (from <code>distribution/@name</code>).</para>
+                    </entry>
+                    <entry>
+                        <para><code>stylesheets</code></para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>$DISTRIBUTIONVERSION</code></para>
+                    </entry>
+                    <entry>
+                        <para>The distribution-version for this distribution (from the <code>-version:…</code> flag on the distribution command line).</para>
+                    </entry>
+                    <entry>
+                        <para><code>1.2.3</code></para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>$DATETIMEISO</code></para>
+                    </entry>
+                    <entry>
+                        <para>The full date/time the distribution was created in ISO format (including timezone indicator).</para>
+                    </entry>
+                    <entry>
+                        <para><code>2023-10-11T14:39:14.5141692+02:00</code></para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>$DATEFULL</code></para>
+                    </entry>
+                    <entry>
+                        <para>The date the distribution was created, in <code>yyyy-mm-dd</code> format.</para>
+                    </entry>
+                    <entry>
+                        <para><code>2023-10-11</code></para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>$DATECOMPACT</code></para>
+                    </entry>
+                    <entry>
+                        <para>The date the distribution was created, in <code>yyyymmdd</code> format.</para>
+                    </entry>
+                    <entry>
+                        <para><code>20231011</code></para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>$TIMEFULL</code></para>
+                    </entry>
+                    <entry>
+                        <para>The time the distribution was created, in <code>hh:mm:ss</code> format.</para>
+                    </entry>
+                    <entry>
+                        <para><code>14:39:14</code></para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>$TIMECOMPACT</code></para>
+                    </entry>
+                    <entry>
+                        <para>The time the distribution was created, in <code>hhmmss</code> format.</para>
+                    </entry>
+                    <entry>
+                        <para><code>143914</code></para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>$TIMESHORTFULL</code></para>
+                    </entry>
+                    <entry>
+                        <para>The time the distribution was created, in <code>hh:mm</code> format.</para>
+                    </entry>
+                    <entry>
+                        <para><code>14:39</code></para>
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <para><code>$TIMESHORTCOMPACT</code></para>
+                    </entry>
+                    <entry>
+                        <para>The time the distribution was created, in <code>hhmm</code> format.</para>
+                    </entry>
+                    <entry>
+                        <para><code>1439</code></para>
+                    </entry>
+                </row>
+            </table>
+
+            <emptyline/>
+
+            <para>There are several locations in a distribution data file where you can define your own macros. This can be useful when, for instance, you use the same file or directory name a lot. To define macros, use the <elm>macros</elm> element:</para>
+
+            <element name="macros">
+                <children>
+                    <element name="macro" pseudo-attributes="name value" occurrences="*">
+                        <para>Define a macro with a given name (<code>@name</code> attribute) and value (<code>@value</code> attribute).<br/>The rules for a name are the same as those for an XML element/attribute name. As a guideline, to distinguish it from the surrounding text, use all-uppercase.</para>
+                    </element>
+                </children>
+            </element>
+            <para>Macro substitution is recursive, a macro value can contain references to other macros.</para>
+
+            <emptyline/>
+            <para>Developers remark: If you ever need to change the predefined macro definitions (for instance, add a new one), see <code>YATC-internal/distribute/xplmod/xsl-distribute.mod/expand-distribution-macros.xsl</code>.</para>
+
+        </section>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <xi:include href="../../../../YATC-shared/srcmod/include-exclude.mod.xml"/>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    </section>
+
+</text-document>

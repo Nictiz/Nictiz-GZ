@@ -1,0 +1,946 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../../../YATC-shared/general-engine/sch/general-engine-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<application xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../../xsd/ada-2-hl7-data.xsd" name="mp" version="9.3.0" source-adarefs2ada="true" source-project-name="mp-mp93">
+    <!-- ======================================================================= -->
+    <!-- 
+        ada-2-hl7 application data for mp/9.3.0
+        
+        This is an include file for ../ada-2-hl7-data.xml
+        
+        IMPORTANT:
+        Schematron validation takes a lot of resources due to the size of the schemas/documents.
+        This means that the process often crashes halfway :(
+        Therefore the whole Schematron validation action is split in three parts.
+        To perform a full Schematron validation over all documents, you have to perform all three as
+        separate commands. Or use (at your own risk) schematron-validate-all.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+    <!-- AORTA REMARKS:
+        
+         This application uses Schemas and Schematrons that are stored in AORTA.
+         These schemas are imported and copied into the application's environment by 
+         the import-aorta-documents support tool.
+         
+         If anything needs to change:
+         
+         * Make sure you have AORTA checked out somewhere on your disk
+         * It turned out that sometimes the relevant files in AORTA are in a zip. Unzip these.
+         * Make sure the location of your AORTA checkout is registered as a YATC parameter (in {basedirectory}/data/parameters.xml):
+                <parameter name="AORTADirectory">
+                    <value>file:/C:/somewhere/AORTA</value>
+                </parameter>
+         * Edit the import specification in YATC-internal/ada-2-hl7/data/import-aorta-documents.xml
+           This is a fairly simple format and there's a schema for it in
+           YATC-shared/support/import-aorta-documents.xsd
+         * Open a command window in YATC-internal/ada-2-hl7/data/ and give the command:
+           yatc import-aorta-documents import-aorta-documents.xml
+         * This will analyze the documents to import and makes sure these files and all files 
+           it is dependent on (through includes/imports) are copied to YATC-internal/ada-2-hl7/env/AORTA/
+           The original AORTA directory structure is retained.
+    -->
+    <!-- ======================================================================= -->
+    <!-- Abbreviations used in mp (medicatieproces):
+        
+         mg     = beschikbaarstellen_medicatiegegevens
+         mg.st  = sturen_medicatiegegevens
+         mg.rp  = raadplegen_medicatiegegevens
+         mo     = beschikbaarstellen_medicatieoverzicht
+         mv     = sturen_medicatievoorschrift
+         mgb    = sturen_medicatiegebruik
+         av     = sturen_afhandeling_medicatievoorschrift
+         vma    = sturen_voorstel_medicatieafspraak
+         avma   = sturen_antwoord_voorstel_medicatieafspraak
+         vvv    = sturen_voorstel_verstrekkingsverzoek
+         avvv   = sturen_antwoord_voorstel_verstrekkingsverzoek
+         xmlv   = xml-voorbeelden
+         nt     = nictiz_test
+    -->
+    <!-- ======================================================================= -->
+
+    <macros>
+        <!-- Date used for conversions to HL7: -->
+        <macro name="DATET" value="2023-01-01"/>
+        <macro name="AORTABASEDIR1" value="../../env/AORTA/branches/Onderhoud_Mp_v90/Publicaties/20231017/mp-xml-20231017T223005"/>
+        <macro name="AORTABASEDIR2" value="../../env/AORTA/trunk/Zorgtoepassing/Medicatieproces/DECOR"/>
+        <macro name="SCHEMASDIR" value="$AORTABASEDIR1/schemas_codeGen_flat"/>
+        <macro name="SCHEMATRONDIR" value="$AORTABASEDIR2/mp-runtime-develop"/>
+
+        <!-- Remark: As test, this definition uses macros for all the usecase names (like the Ant scripts do).  
+             The jury is still out whether this is handy or not.
+             A side-effect is that the paths in @href attributes is no longer directory interpretable, so you can't do a 
+             ctrl-enter in oXygen to open the file.
+        -->
+        <macro name="usecase.mg" value="beschikbaarstellen_medicatiegegevens"/>
+        <macro name="usecase.mgsr" value="sturen_medicatiegegevens"/>
+        <macro name="usecase.mg.rp" value="raadplegen_medicatiegegevens"/>
+        <macro name="usecase.mo" value="beschikbaarstellen_medicatieoverzicht"/>
+        <macro name="usecase.mv" value="sturen_medicatievoorschrift"/>
+        <macro name="usecase.mgb" value="sturen_medicatiegebruik"/>
+        <macro name="usecase.av" value="sturen_afhandeling_medicatievoorschrift"/>
+        <macro name="usecase.vma" value="sturen_voorstel_medicatieafspraak"/>
+        <macro name="usecase.avma" value="sturen_antwoord_voorstel_medicatieafspraak"/>
+        <macro name="usecase.vvv" value="sturen_voorstel_verstrekkingsverzoek"/>
+        <macro name="usecase.avvv" value="sturen_antwoord_voorstel_verstrekkingsverzoek"/>
+        <macro name="usecase.nt" value="nictiz_test"/>
+        <macro name="usecase.xmlv" value="xml-voorbeelden"/>
+
+    </macros>
+
+    <!-- ======================================================================= -->
+    <!-- SETUP: -->
+
+    <message>=========================== {$yatcComponentName}/$BASEPATH</message>
+
+    <setup usecase="$usecase.nt" directory-id="nt">
+        <copy-project-schemas>
+            <include glob="*$usecase.mv.xsd"/>
+        </copy-project-schemas>
+        <!-- Currently schemas only ?!? -->
+    </setup>
+
+    <setup usecase="$usecase.mg" directory-id="mg">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+
+        <copy-data target-subdir="ada_instance_MA" directory-id="mg-ada-instance-ma">
+            <include glob="mg-*MA*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_MA" directory-id="mg-hl7-instance-ma"/>
+
+        <copy-data target-subdir="ada_instance_VV" directory-id="mg-ada-instance-vv">
+            <include glob="mg-*VV*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_VV" directory-id="mg-hl7-instance-vv"/>
+
+        <copy-data target-subdir="ada_instance_TA" directory-id="mg-ada-instance-ta">
+            <include glob="mg-*TA*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_TA" directory-id="mg-hl7-instance-ta"/>
+
+        <copy-data target-subdir="ada_instance_MVE" directory-id="mg-ada-instance-mve">
+            <include glob="mg-*MVE*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_MVE" directory-id="mg-hl7-instance-mve"/>
+
+        <copy-data target-subdir="ada_instance_MGB" directory-id="mg-ada-instance-mgb">
+            <include glob="mg-*MGB*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_MGB" directory-id="mg-hl7-instance-mgb"/>
+
+        <copy-data target-subdir="ada_instance_MTD" directory-id="mg-ada-instance-mtd">
+            <include glob="mg-*MTD*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_MTD" directory-id="mg-hl7-instance-mtd"/>
+
+        <copy-data target-subdir="ada_instance_WDS" directory-id="mg-ada-instance-wds">
+            <include glob="mg-*WDS*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_WDS" directory-id="mg-hl7-instance-wds"/>
+
+        <copy-data directory-id="mg-ada-instance">
+            <include glob="*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="mg-hl7-instance"/>
+
+        <copy-data target-subdir="ada_instance_repo" source-subdir="ada_instance_repo" directory-id="mg-ada-instance-repo">
+            <include glob="*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_repo" directory-id="mg-hl7-instance-repo"/>
+        <empty-directory target-subdir="validate_hl7_instance" directory-id="mg-reports" compare="false"/>
+    </setup>
+
+    <setup usecase="$usecase.mv" directory-id="mv">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="mv-ada-instance">
+            <include glob="*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="mv-hl7-instance"/>
+        <empty-directory target-subdir="validate_hl7_instance" directory-id="mv-reports" compare="false"/>
+    </setup>
+
+    <setup usecase="$usecase.av" directory-id="av">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="av-ada-instance">
+            <include glob="*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="av-hl7-instance"/>
+        <empty-directory target-subdir="validate_hl7_instance" directory-id="av-reports" compare="false"/>
+    </setup>
+
+    <setup usecase="$usecase.vma" directory-id="vma">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="vma-ada-instance">
+            <include glob="*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="vma-hl7-instance"/>
+        <empty-directory target-subdir="validate_hl7_instance" directory-id="vma-reports" compare="false"/>
+    </setup>
+
+    <setup usecase="$usecase.avma" directory-id="avma">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="avma-ada-instance">
+            <include glob="*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="avma-hl7-instance"/>
+        <empty-directory target-subdir="validate_hl7_instance" directory-id="avma-reports" compare="false"/>
+    </setup>
+
+    <setup usecase="$usecase.mgsr" directory-id="mgsr">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+
+        <copy-data target-subdir="ada_instance_MA" directory-id="mgsr-ada-instance-ma">
+            <include glob="mg-*MA*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_MA" directory-id="mgsr-hl7-instance-ma"/>
+
+        <copy-data target-subdir="ada_instance_VV" directory-id="mgsr-ada-instance-vv">
+            <include glob="mg-*VV*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_VV" directory-id="mgsr-hl7-instance-vv"/>
+
+        <copy-data target-subdir="ada_instance_TA" directory-id="mgsr-ada-instance-ta">
+            <include glob="mg-*TA*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_TA" directory-id="mgsr-hl7-instance-ta"/>
+
+        <copy-data target-subdir="ada_instance_MVE" directory-id="mgsr-ada-instance-mve">
+            <include glob="mg-*MVE*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_MVE" directory-id="mgsr-hl7-instance-mve"/>
+
+        <copy-data target-subdir="ada_instance_MGB" directory-id="mgsr-ada-instance-mgb">
+            <include glob="mg-*MGB*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_MGB" directory-id="mgsr-hl7-instance-mgb"/>
+
+        <copy-data target-subdir="ada_instance_MTD" directory-id="mgsr-ada-instance-mtd">
+            <include glob="mg-*MTD*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_MTD" directory-id="mgsr-hl7-instance-mtd"/>
+
+        <copy-data target-subdir="ada_instance_WDS" directory-id="mgsr-ada-instance-wds">
+            <include glob="mg-*WDS*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_WDS" directory-id="mgsr-hl7-instance-wds"/>
+
+        <copy-data directory-id="mgsr-ada-instance">
+            <include glob="*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="mgsr-hl7-instance"/>
+
+        <!-- Remark: This doesn’t do anything because the source directory ada_instance_repo doesn't exist. -->
+        <!--<copy-data target-subdir="ada_instance_repo" source-subdir="ada_instance_repo" directory-id="mgsr-ada-instance-repo">
+            <include glob="*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance_repo" directory-id="mgsr-hl7-instance-repo" compare="false"/>-->
+
+        <empty-directory target-subdir="validate_hl7_instance" directory-id="mgsr-reports" compare="false"/>
+    </setup>
+
+    <setup usecase="$usecase.vvv" directory-id="vvv">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="vvv-ada-instance">
+            <include glob="*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="vvv-hl7-instance"/>
+        <empty-directory target-subdir="validate_hl7_instance" directory-id="vvv-reports" compare="false"/>
+    </setup>
+
+    <setup usecase="$usecase.avvv" directory-id="avvv">
+        <copy-project-schemas>
+            <include glob="*$USECASE.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="avvv-ada-instance">
+            <include glob="*.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="avvv-hl7-instance"/>
+        <empty-directory target-subdir="validate_hl7_instance" directory-id="avvv-reports" compare="false"/>
+    </setup>
+
+    <setup usecase="$usecase.xmlv" directory-id="xmlv">
+        <copy-project-schemas>
+            <include glob="*$usecase.mv.xsd"/>
+            <include glob="*$usecase.mg.xsd"/>
+            <include glob="*$usecase.mo.xsd"/>
+            <include glob="*$usecase.av.xsd"/>
+            <include glob="*$usecase.vma.xsd"/>
+            <include glob="*$usecase.vvv.xsd"/>
+            <include glob="*$usecase.avvv.xsd"/>
+        </copy-project-schemas>
+        <copy-data directory-id="xmlv-ada-instance">
+            <include glob="*example*v30.xml"/>
+        </copy-data>
+        <empty-directory target-subdir="hl7_instance" directory-id="xmlv-hl7-instance"/>
+        <empty-directory target-subdir="validate_hl7_instance" directory-id="xmlv-reports" compare="false"/>
+    </setup>
+
+    <empty-root-directory target-subdir="validate" compare="false" directory-id="validation-results"/>
+
+    <!-- ======================================================================= -->
+    <!-- BUILD: -->
+
+    <action name="build" description="Build the ada-2-hl7 documents" default="true">
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- beschikbaarstellen_medicatiegegevens -->
+
+        <build fast="true" name="convert-$usecase.mg-ada-2-hl7-ma">
+            <stylesheet href="../../env/$BASEPATH/$usecase.mg/payload/$usecase.mg_org.xsl"/>
+            <input-documents directory="@mg-ada-instance-ma"/>
+            <output-documents directory="@mg-hl7-instance-ma"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <build fast="true" name="convert-$usecase.mg-ada-2-hl7-vv">
+            <stylesheet href="../../env/mp/9.3.0/$usecase.mg/payload/$usecase.mg_org.xsl"/>
+            <input-documents directory="@mg-ada-instance-vv"/>
+            <output-documents directory="@mg-hl7-instance-vv"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <build fast="true" name="convert-$usecase.mg-ada-2-hl7-ta">
+            <stylesheet href="../../env/mp/9.3.0/$usecase.mg/payload/$usecase.mg_org.xsl"/>
+            <input-documents directory="@mg-ada-instance-ta"/>
+            <output-documents directory="@mg-hl7-instance-ta"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <build fast="true" name="convert-$usecase.mg-ada-2-hl7-mve">
+            <stylesheet href="../../env/mp/9.3.0/$usecase.mg/payload/$usecase.mg_org.xsl"/>
+            <input-documents directory="@mg-ada-instance-mve"/>
+            <output-documents directory="@mg-hl7-instance-mve"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <build fast="true" name="convert-$usecase.mg-ada-2-hl7-mgb">
+            <stylesheet href="../../env/mp/9.3.0/$usecase.mg/payload/$usecase.mg_org.xsl"/>
+            <input-documents directory="@mg-ada-instance-mgb"/>
+            <output-documents directory="@mg-hl7-instance-mgb"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <build fast="true" name="convert-$usecase.mg-ada-2-hl7-mtd">
+            <stylesheet href="../../env/mp/9.3.0/$usecase.mg/payload/$usecase.mg_org.xsl"/>
+            <input-documents directory="@mg-ada-instance-mtd"/>
+            <output-documents directory="@mg-hl7-instance-mtd"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <build fast="true" name="convert-$usecase.mg-ada-2-hl7-wds">
+            <stylesheet href="../../env/mp/9.3.0/$usecase.mg/payload/$usecase.mg_org.xsl"/>
+            <input-documents directory="@mg-ada-instance-wds"/>
+            <output-documents directory="@mg-hl7-instance-wds"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <build fast="true" name="convert-$usecase.mg-ada-2-hl7">
+            <stylesheet href="../../env/mp/9.3.0/$usecase.mg/payload/$usecase.mg_org.xsl"/>
+            <input-documents directory="@mg-ada-instance"/>
+            <output-documents directory="@mg-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <build fast="true" name="convert-$usecase.mg-ada-2-hl7-repo">
+            <stylesheet href="../../env/mp/9.3.0/$usecase.mg/payload/$usecase.mg_org.xsl"/>
+            <input-documents directory="@mg-ada-instance-repo"/>
+            <output-documents directory="@mg-hl7-instance-repo"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- sturen_medicatievoorschrift -->
+
+        <build fast="true" name="convert-$usecase.mv-ada-2-hl7">
+            <stylesheet href="../../env/$BASEPATH/$usecase.mv/payload/$usecase.mv_org.xsl"/>
+            <input-documents directory="@mv-ada-instance"/>
+            <output-documents directory="@mv-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- sturen_afhandeling_medicatievoorschrift -->
+
+        <build fast="true" name="convert-$usecase.av-ada-2-hl7">
+            <stylesheet href="../../env/$BASEPATH/$usecase.av/payload/$usecase.av_org.xsl"/>
+            <input-documents directory="@av-ada-instance"/>
+            <output-documents directory="@av-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- sturen_voorstel_medicatieafspraak -->
+
+        <build fast="true" name="convert-$usecase.vma-ada-2-hl7">
+            <stylesheet href="../../env/$BASEPATH/$usecase.vma/payload/$usecase.vma_org.xsl"/>
+            <input-documents directory="@vma-ada-instance"/>
+            <output-documents directory="@vma-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- sturen_antwoord_voorstel_medicatieafspraak -->
+
+        <build fast="true" name="convert-$usecase.avma-ada-2-hl7">
+            <stylesheet href="../../env/$BASEPATH/$usecase.avma/payload/$usecase.avma_org.xsl"/>
+            <input-documents directory="@avma-ada-instance"/>
+            <output-documents directory="@avma-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- sturen_medicatiegegevens -->
+
+        <build fast="true" name="convert-$usecase.mgsr-ada-2-hl7-ma">
+            <stylesheet href="../../env/$BASEPATH/$usecase.mgsr/payload/$usecase.mgsr_org.xsl"/>
+            <input-documents directory="@mgsr-ada-instance-ma"/>
+            <output-documents directory="@mgsr-hl7-instance-ma"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <build fast="true" name="convert-$usecase.mgsr-ada-2-hl7-vv">
+            <stylesheet href="../../env/$BASEPATH/$usecase.mgsr/payload/$usecase.mgsr_org.xsl"/>
+            <input-documents directory="@mgsr-ada-instance-vv"/>
+            <output-documents directory="@mgsr-hl7-instance-vv"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <build fast="true" name="convert-$usecase.mgsr-ada-2-hl7-ta">
+            <stylesheet href="../../env/$BASEPATH/$usecase.mgsr/payload/$usecase.mgsr_org.xsl"/>
+            <input-documents directory="@mgsr-ada-instance-ta"/>
+            <output-documents directory="@mgsr-hl7-instance-ta"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <build fast="true" name="convert-$usecase.mgsr-ada-2-hl7-mve">
+            <stylesheet href="../../env/$BASEPATH/$usecase.mgsr/payload/$usecase.mgsr_org.xsl"/>
+            <input-documents directory="@mgsr-ada-instance-mve"/>
+            <output-documents directory="@mgsr-hl7-instance-mve"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <build fast="true" name="convert-$usecase.mgsr-ada-2-hl7-mgb">
+            <stylesheet href="../../env/$BASEPATH/$usecase.mgsr/payload/$usecase.mgsr_org.xsl"/>
+            <input-documents directory="@mgsr-ada-instance-mgb"/>
+            <output-documents directory="@mgsr-hl7-instance-mgb"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <build fast="true" name="convert-$usecase.mgsr-ada-2-hl7-mtd">
+            <stylesheet href="../../env/$BASEPATH/$usecase.mgsr/payload/$usecase.mgsr_org.xsl"/>
+            <input-documents directory="@mgsr-ada-instance-mtd"/>
+            <output-documents directory="@mgsr-hl7-instance-mtd"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <build fast="true" name="convert-$usecase.mgsr-ada-2-hl7-wds">
+            <stylesheet href="../../env/$BASEPATH/$usecase.mgsr/payload/$usecase.mgsr_org.xsl"/>
+            <input-documents directory="@mgsr-ada-instance-wds"/>
+            <output-documents directory="@mgsr-hl7-instance-wds"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <build fast="true" name="convert-$usecase.mgsr-ada-2-hl7">
+            <stylesheet href="../../env/$BASEPATH/$usecase.mgsr/payload/$usecase.mgsr_org.xsl"/>
+            <input-documents directory="@mgsr-ada-instance"/>
+            <output-documents directory="@mgsr-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <!-- <build fast="true" name="convert-$usecase.mgsr-ada-2-hl7-repo">
+            <stylesheet href="../../env/$BASEPATH/$usecase.mgsr/payload/$usecase.mgsr_org.xsl"/>
+            <input-documents directory="@mgsr-ada-instance-repo" accept-empty="true"/>
+            <output-documents directory="@mgsr-hl7-instance-repo"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>-->
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- sturen_voorstel_verstrekkingsverzoek -->
+
+        <build fast="true" name="convert-$usecase.vvv-ada-2-hl7">
+            <stylesheet href="../../env/$BASEPATH/$usecase.vvv/payload/$usecase.vvv_org.xsl"/>
+            <input-documents directory="@vvv-ada-instance"/>
+            <output-documents directory="@vvv-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- sturen_antwoord_voorstel_verstrekkingsverzoek -->
+
+        <build fast="true" name="convert-$usecase.avvv-ada-2-hl7">
+            <stylesheet href="../../env/$BASEPATH/$usecase.avvv/payload/$usecase.avvv_org.xsl"/>
+            <input-documents directory="@avvv-ada-instance"/>
+            <output-documents directory="@avvv-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- xml-voorbeelden -->
+
+        <build fast="true" name="convert-$usecase.xmlv-ada-2-hl7-mv">
+            <stylesheet href="../../env/$BASEPATH/$usecase.mv/payload/$usecase.mv_org.xsl"/>
+            <input-documents directory="@xmlv-ada-instance">
+                <include glob="mv*.xml"/>
+            </input-documents>
+            <output-documents directory="@xmlv-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <build fast="true" name="convert-$usecase.xmlv-ada-2-hl7-mg">
+            <stylesheet href="../../env/$BASEPATH/$usecase.mg/payload/$usecase.mg_org.xsl"/>
+            <input-documents directory="@xmlv-ada-instance">
+                <include glob="mg-*.xml"/>
+            </input-documents>
+            <output-documents directory="@xmlv-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <build fast="true" name="convert-$usecase.xmlv-ada-2-hl7-av">
+            <stylesheet href="../../env/$BASEPATH/$usecase.av/payload/$usecase.av_org.xsl"/>
+            <input-documents directory="@xmlv-ada-instance">
+                <include glob="av*.xml"/>
+            </input-documents>
+            <output-documents directory="@xmlv-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <build fast="true" name="convert-$usecase.xmlv-ada-2-hl7-vma">
+            <stylesheet href="../../env/$BASEPATH/$usecase.vma/payload/$usecase.vma_org.xsl"/>
+            <input-documents directory="@xmlv-ada-instance">
+                <include glob="vma*.xml"/>
+            </input-documents>
+            <output-documents directory="@xmlv-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <build fast="true" name="convert-$usecase.xmlv-ada-2-hl7-avma">
+            <stylesheet href="../../env/$BASEPATH/$usecase.avma/payload/$usecase.avma_org.xsl"/>
+            <input-documents directory="@xmlv-ada-instance">
+                <include glob="avma*.xml"/>
+            </input-documents>
+            <output-documents directory="@xmlv-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <build fast="true" name="convert-$usecase.xmlv-ada-2-hl7-vvv">
+            <stylesheet href="../../env/$BASEPATH/$usecase.vvv/payload/$usecase.vvv_org.xsl"/>
+            <input-documents directory="@xmlv-ada-instance">
+                <include glob="vvv*.xml"/>
+            </input-documents>
+            <output-documents directory="@xmlv-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+        <build fast="true" name="convert-$usecase.xmlv-ada-2-hl7-avvv">
+            <stylesheet href="../../env/$BASEPATH/$usecase.avvv/payload/$usecase.avvv_org.xsl"/>
+            <input-documents directory="@xmlv-ada-instance">
+                <include glob="avvv*.xml"/>
+            </input-documents>
+            <output-documents directory="@xmlv-hl7-instance"/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+
+        <!-- Add bouwstenen: -->
+        <build fast="true" name="convert-xml-voorbeelden-ada-2-hl7-bouwstenen">
+            <stylesheet href="../../env/$BASEPATH/$usecase.xmlv/bouwstenen_transacties/bouwstenen_transacties_org.xsl"/>
+            <no-input/>
+            <discard-output/>
+            <parameter name="generateInstructionText" value="true"/>
+            <parameter name="dateT" value="$DATET"/>
+            <parameter name="inputAdaFilesDir" directory="@xmlv-ada-instance"/>
+            <parameter name="outputDir" directory="@xmlv-hl7-instance"/>
+            <parameter name="schematronRef" value="false"/>
+        </build>
+
+    </action>
+
+    <!-- ======================================================================= -->
+    <!-- SCHEMA VALIDATE: -->
+
+    <action name="schema-validate" description="Schema-validate the HL7 results" setup="false">
+
+        <macros>
+            <macro name="HL7SCHEMA" value="$SCHEMASDIR/organizer.xsd"/>
+            <macro name="CDASCHEMA" value="$SCHEMASDIR/CDANL_extended.xsd"/>
+        </macros>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- HL7 instances: -->
+
+        <validate-with-schema name="schema-validate-hl7-$usecase.mg">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@mg-hl7-instance"/>
+            <output-report directory="@mg-reports" name="schema-report-hl7-validate.xml"/>
+        </validate-with-schema>
+        <validate-with-schema name="schema-validate-hl7-$usecase.mg">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@mg-hl7-instance-repo"/>
+            <output-report directory="@mg-reports" name="schema-report-hl7-repo-validate.xml"/>
+        </validate-with-schema>
+
+        <validate-with-schema name="schema-validate-hl7-$usecase.mv">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@mv-hl7-instance"/>
+            <output-report directory="@mv-reports" name="schema-report-hl7-validate.xml"/>
+        </validate-with-schema>
+
+        <validate-with-schema name="schema-validate-hl7-$usecase.av">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@av-hl7-instance"/>
+            <output-report directory="@av-reports" name="schema-report-hl7-validate.xml"/>
+        </validate-with-schema>
+
+        <validate-with-schema name="schema-validate-hl7-$usecase.vma">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@vma-hl7-instance"/>
+            <output-report directory="@vma-reports" name="schema-report-hl7-validate.xml"/>
+        </validate-with-schema>
+
+        <validate-with-schema name="schema-validate-hl7-$usecase.avma">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@avma-hl7-instance"/>
+            <output-report directory="@avma-reports" name="schema-report-hl7-validate.xml"/>
+        </validate-with-schema>
+
+        <validate-with-schema name="schema-validate-hl7-$usecase.mgsr">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@mgsr-hl7-instance"/>
+            <output-report directory="@mgsr-reports" name="schema-report-hl7-validate.xml"/>
+        </validate-with-schema>
+
+        <validate-with-schema name="schema-validate-hl7-$usecase.vvv">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@vvv-hl7-instance"/>
+            <output-report directory="@vvv-reports" name="schema-report-hl7-validate.xml"/>
+        </validate-with-schema>
+
+        <validate-with-schema name="schema-validate-hl7-$usecase.avvv">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@avvv-hl7-instance"/>
+            <output-report directory="@avvv-reports" name="schema-report-hl7-validate.xml"/>
+        </validate-with-schema>
+
+        <validate-with-schema name="schema-validate-hl7-$usecase.xmlv">
+            <schema href="$HL7SCHEMA"/>
+            <input-documents directory="@xmlv-hl7-instance"/>
+            <output-report directory="@xmlv-reports" name="schema-report-hl7-validate.xml"/>
+        </validate-with-schema>
+
+        <!-- Remark: The original scripts also do CDA validation, but there are no CDA files generated for mp/9.3.0... -->
+
+    </action>
+
+    <!-- ======================================================================= -->
+    <!-- SCHEMATRON-VALIDATE: -->
+
+    <action name="schematron-validate" description="Schematron-validate the HL7 results" setup="false">
+
+        <validate-with-schematron name="schematron-validate-hl7-$usecase.mg" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_mgb.sch"/>
+            <input-documents directory="@mg-hl7-instance-repo"/>
+            <output-report directory="@mg-reports" name="schematron-report-hl7-validate.xml" prune-valid="false"/>
+        </validate-with-schematron>
+
+        <validate-with-schematron name="schematron-validate-hl7-$usecase.mgsr" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_mgb.sch"/>
+            <input-documents directory="@mgsr-hl7-instance"/>
+            <output-report directory="@mgsr-reports" name="schematron-report-hl7-validate.xml"/>
+        </validate-with-schematron>
+
+        <validate-with-schematron name="schematron-validate-hl7-$usecase.av" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_av.sch"/>
+            <input-documents directory="@av-hl7-instance"/>
+            <output-report directory="@av-reports" name="schematron-report-hl7-validate.xml"/>
+        </validate-with-schematron>
+
+        <validate-with-schematron name="schematron-validate-hl7-$usecase.avvv" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_avvv.sch"/>
+            <input-documents directory="@avvv-hl7-instance"/>
+            <output-report directory="@avvv-reports" name="schematron-report-hl7-validate.xml"/>
+        </validate-with-schematron>
+
+        <validate-with-schematron name="schematron-validate-hl7-$usecase.mv" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_vos.sch"/>
+            <input-documents directory="@mv-hl7-instance"/>
+            <output-report directory="@mv-reports" name="schematron-report-hl7-validate.xml"/>
+        </validate-with-schematron>
+
+        <validate-with-schematron name="schematron-validate-hl7-$usecase.vma" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_vma.sch"/>
+            <input-documents directory="@vma-hl7-instance"/>
+            <output-report directory="@vma-reports" name="schematron-report-hl7-validate.xml"/>
+        </validate-with-schematron>
+
+        <validate-with-schematron name="schematron-validate-hl7-$usecase.avma" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_avma.sch"/>
+            <input-documents directory="@avma-hl7-instance"/>
+            <output-report directory="@avma-reports" name="schematron-report-hl7-validate.xml"/>
+        </validate-with-schematron>
+
+        <validate-with-schematron name="schematron-validate-hl7-sturen_medicatievoorschrift" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_vvv.sch"/>
+            <input-documents directory="@vvv-hl7-instance"/>
+            <output-report directory="@vvv-reports" name="schematron-report-hl7-validate.xml"/>
+        </validate-with-schematron>
+
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- XML voorbeelden: -->
+
+        <!-- HL7 -->
+        <validate-with-schematron name="schematron-validate-hl7-$usecase.xmlv-$usecase.mg" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_mgb.sch"/>
+            <input-documents directory="@xmlv-hl7-instance" accept-empty="true">
+                <include glob="mg-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-hl7-validate-mg.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-hl7-$usecase.xmlv-$usecase.av" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_av.sch"/>
+            <input-documents directory="@xmlv-hl7-instance">
+                <include glob="av-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-hl7-validate-av.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-hl7-$usecase.xmlv-$usecase.avvv" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_avvv.sch"/>
+            <input-documents directory="@xmlv-hl7-instance">
+                <include glob="avvv-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-hl7-validate-avvv.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-hl7-$usecase.xmlv-$usecase.mv" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_vos.sch"/>
+            <input-documents directory="@xmlv-hl7-instance">
+                <include glob="mv-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-hl7-validate-mv.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-hl7-$usecase.xmlv-$usecase.vma" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_vma.sch"/>
+            <input-documents directory="@xmlv-hl7-instance">
+                <include glob="vma-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-hl7-validate-vma.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-hl7-$usecase.xmlv-avma" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_avma.sch"/>
+            <input-documents directory="@xmlv-hl7-instance">
+                <include glob="avma-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-hl7-validate-avma.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-hl7-$usecase.xmlv-$usecase.vvv" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_vvv.sch"/>
+            <input-documents directory="@xmlv-hl7-instance">
+                <include glob="vvv-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-hl7-validate-vvv.xml"/>
+        </validate-with-schematron>
+
+        <!-- Bouwstenen: -->
+        <validate-with-schematron name="schematron-validate-hl7-$usecase.xmlv-bouwstenen-1" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_mg_ma.sch"/>
+            <input-documents directory="@xmlv-hl7-instance">
+                <include glob="bsma-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-hl7-validate-bouwstenen-1.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-hl7-$usecase.xmlv-bouwstenen-2" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_mg_wds.sch"/>
+            <input-documents directory="@xmlv-hl7-instance">
+                <include glob="bswds-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-hl7-validate-bouwstenen-2.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-hl7-$usecase.xmlv-bouwstenen-3" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_mg_vv.sch"/>
+            <input-documents directory="@xmlv-hl7-instance">
+                <include glob="bsvv-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-hl7-validate-bouwstenen-3.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-hl7-$usecase.xmlv-bouwstenen-4" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_mg_ta.sch"/>
+            <input-documents directory="@xmlv-hl7-instance">
+                <include glob="bsta-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-hl7-validate-bouwstenen-4.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-hl7-$usecase.xmlv-bouwstenen-5" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_mg_mve.sch"/>
+            <input-documents directory="@xmlv-hl7-instance">
+                <include glob="bsmve-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-hl7-validate-bouwstenen-5.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-hl7-$usecase.xmlv-bouwstenen-6" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_mg_mgb.sch"/>
+            <input-documents directory="@xmlv-hl7-instance">
+                <include glob="bsmgb-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-hl7-validate-bouwstenen-6.xml"/>
+        </validate-with-schematron>
+        <validate-with-schematron name="schematron-validate-hl7-$usecase.xmlv-bouwstenen-7" continue-on-schematron-error="true">
+            <schema href="$SCHEMATRONDIR/mp-mp93_mg_mtd.sch"/>
+            <input-documents directory="@xmlv-hl7-instance">
+                <include glob="bsmtd-*.xml"/>
+            </input-documents>
+            <output-report directory="@xmlv-reports" name="schematron-report-hl7-validate-bouwstenen-7.xml"/>
+        </validate-with-schematron>
+
+    </action>
+
+    <!-- ======================================================================= -->
+
+    <action name="gather-validation-results" setup="false" description="Gathers all validation results in XML reports">
+
+        <build fast="true" name="schematron-report-hl7-$usecase.mg">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="hl7_$usecase.mg.xml"/>
+            <parameter name="hrefReportDir" directory="@mg-reports"/>
+            <parameter name="filenamePattern" value="schema*hl7*.xml"/>
+        </build>
+
+        <build fast="true" name="schematron-report-hl7-$usecase.mv">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="hl7_$usecase.mv.xml"/>
+            <parameter name="hrefReportDir" directory="@mv-reports"/>
+            <parameter name="filenamePattern" value="schema*hl7*.xml"/>
+        </build>
+
+        <build fast="true" name="schematron-report-hl7-$usecase.av">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="hl7_$usecase.av.xml"/>
+            <parameter name="hrefReportDir" directory="@av-reports"/>
+            <parameter name="filenamePattern" value="schema*hl7*.xml"/>
+        </build>
+
+        <build fast="true" name="schematron-report-hl7-$usecase.vma">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="hl7_$usecase.vma.xml"/>
+            <parameter name="hrefReportDir" directory="@vma-reports"/>
+            <parameter name="filenamePattern" value="schema*hl7*.xml"/>
+        </build>
+
+        <build fast="true" name="schematron-report-hl7-$usecase.avma">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="hl7_$usecase.avma.xml"/>
+            <parameter name="hrefReportDir" directory="@avma-reports"/>
+            <parameter name="filenamePattern" value="schema*hl7*.xml"/>
+        </build>
+
+        <build fast="true" name="schematron-report-hl7-$usecase.mgsr">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="hl7_$usecase.mgsr.xml"/>
+            <parameter name="hrefReportDir" directory="@mgsr-reports"/>
+            <parameter name="filenamePattern" value="schema*hl7*.xml"/>
+        </build>
+
+        <build fast="true" name="schematron-report-hl7-$usecase.vvv">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="hl7_$usecase.vvv.xml"/>
+            <parameter name="hrefReportDir" directory="@vvv-reports"/>
+            <parameter name="filenamePattern" value="schema*hl7*.xml"/>
+        </build>
+
+        <build fast="true" name="schematron-report-hl7-$usecase.avvv">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="hl7_$usecase.avvv.xml"/>
+            <parameter name="hrefReportDir" directory="@avvv-reports"/>
+            <parameter name="filenamePattern" value="schema*hl7*.xml"/>
+        </build>
+
+        <build fast="true" name="schematron-report-hl7-$usecase.xmlv">
+            <stylesheet href="../../../../YATC-shared/xsl/validation-report-to-start-format.xsl"/>
+            <no-input/>
+            <output-document directory="@validation-results" name="hl7_$usecase.xmlv.xml"/>
+            <parameter name="hrefReportDir" directory="@xmlv-reports"/>
+            <parameter name="filenamePattern" value="schema*hl7*.xml"/>
+        </build>
+
+    </action>
+
+    <!-- ======================================================================= -->
+
+    <action name="validate" description="Perform all validations and gather results" depends-on="schema-validate schematron-validate gather-validation-results" setup="false"/>
+
+    <!-- ======================================================================= -->
+
+    <action name="all" description="Performs all builds and validations" depends-on="build schema-validate schematron-validate gather-validation-results" setup="true"/>
+
+</application>

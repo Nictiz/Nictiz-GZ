@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../../../YATC-shared/general-engine/sch/general-engine-data.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<fhir-2-ada-data xmlns="https://nictiz.nl/ns/YATC-internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://nictiz.nl/ns/YATC-internal ../xsd/fhir-2-ada-data.xsd" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!-- ================================================================== -->
+    <!--
+        This is the production data for the fhir-2-ada processing.
+        
+        Information about the format of this document in its schema ../xsd/fhir-2-ada-data.xsd
+        Information about how this file is used in the documentation in the ../doc/ subdirectory.
+    -->
+    <!-- ======================================================================= -->
+    <!--
+        Copyright © Nictiz
+        
+        This program is free software; you can redistribute it and/or modify it under the terms of the
+        GNU Lesser General Public License as published by the Free Software Foundation; either version
+        2.1 of the License, or (at your option) any later version.
+        
+        This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+        without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+        See the GNU Lesser General Public License for more details.
+        
+        The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+    -->
+    <!-- ======================================================================= -->
+
+    <application name="mp" version="9.0.7" source-project-name="mp-mp907">
+
+        <message>*** WARNING: This conversion uses *static* ADA schemas (source: YATC-internal/fhir-2-ada/env/mp/9.0.7/…)</message>
+        <message>*** WARNING: This conversion uses *static* FHIR data (source: YATC-internal/fhir-2-ada/env/mp/9.0.7/…)</message>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- beschikbaarstellen_medicatiegegevens -->
+
+        <setup usecase="beschikbaarstellen_medicatiegegevens" directory-id="mg">
+            <copy-directory directory="#../env/$BASEPATH/ada_schemas/" target-subdir="ada_schemas"/>
+            <copy-directory directory="#../env/$BASEPATH/fhir_instance/" target-subdir="fhir_instance" directory-id="mg-fhir-instance"/>
+            <empty-directory target-subdir="ada_instance" directory-id="mg-ada-instance"/>
+        </setup>
+
+        <build>
+            <stylesheet href="../env/$BASEPATH/beschikbaarstellen_medicatiegegevens/payload/beschikbaarstellen_medicatiegegevens_2_ada.xsl"/>
+            <input-documents directory="@mg-fhir-instance"/>
+            <output-documents directory="@mg-ada-instance"/>
+        </build>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- beschikbaarstellen_medicatieoverzicht -->
+
+        <setup usecase="beschikbaarstellen_medicatieoverzicht" directory-id="mo">
+            <copy-directory directory="#../env/$BASEPATH/ada_schemas/" target-subdir="ada_schemas"/>
+            <copy-directory directory="#../env/$BASEPATH/fhir_instance/" target-subdir="fhir_instance" directory-id="mo-fhir-instance"/>
+            <empty-directory target-subdir="ada_instance" directory-id="mo-ada-instance"/>
+        </setup>
+
+        <build>
+            <stylesheet href="../env/$BASEPATH/beschikbaarstellen_medicatieoverzicht/payload/beschikbaarstellen_medicatieoverzicht_2_ada.xsl"/>
+            <input-documents directory="@mo-fhir-instance"/>
+            <output-documents directory="@mo-ada-instance"/>
+        </build>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+        <!-- beschikbaarstellen_verstrekkingenvertaling -->
+
+        <setup usecase="beschikbaarstellen_verstrekkingenvertaling" directory-id="vv">
+            <copy-directory directory="#../env/$BASEPATH/ada_schemas/" target-subdir="ada_schemas"/>
+            <copy-directory directory="#../env/$BASEPATH/fhir_instance/" target-subdir="fhir_instance" directory-id="vv-fhir-instance"/>
+            <empty-directory target-subdir="ada_instance" directory-id="vv-ada-instance"/>
+        </setup>
+
+        <build>
+            <stylesheet href="../env/$BASEPATH/beschikbaarstellen_verstrekkingenvertaling/payload/beschikbaarstellen_verstrekkingenvertaling_2_ada.xsl"/>
+            <input-documents directory="@vv-fhir-instance"/>
+            <output-documents directory="@vv-ada-instance"/>
+        </build>
+
+    </application>
+
+</fhir-2-ada-data>

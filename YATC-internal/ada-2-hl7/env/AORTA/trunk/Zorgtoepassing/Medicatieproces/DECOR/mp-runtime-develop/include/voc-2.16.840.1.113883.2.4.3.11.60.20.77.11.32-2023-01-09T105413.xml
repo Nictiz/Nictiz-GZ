@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             id="2.16.840.1.113883.2.4.3.11.60.20.77.11.32"
+             name="AanvWensVV"
+             displayName="Aanvullende wensen voor VV"
+             effectiveDate="2023-01-09T10:54:13"
+             statusCode="draft"
+             versionLabel="MP9"
+             lastModifiedDate="2023-01-25T10:45:48">
+      <sourceCodeSystem id="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2051"
+                        identifierName="G-std thesaurus 2051"
+                        canonicalUri="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2051"
+                        canonicalUriDSTU2="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2051"
+                        canonicalUriSTU3="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2051"
+                        canonicalUriR4="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2051"
+                        canonicalUriR4B="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2051"
+                        canonicalUriR5="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2051"/>
+      <publishingAuthority name="Nictiz" inherited="project">
+         <addrLine>Oude Middenweg 55</addrLine>
+         <addrLine>2491 AC Den Haag</addrLine>
+         <addrLine type="phone">070-3173450</addrLine>
+      </publishingAuthority>
+      <conceptList>
+         <concept code="1"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2051"
+                  displayName="Spoed"
+                  level="0"
+                  type="L"/>
+         <concept code="2"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2051"
+                  displayName="Niet in GDS"
+                  level="0"
+                  type="L"/>
+         <concept code="3"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2051"
+                  displayName="Bezorgen"
+                  level="0"
+                  type="L"/>
+         <concept code="4"
+                  codeSystem="2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2051"
+                  displayName="In manu medici (IMM)"
+                  level="0"
+                  type="L"/>
+      </conceptList>
+   </valueSet>
+</valueSets>

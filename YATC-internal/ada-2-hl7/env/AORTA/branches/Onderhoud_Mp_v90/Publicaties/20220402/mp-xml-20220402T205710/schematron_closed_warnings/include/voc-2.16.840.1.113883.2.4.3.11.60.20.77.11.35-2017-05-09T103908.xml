@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             name="ZonodigCriterium"
+             displayName="Zonodig criterium"
+             versionLabel="907"
+             id="2.16.840.1.113883.2.4.3.11.60.20.77.11.35"
+             statusCode="final"
+             effectiveDate="2017-05-09T10:39:08">
+      <sourceCodeSystem id="2.16.840.1.113883.2.4.4.5"
+                        identifierName="NHG tabel 25 aanvullende teksten numeriek"
+                        canonicalUri="https://referentiemodel.nhg.org/tabellen/nhg-tabel-25-gebruiksvoorschrift#aanvullend-numeriek"
+                        canonicalUriDSTU2="https://referentiemodel.nhg.org/tabellen/nhg-tabel-25-gebruiksvoorschrift#aanvullend-numeriek"
+                        canonicalUriSTU3="https://referentiemodel.nhg.org/tabellen/nhg-tabel-25-gebruiksvoorschrift#aanvullend-numeriek"
+                        canonicalUriR4="https://referentiemodel.nhg.org/tabellen/nhg-tabel-25-gebruiksvoorschrift#aanvullend-numeriek"/>
+      <sourceCodeSystem id="2.16.840.1.113883.5.1008"
+                        identifierName="Null Flavor"
+                        canonicalUri="http://terminology.hl7.org/CodeSystem/v3-NullFlavor"
+                        canonicalUriDSTU2="http://hl7.org/fhir/v3/NullFlavor"
+                        canonicalUriSTU3="http://hl7.org/fhir/v3/NullFlavor"
+                        canonicalUriR4="http://terminology.hl7.org/CodeSystem/v3-NullFlavor"
+                        context="external/hl7"/>
+      <publishingAuthority name="Nictiz" inherited="project">
+         <addrLine>Oude Middenweg 55</addrLine>
+         <addrLine>2491 AC Den Haag</addrLine>
+         <addrLine>T 070 317 3450</addrLine>
+      </publishingAuthority>
+      <conceptList>
+         <concept code="1022"
+                  codeSystem="2.16.840.1.113883.2.4.4.5"
+                  displayName="bij een aanval"
+                  level="0"
+                  type="L"/>
+         <concept code="1023"
+                  codeSystem="2.16.840.1.113883.2.4.4.5"
+                  displayName="bij benauwdheid"
+                  level="0"
+                  type="L"/>
+         <concept code="1024"
+                  codeSystem="2.16.840.1.113883.2.4.4.5"
+                  displayName="bij diarree"
+                  level="0"
+                  type="L"/>
+         <concept code="1028"
+                  codeSystem="2.16.840.1.113883.2.4.4.5"
+                  displayName="bij pijn"
+                  level="0"
+                  type="L"/>
+         <concept code="1121"
+                  codeSystem="2.16.840.1.113883.2.4.4.5"
+                  displayName="bij jeuk"
+                  level="0"
+                  type="L"/>
+         <concept code="1137"
+                  codeSystem="2.16.840.1.113883.2.4.4.5"
+                  displayName="zo nodig"
+                  level="0"
+                  type="L"/>
+         <concept code="1144"
+                  codeSystem="2.16.840.1.113883.2.4.4.5"
+                  displayName="bij hoofdpijn"
+                  level="0"
+                  type="L"/>
+         <concept code="1145"
+                  codeSystem="2.16.840.1.113883.2.4.4.5"
+                  displayName="bij koorts"
+                  level="0"
+                  type="L"/>
+         <concept code="1146"
+                  codeSystem="2.16.840.1.113883.2.4.4.5"
+                  displayName="bij hoge koorts"
+                  level="0"
+                  type="L"/>
+         <concept code="1147"
+                  codeSystem="2.16.840.1.113883.2.4.4.5"
+                  displayName="bij koorts en/of pijn"
+                  level="0"
+                  type="L"/>
+         <concept code="1387"
+                  codeSystem="2.16.840.1.113883.2.4.4.5"
+                  displayName="bij hoest"
+                  level="0"
+                  type="L"/>
+         <exception code="OTH"
+                    codeSystem="2.16.840.1.113883.5.1008"
+                    displayName="overig"
+                    level="0"
+                    type="L"/>
+         <exception code="NI"
+                    codeSystem="2.16.840.1.113883.5.1008"
+                    displayName="geen informatie"
+                    level="0"
+                    type="L"/>
+      </conceptList>
+   </valueSet>
+</valueSets>

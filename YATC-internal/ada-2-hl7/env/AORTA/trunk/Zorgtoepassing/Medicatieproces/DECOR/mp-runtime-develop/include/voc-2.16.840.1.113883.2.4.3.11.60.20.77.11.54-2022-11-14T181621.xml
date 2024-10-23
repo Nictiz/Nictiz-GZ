@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             id="2.16.840.1.113883.2.4.3.11.60.20.77.11.54"
+             name="RedenWijzigen-StakenWDSCodelijst"
+             displayName="RedenWijzigen-StakenWDSCodelijst"
+             effectiveDate="2022-11-14T18:16:21"
+             statusCode="draft"
+             versionLabel="MP9">
+      <sourceCodeSystem id="2.16.840.1.113883.5.1008"
+                        identifierName="Null Flavor"
+                        canonicalUri="http://terminology.hl7.org/CodeSystem/v3-NullFlavor"
+                        canonicalUriDSTU2="http://hl7.org/fhir/v3/NullFlavor"
+                        canonicalUriSTU3="http://hl7.org/fhir/v3/NullFlavor"
+                        canonicalUriR4="http://terminology.hl7.org/CodeSystem/v3-NullFlavor"
+                        canonicalUriR4B="http://terminology.hl7.org/CodeSystem/v3-NullFlavor"
+                        canonicalUriR5="http://terminology.hl7.org/CodeSystem/v3-NullFlavor"
+                        hl7v2table0396="NULLFL"
+                        context="external/hl7/2.16.840.1.113883.5.1008"/>
+      <sourceCodeSystem id="2.16.840.1.113883.6.96"
+                        identifierName="SNOMED Clinical Terms"
+                        canonicalUri="http://snomed.info/sct"
+                        canonicalUriDSTU2="http://snomed.info/sct"
+                        canonicalUriSTU3="http://snomed.info/sct"
+                        canonicalUriR4="http://snomed.info/sct"
+                        canonicalUriR4B="http://snomed.info/sct"
+                        canonicalUriR5="http://snomed.info/sct"
+                        hl7v2table0396="SCT"/>
+      <publishingAuthority name="Nictiz" inherited="project">
+         <addrLine>Oude Middenweg 55</addrLine>
+         <addrLine>2491 AC Den Haag</addrLine>
+         <addrLine type="phone">070-3173450</addrLine>
+      </publishingAuthority>
+      <copyright language="en-US" inherited="true">This artefact includes content from SNOMED Clinical Terms® (SNOMED CT®) which is copyright of the International Health Terminology Standards Development Organisation (IHTSDO). Implementers of these artefacts must have the appropriate SNOMED CT Affiliate license - for more information contact http://www.snomed.org/snomed-ct/getsnomed-ct or info@snomed.org.</copyright>
+      <conceptList>
+         <concept code="79899007"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="geneesmiddelinteractie"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Drug interaction (finding)"/>
+            <desc language="nl-NL">
+               <div>interactie</div>
+            </desc>
+         </concept>
+         <concept code="58848006"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="gebrek aan geneesmiddeleffect"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Lack of drug action (finding)"/>
+            <desc language="nl-NL">
+               <div>geen of onvoldoende effect</div>
+            </desc>
+         </concept>
+         <concept code="112251000146103"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="te sterk effect van medicatie"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Too strong drug action (finding)"/>
+            <desc language="nl-NL">
+               <div>te sterk effect van medicatie</div>
+            </desc>
+         </concept>
+         <concept code="112751000146109"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="medicatiebeleid veranderd"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Medication management changed (situation)"/>
+            <desc language="nl-NL">
+               <div>ander voorschrijfbeleid</div>
+            </desc>
+         </concept>
+         <concept code="159711000146106"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="verzoek van zorgafnemer om behandeling te wijzigen"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Patient requested modification of treatment (situation)"/>
+            <desc language="nl-NL">
+               <div>wens patiënt</div>
+            </desc>
+         </concept>
+         <concept code="112261000146100"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="hervatten van beleid van vorige voorschrijver"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Treatment previous prescriber continued (situation)"/>
+            <desc language="nl-NL">
+               <div>hervatten beleid vorige voorschrijver</div>
+            </desc>
+         </concept>
+         <concept code="305335007"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="opname in instelling"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Admission to establishment (procedure)"/>
+            <desc language="nl-NL">
+               <div>opname</div>
+            </desc>
+         </concept>
+         <concept code="405613005"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="verrichting gepland"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Planned procedure (situation)"/>
+            <desc language="nl-NL">
+               <div>geplande procedure</div>
+            </desc>
+         </concept>
+         <concept code="159691000146109"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="foutieve registratie van medicatie"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Incorrect registration of medication (finding)"/>
+            <desc language="nl-NL">
+               <div>correctie</div>
+            </desc>
+         </concept>
+         <concept code="160131000146104"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="verandering in labwaarde"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Change in lab value (finding)"/>
+            <desc language="nl-NL">
+               <div>verandering in labwaarde</div>
+            </desc>
+         </concept>
+         <concept code="160161000146108"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="dubbele registratie van medicamenteuze behandeling"
+                  level="0"
+                  type="D">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Duplicate registration of medication treatment (finding)"/>
+            <desc language="nl-NL">
+               <div>loopt in andere medicamenteuze behandeling</div>
+            </desc>
+         </concept>
+         <concept code="180011000146107"
+                  codeSystem="2.16.840.1.113883.6.96"
+                  displayName="dubbele registratie van medicamenteuze behandeling"
+                  level="0"
+                  type="L">
+            <designation language="en-US"
+                         type="fsn"
+                         displayName="Duplicate registration of medication treatment (finding)"/>
+            <desc language="nl-NL">
+               <div>loopt in andere medicamenteuze behandeling</div>
+            </desc>
+         </concept>
+         <exception code="OTH"
+                    codeSystem="2.16.840.1.113883.5.1008"
+                    displayName="Overig"
+                    level="0"
+                    type="L">
+            <desc language="nl-NL">Overig</desc>
+         </exception>
+      </conceptList>
+   </valueSet>
+</valueSets>

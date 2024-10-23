@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:f="http://hl7.org/fhir"
+             xmlns:hl7nl="urn:hl7-nl:v3"
+             xmlns:pharm="urn:ihe:pharm:medication"
+             xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             statusCode="final"
+             id="2.16.840.1.113883.2.4.3.11.60.20.77.11.18"
+             name="Time_aToMin_PQ_UCUM"
+             displayName="Time a tot min PQ (UCUM)"
+             effectiveDate="2016-02-18T12:43:01">
+      <sourceCodeSystem id="2.16.840.1.113883.6.8"
+                        identifierName="Unified Code for Units of Measure"
+                        canonicalUri="http://unitsofmeasure.org"
+                        canonicalUriDSTU2="http://unitsofmeasure.org"
+                        canonicalUriSTU3="http://unitsofmeasure.org"
+                        canonicalUriR4="http://unitsofmeasure.org"
+                        canonicalUriR4B="http://unitsofmeasure.org"
+                        canonicalUriR5="http://unitsofmeasure.org"
+                        hl7v2table0396="UCUM"
+                        context="external/hl7/2.16.840.1.113883.6.8"/>
+      <publishingAuthority name="Nictiz" inherited="project">
+         <addrLine>Oude Middenweg 55</addrLine>
+         <addrLine>2491 AC Den Haag</addrLine>
+         <addrLine type="phone">070-3173450</addrLine>
+      </publishingAuthority>
+      <conceptList>
+         <concept code="wk"
+                  codeSystem="2.16.840.1.113883.6.8"
+                  displayName="Week"
+                  level="0"
+                  type="L"/>
+         <concept code="mo"
+                  codeSystem="2.16.840.1.113883.6.8"
+                  displayName="Month"
+                  level="0"
+                  type="L"/>
+         <concept code="a"
+                  codeSystem="2.16.840.1.113883.6.8"
+                  displayName="Year"
+                  level="0"
+                  type="L"/>
+         <concept code="d"
+                  codeSystem="2.16.840.1.113883.6.8"
+                  displayName="Day"
+                  level="0"
+                  type="L"/>
+         <concept code="h"
+                  codeSystem="2.16.840.1.113883.6.8"
+                  displayName="Hour"
+                  level="0"
+                  type="L"/>
+         <concept code="min"
+                  codeSystem="2.16.840.1.113883.6.8"
+                  displayName="Minute"
+                  level="0"
+                  type="L"/>
+      </conceptList>
+   </valueSet>
+</valueSets>

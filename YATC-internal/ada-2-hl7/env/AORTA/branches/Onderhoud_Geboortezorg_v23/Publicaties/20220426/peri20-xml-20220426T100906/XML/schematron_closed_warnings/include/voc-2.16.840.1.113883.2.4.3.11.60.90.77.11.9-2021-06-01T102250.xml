@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valueSets>
+   <valueSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:decor="http://art-decor.org/ns/decor"
+             xmlns:sdtc="urn:hl7-org:sdtc"
+             xmlns:peri="urn:nictiz-nl:v3/peri"
+             id="2.16.840.1.113883.2.4.3.11.60.90.77.11.9"
+             name="MedicatieNageboorte"
+             displayName="Medicatie nageboortetijdperk"
+             statusCode="final"
+             lastModifiedDate="2022-04-25T10:22:43"
+             effectiveDate="2021-06-01T10:22:50">
+      <sourceCodeSystem id="2.16.840.1.113883.6.73"
+                        identifierName="ATC"
+                        canonicalUri="urn:oid:2.16.840.1.113883.6.73"
+                        canonicalUriDSTU2="urn:oid:2.16.840.1.113883.6.73"
+                        canonicalUriSTU3="urn:oid:2.16.840.1.113883.6.73"
+                        canonicalUriR4="urn:oid:2.16.840.1.113883.6.73"/>
+      <sourceCodeSystem id="2.16.840.1.113883.5.1008"
+                        identifierName="NullFlavor"
+                        canonicalUri="urn:oid:2.16.840.1.113883.5.1008"
+                        canonicalUriDSTU2="urn:oid:2.16.840.1.113883.5.1008"
+                        canonicalUriSTU3="urn:oid:2.16.840.1.113883.5.1008"
+                        canonicalUriR4="urn:oid:2.16.840.1.113883.5.1008"
+                        context="external/hl7"/>
+      <publishingAuthority name="Nictiz" inherited="project">
+         <addrLine>Nationaal ICT Instituut in de Zorg</addrLine>
+         <addrLine>Oude Middenweg 55</addrLine>
+         <addrLine>2491 AC Den Haag</addrLine>
+         <addrLine>T 070 317 3450</addrLine>
+         <addrLine>F 070 320 7437</addrLine>
+      </publishingAuthority>
+      <conceptList>
+         <concept code="H01BB02"
+                  codeSystem="2.16.840.1.113883.6.73"
+                  displayName="Oxytocin"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">
+               <div>Oxytocine</div>
+            </desc>
+         </concept>
+         <concept code="H01BB03"
+                  codeSystem="2.16.840.1.113883.6.73"
+                  codeSystemName="ATC-NL"
+                  displayName="Carbetocine"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">
+               <div>Pabal</div>
+            </desc>
+         </concept>
+         <concept code="G02AB"
+                  codeSystem="2.16.840.1.113883.6.73"
+                  displayName="Ergot alkaloids"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">
+               <div>Moederkoorn alkaloïde</div>
+            </desc>
+         </concept>
+         <concept code="G02AD"
+                  codeSystem="2.16.840.1.113883.6.73"
+                  displayName="Prostaglandins"
+                  level="0"
+                  type="L">
+            <desc language="nl-NL">
+               <div>Prostaglandine</div>
+            </desc>
+         </concept>
+         <exception code="OTH"
+                    codeSystem="2.16.840.1.113883.5.1008"
+                    displayName="Overig"
+                    level="0"
+                    type="L"/>
+         <exception code="UNK"
+                    codeSystem="2.16.840.1.113883.5.1008"
+                    displayName="Onbekend"
+                    level="0"
+                    type="L"/>
+      </conceptList>
+   </valueSet>
+</valueSets>
