@@ -1,0 +1,6 @@
+# Set shell script files to lf line endings. This is necessary because we also want them to have these line endings 
+# on Windows, enabling us to use the Windows Subsystem for Linux (WSL). 
+*.sh text eol=lf
+
+# Make sure jar files are never affected by line-ending stuff:
+*.jar binary
