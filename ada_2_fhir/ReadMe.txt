@@ -1,0 +1,1 @@
+This folder contains some examples for messages with a relatively simple dataset xml format (ada) and corresponding FHIR XML.
