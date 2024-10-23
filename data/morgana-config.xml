@@ -1,0 +1,25 @@
+<!-- This is just a demo on how to do it -->
+<morgana-config xmlns="http://www.xml-project.com/morganaxproc">
+  <!-- ================================================================== -->
+  <!--
+        Configuration file for Morgana XProc, for use in YATC.
+        
+        Remark: Relative paths are resolved by base-uri of this document
+    -->
+  <!-- ================================================================== -->
+
+  <schematron-connector>schxslt</schematron-connector>
+  <path_to_SchXSLT_2>../schxslt/</path_to_SchXSLT_2>
+
+  <XSLTValidationMode>LAX</XSLTValidationMode>
+
+  <xslt-connector>saxon12-3</xslt-connector>
+
+  <xslt-message-prefix/>
+
+  <no-timestamps>true</no-timestamps>
+  <silent>true</silent>
+  <cp>true</cp>
+  <indent-errors>true</indent-errors>
+
+</morgana-config>

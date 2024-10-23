@@ -1,0 +1,10 @@
+# Ignore anything called build or tmp. These names are used for subdirectories containing produced/temporary files that are not
+# part of the main code and must be ignored by GIT.  
+build
+tmp
+
+# Ignore *.bak (backup) files, produced by by some text editors (like Notepad++ using default settings) 
+*.bak
+
+# Igonore zip file (usually distributions of Morgana or Saxon) that are left over
+*.zip
