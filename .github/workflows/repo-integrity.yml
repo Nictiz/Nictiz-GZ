@@ -1,0 +1,43 @@
+name: Repo integrity 2
+
+on: pull_request
+
+jobs:
+  check-integrity:
+    name: Check the integrity of the repository
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Check XML syntax for the src folder
+        uses: Ahli/verify-xml-action@v1
+        with:
+          path: "src"
+
+      - name: Check XML syntax for the dev folder
+        uses: Ahli/verify-xml-action@v1
+        with:
+          path: "dev"
+
+      - name: Check existence of QualificationTokens.json
+        run: |
+          if [[ ! -f Configuration/QualificationTokens.json ]]; then
+            echo ::error::The file Configuration/QualificationTokens.json is gone. This file may never be removed!
+            exit 1
+          fi
+        
+      - name: Check JSON syntax of the Configuration folder
+        uses: limitusus/json-syntax-check@v2
+        env:
+          BASE: ${{ github.workspace }}/Configuration
+        with:
+          pattern: "\\.json$"
+
+      - name: Check JSON syntax of everything in the dev folder
+        uses: limitusus/json-syntax-check@v2
+        env:
+          BASE: ${{ github.workspace }}/dev
+        with:
+          pattern: "\\.json$"
