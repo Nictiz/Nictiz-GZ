@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?yatc-distribution-provenance href="C:/Data/Erik/work/Nictiz/new/HL7-mappings/ada_2_hl7/zib1bbr/2_hl7_zib1bbr_include.xsl"?>
+<?yatc-distribution-info name="VZVZ-test-distribution-drop-in" timestamp="2024-01-25T12:13:11.57+01:00" version="0.2"?>
+<!-- == Provenance: C:/Data/Erik/work/Nictiz/new/HL7-mappings/ada_2_hl7/zib1bbr/2_hl7_zib1bbr_include.xsl == -->
+<!-- == Distribution: VZVZ-test-distribution-drop-in; 0.2; 2024-01-25T12:13:11.57+01:00 == -->
+<xsl:stylesheet exclude-result-prefixes="#all"
+                version="2.0"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns="urn:hl7-org:v3"
+                xmlns:hl7="urn:hl7-org:v3"
+                xmlns:util="urn:hl7:utilities"
+                xmlns:nf="http://www.nictiz.nl/functions"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <xsl:import href="2_hl7_hl7_include.xsl"/>
+   <xsl:template name="template_2.16.840.1.113883.2.4.3.11.60.3.10.1.101_20170602000000">
+      <!-- address NL - generic  (van repository: zib2015bbr-) -->
+      <xsl:param name="adres"
+                 select="."/>
+      <xsl:for-each select="$adres">
+         <addr>
+            <xsl:for-each select="adres_soort[@code][1]">
+               <xsl:attribute name="use"
+                              select="@code"/>
+            </xsl:for-each>
+            <xsl:for-each select="straat[@value]">
+               <streetName>
+                  <xsl:value-of select="@value"/>
+               </streetName>
+            </xsl:for-each>
+            <xsl:for-each select="huisnummer[@value]">
+               <houseNumber>
+                  <xsl:value-of select="@value"/>
+               </houseNumber>
+            </xsl:for-each>
+            <xsl:if test="(huisnummerletter | huisnummertoevoeging)[@value]">
+               <buildingNumberSuffix>
+                  <xsl:value-of select="huisnummerletter/@value"/>
+                  <!-- voeg scheidende spatie toe als beide aanwezig -->
+                  <xsl:if test="huisnummerletter and huisnummertoevoeging">
+                     <xsl:text>
+                     </xsl:text>
+                  </xsl:if>
+                  <xsl:value-of select="huisnummertoevoeging/@value"/>
+               </buildingNumberSuffix>
+            </xsl:if>
+            <xsl:for-each select="aanduiding_bij_nummer[@code]">
+               <additionalLocator>
+                  <xsl:value-of select="@code"/>
+               </additionalLocator>
+            </xsl:for-each>
+            <xsl:for-each select="postcode[@value]">
+               <postalCode>
+                  <xsl:value-of select="nf:convertAdaNlPostcode(@value)"/>
+               </postalCode>
+            </xsl:for-each>
+            <xsl:for-each select="gemeente[@value]">
+               <county>
+                  <xsl:value-of select="@value"/>
+               </county>
+            </xsl:for-each>
+            <xsl:for-each select="woonplaats[@value]">
+               <city>
+                  <xsl:value-of select="@value"/>
+               </city>
+            </xsl:for-each>
+            <xsl:for-each select="land[(@value | @code | @codeSystem | @displayName)]">
+               <country>
+                  <xsl:choose>
+                     <xsl:when test="@code | @codeSystem">
+                        <xsl:call-template name="makeCodeAttribs"/>
+                     </xsl:when>
+                  </xsl:choose>
+                  <!-- fill text node, which is mandatory even with a coded concept -->
+                  <xsl:choose>
+                     <!-- coded value -->
+                     <xsl:when test="@displayName">
+                        <xsl:value-of select="@displayName"/>
+                     </xsl:when>
+                     <!-- free text value -->
+                     <xsl:when test="@value">
+                        <xsl:value-of select="@value"/>
+                     </xsl:when>
+                     <!-- fallback on whatever we have ... should not happen really -->
+                     <xsl:when test="@*">
+                        <xsl:call-template name="util:logMessage">
+                           <xsl:with-param name="level"
+                                           select="$logWARN"/>
+                           <xsl:with-param name="msg">Did not get a proper string for country from input. Please investigate. Outputting whatever we received from coded attributes into the text node.</xsl:with-param>
+                        </xsl:call-template>
+                        <xsl:value-of select="string-join(@*, ' - ')"/>
+                     </xsl:when>
+                  </xsl:choose>
+               </country>
+            </xsl:for-each>
+            <!-- Additionele informatie wordt geschrapt uit de definitie
+                <xsl:for-each select="./additioneleinformatie">
+                <unitID><xsl:value-of select="./@value"/></unitID>
+            </xsl:for-each>-->
+            <!-- UseablePeriod nog niet geimplementeerd - kan niet in ADA forms opgegeven worden. -->
+         </addr>
+      </xsl:for-each>
+   </xsl:template>
+</xsl:stylesheet>
